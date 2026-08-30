@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 660 280" role="img" aria-label="Fail Fastの効果を示した図。上段はエラーを握りつぶす場合で、入力の検証で異常を見逃したまま処理が進み、3つ先の集計処理でようやくおかしな結果として表面化するため、原因が遠く調査が難しい。下段はFail Fastの場合で、入力の検証の時点で即座に失敗させるため、原因と失敗した場所が一致し、すぐ特定できる。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="30" y="26" font-size="12.5" font-weight="600">握りつぶす</text>
+
+        <rect x="30" y="42" width="120" height="44" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="90" y="62" text-anchor="middle" font-size="10.5">入力の検証</text>
+        <text x="90" y="79" text-anchor="middle" font-size="10" class="muted">異常を見逃す</text>
+        <line x1="154" y1="64" x2="176" y2="64" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+        <rect x="180" y="42" width="120" height="44" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="240" y="69" text-anchor="middle" font-size="10.5">変換処理</text>
+        <line x1="304" y1="64" x2="326" y2="64" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+        <rect x="330" y="42" width="120" height="44" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="390" y="69" text-anchor="middle" font-size="10.5">保存処理</text>
+        <line x1="454" y1="64" x2="476" y2="64" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+        <rect x="480" y="42" width="150" height="44" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.6" />
+        <text x="555" y="62" text-anchor="middle" font-size="10.5">集計でおかしな数字</text>
+        <text x="555" y="79" text-anchor="middle" font-size="10" class="muted">ここで初めて気づく</text>
+
+        <path d="M90,96 C90,126 555,126 555,96" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 3" />
+        <text x="322" y="142" text-anchor="middle" font-size="11" class="muted">原因と発覚場所が離れているほど、調査は難しくなる</text>
+
+        <line x1="30" y1="164" x2="630" y2="164" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="30" y="196" font-size="12.5" font-weight="600">Fail Fast</text>
+
+        <rect x="30" y="212" width="120" height="44" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="90" y="232" text-anchor="middle" font-size="10.5" font-weight="600">入力の検証</text>
+        <text x="90" y="249" text-anchor="middle" font-size="10" class="hi">その場で失敗</text>
+
+        <line x1="154" y1="234" x2="176" y2="234" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 3" />
+        <text x="290" y="230" font-size="11" class="muted">以降の処理には進まない</text>
+        <text x="290" y="250" font-size="11" class="muted">= 原因と失敗した場所が一致する</text>
+      </svg>
+    </div>
+  </body>
+</html>

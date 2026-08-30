@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        color: var(--fg);
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 280"
+        role="img"
+        aria-label="プロセスとスレッドの関係図。左のプロセスAは、コード・データ・ヒープからなる共有メモリを持ち、その中でスレッド1とスレッド2がそれぞれ専用のスタックを持って並行に動く。右のプロセスBは独立したメモリ空間を持ち、プロセスAからは見えない。プロセス同士はOSが隔離しているため、やり取りにはIPCという専用の仕組みが必要になる。"
+      >
+        <rect x="30" y="22" width="330" height="196" rx="10" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="6 4" />
+        <text x="195" y="46" text-anchor="middle" font-size="13" font-weight="600">プロセスA</text>
+
+        <rect x="50" y="58" width="290" height="44" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="195" y="85" text-anchor="middle" font-size="12">共有メモリ(コード・データ・ヒープ)</text>
+
+        <rect x="50" y="112" width="140" height="56" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="120" y="136" text-anchor="middle" font-size="12.5" font-weight="600">スレッド1</text>
+        <text x="120" y="155" text-anchor="middle" font-size="11" class="muted">専用スタック</text>
+
+        <rect x="200" y="112" width="140" height="56" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="270" y="136" text-anchor="middle" font-size="12.5" font-weight="600">スレッド2</text>
+        <text x="270" y="155" text-anchor="middle" font-size="11" class="muted">専用スタック</text>
+
+        <text x="195" y="199" text-anchor="middle" font-size="11" class="muted">メモリは共有、スタックだけ各自</text>
+
+        <rect x="400" y="22" width="330" height="196" rx="10" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="6 4" />
+        <text x="565" y="46" text-anchor="middle" font-size="13" font-weight="600">プロセスB(別のアプリ)</text>
+
+        <rect x="420" y="58" width="290" height="110" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="565" y="118" text-anchor="middle" font-size="12.5">独立したメモリ空間</text>
+
+        <text x="565" y="199" text-anchor="middle" font-size="11" class="muted">プロセスAからは覗けない</text>
+
+        <line x1="380" y1="30" x2="380" y2="210" stroke="var(--border)" stroke-dasharray="3 4" />
+        <text x="380" y="256" text-anchor="middle" font-size="11.5" class="muted">プロセス間はOSが隔離する ― やり取りにはIPC(パイプ・共有メモリ等)が要る</text>
+      </svg>
+    </div>
+  </body>
+</html>

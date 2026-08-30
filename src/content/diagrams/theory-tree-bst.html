@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 300"
+        role="img"
+        aria-label="二分探索木で8を探す経路。根の10から左の5へ、さらにその右の8へ進む。右部分木の15と左端の3は探索対象から外れる"
+      >
+        <text x="30" y="28" font-size="13" class="muted">8を探す ― 比較のたびに、見なくてよい側を丸ごと捨てる</text>
+
+        <!-- 枝 -->
+        <line x1="392" y1="94" x2="288" y2="146" stroke="var(--primary)" stroke-width="2.5" />
+        <line x1="448" y1="94" x2="552" y2="146" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="248" y1="194" x2="176" y2="230" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="304" y1="194" x2="376" y2="230" stroke="var(--primary)" stroke-width="2.5" />
+
+        <!-- 根 10 -->
+        <circle cx="420" cy="80" r="32" fill="var(--card)" stroke="var(--primary)" stroke-width="2" />
+        <text x="420" y="87" text-anchor="middle" font-size="18" font-weight="700" class="mono">10</text>
+        <text x="480" y="72" font-size="12" class="accent">8 &lt; 10 → 左へ</text>
+
+        <!-- 左 5 -->
+        <circle cx="276" cy="180" r="32" fill="var(--card)" stroke="var(--primary)" stroke-width="2" />
+        <text x="276" y="187" text-anchor="middle" font-size="18" font-weight="700" class="mono">5</text>
+        <text x="150" y="150" font-size="12" class="accent">8 &gt; 5 → 右へ</text>
+
+        <!-- 右 15(捨てる) -->
+        <circle cx="564" cy="180" r="32" fill="var(--card)" stroke="var(--border)" stroke-width="1.5" />
+        <text x="564" y="187" text-anchor="middle" font-size="18" font-weight="700" class="mono muted">15</text>
+        <text x="612" y="186" font-size="12" class="muted">この側は見ない</text>
+
+        <!-- 葉 3(捨てる) -->
+        <circle cx="160" cy="252" r="28" fill="var(--card)" stroke="var(--border)" stroke-width="1.5" />
+        <text x="160" y="259" text-anchor="middle" font-size="16" font-weight="700" class="mono muted">3</text>
+
+        <!-- 葉 8(目的) -->
+        <circle cx="392" cy="252" r="28" fill="var(--primary)" />
+        <text x="392" y="259" text-anchor="middle" font-size="16" font-weight="700" class="mono" style="fill: var(--primary-fg)">8</text>
+        <text x="432" y="258" font-size="13" class="accent" font-weight="600">見つかった</text>
+
+        <text x="410" y="294" text-anchor="middle" font-size="12" class="muted">
+          高さがそのまま比較回数 ― バランスが崩れて一直線になると O(n) に退化する
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

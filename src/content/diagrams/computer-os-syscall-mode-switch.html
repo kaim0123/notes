@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        color: var(--fg);
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg role="img" aria-label="システムコールでのモード切り替え。上のユーザーモード(一般客エリア)でアプリケーションが動き、下のカーネルモード(スタッフ専用)にカーネルがいる。①アプリがカーネルへ依頼を出し、②カーネルが処理して結果を返し、ユーザーモードへ復帰する。" viewBox="0 0 620 200">
+      <rect x="30" y="30" width="250" height="140" rx="10" fill="none" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="155" y="54" fill="var(--muted)" font-size="13" text-anchor="middle">ユーザーモード(一般客エリア)</text>
+      <rect x="55" y="75" width="200" height="40" fill="none" stroke="var(--primary)" stroke-width="1" />
+      <text x="155" y="99" fill="var(--fg)" font-size="12" text-anchor="middle">アプリケーション</text>
+
+      <rect x="340" y="30" width="250" height="140" rx="10" fill="none" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="465" y="54" fill="var(--muted)" font-size="13" text-anchor="middle">カーネルモード(スタッフ専用)</text>
+      <rect x="365" y="75" width="200" height="40" fill="none" stroke="var(--primary)" stroke-width="1" />
+      <text x="465" y="99" fill="var(--fg)" font-size="12" text-anchor="middle">カーネル</text>
+
+      <line x1="255" y1="90" x2="365" y2="90" stroke="var(--primary)" stroke-width="1.5" />
+      <text x="310" y="82" fill="var(--muted)" font-size="11" text-anchor="middle">① 依頼</text>
+      <line x1="365" y1="120" x2="255" y2="120" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="4 3" />
+      <text x="310" y="138" fill="var(--muted)" font-size="11" text-anchor="middle">② 結果を返して復帰</text>
+      </svg>
+    </div>
+  </body>
+</html>

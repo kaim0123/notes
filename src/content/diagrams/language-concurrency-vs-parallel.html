@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 260"
+        role="img"
+        aria-label="並行と並列の違いを時間軸で比べた図。上の並行(1コア)は、1本の時間軸の上で処理Aと処理Bが交互に切り替わりながら少しずつ進む。同時に走っているのは常に1つだけだが、待ちの間に別の処理へ切り替えるため、全体としては複数の処理を扱っている。下の並列(2コア)は、2本の時間軸それぞれで処理Aと処理Bが最初から最後まで同時に走る。並行は待ち時間の活用で応答性を上げ、並列は手の数を増やして計算そのものを速くする。"
+      >
+        <text x="16" y="24" font-size="12" class="lbl">並行(concurrency) ― 1コア</text>
+        <text x="16" y="42" font-size="10.5" class="muted">切り替えながら進める。同時に走っているのは常に1つ</text>
+
+        <rect x="16" y="54" width="96" height="30" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="64" y="74" text-anchor="middle" font-size="11.5">処理A</text>
+        <rect x="116" y="54" width="96" height="30" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="164" y="74" text-anchor="middle" font-size="11.5" class="muted">処理B</text>
+        <rect x="216" y="54" width="96" height="30" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="264" y="74" text-anchor="middle" font-size="11.5">処理A</text>
+        <rect x="316" y="54" width="96" height="30" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="364" y="74" text-anchor="middle" font-size="11.5" class="muted">処理B</text>
+        <rect x="416" y="54" width="96" height="30" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="464" y="74" text-anchor="middle" font-size="11.5">処理A</text>
+        <text x="524" y="74" font-size="10.5" class="muted">…</text>
+
+        <text x="16" y="130" font-size="12" class="lbl">並列(parallelism) ― 2コア</text>
+        <text x="16" y="148" font-size="10.5" class="muted">本当に同時に走る。コアの数だけ手が増える</text>
+
+        <text x="16" y="178" font-size="10.5" class="muted">コア1</text>
+        <rect x="60" y="160" width="452" height="26" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="286" y="178" text-anchor="middle" font-size="11.5">処理A</text>
+        <text x="16" y="210" font-size="10.5" class="muted">コア2</text>
+        <rect x="60" y="192" width="452" height="26" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="286" y="210" text-anchor="middle" font-size="11.5" class="muted">処理B</text>
+
+        <line x1="16" y1="234" x2="600" y2="234" stroke="var(--muted)" stroke-width="1.2" />
+        <path d="M600,229 L612,234 L600,239 z" fill="var(--muted)" />
+        <text x="612" y="252" text-anchor="end" font-size="11" class="muted">時間</text>
+        <text x="16" y="252" font-size="11" class="muted">バグの原因になるのは並行のほう ― 1コアでも、処理の途中で切り替われば壊れる</text>
+      </svg>
+    </div>
+  </body>
+</html>

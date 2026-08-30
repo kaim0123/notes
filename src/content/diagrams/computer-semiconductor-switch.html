@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        color: var(--fg);
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg role="img" aria-label="トランジスタをスイッチとして見た図。左の入口から右の出口へ電気の通り道があり、その途中にトランジスタが置かれている。下から伸びる背中(ゲート)に電気が来ている間だけ、入口から出口へ電気が通る。" viewBox="0 0 560 220">
+      <rect x="220" y="70" width="120" height="70" fill="none" stroke="var(--primary)" stroke-width="1.5" rx="6" />
+      <text x="280" y="110" fill="var(--fg)" font-size="14" text-anchor="middle">トランジスタ</text>
+
+      <line x1="90" y1="105" x2="220" y2="105" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="110" y="95" fill="var(--muted)" font-size="12">入口</text>
+      <line x1="340" y1="105" x2="470" y2="105" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="420" y="95" fill="var(--muted)" font-size="12">出口</text>
+
+      <line x1="280" y1="200" x2="280" y2="140" stroke="var(--primary)" stroke-width="1.5" />
+      <polygon points="280,140 273,153 287,153" fill="var(--primary)" />
+      <text x="280" y="218" fill="var(--primary)" font-size="12" text-anchor="middle">背中(ゲート)= ここに電気が来ると開く</text>
+      </svg>
+    </div>
+  </body>
+</html>

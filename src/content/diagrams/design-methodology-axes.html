@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 660 330" role="img" aria-label="7つの設計方法論を「何を軸にモジュールを切り出すか」で並べた図。中央に同じ要件があり、そこから7方向へ矢印が伸びる。情報隠蔽は変わりやすい設計判断、データ中心設計はテーブル・スキーマ、オブジェクト中心設計は要求仕様の名詞、契約による設計は責任の分界点、責務駆動設計は役割と協力関係、ユースケース中心設計は利用者のシナリオ、ドメイン駆動設計は業務知識とユビキタス言語を、それぞれ軸にする。同じ要件でも軸が違えばコードの切り分け方が変わる。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="330" y="24" text-anchor="middle" font-size="11.5" class="muted">同じ要件でも、何を軸に切るかでコードの分かれ方は変わる</text>
+
+        <rect x="245" y="140" width="170" height="52" rx="10" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="330" y="163" text-anchor="middle" font-size="12.5" font-weight="600">同じ要件</text>
+        <text x="330" y="181" text-anchor="middle" font-size="10" class="muted">顧客が商品を注文する</text>
+
+        <rect x="20" y="46" width="180" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="34" y="63" font-size="10.5" font-weight="600">情報隠蔽</text>
+        <text x="34" y="79" font-size="10" class="muted">変わりやすい設計判断</text>
+
+        <rect x="20" y="96" width="180" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="34" y="113" font-size="10.5" font-weight="600">データ中心設計</text>
+        <text x="34" y="129" font-size="10" class="muted">テーブル・スキーマ</text>
+
+        <rect x="20" y="196" width="180" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="34" y="213" font-size="10.5" font-weight="600">オブジェクト中心設計</text>
+        <text x="34" y="229" font-size="10" class="muted">要求仕様に出てくる名詞</text>
+
+        <rect x="20" y="246" width="180" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="34" y="263" font-size="10.5" font-weight="600">契約による設計</text>
+        <text x="34" y="279" font-size="10" class="muted">責任の分界点</text>
+
+        <rect x="460" y="70" width="180" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="474" y="87" font-size="10.5" font-weight="600">責務駆動設計</text>
+        <text x="474" y="103" font-size="10" class="muted">役割と協力関係</text>
+
+        <rect x="460" y="146" width="180" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="474" y="163" font-size="10.5" font-weight="600">ユースケース中心設計</text>
+        <text x="474" y="179" font-size="10" class="muted">利用者のシナリオ</text>
+
+        <rect x="460" y="222" width="180" height="40" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="474" y="239" font-size="10.5" font-weight="600">ドメイン駆動設計</text>
+        <text x="474" y="255" font-size="10" class="muted">業務知識・ユビキタス言語</text>
+
+        <line x1="241" y1="158" x2="206" y2="70" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <line x1="241" y1="160" x2="206" y2="118" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <line x1="241" y1="174" x2="206" y2="214" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <line x1="241" y1="176" x2="206" y2="262" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <line x1="419" y1="158" x2="454" y2="94" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <line x1="419" y1="166" x2="454" y2="168" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <line x1="419" y1="176" x2="454" y2="240" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arrowHi)" />
+
+        <text x="330" y="318" text-anchor="middle" font-size="11" class="muted">
+          方法論は互いに置き換わる関係ではなく、それぞれ違う切り口を提供する
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

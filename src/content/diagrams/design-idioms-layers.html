@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 660 290" role="img" aria-label="設計原則・設計パターン・実装イディオムの関係を示した図。上から順に、設計原則(依存性逆転の原則、Fail Fast)、設計パターン(Factory Method、Chain of Responsibility)、実装イディオム(Dependency Injection、Guard Clause、Middleware Chain)が並び、下へ行くほど言語や道具に依存する具体的な形になる。同じ考え方が、抽象から具体へ姿を変えて現れることを示す。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="330" y="24" text-anchor="middle" font-size="11.5" class="muted">同じ考え方が、抽象から具体へ姿を変えて現れる</text>
+
+        <rect x="60" y="42" width="540" height="58" rx="9" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="82" y="66" font-size="11.5" font-weight="600">設計原則 ― 言語に依存しない判断基準</text>
+        <text x="82" y="88" font-size="10.5" class="muted">依存性逆転の原則 / Fail Fast / 継承より合成</text>
+
+        <line x1="330" y1="100" x2="330" y2="118" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+
+        <rect x="60" y="122" width="540" height="58" rx="9" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="82" y="146" font-size="11.5" font-weight="600">設計パターン ― 言語に依存しない構造</text>
+        <text x="82" y="168" font-size="10.5" class="muted">Factory Method / Chain of Responsibility / Decorator</text>
+
+        <line x1="330" y1="180" x2="330" y2="198" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+
+        <rect x="60" y="202" width="540" height="58" rx="9" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="82" y="226" font-size="11.5" font-weight="600">実装イディオム ― 言語・道具に依存する書き方</text>
+        <text x="82" y="248" font-size="10.5" class="muted">Dependency Injection / Guard Clause / Middleware Chain</text>
+
+        <text x="330" y="282" text-anchor="middle" font-size="11" class="muted">
+          下へ行くほど具体的になり、使える形は言語が持つ機能に左右される
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

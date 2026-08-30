@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 660 260" role="img" aria-label="「オブジェクト」という言葉の3つの意味を入れ子で示した図。最も外側の破線の枠が意味1のデータ構造としてのオブジェクト(JavaScriptの波かっこ、キーと値の入れ物)。その内側の枠が意味2のオブジェクト指向のオブジェクト(状態と振る舞いをカプセル化するという設計思想)。さらに内側の枠が意味3のDOMオブジェクト(ブラウザによる具体的な実装例)。外側ほど広い概念、内側ほど具体的な実例であることを示す。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <rect x="30" y="34" width="600" height="176" rx="12" fill="none" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="5 4" />
+        <text x="52" y="58" font-size="11.5" class="muted">意味1: データ構造としてのオブジェクト(キーと値の入れ物)</text>
+
+        <rect x="66" y="72" width="528" height="122" rx="10" fill="var(--card)" stroke="var(--primary)" stroke-width="1.7" />
+        <text x="88" y="96" font-size="12" font-weight="600">意味2: オブジェクト指向のオブジェクト</text>
+        <text x="88" y="115" font-size="10.5" class="muted">状態と振る舞いをカプセル化するという設計思想</text>
+
+        <rect x="110" y="130" width="300" height="48" rx="8" fill="var(--bg)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="260" y="159" text-anchor="middle" font-size="11.5">意味3: DOMオブジェクト(ブラウザの実装例)</text>
+
+        <text x="330" y="238" text-anchor="middle" font-size="11" class="muted">
+          外側ほど広い概念、内側ほど具体的な実例。どの意味の話かは文脈でしか決まらない
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .link {
+        stroke: var(--muted);
+        stroke-width: 1.2;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 680 300"
+        role="img"
+        aria-label="低凝集・高結合と高凝集・低結合の対比図。左側では6つの部品がまとまりなく散らばり、互いに9本の線で複雑に絡み合っている(低凝集・高結合)。右側では同じ6つの部品が3つずつ2つのモジュールにまとめられ、モジュール内は密に、モジュール間は1本の線だけでつながっている(高凝集・低結合)。1つ直すと影響が読める形になることを示す。"
+      >
+        <text x="170" y="26" text-anchor="middle" font-size="12.5" font-weight="600">低凝集・高結合</text>
+        <text x="170" y="46" text-anchor="middle" font-size="11" class="muted">どこを直すと何が壊れるか読めない</text>
+
+        <line class="link" x1="70" y1="110" x2="150" y2="90" />
+        <line class="link" x1="70" y1="110" x2="250" y2="120" />
+        <line class="link" x1="70" y1="110" x2="180" y2="215" />
+        <line class="link" x1="150" y1="90" x2="250" y2="120" />
+        <line class="link" x1="150" y1="90" x2="90" y2="195" />
+        <line class="link" x1="150" y1="90" x2="265" y2="190" />
+        <line class="link" x1="250" y1="120" x2="90" y2="195" />
+        <line class="link" x1="250" y1="120" x2="180" y2="215" />
+        <line class="link" x1="90" y1="195" x2="265" y2="190" />
+        <line class="link" x1="180" y1="215" x2="265" y2="190" />
+
+        <circle cx="70" cy="110" r="15" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <circle cx="150" cy="90" r="15" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <circle cx="250" cy="120" r="15" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <circle cx="90" cy="195" r="15" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <circle cx="180" cy="215" r="15" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <circle cx="265" cy="190" r="15" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+
+        <line x1="340" y1="20" x2="340" y2="270" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="510" y="26" text-anchor="middle" font-size="12.5" font-weight="600">高凝集・低結合</text>
+        <text x="510" y="46" text-anchor="middle" font-size="11" class="muted">関係するものはまとめ、境界は細くする</text>
+
+        <rect x="382" y="70" width="120" height="150" rx="10" fill="none" stroke="var(--primary)" stroke-width="1.6" stroke-dasharray="5 4" />
+        <text x="442" y="90" text-anchor="middle" font-size="11" class="muted">モジュールA</text>
+        <line class="link" x1="412" y1="130" x2="472" y2="130" />
+        <line class="link" x1="412" y1="130" x2="442" y2="185" />
+        <line class="link" x1="472" y1="130" x2="442" y2="185" />
+        <circle cx="412" cy="130" r="14" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <circle cx="472" cy="130" r="14" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <circle cx="442" cy="185" r="14" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+
+        <rect x="522" y="70" width="120" height="150" rx="10" fill="none" stroke="var(--primary)" stroke-width="1.6" stroke-dasharray="5 4" />
+        <text x="582" y="90" text-anchor="middle" font-size="11" class="muted">モジュールB</text>
+        <line class="link" x1="552" y1="130" x2="612" y2="130" />
+        <line class="link" x1="552" y1="130" x2="582" y2="185" />
+        <line class="link" x1="612" y1="130" x2="582" y2="185" />
+        <circle cx="552" cy="130" r="14" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <circle cx="612" cy="130" r="14" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <circle cx="582" cy="185" r="14" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+
+        <line x1="502" y1="145" x2="522" y2="145" stroke="var(--primary)" stroke-width="2" />
+
+        <text x="340" y="290" text-anchor="middle" font-size="11" class="muted">
+          部品の数は同じでも、まとめ方を変えるだけで「影響範囲を読める形」になる
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

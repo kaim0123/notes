@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 320"
+        role="img"
+        aria-label="fact(4)の呼び出しでスタックフレームがfact(4)からfact(1)まで積み上がり、ベースケースの1から順に2、6、24と戻り値が返っていく様子"
+      >
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <text x="30" y="28" font-size="13" class="muted">fact(n) = n × fact(n−1)、fact(1) = 1 を呼び出したときのコールスタック</text>
+
+        <!-- 積む方向の矢印 -->
+        <text x="86" y="70" text-anchor="middle" font-size="12" class="muted">呼び出し</text>
+        <line x1="86" y1="248" x2="86" y2="84" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a)" />
+
+        <!-- フレーム(下が最初の呼び出し) -->
+        <rect x="130" y="222" width="300" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="251" font-size="15" class="mono">fact(4)</text>
+        <text x="250" y="251" font-size="13" class="muted">4 × fact(3) を待つ</text>
+
+        <rect x="130" y="170" width="300" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="199" font-size="15" class="mono">fact(3)</text>
+        <text x="250" y="199" font-size="13" class="muted">3 × fact(2) を待つ</text>
+
+        <rect x="130" y="118" width="300" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="147" font-size="15" class="mono">fact(2)</text>
+        <text x="250" y="147" font-size="13" class="muted">2 × fact(1) を待つ</text>
+
+        <rect x="130" y="66" width="300" height="46" rx="8" fill="var(--primary)" />
+        <text x="150" y="95" font-size="15" class="mono" style="fill: var(--primary-fg)">fact(1)</text>
+        <text x="250" y="95" font-size="13" style="fill: var(--primary-fg)">ベースケース → 1 を返す</text>
+
+        <!-- 戻り値 -->
+        <line x1="474" y1="84" x2="474" y2="248" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#a)" />
+        <text x="520" y="70" text-anchor="middle" font-size="12" class="accent" font-weight="600">戻り値</text>
+
+        <text x="500" y="95" font-size="14" class="mono accent">1</text>
+        <text x="500" y="147" font-size="14" class="mono accent">2 = 2 × 1</text>
+        <text x="500" y="199" font-size="14" class="mono accent">6 = 3 × 2</text>
+        <text x="500" y="251" font-size="14" class="mono accent">24 = 4 × 6</text>
+
+        <text x="410" y="300" text-anchor="middle" font-size="12" class="muted">
+          ベースケースが無い/届かないと、フレームが積まれ続けてスタックオーバーフローになる
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

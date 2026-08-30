@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 680 280" role="img" aria-label="Front ControllerとPage Controllerの対比図。左のFront Controllerでは、すべてのリクエストが1つの窓口を通り、そこで認証・ログ・ルーティングの共通処理を済ませてから、注文処理・商品処理・会員処理へ振り分けられる。右のPage Controllerでは、ページごとに専用のコントローラが入口を持ち、共通処理を各コントローラで重複して書くことになる。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="170" y="26" text-anchor="middle" font-size="12.5" font-weight="600">Front Controller</text>
+
+        <text x="170" y="50" text-anchor="middle" font-size="10.5" class="muted">すべてのリクエスト</text>
+        <line x1="170" y1="56" x2="170" y2="70" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+
+        <rect x="50" y="74" width="240" height="52" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="170" y="96" text-anchor="middle" font-size="11" font-weight="600">1つの窓口</text>
+        <text x="170" y="114" text-anchor="middle" font-size="9.5" class="muted">認証・ログ・ルーティング</text>
+
+        <line x1="100" y1="126" x2="90" y2="164" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+        <line x1="170" y1="126" x2="170" y2="164" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+        <line x1="240" y1="126" x2="250" y2="164" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+
+        <rect x="50" y="168" width="76" height="36" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="88" y="191" text-anchor="middle" font-size="10">注文</text>
+        <rect x="132" y="168" width="76" height="36" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="170" y="191" text-anchor="middle" font-size="10">商品</text>
+        <rect x="214" y="168" width="76" height="36" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="252" y="191" text-anchor="middle" font-size="10">会員</text>
+
+        <text x="170" y="234" text-anchor="middle" font-size="11" class="muted">共通処理は1箇所だけ</text>
+
+        <line x1="350" y1="30" x2="350" y2="260" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="510" y="26" text-anchor="middle" font-size="12.5" font-weight="600">Page Controller</text>
+        <text x="510" y="50" text-anchor="middle" font-size="10.5" class="muted">ページごとに入口がある</text>
+
+        <rect x="390" y="74" width="76" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="428" y="94" text-anchor="middle" font-size="10">注文入口</text>
+        <text x="428" y="112" text-anchor="middle" font-size="8.5" class="muted">認証・ログ</text>
+
+        <rect x="472" y="74" width="76" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="510" y="94" text-anchor="middle" font-size="10">商品入口</text>
+        <text x="510" y="112" text-anchor="middle" font-size="8.5" class="muted">認証・ログ</text>
+
+        <rect x="554" y="74" width="76" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="592" y="94" text-anchor="middle" font-size="10">会員入口</text>
+        <text x="592" y="112" text-anchor="middle" font-size="8.5" class="muted">認証・ログ</text>
+
+        <line x1="428" y1="126" x2="428" y2="164" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+        <line x1="510" y1="126" x2="510" y2="164" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+        <line x1="592" y1="126" x2="592" y2="164" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+
+        <rect x="390" y="168" width="76" height="36" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="428" y="191" text-anchor="middle" font-size="10">注文</text>
+        <rect x="472" y="168" width="76" height="36" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="510" y="191" text-anchor="middle" font-size="10">商品</text>
+        <rect x="554" y="168" width="76" height="36" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="592" y="191" text-anchor="middle" font-size="10">会員</text>
+
+        <text x="510" y="234" text-anchor="middle" font-size="11" class="muted">ページ単位で分かりやすいが、共通処理が重複する</text>
+      </svg>
+    </div>
+  </body>
+</html>

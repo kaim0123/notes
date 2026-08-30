@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 660 320" role="img" aria-label="純粋なコアと副作用の境界を示した同心の図。中心に純粋関数だけで書かれたコア(フォーマット・変換・計算・バリデーション)があり、テストにモックが不要と記される。その外側に副作用を閉じ込める層(リポジトリ・外部API・認証・ログ)があり、テスト時はダミー実装に差し替えると記される。さらに外側が入口の層(Server Actions・Custom Hooks・画面)で、外部世界とのやり取りはここを通る。矢印は外側から内側へ向かう。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="330" y="24" text-anchor="middle" font-size="11.5" class="muted">副作用は外へ押し出し、内側は純粋関数だけにする</text>
+
+        <rect x="40" y="40" width="580" height="230" rx="14" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="60" y="64" font-size="11.5" class="muted">入口 ― Server Actions / Custom Hooks / 画面</text>
+
+        <rect x="82" y="78" width="496" height="174" rx="12" fill="var(--bg)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="102" y="102" font-size="11.5" class="muted">副作用の層 ― リポジトリ / 外部API / 認証 / ログ</text>
+        <text x="102" y="120" font-size="10.5" class="muted">テストではダミー実装へ差し替える</text>
+
+        <rect x="130" y="134" width="400" height="100" rx="10" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="330" y="162" text-anchor="middle" font-size="12.5" font-weight="600">純粋なコア</text>
+        <text x="330" y="184" text-anchor="middle" font-size="11">フォーマット・変換・計算・バリデーション</text>
+        <text x="330" y="208" text-anchor="middle" font-size="10.5" class="muted">テストにモックが要らない</text>
+
+        <line x1="330" y1="290" x2="330" y2="258" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+        <text x="330" y="308" text-anchor="middle" font-size="11" class="muted">外部世界とのやり取りは、必ず外側の層を通る</text>
+      </svg>
+    </div>
+  </body>
+</html>

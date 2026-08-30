@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        color: var(--fg);
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg role="img" aria-label="全加算器を横に3個並べた多桁の加算器。右から1桁目・2桁目・3桁目の順に並び、各段の下から答えs1・s2・s3が出る。各段が出した桁上がりcは左隣の段の入力xへつながり、筆算の繰り上がりと同じように順に伝わっていく。" viewBox="0 0 560 180">
+      <rect x="360" y="60" width="110" height="70" fill="none" stroke="var(--primary)" stroke-width="1.5" rx="6" />
+      <text x="415" y="92" fill="var(--fg)" font-size="12" text-anchor="middle">全加算器</text>
+      <text x="415" y="110" fill="var(--muted)" font-size="10" text-anchor="middle">1桁目</text>
+      <line x1="415" y1="130" x2="415" y2="155" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="415" y="172" fill="var(--primary)" font-size="11" text-anchor="middle">s1</text>
+      <rect x="200" y="60" width="110" height="70" fill="none" stroke="var(--primary)" stroke-width="1.5" rx="6" />
+      <text x="255" y="92" fill="var(--fg)" font-size="12" text-anchor="middle">全加算器</text>
+      <text x="255" y="110" fill="var(--muted)" font-size="10" text-anchor="middle">2桁目</text>
+      <line x1="255" y1="130" x2="255" y2="155" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="255" y="172" fill="var(--primary)" font-size="11" text-anchor="middle">s2</text>
+      <rect x="40" y="60" width="110" height="70" fill="none" stroke="var(--primary)" stroke-width="1.5" rx="6" />
+      <text x="95" y="92" fill="var(--fg)" font-size="12" text-anchor="middle">全加算器</text>
+      <text x="95" y="110" fill="var(--muted)" font-size="10" text-anchor="middle">3桁目</text>
+      <line x1="95" y1="130" x2="95" y2="155" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="95" y="172" fill="var(--primary)" font-size="11" text-anchor="middle">s3</text>
+      <line x1="200" y1="95" x2="160" y2="95" stroke="#ffb43c" stroke-width="1.5" />
+      <polygon points="160,95 170,90 170,100" fill="#ffb43c" />
+      <line x1="360" y1="95" x2="320" y2="95" stroke="#ffb43c" stroke-width="1.5" />
+      <polygon points="320,95 330,90 330,100" fill="#ffb43c" />
+      <text x="280" y="45" fill="#ffb43c" font-size="11" text-anchor="middle">c(桁上がり)を次の桁の x へ →→→</text>
+      </svg>
+    </div>
+  </body>
+</html>

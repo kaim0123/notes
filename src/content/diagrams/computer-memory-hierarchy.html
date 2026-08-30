@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        color: var(--fg);
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 390"
+        role="img"
+        aria-label="記憶階層のピラミッド図。上から順にレジスタ、キャッシュメモリ(L1・L2・L3)、主記憶(RAM)、補助記憶(SSD・HDD)が台形で積み重なり、上ほど幅が狭く下ほど広い。左側の矢印は上へ行くほど速く高価で小容量、下へ行くほど遅く安価で大容量であることを示す。右側には各層のおおよそのアクセス時間として、1ナノ秒未満、数ナノ秒、数十ナノ秒、数十マイクロ秒から数ミリ秒が並ぶ。"
+      >
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <polygon points="320,40 440,40 480,110 280,110" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="380" y="82" text-anchor="middle" font-size="14" font-weight="600">レジスタ</text>
+
+        <polygon points="275,115 485,115 525,185 235,185" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="380" y="150" text-anchor="middle" font-size="14" font-weight="600">キャッシュメモリ</text>
+        <text x="380" y="170" text-anchor="middle" font-size="11" class="muted">L1・L2・L3</text>
+
+        <polygon points="230,190 530,190 570,260 190,260" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="380" y="225" text-anchor="middle" font-size="14" font-weight="600">主記憶(RAM)</text>
+        <text x="380" y="245" text-anchor="middle" font-size="11" class="muted">揮発性・DRAM</text>
+
+        <polygon points="185,265 575,265 615,335 145,335" fill="var(--card)" stroke="var(--border)" stroke-width="1.5" />
+        <text x="380" y="300" text-anchor="middle" font-size="14" font-weight="600">補助記憶(SSD・HDD)</text>
+        <text x="380" y="320" text-anchor="middle" font-size="11" class="muted">不揮発性</text>
+
+        <!-- 左の軸 -->
+        <line x1="115" y1="40" x2="115" y2="335" stroke="var(--muted)" stroke-width="1.2" marker-start="url(#arrow)" marker-end="url(#arrow)" color="var(--muted)" />
+        <text x="103" y="62" text-anchor="end" font-size="12" class="muted">速い</text>
+        <text x="103" y="80" text-anchor="end" font-size="12" class="muted">高価・小容量</text>
+        <text x="103" y="300" text-anchor="end" font-size="12" class="muted">遅い</text>
+        <text x="103" y="318" text-anchor="end" font-size="12" class="muted">安価・大容量</text>
+
+        <!-- 右のアクセス時間 -->
+        <text x="635" y="80" font-size="12" class="muted">1ns 未満</text>
+        <text x="635" y="155" font-size="12" class="muted">数ns</text>
+        <text x="635" y="230" font-size="12" class="muted">数十ns</text>
+        <text x="635" y="300" font-size="12" class="muted">数十μs〜ms</text>
+        <text x="635" y="40" font-size="11.5" class="muted">アクセス時間</text>
+
+        <text x="380" y="370" text-anchor="middle" font-size="12" class="muted">CPUに近いほど速いが小さい ― どの層も「速さ」と「広さ」の交換条件の上にある</text>
+      </svg>
+    </div>
+  </body>
+</html>

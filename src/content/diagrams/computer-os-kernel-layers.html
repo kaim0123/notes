@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        color: var(--fg);
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg role="img" aria-label="コンピュータシステムの4層構造。第1層のハードウェア(CPU・メモリ・HDD/SSD・GPU)の上に、第2層のカーネル(ハードウェアを直接触れる唯一の存在であるハードウェア抽象化層)、第3層のシステムプログラム(シェル・エクスプローラー・設定などカーネル以外のOS)、第4層のアプリケーション(ブラウザ・ゲーム・オフィスソフト)が積み上がる。" viewBox="0 0 560 280">
+      <rect x="80" y="10" width="400" height="50" fill="none" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="280" y="32" fill="var(--fg)" font-size="14" text-anchor="middle">第4層: アプリケーション</text>
+      <text x="280" y="50" fill="var(--muted)" font-size="11" text-anchor="middle">ブラウザ・ゲーム・オフィスソフト</text>
+
+      <rect x="80" y="70" width="400" height="50" fill="none" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="280" y="92" fill="var(--fg)" font-size="14" text-anchor="middle">第3層: システムプログラム</text>
+      <text x="280" y="110" fill="var(--muted)" font-size="11" text-anchor="middle">シェル・エクスプローラー・設定など カーネル以外のOS</text>
+
+      <rect x="80" y="130" width="400" height="50" fill="none" stroke="var(--primary)" stroke-width="1.5" />
+      <text x="280" y="152" fill="var(--fg)" font-size="14" text-anchor="middle">第2層: カーネル</text>
+      <text x="280" y="170" fill="var(--muted)" font-size="11" text-anchor="middle">ハードウェアを直接触れる唯一の存在(ハードウェア抽象化層)</text>
+
+      <rect x="80" y="190" width="400" height="50" fill="none" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="280" y="212" fill="var(--fg)" font-size="14" text-anchor="middle">第1層: ハードウェア</text>
+      <text x="280" y="230" fill="var(--muted)" font-size="11" text-anchor="middle">CPU・メモリ・HDD/SSD・GPU など物理部品</text>
+
+      <text x="280" y="266" fill="var(--muted)" font-size="11" text-anchor="middle">複雑なハードウェアをカーネルが整理し、上の層に使いやすく見せている</text>
+      </svg>
+    </div>
+  </body>
+</html>

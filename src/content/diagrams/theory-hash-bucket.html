@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 320"
+        role="img"
+        aria-label="鍵tanakaとsatoをハッシュ関数に通し、得た添字3と1のバケットへ格納する図。suzukiも3になって衝突し、チェイニングでリストとして繋がれる"
+      >
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <text x="30" y="28" font-size="13" class="muted">鍵 → ハッシュ関数 → 配列の添字</text>
+
+        <!-- 鍵 -->
+        <rect x="30" y="70" width="120" height="38" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="90" y="95" text-anchor="middle" font-size="14" class="mono">"sato"</text>
+        <rect x="30" y="140" width="120" height="38" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="90" y="165" text-anchor="middle" font-size="14" class="mono">"tanaka"</text>
+        <rect x="30" y="210" width="120" height="38" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="90" y="235" text-anchor="middle" font-size="14" class="mono">"suzuki"</text>
+
+        <!-- ハッシュ関数 -->
+        <rect x="200" y="110" width="150" height="98" rx="10" fill="var(--primary)" opacity="0.22" stroke="var(--primary)" />
+        <text x="275" y="152" text-anchor="middle" font-size="14" font-weight="600">ハッシュ関数</text>
+        <text x="275" y="176" text-anchor="middle" font-size="11" class="muted">鍵全体から数値を作る</text>
+
+        <line x1="150" y1="89" x2="198" y2="130" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#a)" />
+        <line x1="150" y1="159" x2="198" y2="159" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#a)" />
+        <line x1="150" y1="229" x2="198" y2="190" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#a)" />
+
+        <!-- 添字 -->
+        <line x1="350" y1="140" x2="428" y2="112" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#a)" />
+        <text x="390" y="112" text-anchor="middle" font-size="12" class="accent" font-weight="600">1</text>
+        <line x1="350" y1="178" x2="428" y2="220" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#a)" />
+        <text x="390" y="216" text-anchor="middle" font-size="12" class="accent" font-weight="600">3</text>
+
+        <!-- バケット配列 -->
+        <text x="520" y="60" text-anchor="middle" font-size="12" class="muted">バケット(配列)</text>
+        <rect x="430" y="70" width="180" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="450" y="93" font-size="13" class="muted">[0]</text>
+        <rect x="430" y="106" width="180" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="450" y="129" font-size="13" class="muted">[1]</text>
+        <text x="500" y="129" font-size="13" class="mono">佐藤の値</text>
+        <rect x="430" y="142" width="180" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="450" y="165" font-size="13" class="muted">[2]</text>
+        <rect x="430" y="178" width="180" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="450" y="201" font-size="13" class="muted">[3]</text>
+        <text x="500" y="201" font-size="13" class="mono">田中の値</text>
+        <rect x="430" y="214" width="180" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="450" y="237" font-size="13" class="muted">[4]</text>
+
+        <!-- 衝突のチェイン -->
+        <line x1="610" y1="195" x2="662" y2="195" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#a)" />
+        <rect x="664" y="178" width="126" height="34" rx="6" fill="var(--primary)" />
+        <text x="727" y="201" text-anchor="middle" font-size="13" class="mono" style="fill: var(--primary-fg)">鈴木の値</text>
+        <text x="727" y="232" text-anchor="middle" font-size="11" class="accent">衝突 → リストで繋ぐ</text>
+
+        <text x="410" y="300" text-anchor="middle" font-size="12" class="muted">
+          鍵は無限に作れて配列は有限 ― 衝突は必ず起きる。どう捌くかがハッシュ表の設計
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

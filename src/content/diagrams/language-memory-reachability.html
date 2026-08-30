@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 300"
+        role="img"
+        aria-label="トレーシングGCが到達可能性で判定することを示したオブジェクトグラフ。左端の根(グローバル変数とスタック上の変数)から矢印をたどれるオブジェクトAとBには印が付き、生き残る。右側にはAとBのどちらからも指されていないオブジェクトCとDがあり、CとDは互いに指し合う循環参照になっている。参照カウント方式ではCとDのカウントが1のまま0にならないため永久に残ってしまうが、トレーシングGCは根からたどれるかどうかだけを見るため、CとDはまとめて回収される。"
+      >
+        <defs>
+          <marker id="arm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="armp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="16" y="96" width="104" height="76" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="68" y="126" text-anchor="middle" font-size="12.5" font-weight="600">根(root)</text>
+        <text x="68" y="145" text-anchor="middle" font-size="10.5" class="muted">グローバル変数</text>
+        <text x="68" y="160" text-anchor="middle" font-size="10.5" class="muted">スタック上の変数</text>
+
+        <line x1="120" y1="118" x2="168" y2="90" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#armp)" />
+        <line x1="120" y1="150" x2="168" y2="178" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#armp)" />
+
+        <rect x="174" y="60" width="96" height="56" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="222" y="86" text-anchor="middle" font-size="13" font-weight="600">A</text>
+        <text x="222" y="104" text-anchor="middle" font-size="10.5" class="lbl">到達できる</text>
+
+        <rect x="174" y="152" width="96" height="56" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="222" y="178" text-anchor="middle" font-size="13" font-weight="600">B</text>
+        <text x="222" y="196" text-anchor="middle" font-size="10.5" class="lbl">到達できる</text>
+
+        <rect x="330" y="40" width="290" height="188" rx="10" fill="none" stroke="var(--border)" stroke-width="1.4" stroke-dasharray="6 4" />
+        <text x="475" y="62" text-anchor="middle" font-size="11.5" class="muted">根からどうたどっても届かない領域</text>
+
+        <rect x="358" y="82" width="96" height="56" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="406" y="108" text-anchor="middle" font-size="13" class="muted">C</text>
+        <text x="406" y="126" text-anchor="middle" font-size="10.5" class="muted">参照カウント 1</text>
+
+        <rect x="496" y="152" width="96" height="56" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="544" y="178" text-anchor="middle" font-size="13" class="muted">D</text>
+        <text x="544" y="196" text-anchor="middle" font-size="10.5" class="muted">参照カウント 1</text>
+
+        <line x1="454" y1="118" x2="496" y2="166" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arm)" />
+        <line x1="496" y1="188" x2="454" y2="130" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arm)" />
+        <text x="440" y="160" font-size="10.5" class="muted">互いに指し合う(循環参照)</text>
+
+        <line x1="16" y1="252" x2="624" y2="252" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="272" font-size="11" class="muted">参照カウント方式: CとDはカウントが0にならず、永久に残る</text>
+        <text x="16" y="290" font-size="11" class="lbl">トレーシングGC: 根からたどれないので、CとDはまとめて回収される</text>
+      </svg>
+    </div>
+  </body>
+</html>

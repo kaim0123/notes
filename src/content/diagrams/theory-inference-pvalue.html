@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 720 320"
+        role="img"
+        aria-label="帰無仮説のもとで想定される分布と、その裾に置かれた有意水準5パーセントの棄却域。観測値が棄却域に入るほど極端であればp値が有意水準を下回り、帰無仮説を棄却する"
+      >
+        <!-- 分布の面(全体) -->
+        <path
+          d="M60,248 C140,240 180,150 260,135 C310,125 330,60 360,60 C390,60 410,125 460,135 C540,150 580,240 660,248 L660,250 L60,250 Z"
+          fill="var(--primary)"
+          opacity="0.10"
+        />
+        <!-- 棄却域(右裾) -->
+        <path
+          d="M560,224 C600,236 620,244 660,248 L660,250 L560,250 Z"
+          fill="var(--primary)"
+          opacity="0.55"
+        />
+
+        <!-- 曲線本体 -->
+        <path
+          d="M60,248 C140,240 180,150 260,135 C310,125 330,60 360,60 C390,60 410,125 460,135 C540,150 580,240 660,248"
+          fill="none"
+          stroke="var(--fg)"
+          stroke-width="2"
+        />
+        <line x1="40" y1="250" x2="680" y2="250" stroke="var(--border)" stroke-width="1.5" />
+
+        <!-- 中心(帰無仮説の想定) -->
+        <line x1="360" y1="60" x2="360" y2="250" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <text x="360" y="48" text-anchor="middle" font-size="12" class="muted">帰無仮説 H₀ が正しいときの中心</text>
+
+        <!-- 棄却域の境界 -->
+        <line x1="560" y1="224" x2="560" y2="266" stroke="var(--primary)" stroke-width="2" />
+        <text x="560" y="284" text-anchor="middle" font-size="12" class="accent" font-weight="600">有意水準 α = 0.05</text>
+
+        <!-- 観測値 -->
+        <line x1="612" y1="120" x2="612" y2="243" stroke="var(--fg)" stroke-width="2" />
+        <circle cx="612" cy="120" r="5" fill="var(--fg)" />
+        <text x="612" y="106" text-anchor="middle" font-size="13" font-weight="600">観測値</text>
+
+        <text x="620" y="212" font-size="12" class="accent" font-weight="600">p値</text>
+        <text x="150" y="120" font-size="13" class="muted">帰無仮説のもとで</text>
+        <text x="150" y="140" font-size="13" class="muted">起こりやすい範囲</text>
+
+        <text x="360" y="308" text-anchor="middle" font-size="12" class="muted">
+          観測値より外側の面積(p値)が α より小さければ、偶然とは見なさず H₀ を棄却する
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

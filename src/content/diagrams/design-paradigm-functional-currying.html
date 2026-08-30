@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 660 280" role="img" aria-label="カリー化と部分適用の違いを示した図。上段のカリー化では、3引数の関数が、割引率を受け取る関数、税率を受け取る関数、価格を受け取る関数という3段の連鎖に分解され、1つずつ引数を渡すたびに次の関数が返る。下段の部分適用では、元の3引数関数の形を保ったまま、割引率と税率の2つをまとめて先に固定し、残りの価格だけを受け取る関数が作られる。どちらも決まった分から先に固定するという発想は共通している。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="30" y="26" font-size="12.5" font-weight="600">カリー化 ― 常に1引数ずつ</text>
+
+        <rect x="30" y="42" width="130" height="46" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="95" y="62" text-anchor="middle" font-size="10.5" class="mono">割引率 =&gt;</text>
+        <text x="95" y="79" text-anchor="middle" font-size="10" class="muted">0.1 を渡す</text>
+        <line x1="164" y1="65" x2="186" y2="65" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+
+        <rect x="190" y="42" width="130" height="46" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="255" y="62" text-anchor="middle" font-size="10.5" class="mono">税率 =&gt;</text>
+        <text x="255" y="79" text-anchor="middle" font-size="10" class="muted">0.1 を渡す</text>
+        <line x1="324" y1="65" x2="346" y2="65" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+
+        <rect x="350" y="42" width="130" height="46" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="415" y="62" text-anchor="middle" font-size="10.5" class="mono">価格 =&gt;</text>
+        <text x="415" y="79" text-anchor="middle" font-size="10" class="muted">1000 を渡す</text>
+        <line x1="484" y1="65" x2="506" y2="65" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+
+        <rect x="510" y="42" width="120" height="46" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="570" y="71" text-anchor="middle" font-size="11.5" font-weight="600">結果</text>
+
+        <line x1="30" y1="118" x2="630" y2="118" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="30" y="150" font-size="12.5" font-weight="600">部分適用 ― まとめて先に固定</text>
+
+        <rect x="30" y="166" width="230" height="56" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="145" y="190" text-anchor="middle" font-size="11">割引率と税率をまとめて固定</text>
+        <text x="145" y="209" text-anchor="middle" font-size="10" class="mono muted">bind(null, 0.1, 0.1)</text>
+        <line x1="264" y1="194" x2="296" y2="194" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+
+        <rect x="300" y="166" width="180" height="56" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="390" y="197" text-anchor="middle" font-size="11">価格だけ受け取る関数</text>
+        <line x1="484" y1="194" x2="506" y2="194" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+
+        <rect x="510" y="166" width="120" height="56" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="570" y="200" text-anchor="middle" font-size="11.5" font-weight="600">結果</text>
+
+        <text x="330" y="262" text-anchor="middle" font-size="11" class="muted">
+          違いは「1つずつか、まとめてか」だけ。狙いはどちらも、決まった分を先に固定すること
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

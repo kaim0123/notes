@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 700 250" role="img" aria-label="パイプラインアーキテクチャの構成図。左からプロデューサーフィルター(データを取得する)、テスターフィルター(条件で通すか止めるか判定する)、トランスフォーマーフィルター(受け取ったデータを加工する)、コンシューマーフィルター(最終結果を保存・出力する)が、一方向のパイプで数珠つなぎになっている。各フィルターは隣が何をしているかを知らず、単機能の独立部品として差し替えや並び替えができる。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="350" y="26" text-anchor="middle" font-size="11.5" class="muted">フィルター(単機能の部品)を、パイプ(一方向の経路)でつなぐだけ</text>
+
+        <rect x="20" y="60" width="150" height="66" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="95" y="86" text-anchor="middle" font-size="11" font-weight="600">プロデューサー</text>
+        <text x="95" y="106" text-anchor="middle" font-size="10" class="muted">データを取得する</text>
+        <line x1="174" y1="93" x2="196" y2="93" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+
+        <rect x="200" y="60" width="150" height="66" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="275" y="86" text-anchor="middle" font-size="11">テスター</text>
+        <text x="275" y="106" text-anchor="middle" font-size="10" class="muted">通すか止めるか判定</text>
+        <line x1="354" y1="93" x2="376" y2="93" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+
+        <rect x="380" y="60" width="150" height="66" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="455" y="86" text-anchor="middle" font-size="11">トランスフォーマー</text>
+        <text x="455" y="106" text-anchor="middle" font-size="10" class="muted">受け取った値を加工</text>
+        <line x1="534" y1="93" x2="556" y2="93" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+
+        <rect x="560" y="60" width="130" height="66" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="625" y="86" text-anchor="middle" font-size="11" font-weight="600">コンシューマー</text>
+        <text x="625" y="106" text-anchor="middle" font-size="10" class="muted">保存・出力する</text>
+
+        <text x="350" y="164" text-anchor="middle" font-size="11" class="mono muted">cat file | grep error | sort | uniq</text>
+        <text x="350" y="192" text-anchor="middle" font-size="11" class="muted">各フィルターは隣が何をしているかを知らない</text>
+        <text x="350" y="212" text-anchor="middle" font-size="11" class="muted">= 単体でテストでき、差し替えも並び替えもできる</text>
+      </svg>
+    </div>
+  </body>
+</html>

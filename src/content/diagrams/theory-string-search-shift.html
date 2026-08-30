@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 320"
+        role="img"
+        aria-label="素朴法は不一致のたびにパターンを1文字ずつずらすが、ボイヤー・ムーア法は末尾から比較して、不一致文字がパターンに無ければパターン長ぶん一気にずらせることを示す比較図"
+      >
+        <text x="30" y="26" font-size="13" class="muted">テキスト "ABCXABCDABCDABDE" から "ABCD" を探す</text>
+
+        <!-- 上段: 素朴法 -->
+        <text x="30" y="60" font-size="14" font-weight="700">素朴法 ― 1文字ずつずらす</text>
+
+        <g class="mono" font-size="15">
+          <text x="30" y="96" class="muted">A B C X A B C D A B C D A B D E</text>
+        </g>
+        <text x="30" y="124" font-size="14" class="mono accent">A B C D</text>
+        <text x="180" y="124" font-size="12" class="muted">4文字目 X で不一致 → 1つずらす</text>
+
+        <text x="52" y="150" font-size="14" class="mono accent">A B C D</text>
+        <text x="180" y="150" font-size="12" class="muted">1文字目から比べ直し(B ≠ A)</text>
+
+        <text x="74" y="176" font-size="14" class="mono accent">A B C D</text>
+        <text x="180" y="176" font-size="12" class="muted">また1つずらす ― 直前の一致情報は毎回捨てている</text>
+
+        <!-- 区切り -->
+        <line x1="30" y1="196" x2="790" y2="196" stroke="var(--border)" stroke-width="1.5" />
+
+        <!-- 下段: BM -->
+        <text x="30" y="226" font-size="14" font-weight="700" class="accent">ボイヤー・ムーア法 ― 末尾から比べ、大きく飛ぶ</text>
+
+        <g class="mono" font-size="15">
+          <text x="30" y="262" class="muted">A B C X A B C D A B C D A B D E</text>
+        </g>
+        <text x="30" y="290" font-size="14" class="mono accent">A B C D</text>
+        <text x="94" y="278" font-size="11" class="accent">末尾から比較</text>
+
+        <!-- ジャンプの矢印 -->
+        <path d="M96,296 C130,312 150,312 172,300" fill="none" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="200" y="290" font-size="12" class="accent" font-weight="600">
+          X はパターンに含まれない → 4文字ぶん一気にずらす
+        </text>
+        <text x="200" y="308" font-size="12" class="muted">
+          間の A・B・C は一度も読まずに済む
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

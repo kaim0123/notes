@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 660 300" role="img" aria-label="例外による失敗の扱いとResult型による扱いを比べた図。左では関数が例外を投げ、呼び出し側の型には失敗の可能性が現れないため、try/catchを書き忘れても気づけない。右では関数がResult型を返し、成功の場合と失敗の場合の2つの形が戻り値の型に現れるので、両方の分岐を書くまでコンパイラが通さない。網羅性はswitch文とnever型で確認する。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="165" y="26" text-anchor="middle" font-size="12.5" font-weight="600">例外(throw)</text>
+
+        <rect x="45" y="52" width="240" height="46" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="165" y="81" text-anchor="middle" font-size="11" class="mono">parsePrice(s): number</text>
+
+        <line x1="165" y1="98" x2="165" y2="126" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+        <text x="240" y="118" text-anchor="middle" font-size="10.5" class="muted">失敗は型に出ない</text>
+
+        <rect x="45" y="130" width="240" height="46" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="165" y="159" text-anchor="middle" font-size="11">呼び出し側</text>
+
+        <text x="165" y="206" text-anchor="middle" font-size="11" class="muted">try / catch を書き忘れても</text>
+        <text x="165" y="224" text-anchor="middle" font-size="11" class="muted">コンパイラは何も言わない</text>
+
+        <line x1="335" y1="30" x2="335" y2="270" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="500" y="26" text-anchor="middle" font-size="12.5" font-weight="600">Result型</text>
+
+        <rect x="380" y="52" width="240" height="46" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="500" y="81" text-anchor="middle" font-size="10.5" class="mono">parsePrice(s): Result</text>
+
+        <line x1="450" y1="98" x2="430" y2="126" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+        <line x1="550" y1="98" x2="570" y2="126" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+
+        <rect x="360" y="130" width="130" height="46" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="425" y="150" text-anchor="middle" font-size="10.5" class="mono">ok: true</text>
+        <text x="425" y="167" text-anchor="middle" font-size="10.5">成功の値</text>
+
+        <rect x="510" y="130" width="130" height="46" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="575" y="150" text-anchor="middle" font-size="10.5" class="mono">ok: false</text>
+        <text x="575" y="167" text-anchor="middle" font-size="10.5">失敗の理由</text>
+
+        <text x="500" y="206" text-anchor="middle" font-size="11" class="muted">両方の分岐を書くまで通らない</text>
+        <text x="500" y="224" text-anchor="middle" font-size="11" class="muted">網羅性は switch と never で確認する</text>
+
+        <text x="330" y="284" text-anchor="middle" font-size="11" class="muted">
+          失敗する可能性そのものを、戻り値の型として見えるようにする
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

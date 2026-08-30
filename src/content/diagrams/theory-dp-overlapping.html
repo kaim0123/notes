@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 340"
+        role="img"
+        aria-label="fib(5)の再帰呼び出し木。fib(3)が2回、fib(2)が3回現れるなど同じ部分問題が重複して計算されている様子を強調した図"
+      >
+        <text x="30" y="26" font-size="13" class="muted">素朴な再帰で fib(5) を計算したときの呼び出し木 ― 色付きは重複した計算</text>
+
+        <!-- 枝 -->
+        <line x1="386" y1="72" x2="250" y2="116" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="434" y1="72" x2="560" y2="116" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="212" y1="152" x2="140" y2="196" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="268" y1="152" x2="330" y2="196" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="524" y1="152" x2="470" y2="196" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="596" y1="152" x2="650" y2="196" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="112" y1="232" x2="70" y2="272" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="158" y1="232" x2="200" y2="272" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="452" y1="232" x2="410" y2="272" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="498" y1="232" x2="540" y2="272" stroke="var(--border)" stroke-width="1.5" />
+
+        <!-- fib(5) -->
+        <rect x="360" y="42" width="100" height="34" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="410" y="65" text-anchor="middle" font-size="14" class="mono">fib(5)</text>
+
+        <!-- fib(4), fib(3) -->
+        <rect x="200" y="120" width="100" height="34" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="250" y="143" text-anchor="middle" font-size="14" class="mono">fib(4)</text>
+        <rect x="510" y="120" width="100" height="34" rx="8" fill="var(--primary)" opacity="0.3" stroke="var(--primary)" />
+        <text x="560" y="143" text-anchor="middle" font-size="14" class="mono">fib(3)</text>
+
+        <!-- 3段目 -->
+        <rect x="90" y="200" width="100" height="34" rx="8" fill="var(--primary)" opacity="0.3" stroke="var(--primary)" />
+        <text x="140" y="223" text-anchor="middle" font-size="14" class="mono">fib(3)</text>
+        <rect x="280" y="200" width="100" height="34" rx="8" fill="var(--primary)" opacity="0.3" stroke="var(--primary)" />
+        <text x="330" y="223" text-anchor="middle" font-size="14" class="mono">fib(2)</text>
+        <rect x="420" y="200" width="100" height="34" rx="8" fill="var(--primary)" opacity="0.3" stroke="var(--primary)" />
+        <text x="470" y="223" text-anchor="middle" font-size="14" class="mono">fib(2)</text>
+        <rect x="600" y="200" width="100" height="34" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="650" y="223" text-anchor="middle" font-size="14" class="mono">fib(1)</text>
+
+        <!-- 4段目 -->
+        <rect x="20" y="276" width="100" height="34" rx="8" fill="var(--primary)" opacity="0.3" stroke="var(--primary)" />
+        <text x="70" y="299" text-anchor="middle" font-size="14" class="mono">fib(2)</text>
+        <rect x="150" y="276" width="100" height="34" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="200" y="299" text-anchor="middle" font-size="14" class="mono">fib(1)</text>
+        <rect x="360" y="276" width="100" height="34" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="410" y="299" text-anchor="middle" font-size="14" class="mono">fib(1)</text>
+        <rect x="490" y="276" width="100" height="34" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="540" y="299" text-anchor="middle" font-size="14" class="mono">fib(0)</text>
+
+        <!-- 注記 -->
+        <text x="740" y="266" text-anchor="middle" font-size="13" class="accent" font-weight="600">fib(3) は2回</text>
+        <text x="740" y="288" text-anchor="middle" font-size="13" class="accent" font-weight="600">fib(2) は3回</text>
+        <text x="740" y="312" text-anchor="middle" font-size="12" class="muted">覚えれば O(2ⁿ) → O(n)</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 680 260" role="img" aria-label="関数名の接頭辞を役割ごとに整理した図。左は真偽値を返す関数で、is(今そうなのかという状態)、has(それを持っているか)、can(それができるか)の3つが、それぞれ問いの性質ごとに並ぶ。右はイベント関連で、onは受け取る側のprop名、handleは実装する側の関数名という使い分けが、子コンポーネントへonClickを渡し、親側でhandleClickを実装する形で示される。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="165" y="26" text-anchor="middle" font-size="12.5" font-weight="600">真偽値を返す ― is / has / can</text>
+
+        <rect x="30" y="46" width="270" height="46" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="52" y="66" font-size="10.5" class="mono hi">is</text>
+        <text x="52" y="84" font-size="10" class="muted">今そうなのか(状態・性質)</text>
+        <text x="288" y="80" text-anchor="end" font-size="9.5" class="mono muted">isValid / isOpen</text>
+
+        <rect x="30" y="98" width="270" height="46" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="52" y="118" font-size="10.5" class="mono hi">has</text>
+        <text x="52" y="136" font-size="10" class="muted">それを持っているか(所有)</text>
+        <text x="288" y="132" text-anchor="end" font-size="9.5" class="mono muted">hasError</text>
+
+        <rect x="30" y="150" width="270" height="46" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="52" y="170" font-size="10.5" class="mono hi">can</text>
+        <text x="52" y="188" font-size="10" class="muted">それができるか(能力・許可)</text>
+        <text x="288" y="184" text-anchor="end" font-size="9.5" class="mono muted">canSubmit</text>
+
+        <text x="165" y="228" text-anchor="middle" font-size="10.5" class="muted">同じフォームでも、問いが違えば接頭辞が変わる</text>
+
+        <line x1="345" y1="30" x2="345" y2="240" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="510" y="26" text-anchor="middle" font-size="12.5" font-weight="600">イベント ― on / handle</text>
+
+        <rect x="380" y="52" width="260" height="52" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="510" y="74" text-anchor="middle" font-size="10.5">呼び出す側(親)</text>
+        <text x="510" y="92" text-anchor="middle" font-size="9.5" class="mono muted">const handleClick = () =&gt; {...}</text>
+
+        <line x1="510" y1="104" x2="510" y2="130" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+        <text x="590" y="122" text-anchor="middle" font-size="9.5" class="hi">onClick として渡す</text>
+
+        <rect x="380" y="134" width="260" height="52" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.7" />
+        <text x="510" y="156" text-anchor="middle" font-size="10.5">受け取る側(子)</text>
+        <text x="510" y="174" text-anchor="middle" font-size="9.5" class="mono muted">props: { onClick }</text>
+
+        <text x="510" y="218" text-anchor="middle" font-size="10.5" class="muted">on は「いつ呼ばれるか」を受け取る名前、</text>
+        <text x="510" y="236" text-anchor="middle" font-size="10.5" class="muted">handle は「何をするか」を実装する名前</text>
+      </svg>
+    </div>
+  </body>
+</html>

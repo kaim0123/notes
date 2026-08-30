@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 280"
+        role="img"
+        aria-label="JavaScriptの非同期処理の書き方が3世代で変わってきたことを示した図。1つ目のコールバックは、処理を入れ子の中に書いていくため、続きの処理を足すほど右へ深くなっていく(コールバック地獄)。2つ目のPromiseは、入れ子ではなく.then()を縦につないだ鎖になり、深さは増えないが繋ぎの記述が残る。3つ目のasync/awaitは、awaitを付けた代入文が上から下へ並ぶだけになり、同期処理とほぼ同じ見た目で読める。"
+      >
+        <text x="16" y="22" font-size="12" class="lbl">① コールバック</text>
+        <text x="226" y="22" font-size="12" class="lbl">② Promise</text>
+        <text x="436" y="22" font-size="12" class="lbl">③ async / await</text>
+
+        <rect x="16" y="32" width="190" height="192" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <rect x="30" y="46" width="162" height="164" rx="5" fill="none" stroke="var(--muted)" stroke-width="1.2" />
+        <text x="40" y="62" font-size="10.5" class="muted">getUser(id, () =&gt; {</text>
+        <rect x="46" y="70" width="134" height="132" rx="5" fill="none" stroke="var(--muted)" stroke-width="1.2" />
+        <text x="56" y="86" font-size="10.5" class="muted">getPosts(() =&gt; {</text>
+        <rect x="62" y="94" width="106" height="100" rx="5" fill="none" stroke="var(--muted)" stroke-width="1.2" />
+        <text x="72" y="110" font-size="10.5" class="muted">getTags(() =&gt; {</text>
+        <rect x="78" y="118" width="78" height="68" rx="5" fill="none" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="88" y="140" font-size="10.5">やりたい</text>
+        <text x="88" y="156" font-size="10.5">処理</text>
+
+        <rect x="226" y="32" width="190" height="192" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <rect x="242" y="52" width="158" height="34" rx="5" fill="none" stroke="var(--muted)" stroke-width="1.2" />
+        <text x="252" y="74" font-size="10.5" class="muted">getUser(id)</text>
+        <line x1="321" y1="86" x2="321" y2="100" stroke="var(--muted)" stroke-width="1.2" />
+        <rect x="242" y="100" width="158" height="34" rx="5" fill="none" stroke="var(--muted)" stroke-width="1.2" />
+        <text x="252" y="122" font-size="10.5" class="muted">.then(getPosts)</text>
+        <line x1="321" y1="134" x2="321" y2="148" stroke="var(--muted)" stroke-width="1.2" />
+        <rect x="242" y="148" width="158" height="34" rx="5" fill="none" stroke="var(--muted)" stroke-width="1.2" />
+        <text x="252" y="170" font-size="10.5" class="muted">.then(getTags)</text>
+        <line x1="321" y1="182" x2="321" y2="196" stroke="var(--muted)" stroke-width="1.2" />
+        <rect x="242" y="196" width="158" height="14" rx="4" fill="none" stroke="var(--primary)" stroke-width="1.3" />
+
+        <rect x="436" y="32" width="190" height="192" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <line x1="452" y1="52" x2="452" y2="204" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="464" y="70" font-size="10.5" class="muted">const u = await getUser(id)</text>
+        <text x="464" y="104" font-size="10.5" class="muted">const p = await getPosts(u)</text>
+        <text x="464" y="138" font-size="10.5" class="muted">const t = await getTags(p)</text>
+        <text x="464" y="176" font-size="10.5">やりたい処理</text>
+
+        <text x="111" y="244" text-anchor="middle" font-size="10.5" class="muted">続きを足すほど右へ深くなる</text>
+        <text x="321" y="244" text-anchor="middle" font-size="10.5" class="muted">深さは増えないが繋ぎが残る</text>
+        <text x="531" y="244" text-anchor="middle" font-size="10.5" class="muted">上から下へ、同期処理と同じ形</text>
+
+        <line x1="16" y1="258" x2="624" y2="258" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="272" font-size="11" class="muted">どれも待っている間に他の処理を進める点は同じ ― 変わったのは「待ち」の書き表し方だけ</text>
+      </svg>
+    </div>
+  </body>
+</html>

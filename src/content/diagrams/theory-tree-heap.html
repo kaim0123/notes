@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 320"
+        role="img"
+        aria-label="最小ヒープの木と、それを配列に並べた対応図。根が最小値1で、各親は子より小さい。配列のi番目の子は2i+1と2i+2の位置にある"
+      >
+        <text x="30" y="28" font-size="13" class="muted">最小ヒープ ― 親 &lt; 子 だけを守る(兄弟どうしの順序は問わない)</text>
+
+        <!-- 枝 -->
+        <line x1="180" y1="88" x2="120" y2="134" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="220" y1="88" x2="280" y2="134" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="88" y1="182" x2="56" y2="222" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="128" y1="182" x2="160" y2="222" stroke="var(--border)" stroke-width="1.5" />
+
+        <!-- 節点 -->
+        <circle cx="200" cy="62" r="26" fill="var(--primary)" />
+        <text x="200" y="69" text-anchor="middle" font-size="16" font-weight="700" class="mono" style="fill: var(--primary-fg)">1</text>
+        <text x="236" y="52" font-size="12" class="accent" font-weight="600">根 = 最小</text>
+
+        <circle cx="108" cy="158" r="26" fill="var(--card)" stroke="var(--border)" stroke-width="1.5" />
+        <text x="108" y="165" text-anchor="middle" font-size="16" font-weight="700" class="mono">3</text>
+        <circle cx="292" cy="158" r="26" fill="var(--card)" stroke="var(--border)" stroke-width="1.5" />
+        <text x="292" y="165" text-anchor="middle" font-size="16" font-weight="700" class="mono">7</text>
+
+        <circle cx="44" cy="246" r="26" fill="var(--card)" stroke="var(--border)" stroke-width="1.5" />
+        <text x="44" y="253" text-anchor="middle" font-size="16" font-weight="700" class="mono">9</text>
+        <circle cx="172" cy="246" r="26" fill="var(--card)" stroke="var(--border)" stroke-width="1.5" />
+        <text x="172" y="253" text-anchor="middle" font-size="16" font-weight="700" class="mono">5</text>
+
+        <!-- 区切り -->
+        <line x1="380" y1="40" x2="380" y2="290" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4" />
+
+        <!-- 配列表現 -->
+        <text x="430" y="70" font-size="13" class="muted">同じ木を配列で表す</text>
+        <g>
+          <rect x="430" y="90" width="66" height="52" rx="6" fill="var(--primary)" />
+          <text x="463" y="122" text-anchor="middle" font-size="18" class="mono" style="fill: var(--primary-fg)">1</text>
+          <text x="463" y="162" text-anchor="middle" font-size="12" class="muted">0</text>
+
+          <rect x="498" y="90" width="66" height="52" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <text x="531" y="122" text-anchor="middle" font-size="18" class="mono">3</text>
+          <text x="531" y="162" text-anchor="middle" font-size="12" class="muted">1</text>
+
+          <rect x="566" y="90" width="66" height="52" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <text x="599" y="122" text-anchor="middle" font-size="18" class="mono">7</text>
+          <text x="599" y="162" text-anchor="middle" font-size="12" class="muted">2</text>
+
+          <rect x="634" y="90" width="66" height="52" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <text x="667" y="122" text-anchor="middle" font-size="18" class="mono">9</text>
+          <text x="667" y="162" text-anchor="middle" font-size="12" class="muted">3</text>
+
+          <rect x="702" y="90" width="66" height="52" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <text x="735" y="122" text-anchor="middle" font-size="18" class="mono">5</text>
+          <text x="735" y="162" text-anchor="middle" font-size="12" class="muted">4</text>
+        </g>
+
+        <text x="430" y="200" font-size="13">i 番目の子は <tspan class="mono accent">2i+1</tspan> と <tspan class="mono accent">2i+2</tspan></text>
+        <text x="430" y="224" font-size="13" class="muted">例) i=1(値3)の子は 3番地(9)と4番地(5)</text>
+        <text x="430" y="252" font-size="13" class="muted">ポインタを持たずに木を表現でき、</text>
+        <text x="430" y="272" font-size="13" class="muted">メモリも連続して並ぶ</text>
+      </svg>
+    </div>
+  </body>
+</html>

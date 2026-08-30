@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 300"
+        role="img"
+        aria-label="母集団から無作為抽出した標本をもとに、点推定では1つの値を、区間推定では信頼区間という幅のある範囲を示して母平均を推し量る流れ"
+      >
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <!-- 母集団 -->
+        <ellipse cx="130" cy="130" rx="105" ry="80" fill="var(--card)" stroke="var(--border)" stroke-width="1.5" />
+        <text x="130" y="42" text-anchor="middle" font-size="13" class="muted">母集団(全体・未知)</text>
+        <circle cx="88" cy="106" r="6" class="muted" fill="var(--muted)" />
+        <circle cx="132" cy="92" r="6" fill="var(--primary)" />
+        <circle cx="176" cy="118" r="6" fill="var(--muted)" />
+        <circle cx="96" cy="150" r="6" fill="var(--primary)" />
+        <circle cx="146" cy="140" r="6" fill="var(--muted)" />
+        <circle cx="188" cy="160" r="6" fill="var(--muted)" />
+        <circle cx="120" cy="176" r="6" fill="var(--primary)" />
+        <circle cx="164" cy="82" r="6" fill="var(--muted)" />
+        <text x="130" y="228" text-anchor="middle" font-size="14" font-weight="600">母平均 μ</text>
+        <text x="130" y="246" text-anchor="middle" font-size="11" class="muted">本当に知りたい値</text>
+
+        <!-- 抽出の矢印 -->
+        <line x1="240" y1="130" x2="308" y2="130" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#a)" />
+        <text x="274" y="116" text-anchor="middle" font-size="12" class="accent" font-weight="600">無作為抽出</text>
+
+        <!-- 標本 -->
+        <rect x="315" y="80" width="150" height="100" rx="12" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="390" y="42" text-anchor="middle" font-size="13" class="accent" font-weight="600">標本(手元のデータ)</text>
+        <circle cx="352" cy="112" r="6" fill="var(--primary)" />
+        <circle cx="392" cy="102" r="6" fill="var(--primary)" />
+        <circle cx="430" cy="124" r="6" fill="var(--primary)" />
+        <circle cx="368" cy="150" r="6" fill="var(--primary)" />
+        <circle cx="418" cy="156" r="6" fill="var(--primary)" />
+        <text x="390" y="228" text-anchor="middle" font-size="14" font-weight="600">標本平均 x̄</text>
+        <text x="390" y="246" text-anchor="middle" font-size="11" class="muted">計算できる値</text>
+
+        <!-- 推定の矢印 -->
+        <line x1="472" y1="130" x2="540" y2="130" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#a)" />
+        <text x="506" y="116" text-anchor="middle" font-size="12" class="accent" font-weight="600">推定</text>
+
+        <!-- 点推定 -->
+        <rect x="550" y="62" width="240" height="62" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="566" y="86" font-size="13" font-weight="600">点推定</text>
+        <line x1="620" y1="106" x2="770" y2="106" stroke="var(--border)" stroke-width="1.5" />
+        <circle cx="695" cy="106" r="6" fill="var(--primary)" />
+        <text x="566" y="111" font-size="11" class="muted">1つの値</text>
+
+        <!-- 区間推定 -->
+        <rect x="550" y="138" width="240" height="70" rx="10" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="566" y="162" font-size="13" font-weight="600" class="accent">区間推定</text>
+        <line x1="620" y1="184" x2="770" y2="184" stroke="var(--border)" stroke-width="1.5" />
+        <rect x="655" y="176" width="80" height="16" rx="4" fill="var(--primary)" opacity="0.35" />
+        <line x1="655" y1="170" x2="655" y2="198" stroke="var(--primary)" stroke-width="2" />
+        <line x1="735" y1="170" x2="735" y2="198" stroke="var(--primary)" stroke-width="2" />
+        <text x="566" y="187" font-size="11" class="muted">幅のある</text>
+        <text x="566" y="201" font-size="11" class="muted">範囲</text>
+        <text x="695" y="228" text-anchor="middle" font-size="11" class="muted">95%信頼区間 ― 標本が増えるほど狭くなる</text>
+      </svg>
+    </div>
+  </body>
+</html>

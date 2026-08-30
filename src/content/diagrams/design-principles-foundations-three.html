@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 680 290" role="img" aria-label="黎明期の3原則を3段構えで示した図。左は関心の分離で、画面・業務・保存が混ざった1つの塊を、3つの独立したモジュールに分ける様子。中央は情報隠蔽で、モジュールの内部にある変わりやすい判断を隠し、外へは安定した窓口だけを見せる様子。右は最小権限の原則で、呼び出す相手には必要な鍵だけを渡し、全体の管理者権限は渡さない様子。分ける、隠す、絞るという順に効いてくる。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="113" y="26" text-anchor="middle" font-size="12" font-weight="600">① 分ける ― 関心の分離</text>
+        <rect x="38" y="44" width="150" height="46" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="113" y="63" text-anchor="middle" font-size="10.5">画面 + 業務 + 保存</text>
+        <text x="113" y="81" text-anchor="middle" font-size="10" class="muted">が混ざった1つの塊</text>
+        <line x1="113" y1="94" x2="113" y2="112" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+        <rect x="38" y="116" width="46" height="36" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="61" y="139" text-anchor="middle" font-size="10">画面</text>
+        <rect x="90" y="116" width="46" height="36" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="113" y="139" text-anchor="middle" font-size="10">業務</text>
+        <rect x="142" y="116" width="46" height="36" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="165" y="139" text-anchor="middle" font-size="10">保存</text>
+        <text x="113" y="176" text-anchor="middle" font-size="10.5" class="muted">変更の影響を1箇所に閉じ込める</text>
+
+        <line x1="228" y1="30" x2="228" y2="230" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="340" y="26" text-anchor="middle" font-size="12" font-weight="600">② 隠す ― 情報隠蔽</text>
+        <rect x="262" y="52" width="156" height="100" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <rect x="278" y="88" width="124" height="48" rx="6" fill="var(--bg)" stroke="var(--border)" stroke-width="1.3" stroke-dasharray="4 3" />
+        <text x="340" y="108" text-anchor="middle" font-size="10" class="muted">変わりやすい判断</text>
+        <text x="340" y="126" text-anchor="middle" font-size="10" class="muted">(配列かDBか)</text>
+        <text x="340" y="74" text-anchor="middle" font-size="10.5">安定した窓口だけ公開</text>
+        <line x1="340" y1="180" x2="340" y2="158" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+        <text x="340" y="196" text-anchor="middle" font-size="10.5" class="muted">利用側は窓口しか知らない</text>
+
+        <line x1="452" y1="30" x2="452" y2="230" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="566" y="26" text-anchor="middle" font-size="12" font-weight="600">③ 絞る ― 最小権限</text>
+        <rect x="486" y="52" width="160" height="42" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="566" y="78" text-anchor="middle" font-size="10.5">呼び出す相手</text>
+        <line x1="566" y1="98" x2="566" y2="116" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+        <rect x="486" y="120" width="160" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="566" y="142" text-anchor="middle" font-size="10.5">読み取り権限だけ渡す</text>
+        <text x="566" y="178" text-anchor="middle" font-size="10.5" class="muted">全体の管理者権限は渡さない</text>
+        <text x="566" y="196" text-anchor="middle" font-size="10.5" class="muted">= 事故の影響範囲が狭まる</text>
+
+        <text x="340" y="262" text-anchor="middle" font-size="11" class="muted">
+          分けて、隠して、絞る。以降の原則はすべて、この3つの言い換えか具体化になっている
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 300"
+        role="img"
+        aria-label="頂点A・B・C・Dを辺で結んだ重み付き無向グラフ。A-Bが2、A-Cが5、B-Dが3、C-Dが1、B-Cが4の重みを持つ"
+      >
+        <text x="30" y="28" font-size="13" class="muted">重み付き無向グラフ ― 辺の数字が距離(コスト)</text>
+
+        <!-- 辺 -->
+        <line x1="170" y1="110" x2="390" y2="70" stroke="var(--border)" stroke-width="2" />
+        <line x1="170" y1="110" x2="240" y2="238" stroke="var(--border)" stroke-width="2" />
+        <line x1="390" y1="70" x2="640" y2="170" stroke="var(--border)" stroke-width="2" />
+        <line x1="240" y1="238" x2="640" y2="170" stroke="var(--border)" stroke-width="2" />
+        <line x1="240" y1="238" x2="390" y2="70" stroke="var(--border)" stroke-width="2" />
+
+        <!-- 重み -->
+        <text x="280" y="76" text-anchor="middle" font-size="15" font-weight="600" class="accent">2</text>
+        <text x="176" y="184" text-anchor="middle" font-size="15" font-weight="600" class="accent">5</text>
+        <text x="530" y="102" text-anchor="middle" font-size="15" font-weight="600" class="accent">3</text>
+        <text x="450" y="228" text-anchor="middle" font-size="15" font-weight="600" class="accent">1</text>
+        <text x="338" y="170" text-anchor="middle" font-size="15" font-weight="600" class="accent">4</text>
+
+        <!-- 頂点 -->
+        <circle cx="170" cy="110" r="30" fill="var(--card)" stroke="var(--primary)" stroke-width="2" />
+        <text x="170" y="117" text-anchor="middle" font-size="17" font-weight="700">A</text>
+        <circle cx="390" cy="70" r="30" fill="var(--card)" stroke="var(--primary)" stroke-width="2" />
+        <text x="390" y="77" text-anchor="middle" font-size="17" font-weight="700">B</text>
+        <circle cx="240" cy="238" r="30" fill="var(--card)" stroke="var(--primary)" stroke-width="2" />
+        <text x="240" y="245" text-anchor="middle" font-size="17" font-weight="700">C</text>
+        <circle cx="640" cy="170" r="30" fill="var(--card)" stroke="var(--primary)" stroke-width="2" />
+        <text x="640" y="177" text-anchor="middle" font-size="17" font-weight="700">D</text>
+
+        <!-- 経路の比較 -->
+        <text x="700" y="242" text-anchor="end" font-size="13">A→B→D = 2 + 3 = <tspan class="accent" font-weight="700">5</tspan></text>
+        <text x="700" y="266" text-anchor="end" font-size="13" class="muted">A→C→D = 5 + 1 = 6</text>
+      </svg>
+    </div>
+  </body>
+</html>

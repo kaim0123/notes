@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 660 280"
+        role="img"
+        aria-label="単一スレッドのJavaScriptでも競合状態が起きることを、在庫1個の二重販売で示した図。リクエスト1が在庫を読み(残り1)、awaitでデータベースの応答を待っている間に、リクエスト2が同じ在庫を読む。リクエスト2から見ても在庫はまだ1なので、両方が販売可能と判断し、それぞれ在庫を1減らして注文を作る。結果、在庫1個の商品が2人に売れ、在庫はマイナス1になる。awaitは処理の中断点であり、その隙間に別のリクエストが割り込む。"
+      >
+        <defs>
+          <marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="22" font-size="12" class="lbl">在庫は1個しかない</text>
+
+        <text x="16" y="72" font-size="11" class="muted">リクエスト1</text>
+        <rect x="96" y="52" width="120" height="32" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="156" y="72" text-anchor="middle" font-size="11.5">在庫を読む → 1</text>
+        <line x1="216" y1="68" x2="292" y2="68" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ar6)" />
+        <text x="254" y="62" text-anchor="middle" font-size="10" class="muted">await</text>
+        <rect x="298" y="52" width="128" height="32" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="362" y="72" text-anchor="middle" font-size="11.5">1 &gt; 0 なので販売</text>
+        <line x1="426" y1="68" x2="452" y2="68" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar6)" />
+        <rect x="458" y="52" width="130" height="32" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="523" y="72" text-anchor="middle" font-size="11.5">在庫を1減らす</text>
+
+        <rect x="222" y="98" width="200" height="46" rx="7" fill="none" stroke="var(--primary)" stroke-width="1.4" stroke-dasharray="5 3" />
+        <text x="322" y="118" text-anchor="middle" font-size="11.5" class="lbl">この隙間に割り込まれる</text>
+        <text x="322" y="134" text-anchor="middle" font-size="10.5" class="muted">awaitは処理の中断点</text>
+
+        <text x="16" y="178" font-size="11" class="muted">リクエスト2</text>
+        <rect x="96" y="158" width="120" height="32" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="156" y="178" text-anchor="middle" font-size="11.5" class="muted">在庫を読む → 1</text>
+        <line x1="216" y1="174" x2="292" y2="174" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ar6)" />
+        <text x="254" y="168" text-anchor="middle" font-size="10" class="muted">await</text>
+        <rect x="298" y="158" width="128" height="32" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="362" y="178" text-anchor="middle" font-size="11.5" class="muted">1 &gt; 0 なので販売</text>
+        <line x1="426" y1="174" x2="452" y2="174" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar6)" />
+        <rect x="458" y="158" width="130" height="32" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="523" y="178" text-anchor="middle" font-size="11.5" class="muted">在庫を1減らす</text>
+
+        <line x1="16" y1="212" x2="600" y2="212" stroke="var(--muted)" stroke-width="1.2" />
+        <path d="M600,207 L612,212 L600,217 z" fill="var(--muted)" />
+        <text x="612" y="230" text-anchor="end" font-size="11" class="muted">時間</text>
+
+        <rect x="96" y="228" width="492" height="36" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="342" y="251" text-anchor="middle" font-size="12">結果: 1個しかない在庫が2人に売れ、在庫は -1 になる</text>
+      </svg>
+    </div>
+  </body>
+</html>

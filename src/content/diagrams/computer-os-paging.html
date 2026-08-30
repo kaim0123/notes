@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        color: var(--fg);
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 780 400"
+        role="img"
+        aria-label="ページングによる仮想記憶の図。左はプロセスから見た仮想アドレス空間で、仮想ページ0から4が連続して並ぶ。中央のページテーブルが各仮想ページの行き先を記録し、ページ0はフレーム1、ページ1はフレーム0、ページ3はフレーム2へ対応し、ページ2とページ4は物理メモリに載っておらず補助記憶にある。右上の物理メモリにはフレーム0から2があり、右下の補助記憶(スワップ領域)には載りきらないページが退避されている。補助記憶にあるページへアクセスするとページフォールトが起き、OSが読み込んで空きフレームに載せる。"
+      >
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <text x="105" y="32" text-anchor="middle" font-size="12" class="muted">仮想アドレス空間</text>
+        <text x="340" y="32" text-anchor="middle" font-size="12" class="muted">ページテーブル</text>
+        <text x="592" y="32" text-anchor="middle" font-size="12" class="muted">物理メモリ</text>
+
+        <rect x="35" y="48" width="140" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="105" y="70" text-anchor="middle" font-size="12">仮想ページ0</text>
+        <rect x="35" y="90" width="140" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="105" y="112" text-anchor="middle" font-size="12">仮想ページ1</text>
+        <rect x="35" y="132" width="140" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="105" y="154" text-anchor="middle" font-size="12">仮想ページ2</text>
+        <rect x="35" y="174" width="140" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="105" y="196" text-anchor="middle" font-size="12">仮想ページ3</text>
+        <rect x="35" y="216" width="140" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="105" y="238" text-anchor="middle" font-size="12">仮想ページ4</text>
+
+        <rect x="255" y="48" width="170" height="202" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="340" y="70" text-anchor="middle" font-size="12">0 → フレーム1</text>
+        <line x1="255" y1="82" x2="425" y2="82" stroke="var(--border)" />
+        <text x="340" y="112" text-anchor="middle" font-size="12">1 → フレーム0</text>
+        <line x1="255" y1="124" x2="425" y2="124" stroke="var(--border)" />
+        <text x="340" y="154" text-anchor="middle" font-size="12" class="muted">2 → 補助記憶</text>
+        <line x1="255" y1="166" x2="425" y2="166" stroke="var(--border)" />
+        <text x="340" y="196" text-anchor="middle" font-size="12">3 → フレーム2</text>
+        <line x1="255" y1="208" x2="425" y2="208" stroke="var(--border)" />
+        <text x="340" y="238" text-anchor="middle" font-size="12" class="muted">4 → 補助記憶</text>
+
+        <line x1="177" y1="65" x2="253" y2="65" stroke="var(--fg)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <line x1="177" y1="107" x2="253" y2="107" stroke="var(--fg)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <line x1="177" y1="149" x2="253" y2="149" stroke="var(--fg)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <line x1="177" y1="191" x2="253" y2="191" stroke="var(--fg)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <line x1="177" y1="233" x2="253" y2="233" stroke="var(--fg)" stroke-width="1.2" marker-end="url(#arrow)" />
+
+        <rect x="522" y="48" width="140" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="592" y="70" text-anchor="middle" font-size="12">フレーム0</text>
+        <rect x="522" y="90" width="140" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="592" y="112" text-anchor="middle" font-size="12">フレーム1</text>
+        <rect x="522" y="132" width="140" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="592" y="154" text-anchor="middle" font-size="12">フレーム2</text>
+
+        <rect x="522" y="252" width="200" height="86" rx="6" fill="var(--card)" stroke="var(--border)" stroke-dasharray="5 4" />
+        <text x="622" y="284" text-anchor="middle" font-size="12.5" font-weight="600">補助記憶</text>
+        <text x="622" y="304" text-anchor="middle" font-size="11" class="muted">スワップ領域</text>
+        <text x="622" y="324" text-anchor="middle" font-size="11" class="muted">載りきらないページを退避</text>
+
+        <path d="M427,65 C 470,65 480,105 520,107" fill="none" stroke="var(--fg)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <path d="M427,107 C 470,107 480,68 520,66" fill="none" stroke="var(--fg)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <path d="M427,191 C 470,191 480,155 520,150" fill="none" stroke="var(--fg)" stroke-width="1.2" marker-end="url(#arrow)" />
+        <path d="M427,149 C 480,149 490,250 545,250" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow)" color="var(--muted)" />
+        <path d="M427,233 C 480,233 500,250 545,250" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow)" color="var(--muted)" />
+
+        <text x="390" y="378" text-anchor="middle" font-size="11.5" class="muted">使うページだけ物理メモリに載せる。載っていないページに触れるとページフォールトが起きる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 340"
+        role="img"
+        aria-label="加法混色のRGB3円は重なるほど明るくなり中心が白になるのに対し、減法混色のCMY3円は重なるほど暗くなり中心が黒に近づくことを対比した図"
+      >
+        <text x="30" y="28" font-size="13" class="muted">混ぜると明るくなるのが加法混色、暗くなるのが減法混色</text>
+
+        <!-- 加法混色 -->
+        <text x="215" y="66" text-anchor="middle" font-size="15" font-weight="700">加法混色(光・RGB)</text>
+        <rect x="70" y="76" width="290" height="200" rx="12" fill="oklch(0.12 0 0)" stroke="var(--border)" />
+        <g style="mix-blend-mode: screen">
+          <circle cx="215" cy="140" r="62" fill="oklch(0.55 0.24 27)" />
+          <circle cx="180" cy="205" r="62" fill="oklch(0.7 0.26 145)" />
+          <circle cx="250" cy="205" r="62" fill="oklch(0.5 0.26 264)" />
+        </g>
+        <text x="215" y="112" text-anchor="middle" font-size="12" style="fill: oklch(1 0 0)">R</text>
+        <text x="152" y="232" text-anchor="middle" font-size="12" style="fill: oklch(0 0 0)">G</text>
+        <text x="278" y="232" text-anchor="middle" font-size="12" style="fill: oklch(1 0 0)">B</text>
+        <text x="215" y="300" text-anchor="middle" font-size="12" class="muted">3色すべてが重なると白</text>
+        <text x="215" y="320" text-anchor="middle" font-size="12" class="accent">ディスプレイ・テレビ</text>
+
+        <!-- 減法混色 -->
+        <text x="605" y="66" text-anchor="middle" font-size="15" font-weight="700">減法混色(インク・CMY)</text>
+        <rect x="460" y="76" width="290" height="200" rx="12" fill="oklch(0.97 0 0)" stroke="var(--border)" />
+        <g style="mix-blend-mode: multiply">
+          <circle cx="605" cy="140" r="62" fill="oklch(0.8 0.13 210)" />
+          <circle cx="570" cy="205" r="62" fill="oklch(0.65 0.25 350)" />
+          <circle cx="640" cy="205" r="62" fill="oklch(0.9 0.18 100)" />
+        </g>
+        <text x="605" y="112" text-anchor="middle" font-size="12" style="fill: oklch(0 0 0)">C</text>
+        <text x="542" y="232" text-anchor="middle" font-size="12" style="fill: oklch(0 0 0)">M</text>
+        <text x="668" y="232" text-anchor="middle" font-size="12" style="fill: oklch(0 0 0)">Y</text>
+        <text x="605" y="300" text-anchor="middle" font-size="12" class="muted">3色すべてが重なると黒に近づく</text>
+        <text x="605" y="320" text-anchor="middle" font-size="12" class="accent">印刷は黒(K)を足して CMYK</text>
+      </svg>
+    </div>
+  </body>
+</html>

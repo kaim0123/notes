@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        color: var(--fg);
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg role="img" aria-label="チューリングマシンの4つの部品。無限に長いテープにマス目ごとに0や1などの記号が並び、読み書きヘッドが今いる位置の記号を読み書きする。右側には内部状態(今どのモードか)と、この状態でこの記号を読んだら何を書いて左右どちらに動くかを定めた状態表が置かれ、この4つだけであらゆる計算を表現できる。" viewBox="0 0 640 190">
+      <text x="20" y="24" fill="var(--muted)" font-size="13">① 無限に長いテープ(マス目に0/1などの記号)</text>
+      <g>
+      <rect x="20" y="40" width="290" height="40" fill="none" stroke="var(--primary)" stroke-width="1.5" />
+      <line x1="60" y1="40" x2="60" y2="80" stroke="var(--primary)" stroke-width="1" />
+      <line x1="100" y1="40" x2="100" y2="80" stroke="var(--primary)" stroke-width="1" />
+      <line x1="140" y1="40" x2="140" y2="80" stroke="var(--primary)" stroke-width="1" />
+      <line x1="180" y1="40" x2="180" y2="80" stroke="var(--primary)" stroke-width="1" />
+      <line x1="220" y1="40" x2="220" y2="80" stroke="var(--primary)" stroke-width="1" />
+      <line x1="260" y1="40" x2="260" y2="80" stroke="var(--primary)" stroke-width="1" />
+      <text x="35" y="65" fill="var(--fg)" font-size="14">0</text>
+      <text x="75" y="65" fill="var(--fg)" font-size="14">1</text>
+      <text x="115" y="65" fill="var(--fg)" font-size="14">1</text>
+      <text x="155" y="65" fill="var(--fg)" font-size="14">0</text>
+      <text x="195" y="65" fill="var(--fg)" font-size="14">…</text>
+      </g>
+      <polygon points="130,90 150,90 140,105" fill="var(--primary)" />
+      <text x="90" y="122" fill="var(--fg)" font-size="13">② 読み書きヘッド(今この位置の記号を読む/書く)</text>
+
+      <rect x="330" y="40" width="290" height="80" fill="none" stroke="var(--muted)" stroke-width="1" stroke-dasharray="4 3" />
+      <text x="345" y="58" fill="var(--muted)" font-size="13">③ 内部状態:「今どのモードか」</text>
+      <text x="345" y="78" fill="var(--muted)" font-size="13">④ 状態表:「この状態でこの記号を</text>
+      <text x="345" y="94" fill="var(--muted)" font-size="13">　読んだら、何を書いて左右どちらに</text>
+      <text x="345" y="110" fill="var(--muted)" font-size="13">　動くか」の命令一覧</text>
+      </svg>
+    </div>
+  </body>
+</html>

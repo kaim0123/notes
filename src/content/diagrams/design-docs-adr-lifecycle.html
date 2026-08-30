@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 660 260" role="img" aria-label="ADRのライフサイクル図。ADR-0007「セッションをCookieで管理する」が採択済みの状態で置かれ、後に前提が変わったとき、書き換えるのではなく新しいADR-0021「セッションをJWTへ移行する」を作り、古い方を置き換え済みとして残す。両者は置き換えるという矢印で結ばれ、いつなぜ方針が変わったかの履歴が残ることを示す。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="330" y="26" text-anchor="middle" font-size="11.5" class="muted">ADRは書き換えない。新しい決定で「置き換え済み」にする</text>
+
+        <rect x="40" y="52" width="250" height="90" rx="9" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="60" y="76" font-size="10" class="mono muted">ADR-0007</text>
+        <text x="60" y="98" font-size="11">セッションをCookieで管理する</text>
+        <text x="60" y="122" font-size="10" class="muted">状態: 置き換え済み(superseded)</text>
+
+        <line x1="296" y1="97" x2="364" y2="97" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+        <text x="330" y="88" text-anchor="middle" font-size="9.5" class="hi">置き換える</text>
+
+        <rect x="370" y="52" width="250" height="90" rx="9" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="390" y="76" font-size="10" class="mono hi">ADR-0021</text>
+        <text x="390" y="98" font-size="11" font-weight="600">セッションをJWTへ移行する</text>
+        <text x="390" y="122" font-size="10" class="muted">状態: 採択済み(accepted)</text>
+
+        <text x="330" y="176" text-anchor="middle" font-size="11" class="muted">古い決定を消さないから、「いつ・なぜ方針が変わったか」の履歴が残る</text>
+        <text x="330" y="200" text-anchor="middle" font-size="11" class="muted">技術選定の変遷を追えることが、同じ失敗を繰り返さない材料になる</text>
+
+        <text x="330" y="238" text-anchor="middle" font-size="10.5" class="muted">1ファイル1決定・1ページ以内・決めた直後に書く</text>
+      </svg>
+    </div>
+  </body>
+</html>

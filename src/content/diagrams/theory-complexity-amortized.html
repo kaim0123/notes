@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 300"
+        role="img"
+        aria-label="可変長配列への追加コストの棒グラフ。ほとんどの回は低いコストだが、容量を使い切った回だけ全要素コピーでコストが跳ね上がる。全体をならした平均は低い水平線に収まる"
+      >
+        <text x="30" y="26" font-size="13" class="muted">可変長配列に1件ずつ追加したときの、1回あたりのコスト</text>
+
+        <!-- 軸 -->
+        <line x1="60" y1="240" x2="790" y2="240" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="60" y1="50" x2="60" y2="240" stroke="var(--border)" stroke-width="1.5" />
+        <text x="30" y="56" font-size="11" class="muted">高</text>
+        <text x="30" y="238" font-size="11" class="muted">低</text>
+
+        <!-- 通常の追加(低い棒) -->
+        <rect x="76" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="146" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="181" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="251" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="286" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="321" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="356" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="426" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="461" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="496" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="531" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="566" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="601" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="636" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="671" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="741" y="222" width="22" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+        <rect x="776" y="222" width="14" height="18" rx="3" fill="var(--card)" stroke="var(--border)" />
+
+        <!-- リサイズが起きた回(高い棒) -->
+        <rect x="111" y="186" width="22" height="54" rx="3" fill="var(--primary)" />
+        <rect x="216" y="160" width="22" height="80" rx="3" fill="var(--primary)" />
+        <rect x="391" y="120" width="22" height="120" rx="3" fill="var(--primary)" />
+        <rect x="706" y="62" width="22" height="178" rx="3" fill="var(--primary)" />
+
+        <text x="122" y="176" text-anchor="middle" font-size="10" class="accent">×2</text>
+        <text x="227" y="150" text-anchor="middle" font-size="10" class="accent">×2</text>
+        <text x="402" y="110" text-anchor="middle" font-size="10" class="accent">×2</text>
+        <text x="717" y="52" text-anchor="middle" font-size="11" class="accent" font-weight="600">容量が尽きて全要素コピー O(n)</text>
+
+        <!-- ならした平均線 -->
+        <line x1="60" y1="212" x2="790" y2="212" stroke="var(--fg)" stroke-width="2" stroke-dasharray="6 4" />
+        <text x="70" y="206" font-size="12" font-weight="600">ならした1回あたり = O(1)</text>
+
+        <text x="425" y="268" text-anchor="middle" font-size="12" class="muted">追加した回数 →</text>
+        <text x="425" y="290" text-anchor="middle" font-size="12" class="muted">
+          高い山は倍々に間隔が空くため、回数で割ると1回あたりの負担は定数に収まる
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

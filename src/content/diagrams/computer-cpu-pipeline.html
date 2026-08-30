@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        color: var(--fg);
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 320"
+        role="img"
+        aria-label="パイプライン処理のタイムチャート。横軸はクロック1から7、縦軸は命令1から4。命令1はクロック1から4でフェッチ・デコード・実行・書き戻しを行い、命令2は1クロック遅れて2から5、命令3は3から6、命令4は4から7で同じ4段階を進む。段階をずらして重ねることで、4命令を逐次実行すれば16クロックかかるところが7クロックで終わる。"
+      >
+        <!-- クロック目盛り -->
+        <text x="60" y="34" text-anchor="middle" font-size="12" class="muted">クロック</text>
+        <text x="162" y="34" text-anchor="middle" font-size="12" class="muted">1</text>
+        <text x="247" y="34" text-anchor="middle" font-size="12" class="muted">2</text>
+        <text x="332" y="34" text-anchor="middle" font-size="12" class="muted">3</text>
+        <text x="417" y="34" text-anchor="middle" font-size="12" class="muted">4</text>
+        <text x="502" y="34" text-anchor="middle" font-size="12" class="muted">5</text>
+        <text x="587" y="34" text-anchor="middle" font-size="12" class="muted">6</text>
+        <text x="672" y="34" text-anchor="middle" font-size="12" class="muted">7</text>
+        <line x1="20" y1="44" x2="740" y2="44" stroke="var(--border)" />
+
+        <!-- 命令1 -->
+        <text x="105" y="76" text-anchor="end" font-size="12.5">命令1</text>
+        <rect x="122" y="54" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--primary)" />
+        <text x="162" y="76" text-anchor="middle" font-size="12">フェッチ</text>
+        <rect x="207" y="54" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--primary)" />
+        <text x="247" y="76" text-anchor="middle" font-size="12">デコード</text>
+        <rect x="292" y="54" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--primary)" />
+        <text x="332" y="76" text-anchor="middle" font-size="12">実行</text>
+        <rect x="377" y="54" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--primary)" />
+        <text x="417" y="76" text-anchor="middle" font-size="12">書き戻し</text>
+
+        <!-- 命令2 -->
+        <text x="105" y="126" text-anchor="end" font-size="12.5">命令2</text>
+        <rect x="207" y="104" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="247" y="126" text-anchor="middle" font-size="12">フェッチ</text>
+        <rect x="292" y="104" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="332" y="126" text-anchor="middle" font-size="12">デコード</text>
+        <rect x="377" y="104" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="417" y="126" text-anchor="middle" font-size="12">実行</text>
+        <rect x="462" y="104" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="502" y="126" text-anchor="middle" font-size="12">書き戻し</text>
+
+        <!-- 命令3 -->
+        <text x="105" y="176" text-anchor="end" font-size="12.5">命令3</text>
+        <rect x="292" y="154" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="332" y="176" text-anchor="middle" font-size="12">フェッチ</text>
+        <rect x="377" y="154" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="417" y="176" text-anchor="middle" font-size="12">デコード</text>
+        <rect x="462" y="154" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="502" y="176" text-anchor="middle" font-size="12">実行</text>
+        <rect x="547" y="154" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="587" y="176" text-anchor="middle" font-size="12">書き戻し</text>
+
+        <!-- 命令4 -->
+        <text x="105" y="226" text-anchor="end" font-size="12.5">命令4</text>
+        <rect x="377" y="204" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="417" y="226" text-anchor="middle" font-size="12">フェッチ</text>
+        <rect x="462" y="204" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="502" y="226" text-anchor="middle" font-size="12">デコード</text>
+        <rect x="547" y="204" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="587" y="226" text-anchor="middle" font-size="12">実行</text>
+        <rect x="632" y="204" width="80" height="34" rx="5" fill="var(--card)" stroke="var(--border)" />
+        <text x="672" y="226" text-anchor="middle" font-size="12">書き戻し</text>
+
+        <line x1="20" y1="256" x2="740" y2="256" stroke="var(--border)" />
+        <text x="380" y="280" text-anchor="middle" font-size="12" class="muted">1命令ずつ順に流すと4命令で16クロック。段階をずらして重ねると7クロックで済む。</text>
+        <text x="380" y="300" text-anchor="middle" font-size="12" class="muted">1命令の所要時間は変わらないが、単位時間に流れる命令数(スループット)が上がる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

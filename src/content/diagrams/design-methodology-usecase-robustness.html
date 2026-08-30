@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 680 250" role="img" aria-label="ロバストネス図の3種類のオブジェクトを示した図。左のアクター(顧客)から、境界オブジェクト(注文画面)、制御オブジェクト(注文ユースケース)、実体オブジェクト(注文・商品・在庫)へと順に矢印がつながる。境界は利用者との接点、制御はユースケース1つ分の流れの取りまとめ、実体は永続化されるドメインのデータを表す。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="340" y="26" text-anchor="middle" font-size="11.5" class="muted">ユースケースを、3種類のオブジェクトへ橋渡しする</text>
+
+        <circle cx="60" cy="120" r="20" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="60" y="125" text-anchor="middle" font-size="10">顧客</text>
+        <text x="60" y="166" text-anchor="middle" font-size="10" class="muted">アクター</text>
+        <line x1="86" y1="120" x2="118" y2="120" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+
+        <rect x="122" y="94" width="150" height="52" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="197" y="116" text-anchor="middle" font-size="11">注文画面</text>
+        <text x="197" y="134" text-anchor="middle" font-size="9.5" class="muted">境界(Boundary)</text>
+        <line x1="276" y1="120" x2="308" y2="120" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+
+        <rect x="312" y="94" width="170" height="52" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="397" y="116" text-anchor="middle" font-size="11" font-weight="600">注文ユースケース</text>
+        <text x="397" y="134" text-anchor="middle" font-size="9.5" class="muted">制御(Control)</text>
+        <line x1="486" y1="120" x2="518" y2="120" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+
+        <rect x="522" y="94" width="140" height="52" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="592" y="116" text-anchor="middle" font-size="11">注文 / 商品 / 在庫</text>
+        <text x="592" y="134" text-anchor="middle" font-size="9.5" class="muted">実体(Entity)</text>
+
+        <text x="197" y="192" text-anchor="middle" font-size="10.5" class="muted">利用者との接点</text>
+        <text x="397" y="192" text-anchor="middle" font-size="10.5" class="muted">1ユースケース分の流れ</text>
+        <text x="592" y="192" text-anchor="middle" font-size="10.5" class="muted">永続化されるデータ</text>
+
+        <text x="340" y="230" text-anchor="middle" font-size="11" class="muted">
+          Clean Architectureの「Use Case層」は、この制御オブジェクトの直接の子孫にあたる
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 300"
+        role="img"
+        aria-label="読んで書く処理を1つの操作にまとめると競合が消えることを示した図。上段は危険な書き方で、在庫を読む、条件を判定する、書き戻すという3つの操作に分かれており、それぞれの間に隙間がある。この隙間に別のリクエストが割り込めるため、2人が同じ在庫1を読んでしまい、どちらの更新も通ってしまう。下段は安全な書き方で、在庫を1減らす更新文の中に条件を含め、読み取りと判定と書き込みを1文にまとめている。データベース側で1つの不可分な操作として実行されるため、割り込む隙間がそもそも存在せず、2件目は条件に合わず失敗する。競合対策の第一手はロックを足すことではなく、操作を1つにまとめられないか考えること。"
+      >
+        <text x="16" y="26" font-size="12" class="muted">危険 ― 読み取りと書き込みが分かれている</text>
+
+        <rect x="16" y="38" width="150" height="46" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="91" y="58" text-anchor="middle" font-size="11.5" class="muted">① 在庫を読む</text>
+        <text x="91" y="75" text-anchor="middle" font-size="10.5" class="muted">SELECT stock</text>
+
+        <rect x="182" y="38" width="150" height="46" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="257" y="58" text-anchor="middle" font-size="11.5" class="muted">② 判定する</text>
+        <text x="257" y="75" text-anchor="middle" font-size="10.5" class="muted">if (stock &lt; 1)</text>
+
+        <rect x="348" y="38" width="150" height="46" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="423" y="58" text-anchor="middle" font-size="11.5" class="muted">③ 書き戻す</text>
+        <text x="423" y="75" text-anchor="middle" font-size="10.5" class="muted">UPDATE stock = 0</text>
+
+        <path d="M170,61 L178,61" stroke="var(--muted)" stroke-width="1.2" />
+        <path d="M336,61 L344,61" stroke="var(--muted)" stroke-width="1.2" />
+
+        <text x="174" y="104" text-anchor="middle" font-size="20" class="lbl">↑</text>
+        <text x="340" y="104" text-anchor="middle" font-size="20" class="lbl">↑</text>
+        <text x="514" y="66" font-size="11" class="lbl">隙間に別のリクエストが</text>
+        <text x="514" y="82" font-size="11" class="lbl">割り込める</text>
+        <text x="257" y="122" text-anchor="middle" font-size="11" class="muted">この2か所が隙間 ― さっき読んだ古い値をもとに書いてしまう</text>
+
+        <line x1="16" y1="146" x2="624" y2="146" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="174" font-size="12" class="lbl">安全 ― 読み取り・判定・書き込みを1文にまとめる</text>
+
+        <rect x="16" y="186" width="482" height="60" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="36" y="212" font-size="11" font-family="monospace">UPDATE items SET stock = stock - 1</text>
+        <text x="36" y="232" font-size="11" font-family="monospace">WHERE id = $1 AND stock &gt;= 1</text>
+
+        <text x="514" y="212" font-size="11" class="lbl">隙間が存在しない</text>
+        <text x="514" y="230" font-size="11" class="muted">2件目は条件に合わず失敗</text>
+
+        <text x="16" y="272" font-size="11" class="muted">stock - 1 は「今のDBの値」を基準に計算され、判定も同じ行ロックの中で行われる ― アプリが握った古い値は登場しない</text>
+        <text x="16" y="290" font-size="11" class="lbl">競合対策の第一手はロックを足すことではなく、操作を1つにまとめられないか考えること</text>
+      </svg>
+    </div>
+  </body>
+</html>

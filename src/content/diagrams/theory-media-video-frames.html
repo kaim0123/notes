@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 300"
+        role="img"
+        aria-label="動画のフレーム間圧縮。最初のIフレームは完全な画像を保持し、続くフレームは前フレームからの差分だけを記録する"
+      >
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <text x="30" y="28" font-size="13" class="muted">隣り合うフレームはほとんど同じ ― 変わった部分だけを記録する</text>
+
+        <!-- フレーム1: Iフレーム -->
+        <rect x="40" y="60" width="150" height="110" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="2" />
+        <rect x="52" y="120" width="126" height="38" fill="var(--primary)" opacity="0.2" />
+        <circle cx="80" cy="100" r="16" fill="var(--primary)" />
+        <text x="115" y="190" text-anchor="middle" font-size="13" font-weight="700" class="accent">Iフレーム</text>
+        <text x="115" y="210" text-anchor="middle" font-size="11" class="muted">画像を丸ごと保持</text>
+        <text x="115" y="232" text-anchor="middle" font-size="12" class="mono">データ量 ■■■■■</text>
+
+        <line x1="196" y1="115" x2="238" y2="115" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#a)" />
+
+        <!-- フレーム2: 差分 -->
+        <rect x="240" y="60" width="150" height="110" rx="8" fill="var(--card)" stroke="var(--border)" stroke-dasharray="5 4" />
+        <circle cx="296" cy="100" r="16" fill="var(--primary)" />
+        <text x="315" y="190" text-anchor="middle" font-size="13" font-weight="700">差分フレーム</text>
+        <text x="315" y="210" text-anchor="middle" font-size="11" class="muted">動いた部分だけ</text>
+        <text x="315" y="232" text-anchor="middle" font-size="12" class="mono">データ量 ■</text>
+
+        <line x1="396" y1="115" x2="438" y2="115" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#a)" />
+
+        <!-- フレーム3: 差分 -->
+        <rect x="440" y="60" width="150" height="110" rx="8" fill="var(--card)" stroke="var(--border)" stroke-dasharray="5 4" />
+        <circle cx="512" cy="100" r="16" fill="var(--primary)" />
+        <text x="515" y="190" text-anchor="middle" font-size="13" font-weight="700">差分フレーム</text>
+        <text x="515" y="210" text-anchor="middle" font-size="11" class="muted">動いた部分だけ</text>
+        <text x="515" y="232" text-anchor="middle" font-size="12" class="mono">データ量 ■</text>
+
+        <line x1="596" y1="115" x2="638" y2="115" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#a)" />
+
+        <!-- フレーム4: 再びIフレーム -->
+        <rect x="640" y="60" width="150" height="110" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="2" />
+        <rect x="652" y="120" width="126" height="38" fill="var(--primary)" opacity="0.2" />
+        <circle cx="730" cy="100" r="16" fill="var(--primary)" />
+        <text x="715" y="190" text-anchor="middle" font-size="13" font-weight="700" class="accent">Iフレーム</text>
+        <text x="715" y="210" text-anchor="middle" font-size="11" class="muted">定期的に基準を置き直す</text>
+        <text x="715" y="232" text-anchor="middle" font-size="12" class="mono">データ量 ■■■■■</text>
+
+        <text x="410" y="278" text-anchor="middle" font-size="12" class="muted">
+          背景が動かない映像ほど差分が小さくなり、全フレームを保存する場合よりデータ量が大きく減る
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

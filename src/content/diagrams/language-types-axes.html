@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 300"
+        role="img"
+        aria-label="型システムを見る4つの独立した軸を、それぞれ左右のスペクトルとして並べた図。1つ目は検査のタイミングで、左が動的(Python・JavaScript・Ruby)、右が静的(Java・Go・Rust・TypeScript)。2つ目は暗黙変換をどれだけ許すかで、左が弱い(C・JavaScript)、右が強い(Python・Java・Rust)。3つ目は型を誰が書くかで、左が明示(古いJava・C)、右が推論(TypeScript・Rust・Go・Haskell)。4つ目は型の同一性の判定で、左が構造的(TypeScript・Go のインタフェース)、右が公称(Java・C#・Rust)。4つの軸は独立しており、たとえばRustは静的・強い・推論・公称の組み合わせ、JavaScriptは動的・弱い・推論なし・構造的の組み合わせになる。"
+      >
+        <defs>
+          <marker id="art" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="30" font-size="11.5" class="lbl">① 検査はいつ行われるか</text>
+        <line x1="120" y1="52" x2="600" y2="52" stroke="var(--muted)" stroke-width="1.3" marker-start="url(#art)" marker-end="url(#art)" />
+        <text x="128" y="44" font-size="12">動的</text>
+        <text x="592" y="44" text-anchor="end" font-size="12">静的</text>
+        <text x="128" y="70" font-size="10.5" class="muted">Python / JavaScript / Ruby</text>
+        <text x="592" y="70" text-anchor="end" font-size="10.5" class="muted">Java / Go / Rust / TypeScript</text>
+
+        <text x="16" y="112" font-size="11.5" class="lbl">② 暗黙の変換をどれだけ許すか</text>
+        <line x1="120" y1="134" x2="600" y2="134" stroke="var(--muted)" stroke-width="1.3" marker-start="url(#art)" marker-end="url(#art)" />
+        <text x="128" y="126" font-size="12">弱い</text>
+        <text x="592" y="126" text-anchor="end" font-size="12">強い</text>
+        <text x="128" y="152" font-size="10.5" class="muted">C / JavaScript</text>
+        <text x="592" y="152" text-anchor="end" font-size="10.5" class="muted">Python / Java / Rust</text>
+
+        <text x="16" y="194" font-size="11.5" class="lbl">③ 型を誰が書くか</text>
+        <line x1="120" y1="216" x2="600" y2="216" stroke="var(--muted)" stroke-width="1.3" marker-start="url(#art)" marker-end="url(#art)" />
+        <text x="128" y="208" font-size="12">明示</text>
+        <text x="592" y="208" text-anchor="end" font-size="12">推論</text>
+        <text x="128" y="234" font-size="10.5" class="muted">初期のJava / C</text>
+        <text x="592" y="234" text-anchor="end" font-size="10.5" class="muted">TypeScript / Rust / Go / Haskell</text>
+
+        <text x="16" y="262" font-size="11.5" class="lbl">④ 同じ型とみなす条件</text>
+        <line x1="120" y1="278" x2="600" y2="278" stroke="var(--muted)" stroke-width="1.3" marker-start="url(#art)" marker-end="url(#art)" />
+        <text x="128" y="270" font-size="12">構造的 ― 形が同じなら同じ</text>
+        <text x="592" y="270" text-anchor="end" font-size="12">公称 ― 名前が同じなら同じ</text>
+        <text x="128" y="294" font-size="10.5" class="muted">TypeScript</text>
+        <text x="592" y="294" text-anchor="end" font-size="10.5" class="muted">Java / C# / Rust</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 340"
+        role="img"
+        aria-label="コンシステントハッシュの円環。円周上にサーバーAとBが配置され、鍵は時計回りで最初に出会うサーバーが担当する。サーバーCを追加しても移動するのは直前の区間の鍵だけ"
+      >
+        <text x="30" y="28" font-size="13" class="muted">ハッシュ値を円環に見立て、鍵は時計回りで最初に出会うサーバーが担当する</text>
+
+        <!-- 左: A と B の2台 -->
+        <circle cx="215" cy="185" r="105" fill="none" stroke="var(--border)" stroke-width="1.5" />
+        <text x="215" y="316" text-anchor="middle" font-size="13" class="muted">サーバー2台のとき</text>
+
+        <circle cx="215" cy="80" r="14" fill="var(--primary)" />
+        <text x="215" y="85" text-anchor="middle" font-size="12" font-weight="700" style="fill: var(--primary-fg)">A</text>
+        <circle cx="215" cy="290" r="14" fill="var(--primary)" />
+        <text x="215" y="295" text-anchor="middle" font-size="12" font-weight="700" style="fill: var(--primary-fg)">B</text>
+
+        <circle cx="300" cy="122" r="6" fill="var(--fg)" />
+        <text x="322" y="118" font-size="11" class="muted">k1 → B</text>
+        <circle cx="305" cy="235" r="6" fill="var(--fg)" />
+        <text x="322" y="240" font-size="11" class="muted">k2 → B</text>
+        <circle cx="125" cy="235" r="6" fill="var(--fg)" />
+        <text x="60" y="252" font-size="11" class="muted">k3 → A</text>
+        <circle cx="128" cy="120" r="6" fill="var(--fg)" />
+        <text x="58" y="116" font-size="11" class="muted">k4 → A</text>
+
+        <!-- 矢印: 追加 -->
+        <text x="410" y="180" text-anchor="middle" font-size="26" class="accent">→</text>
+        <text x="410" y="206" text-anchor="middle" font-size="12" class="accent">Cを追加</text>
+
+        <!-- 右: C を追加 -->
+        <circle cx="605" cy="185" r="105" fill="none" stroke="var(--border)" stroke-width="1.5" />
+        <text x="605" y="316" text-anchor="middle" font-size="13" class="muted">3台に増えたとき</text>
+
+        <circle cx="605" cy="80" r="14" fill="var(--primary)" />
+        <text x="605" y="85" text-anchor="middle" font-size="12" font-weight="700" style="fill: var(--primary-fg)">A</text>
+        <circle cx="605" cy="290" r="14" fill="var(--primary)" />
+        <text x="605" y="295" text-anchor="middle" font-size="12" font-weight="700" style="fill: var(--primary-fg)">B</text>
+        <circle cx="710" cy="185" r="14" fill="var(--fg)" />
+        <text x="710" y="190" text-anchor="middle" font-size="12" font-weight="700" style="fill: var(--bg)">C</text>
+
+        <circle cx="690" cy="122" r="6" fill="var(--primary)" />
+        <text x="712" y="118" font-size="11" class="accent" font-weight="600">k1 → C(移動)</text>
+        <circle cx="695" cy="235" r="6" fill="var(--fg)" />
+        <text x="712" y="240" font-size="11" class="muted">k2 → B</text>
+        <circle cx="515" cy="235" r="6" fill="var(--fg)" />
+        <text x="450" y="252" font-size="11" class="muted">k3 → A</text>
+        <circle cx="518" cy="120" r="6" fill="var(--fg)" />
+        <text x="448" y="116" font-size="11" class="muted">k4 → A</text>
+
+        <text x="410" y="336" text-anchor="middle" font-size="12" class="muted">
+          「ハッシュ値 mod 台数」だと台数変更でほぼ全件の配置が変わるが、円環なら移動は一部で済む
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

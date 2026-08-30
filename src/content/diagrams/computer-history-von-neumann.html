@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        color: var(--fg);
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg role="img" aria-label="ノイマン型アーキテクチャの5要素。中央に制御装置と演算装置(ALU)が縦に並び、左に入出力装置、右にメモリがつながる。メモリにはプログラムもデータも同じように置かれる。すべての装置はバスという共通の通り道でつながり、フェッチ→デコード→実行→次の命令へというサイクルを繰り返す。" viewBox="0 0 640 260">
+      <rect x="250" y="10" width="140" height="46" rx="8" fill="none" stroke="var(--primary)" stroke-width="1.5" />
+      <text x="320" y="38" fill="var(--fg)" font-size="14" text-anchor="middle">制御装置</text>
+
+      <rect x="250" y="90" width="140" height="46" rx="8" fill="none" stroke="var(--primary)" stroke-width="1.5" />
+      <text x="320" y="118" fill="var(--fg)" font-size="14" text-anchor="middle">演算装置(ALU)</text>
+
+      <rect x="470" y="50" width="140" height="46" rx="8" fill="none" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="540" y="78" fill="var(--fg)" font-size="14" text-anchor="middle">メモリ</text>
+      <text x="540" y="30" fill="var(--muted)" font-size="12" text-anchor="middle">プログラムもデータもここに</text>
+
+      <rect x="30" y="50" width="140" height="46" rx="8" fill="none" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="100" y="78" fill="var(--fg)" font-size="14" text-anchor="middle">入出力装置</text>
+
+      <line x1="170" y1="73" x2="250" y2="73" stroke="var(--muted)" stroke-width="1.5" />
+      <line x1="390" y1="73" x2="470" y2="73" stroke="var(--muted)" stroke-width="1.5" />
+      <line x1="320" y1="56" x2="320" y2="90" stroke="var(--muted)" stroke-width="1.5" />
+      <text x="320" y="200" fill="var(--muted)" font-size="12" text-anchor="middle">全ての装置は「バス」という共通の通り道でつながっている</text>
+
+      <text x="320" y="230" fill="var(--primary)" font-size="13" text-anchor="middle">サイクル: フェッチ(命令を取り出す) → デコード(解読する) → 実行する → 次の命令へ</text>
+      </svg>
+    </div>
+  </body>
+</html>

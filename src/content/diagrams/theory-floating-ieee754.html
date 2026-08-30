@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 260"
+        role="img"
+        aria-label="倍精度64ビットの内訳。先頭1ビットが符号、次の11ビットが指数部、残り52ビットが仮数部で、値は(−1)^符号×1.仮数×2^(指数−1023)として復元される"
+      >
+        <defs>
+          <marker
+            id="tick"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <text x="30" y="28" font-size="13" class="muted">倍精度(64ビット)のビット配置 ― 幅はビット数に比例</text>
+
+        <!-- 符号のラベル(幅が細いので外に出す) -->
+        <text x="30" y="66" font-size="13" class="accent" font-weight="600">符号 1bit</text>
+        <line x1="36" y1="74" x2="36" y2="88" stroke="var(--primary)" stroke-width="1.5" />
+
+        <!-- ビット列のバー -->
+        <rect x="30" y="90" width="12" height="56" rx="3" fill="var(--primary)" />
+        <rect x="42" y="90" width="131" height="56" fill="var(--card)" stroke="var(--border)" />
+        <rect x="173" y="90" width="617" height="56" rx="3" fill="var(--card)" stroke="var(--border)" />
+
+        <text x="107" y="123" text-anchor="middle" font-size="14" font-weight="600">指数部 11bit</text>
+        <text x="481" y="123" text-anchor="middle" font-size="14" font-weight="600">仮数部 52bit</text>
+
+        <text x="107" y="166" text-anchor="middle" font-size="12" class="muted">桁の大きさ</text>
+        <text x="481" y="166" text-anchor="middle" font-size="12" class="muted">有効数字(先頭の1は省略)</text>
+
+        <!-- 値の復元式 -->
+        <line x1="36" y1="180" x2="36" y2="200" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="107" y1="180" x2="107" y2="200" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="481" y1="180" x2="481" y2="200" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="36" y1="200" x2="481" y2="200" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="260" y1="200" x2="260" y2="212" stroke="var(--border)" stroke-width="1.5" marker-end="url(#tick)" />
+
+        <rect x="185" y="216" width="450" height="34" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="410" y="239" text-anchor="middle" font-size="16" class="mono">
+          (−1)<tspan class="accent">符号</tspan> × 1.<tspan class="accent">仮数</tspan> × 2<tspan class="accent">指数−1023</tspan>
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

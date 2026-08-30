@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 660 290"
+        role="img"
+        aria-label="ソースコードが実行されるまでの4つの経路を並べた図。左に置いたソースコードから4本の枝が分かれる。1本目はコンパイラが事前に全体を翻訳し、生成された機械語をCPUが直接実行する経路(C・Go・Rust)。2本目はインタプリタが1行ずつ読んで解釈しながら実行する経路(シェルスクリプト・かつてのRuby)。3本目はコンパイラがバイトコードという中間形式に変換し、仮想マシンがそれを実行する経路(Java・Python)。4本目はJITコンパイラで、インタプリタとして動かしながら、繰り返し実行される部分だけを機械語に置き換えていく経路(JavaScriptのV8・JavaのHotSpot)。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <rect x="16" y="106" width="122" height="60" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="77" y="132" text-anchor="middle" font-size="13" font-weight="600">ソースコード</text>
+        <text x="77" y="151" text-anchor="middle" font-size="10.5" class="muted">人間が読める文字</text>
+
+        <line x1="138" y1="136" x2="158" y2="136" stroke="var(--muted)" stroke-width="1.3" />
+        <line x1="158" y1="38" x2="158" y2="234" stroke="var(--muted)" stroke-width="1.3" />
+
+        <line x1="158" y1="38" x2="174" y2="38" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="180" y="16" width="228" height="44" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="194" y="35" font-size="11.5" class="lbl">①</text>
+        <text x="212" y="35" font-size="12">コンパイラが事前に全部翻訳</text>
+        <text x="212" y="51" font-size="10.5" class="muted">C / Go / Rust</text>
+        <line x1="408" y1="38" x2="432" y2="38" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="438" y="16" width="206" height="44" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="541" y="43" text-anchor="middle" font-size="12">機械語をCPUが直接実行</text>
+
+        <line x1="158" y1="104" x2="174" y2="104" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="180" y="82" width="228" height="44" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="194" y="101" font-size="11.5" class="lbl">②</text>
+        <text x="212" y="101" font-size="12">インタプリタが1行ずつ解釈</text>
+        <text x="212" y="117" font-size="10.5" class="muted">シェルスクリプト / 初期のRuby</text>
+        <line x1="408" y1="104" x2="432" y2="104" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="438" y="82" width="206" height="44" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="541" y="109" text-anchor="middle" font-size="12">読みながらその場で実行</text>
+
+        <line x1="158" y1="170" x2="174" y2="170" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="180" y="148" width="228" height="44" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="194" y="167" font-size="11.5" class="lbl">③</text>
+        <text x="212" y="167" font-size="12">バイトコードに変換</text>
+        <text x="212" y="183" font-size="10.5" class="muted">Java(.class) / Python(.pyc)</text>
+        <line x1="408" y1="170" x2="432" y2="170" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="438" y="148" width="206" height="44" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="541" y="175" text-anchor="middle" font-size="12">仮想マシン(VM)が実行</text>
+
+        <line x1="158" y1="234" x2="174" y2="234" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="180" y="212" width="228" height="44" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="194" y="231" font-size="11.5" class="lbl">④</text>
+        <text x="212" y="231" font-size="12">JITが実行しながら機械語化</text>
+        <text x="212" y="247" font-size="10.5" class="muted">JavaScript(V8) / Java(HotSpot)</text>
+        <line x1="408" y1="234" x2="432" y2="234" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="438" y="212" width="206" height="44" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="541" y="232" text-anchor="middle" font-size="12">まず解釈で走り出し、</text>
+        <text x="541" y="248" text-anchor="middle" font-size="12">熱い所だけ翻訳して差し替え</text>
+
+        <text x="16" y="280" font-size="11" class="muted">下へ行くほど「翻訳のタイミング」が実行時に近づく。③④は中間形式をはさむぶん、同じコードがどのOS・CPUでも動く</text>
+      </svg>
+    </div>
+  </body>
+</html>

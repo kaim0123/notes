@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 700 320" role="img" aria-label="イベント駆動アーキテクチャのブローカー型とメディエーター型を比べた図。左のブローカー型では、注文作成イベントがブローカーに発行され、在庫・決済・通知の各プロセッサーが自律的に反応して、それぞれが次の派生イベントを発行する。中央の司令塔はなく、疎結合だが全体の流れは見えにくい。右のメディエーター型では、中央のイベントメディエーターが開始イベントを受け取り、在庫・決済・通知を順に呼び出して結果を受け取る。流れは追いやすいが、メディエーターが単一障害点になりやすい。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="175" y="26" text-anchor="middle" font-size="12.5" font-weight="600">ブローカー型</text>
+        <text x="175" y="46" text-anchor="middle" font-size="10.5" class="muted">司令塔なし。各自が反応して連鎖する</text>
+
+        <rect x="60" y="60" width="230" height="38" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="175" y="84" text-anchor="middle" font-size="11" font-weight="600">イベントブローカー</text>
+
+        <line x1="110" y1="98" x2="90" y2="130" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+        <line x1="175" y1="98" x2="175" y2="130" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+        <line x1="240" y1="98" x2="260" y2="130" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+
+        <rect x="40" y="134" width="90" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="85" y="159" text-anchor="middle" font-size="10.5">在庫</text>
+        <rect x="136" y="134" width="80" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="176" y="159" text-anchor="middle" font-size="10.5">決済</text>
+        <rect x="222" y="134" width="86" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="265" y="159" text-anchor="middle" font-size="10.5">通知</text>
+
+        <path d="M85,178 C85,214 175,214 175,106" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow)" />
+        <text x="175" y="234" text-anchor="middle" font-size="10" class="muted">処理後、派生イベントを発行する</text>
+
+        <text x="175" y="266" text-anchor="middle" font-size="11" class="muted">疎結合だが、全体の流れを</text>
+        <text x="175" y="284" text-anchor="middle" font-size="11" class="muted">1箇所で把握しにくい</text>
+
+        <line x1="350" y1="30" x2="350" y2="300" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="525" y="26" text-anchor="middle" font-size="12.5" font-weight="600">メディエーター型</text>
+        <text x="525" y="46" text-anchor="middle" font-size="10.5" class="muted">中央が順序と条件分岐を握る</text>
+
+        <rect x="410" y="60" width="230" height="38" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="525" y="84" text-anchor="middle" font-size="11" font-weight="600">イベントメディエーター</text>
+
+        <line x1="450" y1="98" x2="435" y2="130" stroke="var(--primary)" stroke-width="1.3" marker-start="url(#arrowHi)" marker-end="url(#arrowHi)" />
+        <line x1="525" y1="98" x2="525" y2="130" stroke="var(--primary)" stroke-width="1.3" marker-start="url(#arrowHi)" marker-end="url(#arrowHi)" />
+        <line x1="600" y1="98" x2="615" y2="130" stroke="var(--primary)" stroke-width="1.3" marker-start="url(#arrowHi)" marker-end="url(#arrowHi)" />
+
+        <rect x="390" y="134" width="90" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="435" y="159" text-anchor="middle" font-size="10.5">在庫 ①</text>
+        <rect x="486" y="134" width="80" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="526" y="159" text-anchor="middle" font-size="10.5">決済 ②</text>
+        <rect x="572" y="134" width="86" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="615" y="159" text-anchor="middle" font-size="10.5">通知 ③</text>
+
+        <text x="525" y="234" text-anchor="middle" font-size="10" class="muted">各プロセッサーは結果を返すだけ</text>
+        <text x="525" y="266" text-anchor="middle" font-size="11" class="muted">流れは追いやすいが、中央が</text>
+        <text x="525" y="284" text-anchor="middle" font-size="11" class="muted">単一障害点になりやすい</text>
+      </svg>
+    </div>
+  </body>
+</html>

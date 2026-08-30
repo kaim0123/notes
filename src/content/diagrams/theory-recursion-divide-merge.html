@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 340"
+        role="img"
+        aria-label="配列5,2,8,1をマージソートする分割統治の木。上から半分ずつ分割して1要素まで下り、戻るときに2,5と1,8を併合し、最後に1,2,5,8へ統合される"
+      >
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <text x="30" y="26" font-size="13" class="muted">左半分: 分割(下向き)　／　右半分: 統合(上向き)</text>
+
+        <!-- 分割の段(左側) -->
+        <text x="60" y="70" font-size="12" class="muted">分割</text>
+        <line x1="60" y1="80" x2="60" y2="250" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a)" />
+
+        <rect x="130" y="52" width="150" height="36" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="205" y="76" text-anchor="middle" font-size="14" class="mono">[5, 2, 8, 1]</text>
+
+        <rect x="100" y="132" width="100" height="36" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="156" text-anchor="middle" font-size="14" class="mono">[5, 2]</text>
+        <rect x="215" y="132" width="100" height="36" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="265" y="156" text-anchor="middle" font-size="14" class="mono">[8, 1]</text>
+
+        <rect x="100" y="212" width="45" height="36" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="122" y="236" text-anchor="middle" font-size="14" class="mono">5</text>
+        <rect x="155" y="212" width="45" height="36" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="177" y="236" text-anchor="middle" font-size="14" class="mono">2</text>
+        <rect x="215" y="212" width="45" height="36" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="237" y="236" text-anchor="middle" font-size="14" class="mono">8</text>
+        <rect x="270" y="212" width="45" height="36" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="292" y="236" text-anchor="middle" font-size="14" class="mono">1</text>
+
+        <line x1="180" y1="88" x2="150" y2="132" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="230" y1="88" x2="265" y2="132" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="135" y1="168" x2="122" y2="212" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="165" y1="168" x2="177" y2="212" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="250" y1="168" x2="237" y2="212" stroke="var(--border)" stroke-width="1.5" />
+        <line x1="280" y1="168" x2="292" y2="212" stroke="var(--border)" stroke-width="1.5" />
+
+        <!-- 区切り -->
+        <line x1="380" y1="40" x2="380" y2="290" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4" />
+
+        <!-- 統合の段(右側) -->
+        <text x="770" y="70" text-anchor="end" font-size="12" class="accent">統合(併合)</text>
+        <line x1="770" y1="250" x2="770" y2="80" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#a)" />
+
+        <rect x="470" y="212" width="45" height="36" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="492" y="236" text-anchor="middle" font-size="14" class="mono">5</text>
+        <rect x="525" y="212" width="45" height="36" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="547" y="236" text-anchor="middle" font-size="14" class="mono">2</text>
+        <rect x="585" y="212" width="45" height="36" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="607" y="236" text-anchor="middle" font-size="14" class="mono">8</text>
+        <rect x="640" y="212" width="45" height="36" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="662" y="236" text-anchor="middle" font-size="14" class="mono">1</text>
+
+        <rect x="470" y="132" width="100" height="36" rx="8" fill="var(--primary)" opacity="0.25" stroke="var(--primary)" />
+        <text x="520" y="156" text-anchor="middle" font-size="14" class="mono">[2, 5]</text>
+        <rect x="585" y="132" width="100" height="36" rx="8" fill="var(--primary)" opacity="0.25" stroke="var(--primary)" />
+        <text x="635" y="156" text-anchor="middle" font-size="14" class="mono">[1, 8]</text>
+
+        <rect x="500" y="52" width="155" height="36" rx="8" fill="var(--primary)" />
+        <text x="577" y="76" text-anchor="middle" font-size="14" class="mono" style="fill: var(--primary-fg)">[1, 2, 5, 8]</text>
+
+        <line x1="492" y1="212" x2="505" y2="168" stroke="var(--primary)" stroke-width="1.5" />
+        <line x1="547" y1="212" x2="535" y2="168" stroke="var(--primary)" stroke-width="1.5" />
+        <line x1="607" y1="212" x2="620" y2="168" stroke="var(--primary)" stroke-width="1.5" />
+        <line x1="662" y1="212" x2="650" y2="168" stroke="var(--primary)" stroke-width="1.5" />
+        <line x1="520" y1="132" x2="550" y2="88" stroke="var(--primary)" stroke-width="1.5" />
+        <line x1="635" y1="132" x2="605" y2="88" stroke="var(--primary)" stroke-width="1.5" />
+
+        <text x="410" y="318" text-anchor="middle" font-size="12" class="muted">
+          分割の深さは log n 段、各段の併合に n 回 ― 合わせて O(n log n)
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

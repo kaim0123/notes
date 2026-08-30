@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 680 300" role="img" aria-label="共有データベースとサービスごとの専用データベースを比べた図。左は共有DBの構成で、注文・在庫・配送の3サービスが1つのデータベースを参照するため、テーブル定義を変えると全サービスに影響が及ぶ。右はマイクロサービスの構成で、各サービスが自分専用のデータベースを持ち、他サービスのデータへは直接アクセスせずAPIやイベント経由でやり取りする。独立してデプロイできる代わりに、複数サービスにまたがる整合性はSagaやTCCで取る必要がある。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="165" y="26" text-anchor="middle" font-size="12.5" font-weight="600">共有データベース</text>
+
+        <rect x="30" y="46" width="86" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="73" y="71" text-anchor="middle" font-size="10.5">注文</text>
+        <rect x="122" y="46" width="86" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="165" y="71" text-anchor="middle" font-size="10.5">在庫</text>
+        <rect x="214" y="46" width="86" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="257" y="71" text-anchor="middle" font-size="10.5">配送</text>
+
+        <line x1="73" y1="86" x2="140" y2="126" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+        <line x1="165" y1="86" x2="165" y2="126" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+        <line x1="257" y1="86" x2="190" y2="126" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrow)" />
+
+        <rect x="60" y="130" width="210" height="44" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="165" y="157" text-anchor="middle" font-size="11">1つのデータベース</text>
+
+        <text x="165" y="204" text-anchor="middle" font-size="11" class="muted">テーブル定義を1つ変えると</text>
+        <text x="165" y="222" text-anchor="middle" font-size="11" class="muted">全サービスに影響が及ぶ</text>
+
+        <line x1="340" y1="30" x2="340" y2="270" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="510" y="26" text-anchor="middle" font-size="12.5" font-weight="600">サービスごとの専用DB</text>
+
+        <rect x="375" y="46" width="86" height="40" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="418" y="71" text-anchor="middle" font-size="10.5">注文</text>
+        <rect x="467" y="46" width="86" height="40" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="510" y="71" text-anchor="middle" font-size="10.5">在庫</text>
+        <rect x="559" y="46" width="86" height="40" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="602" y="71" text-anchor="middle" font-size="10.5">配送</text>
+
+        <line x1="418" y1="86" x2="418" y2="126" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arrowHi)" />
+        <line x1="510" y1="86" x2="510" y2="126" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arrowHi)" />
+        <line x1="602" y1="86" x2="602" y2="126" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arrowHi)" />
+
+        <rect x="375" y="130" width="86" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="418" y="155" text-anchor="middle" font-size="10">DB</text>
+        <rect x="467" y="130" width="86" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="510" y="155" text-anchor="middle" font-size="10">DB</text>
+        <rect x="559" y="130" width="86" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="602" y="155" text-anchor="middle" font-size="10">DB</text>
+
+        <line x1="465" y1="66" x2="463" y2="66" stroke="var(--muted)" stroke-width="1.3" />
+        <text x="510" y="204" text-anchor="middle" font-size="11" class="muted">他サービスのDBは直接触らず、</text>
+        <text x="510" y="222" text-anchor="middle" font-size="11" class="muted">APIやイベント経由でやり取りする</text>
+
+        <text x="340" y="286" text-anchor="middle" font-size="11" class="muted">
+          独立してデプロイできる代わりに、またがる整合性はSagaやTCCで取ることになる
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

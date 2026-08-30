@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .hi {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 680 300" role="img" aria-label="純粋関数と副作用のある関数を比べた図。左は不純な関数で、入力に加えて外側のグローバルな状態やデータベースを読み書きする矢印が伸びており、呼ぶタイミングや回数で結果が変わる。右は純粋な関数で、入力から出力への矢印だけがあり、外部との線が一本もない。そのため同じ入力なら常に同じ出力になり、入力と出力だけを確認すればテストできる。">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowHi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="170" y="26" text-anchor="middle" font-size="12.5" font-weight="600">副作用のある関数</text>
+
+        <rect x="30" y="120" width="70" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="65" y="145" text-anchor="middle" font-size="11">入力</text>
+        <line x1="104" y1="140" x2="128" y2="140" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+
+        <rect x="132" y="112" width="86" height="56" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="175" y="145" text-anchor="middle" font-size="11.5">関数</text>
+
+        <line x1="222" y1="140" x2="246" y2="140" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrow)" />
+        <rect x="250" y="120" width="70" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="285" y="145" text-anchor="middle" font-size="11">出力</text>
+
+        <rect x="120" y="46" width="110" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="175" y="68" text-anchor="middle" font-size="10.5" class="muted">グローバル変数</text>
+        <line x1="175" y1="112" x2="175" y2="84" stroke="var(--muted)" stroke-width="1.3" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+
+        <rect x="120" y="200" width="110" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="175" y="222" text-anchor="middle" font-size="10.5" class="muted">DB・API・時刻</text>
+        <line x1="175" y1="168" x2="175" y2="196" stroke="var(--muted)" stroke-width="1.3" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+
+        <text x="175" y="268" text-anchor="middle" font-size="11" class="muted">呼ぶ時刻・回数で結果が変わる</text>
+
+        <line x1="360" y1="30" x2="360" y2="270" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="520" y="26" text-anchor="middle" font-size="12.5" font-weight="600">純粋関数</text>
+
+        <rect x="390" y="120" width="70" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="425" y="145" text-anchor="middle" font-size="11">入力</text>
+        <line x1="464" y1="140" x2="488" y2="140" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+
+        <rect x="492" y="112" width="86" height="56" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="535" y="145" text-anchor="middle" font-size="11.5" font-weight="600">関数</text>
+
+        <line x1="582" y1="140" x2="606" y2="140" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowHi)" />
+        <rect x="610" y="120" width="60" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="640" y="145" text-anchor="middle" font-size="11">出力</text>
+
+        <text x="535" y="80" text-anchor="middle" font-size="10.5" class="muted">外部とつながる線が1本もない</text>
+        <text x="535" y="222" text-anchor="middle" font-size="11" class="muted">同じ入力なら常に同じ出力</text>
+        <text x="535" y="268" text-anchor="middle" font-size="11" class="muted">入力と出力だけ確かめればテストできる</text>
+      </svg>
+    </div>
+  </body>
+</html>

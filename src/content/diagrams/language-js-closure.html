@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 290"
+        role="img"
+        aria-label="クロージャの仕組みを示した図。createCounterという関数を呼ぶと、その呼び出しごとに count という変数が新しく作られ、その中で定義された内側の関数が返される。返された関数は、自分が生まれた場所にあった count を覚えたまま外へ持ち出される。そのため next() を呼ぶたびに count が1ずつ増え、1、2、3と返る。count は外から直接触る手段がなく、返された関数を通してしか変更できない。createCounterをもう一度呼べば、まったく別の count が作られるため、2つのカウンタは互いに影響しない。"
+      >
+        <defs>
+          <marker id="arcl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="26" font-size="12" class="lbl">createCounter() を呼ぶと…</text>
+
+        <rect x="16" y="38" width="270" height="140" rx="9" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" stroke-dasharray="5 4" />
+        <text x="32" y="60" font-size="11.5" class="muted">呼び出しごとに作られる領域</text>
+
+        <rect x="34" y="72" width="112" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="90" y="90" text-anchor="middle" font-size="12" font-family="monospace">count</text>
+        <text x="90" y="106" text-anchor="middle" font-size="11" class="lbl">外から触れない</text>
+
+        <rect x="160" y="72" width="110" height="88" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="215" y="94" text-anchor="middle" font-size="11.5">内側の関数</text>
+        <text x="215" y="114" text-anchor="middle" font-size="10.5" class="muted">count += 1</text>
+        <text x="215" y="130" text-anchor="middle" font-size="10.5" class="muted">return count</text>
+
+        <line x1="160" y1="100" x2="150" y2="94" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#arcl)" />
+        <text x="90" y="132" text-anchor="middle" font-size="10.5" class="muted">生まれた場所の</text>
+        <text x="90" y="148" text-anchor="middle" font-size="10.5" class="muted">変数を覚えている</text>
+
+        <line x1="286" y1="116" x2="330" y2="116" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arcl)" />
+        <text x="308" y="106" text-anchor="middle" font-size="10.5" class="muted">返す</text>
+
+        <rect x="338" y="72" width="120" height="88" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="398" y="104" text-anchor="middle" font-size="12" font-family="monospace">next</text>
+        <text x="398" y="126" text-anchor="middle" font-size="10.5" class="muted">外に持ち出された</text>
+        <text x="398" y="142" text-anchor="middle" font-size="10.5" class="muted">関数</text>
+
+        <rect x="480" y="72" width="144" height="88" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="552" y="94" text-anchor="middle" font-size="11" font-family="monospace" class="muted">next() // 1</text>
+        <text x="552" y="114" text-anchor="middle" font-size="11" font-family="monospace" class="muted">next() // 2</text>
+        <text x="552" y="134" text-anchor="middle" font-size="11" font-family="monospace" class="muted">next() // 3</text>
+        <line x1="458" y1="116" x2="474" y2="116" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arcl)" />
+
+        <line x1="16" y1="200" x2="624" y2="200" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="222" font-size="11.5">createCounter() をもう一度呼ぶと</text>
+        <rect x="16" y="232" width="288" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="160" y="257" text-anchor="middle" font-size="11.5" class="muted">まったく別の count が作られる</text>
+        <rect x="336" y="232" width="288" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="480" y="257" text-anchor="middle" font-size="11.5" class="muted">2つのカウンタは互いに影響しない</text>
+      </svg>
+    </div>
+  </body>
+</html>

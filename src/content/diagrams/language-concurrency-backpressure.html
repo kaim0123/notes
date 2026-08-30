@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 290"
+        role="img"
+        aria-label="バックプレッシャーの有無を比べた図。上段は上限を設けない場合で、送り手から毎秒1000件が流れ込むのに対し、受け手は毎秒100件しかさばけない。差はキューに溜まり続け、キューの長さと遅延がどこまでも伸びて、最後はメモリ枯渇で倒れる。下段はバックプレッシャーを効かせた場合で、キューに上限を設け、溢れたぶんは受け取らずに断る。断られた送り手は速度を落とすため、キューの長さは一定に保たれ、受け手は本来の速度で処理を続けられる。あとで処理するというのは無限に溜め込むことではなく、溢れたら早く断るほうが全体としては健全に動く。"
+      >
+        <defs>
+          <marker id="arbp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="26" font-size="12" class="muted">上限なし ― 差がすべてキューに溜まる</text>
+
+        <rect x="16" y="40" width="120" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="76" y="62" text-anchor="middle" font-size="11.5" class="muted">送り手</text>
+        <text x="76" y="80" text-anchor="middle" font-size="10.5" class="muted">毎秒 1000 件</text>
+
+        <line x1="136" y1="66" x2="176" y2="66" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arbp)" />
+
+        <rect x="182" y="40" width="240" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="302" y="62" text-anchor="middle" font-size="11.5" class="muted">キュー ― 上限なし</text>
+        <text x="302" y="80" text-anchor="middle" font-size="10.5" class="lbl">長さも遅延も伸び続ける → メモリ枯渇</text>
+
+        <line x1="422" y1="66" x2="462" y2="66" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arbp)" />
+
+        <rect x="468" y="40" width="120" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="528" y="62" text-anchor="middle" font-size="11.5" class="muted">受け手</text>
+        <text x="528" y="80" text-anchor="middle" font-size="10.5" class="muted">毎秒 100 件</text>
+
+        <line x1="16" y1="122" x2="624" y2="122" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="150" font-size="12" class="lbl">バックプレッシャーあり ― 溢れたら断り、上流を減速させる</text>
+
+        <rect x="16" y="164" width="120" height="52" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="76" y="186" text-anchor="middle" font-size="11.5">送り手</text>
+        <text x="76" y="204" text-anchor="middle" font-size="10.5" class="muted">断られたら減速</text>
+
+        <line x1="136" y1="190" x2="176" y2="190" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arbp)" />
+        <line x1="176" y1="176" x2="136" y2="176" stroke="var(--primary)" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#arbp)" />
+        <text x="156" y="166" text-anchor="middle" font-size="9.5" class="lbl">429</text>
+
+        <rect x="182" y="164" width="240" height="52" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="302" y="186" text-anchor="middle" font-size="11.5">キュー ― 上限あり</text>
+        <text x="302" y="204" text-anchor="middle" font-size="10.5" class="muted">長さは一定に保たれる</text>
+
+        <line x1="422" y1="190" x2="462" y2="190" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arbp)" />
+
+        <rect x="468" y="164" width="120" height="52" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="528" y="186" text-anchor="middle" font-size="11.5">受け手</text>
+        <text x="528" y="204" text-anchor="middle" font-size="10.5" class="muted">本来の速度で処理</text>
+
+        <text x="16" y="250" font-size="11" class="muted">「あとで処理する」は「無限に溜め込む」ではない</text>
+        <text x="16" y="270" font-size="11" class="lbl">溢れたら早く断るほうが、全体としては健全に動く</text>
+      </svg>
+    </div>
+  </body>
+</html>
