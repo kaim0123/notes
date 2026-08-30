@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 20%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 720 320"
+        role="img"
+        aria-label="正規分布の釣り鐘曲線に、平均から標準偏差±1個分の範囲に約68%、±2個分の範囲に約95%のデータが収まることを帯で示した図解"
+      >
+        <!-- 95%帯(±2σ) -->
+        <path
+          d="M160,224 C220,210 240,150 260,135 C310,125 330,60 360,60 C390,60 410,125 460,135 C480,150 500,210 560,224 L560,250 L160,250 Z"
+          fill="var(--primary)"
+          opacity="0.12"
+        />
+        <!-- 68%帯(±1σ) -->
+        <path
+          d="M260,135 C310,125 330,60 360,60 C390,60 410,125 460,135 L460,250 L260,250 Z"
+          fill="var(--primary)"
+          opacity="0.28"
+        />
+
+        <!-- 曲線本体 -->
+        <path
+          d="M60,248 C140,240 180,150 260,135 C310,125 330,60 360,60 C390,60 410,125 460,135 C540,150 580,240 660,248"
+          fill="none"
+          stroke="var(--fg)"
+          stroke-width="2"
+        />
+
+        <!-- 基準線 -->
+        <line x1="40" y1="250" x2="680" y2="250" stroke="var(--border)" stroke-width="1.5" />
+
+        <!-- σの目盛り(破線) -->
+        <line x1="160" y1="224" x2="160" y2="250" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <line x1="260" y1="135" x2="260" y2="250" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <line x1="360" y1="60" x2="360" y2="250" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <line x1="460" y1="135" x2="460" y2="250" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <line x1="560" y1="224" x2="560" y2="250" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+
+        <text x="160" y="270" text-anchor="middle" font-size="12" class="muted">μ−2σ</text>
+        <text x="260" y="270" text-anchor="middle" font-size="12" class="muted">μ−σ</text>
+        <text x="360" y="270" text-anchor="middle" font-size="12" font-weight="600">μ</text>
+        <text x="460" y="270" text-anchor="middle" font-size="12" class="muted">μ+σ</text>
+        <text x="560" y="270" text-anchor="middle" font-size="12" class="muted">μ+2σ</text>
+
+        <!-- 凡例 -->
+        <rect x="60" y="296" width="14" height="14" rx="3" fill="var(--primary)" opacity="0.28" />
+        <text x="80" y="307" font-size="13">68%(平均±1σ)</text>
+        <rect x="270" y="296" width="14" height="14" rx="3" fill="var(--primary)" opacity="0.12" />
+        <text x="290" y="307" font-size="13">95%(平均±2σ)</text>
+        <rect x="480" y="296" width="14" height="14" rx="3" fill="none" stroke="var(--border)" />
+        <text x="500" y="307" font-size="13" class="muted">99.7%(平均±3σ)</text>
+      </svg>
+    </div>
+  </body>
+</html>

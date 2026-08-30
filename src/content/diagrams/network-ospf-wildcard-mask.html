@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 260"
+        role="img"
+        aria-label="ワイルドカードマスクの図解。サブネットマスク255.255.255.0の1と0をひっくり返した0.0.0.255がワイルドカードマスクになる。0のオクテットは一致必須(ネットワーク部)、255のオクテットは任意(ここは何でもよい)を意味する。"
+      >
+        <text x="380" y="18" text-anchor="middle" font-size="12.5" font-weight="700">
+          ワイルドカードマスク(例: network 192.168.1.0 0.0.0.255)
+        </text>
+
+        <text x="30" y="42" font-size="11" class="muted">ネットワークアドレス</text>
+        <rect x="30" y="50" width="150" height="60" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="105" y="74" text-anchor="middle" font-size="14" font-weight="700">192</text>
+        <text x="105" y="98" text-anchor="middle" font-size="10.5" class="mono muted">11000000</text>
+
+        <rect x="200" y="50" width="150" height="60" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="275" y="74" text-anchor="middle" font-size="14" font-weight="700">168</text>
+        <text x="275" y="98" text-anchor="middle" font-size="10.5" class="mono muted">10101000</text>
+
+        <rect x="370" y="50" width="150" height="60" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="445" y="74" text-anchor="middle" font-size="14" font-weight="700">1</text>
+        <text x="445" y="98" text-anchor="middle" font-size="10.5" class="mono muted">00000001</text>
+
+        <rect x="540" y="50" width="150" height="60" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="615" y="74" text-anchor="middle" font-size="14" font-weight="700">0</text>
+        <text x="615" y="98" text-anchor="middle" font-size="10.5" class="mono muted">00000000</text>
+
+        <text x="30" y="132" font-size="11" class="muted">ワイルドカードマスク</text>
+        <rect x="30" y="140" width="150" height="46" rx="6" fill="var(--primary)" />
+        <text x="105" y="160" text-anchor="middle" font-size="13" font-weight="700" style="fill: var(--primary-fg)">0</text>
+        <text x="105" y="178" text-anchor="middle" font-size="10" class="mono" style="fill: var(--primary-fg)">00000000</text>
+
+        <rect x="200" y="140" width="150" height="46" rx="6" fill="var(--primary)" />
+        <text x="275" y="160" text-anchor="middle" font-size="13" font-weight="700" style="fill: var(--primary-fg)">0</text>
+        <text x="275" y="178" text-anchor="middle" font-size="10" class="mono" style="fill: var(--primary-fg)">00000000</text>
+
+        <rect x="370" y="140" width="150" height="46" rx="6" fill="var(--primary)" />
+        <text x="445" y="160" text-anchor="middle" font-size="13" font-weight="700" style="fill: var(--primary-fg)">0</text>
+        <text x="445" y="178" text-anchor="middle" font-size="10" class="mono" style="fill: var(--primary-fg)">00000000</text>
+
+        <rect x="540" y="140" width="150" height="46" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="615" y="160" text-anchor="middle" font-size="13" font-weight="700">255</text>
+        <text x="615" y="178" text-anchor="middle" font-size="10" class="mono muted">11111111</text>
+
+        <line x1="30" y1="200" x2="520" y2="200" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="275" y="217" text-anchor="middle" font-size="11.5" style="fill: var(--primary)">0 = 一致必須(ネットワーク部)</text>
+
+        <line x1="540" y1="200" x2="690" y2="200" stroke="var(--muted)" stroke-width="1.5" />
+        <text x="615" y="217" text-anchor="middle" font-size="11.5" class="muted">255 = 任意(don't care)</text>
+
+        <text x="380" y="245" text-anchor="middle" font-size="11.5" class="muted">
+          サブネットマスク(255.255.255.0)の1と0をひっくり返した値になっている
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

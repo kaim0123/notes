@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 20%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 260"
+        role="img"
+        aria-label="アナログ波形を標本化・量子化・符号化する3ステップの図解。連続した波を一定間隔で測り(標本化)、近い段階に丸め(量子化)、ビット列に対応させる(符号化)様子を、同じ時点を縦の破線でそろえて示す"
+      >
+        <text x="400" y="15" text-anchor="middle" font-size="13" font-weight="600">
+          ① 標本化(サンプリング)
+        </text>
+        <path
+          d="M40,60 L80,60 C120,60 120,25 160,25 C200,25 200,60 240,60 C280,60 280,95 320,95 C360,95 360,60 400,60 C440,60 440,25 480,25 C520,25 520,60 560,60 C600,60 600,95 640,95 L680,95"
+          fill="none"
+          stroke="var(--fg)"
+          stroke-width="2"
+        />
+
+        <text x="400" y="115" text-anchor="middle" font-size="13" font-weight="600">
+          ② 量子化
+        </text>
+        <line x1="40" y1="130" x2="680" y2="130" stroke="var(--border)" stroke-width="1" />
+        <line x1="40" y1="150" x2="680" y2="150" stroke="var(--border)" stroke-width="1" />
+        <line x1="40" y1="170" x2="680" y2="170" stroke="var(--border)" stroke-width="1" />
+        <line x1="40" y1="190" x2="680" y2="190" stroke="var(--border)" stroke-width="1" />
+
+        <text x="400" y="215" text-anchor="middle" font-size="13" font-weight="600">
+          ③ 符号化
+        </text>
+
+        <!-- サンプルごとの縦の対応線・点・ビット列 -->
+        <!-- s1 -->
+        <line x1="80" y1="60" x2="80" y2="225" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <circle cx="80" cy="60" r="4" fill="var(--fg)" />
+        <circle cx="80" cy="170" r="5" fill="var(--primary)" />
+        <text x="80" y="248" text-anchor="middle" font-size="14" font-weight="700" class="mono">10</text>
+
+        <!-- s2 -->
+        <line x1="160" y1="25" x2="160" y2="225" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <circle cx="160" cy="25" r="4" fill="var(--fg)" />
+        <circle cx="160" cy="130" r="5" fill="var(--primary)" />
+        <text x="160" y="248" text-anchor="middle" font-size="14" font-weight="700" class="mono">00</text>
+
+        <!-- s3 -->
+        <line x1="240" y1="60" x2="240" y2="225" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <circle cx="240" cy="60" r="4" fill="var(--fg)" />
+        <circle cx="240" cy="170" r="5" fill="var(--primary)" />
+        <text x="240" y="248" text-anchor="middle" font-size="14" font-weight="700" class="mono">10</text>
+
+        <!-- s4 -->
+        <line x1="320" y1="95" x2="320" y2="225" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <circle cx="320" cy="95" r="4" fill="var(--fg)" />
+        <circle cx="320" cy="190" r="5" fill="var(--primary)" />
+        <text x="320" y="248" text-anchor="middle" font-size="14" font-weight="700" class="mono">11</text>
+
+        <!-- s5 -->
+        <line x1="400" y1="60" x2="400" y2="225" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <circle cx="400" cy="60" r="4" fill="var(--fg)" />
+        <circle cx="400" cy="170" r="5" fill="var(--primary)" />
+        <text x="400" y="248" text-anchor="middle" font-size="14" font-weight="700" class="mono">10</text>
+
+        <!-- s6 -->
+        <line x1="480" y1="25" x2="480" y2="225" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <circle cx="480" cy="25" r="4" fill="var(--fg)" />
+        <circle cx="480" cy="130" r="5" fill="var(--primary)" />
+        <text x="480" y="248" text-anchor="middle" font-size="14" font-weight="700" class="mono">00</text>
+
+        <!-- s7 -->
+        <line x1="560" y1="60" x2="560" y2="225" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <circle cx="560" cy="60" r="4" fill="var(--fg)" />
+        <circle cx="560" cy="170" r="5" fill="var(--primary)" />
+        <text x="560" y="248" text-anchor="middle" font-size="14" font-weight="700" class="mono">10</text>
+
+        <!-- s8 -->
+        <line x1="640" y1="95" x2="640" y2="225" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3 3" />
+        <circle cx="640" cy="95" r="4" fill="var(--fg)" />
+        <circle cx="640" cy="190" r="5" fill="var(--primary)" />
+        <text x="640" y="248" text-anchor="middle" font-size="14" font-weight="700" class="mono">11</text>
+      </svg>
+    </div>
+  </body>
+</html>

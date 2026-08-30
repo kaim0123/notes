@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 800 340"
+        role="img"
+        aria-label="802.1Qタグの仕組みの図解。アクセスリンクではタグの無い通常のフレームが流れ、トランクリンクを通るときだけSW1が送信元MACとタイプの間に802.1Qタグを挿入し、SW2側でタグを外してから元のアクセスポートへ送り出す。"
+      >
+        <defs>
+          <marker
+            id="arrowV2"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="100" width="90" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="65" y="130" text-anchor="middle" font-size="12">PC-A</text>
+
+        <rect x="180" y="95" width="120" height="60" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="240" y="120" text-anchor="middle" font-size="12" font-weight="600">SW1</text>
+        <text x="240" y="138" text-anchor="middle" font-size="9.5" class="muted">アクセスポート</text>
+
+        <rect x="490" y="95" width="120" height="60" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="550" y="120" text-anchor="middle" font-size="12" font-weight="600">SW2</text>
+        <text x="550" y="138" text-anchor="middle" font-size="9.5" class="muted">アクセスポート</text>
+
+        <rect x="690" y="100" width="90" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="735" y="130" text-anchor="middle" font-size="12">PC-B</text>
+
+        <line x1="110" y1="125" x2="180" y2="125" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#arrowV2)" />
+        <text x="145" y="115" text-anchor="middle" font-size="9">タグ無し</text>
+
+        <line x1="300" y1="125" x2="490" y2="125" stroke="var(--primary)" stroke-width="1.8" marker-end="url(#arrowV2)" />
+        <text x="395" y="115" text-anchor="middle" font-size="10" style="fill: var(--primary)">トランク(802.1Qタグ付き, VLAN10)</text>
+
+        <line x1="610" y1="125" x2="690" y2="125" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#arrowV2)" />
+        <text x="650" y="115" text-anchor="middle" font-size="9">タグ無し</text>
+
+        <text x="400" y="195" text-anchor="middle" font-size="11" class="muted">アクセスリンク上のフレーム(タグなし)</text>
+        <rect x="130" y="205" width="110" height="36" fill="var(--card)" stroke="var(--border)" />
+        <text x="185" y="227" text-anchor="middle" font-size="10">宛先MAC</text>
+        <rect x="240" y="205" width="110" height="36" fill="var(--card)" stroke="var(--border)" />
+        <text x="295" y="227" text-anchor="middle" font-size="10">送信元MAC</text>
+        <rect x="350" y="205" width="70" height="36" fill="var(--card)" stroke="var(--border)" />
+        <text x="385" y="227" text-anchor="middle" font-size="10">タイプ</text>
+        <rect x="420" y="205" width="180" height="36" fill="var(--card)" stroke="var(--border)" />
+        <text x="510" y="227" text-anchor="middle" font-size="10">データ</text>
+        <rect x="600" y="205" width="70" height="36" fill="var(--card)" stroke="var(--border)" />
+        <text x="635" y="227" text-anchor="middle" font-size="10">FCS</text>
+
+        <text x="400" y="265" text-anchor="middle" font-size="11" style="fill: var(--primary)">
+          トランクリンク上のフレーム(802.1Qタグが挿入される)
+        </text>
+        <rect x="85" y="275" width="110" height="36" fill="var(--card)" stroke="var(--border)" />
+        <text x="140" y="297" text-anchor="middle" font-size="10">宛先MAC</text>
+        <rect x="195" y="275" width="110" height="36" fill="var(--card)" stroke="var(--border)" />
+        <text x="250" y="297" text-anchor="middle" font-size="10">送信元MAC</text>
+        <rect x="305" y="275" width="90" height="36" fill="var(--primary)" />
+        <text x="350" y="291" text-anchor="middle" font-size="9.5" font-weight="700" style="fill: var(--primary-fg)">802.1Q</text>
+        <text x="350" y="303" text-anchor="middle" font-size="8.5" style="fill: var(--primary-fg)">VLAN10</text>
+        <rect x="395" y="275" width="70" height="36" fill="var(--card)" stroke="var(--border)" />
+        <text x="430" y="297" text-anchor="middle" font-size="10">タイプ</text>
+        <rect x="465" y="275" width="180" height="36" fill="var(--card)" stroke="var(--border)" />
+        <text x="555" y="297" text-anchor="middle" font-size="10">データ</text>
+        <rect x="645" y="275" width="70" height="36" fill="var(--card)" stroke="var(--border)" />
+        <text x="680" y="297" text-anchor="middle" font-size="10">FCS</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 300"
+        role="img"
+        aria-label="レプリケーションの構成図。書き込みを受け付けるプライマリから、3台のリードレプリカへ点線でデータが複製される。参照(SELECT)クエリはリードレプリカへ分散させ、プライマリには書き込みだけを集約する。"
+      >
+        <defs>
+          <marker id="arrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowPrimary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="24" width="150" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="95" y="52" text-anchor="middle" font-size="12.5" font-weight="600">書き込み(INSERT/UPDATE)</text>
+
+        <path d="M170,47 L265,47" fill="none" stroke="var(--primary)" stroke-width="1.6" marker-end="url(#arrowPrimary)" />
+
+        <rect x="265" y="18" width="170" height="58" rx="10" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="350" y="42" text-anchor="middle" font-size="13.5" font-weight="700" style="fill: var(--primary)">プライマリ</text>
+        <text x="350" y="60" text-anchor="middle" font-size="10.5" class="muted">(書き込みを受け付ける)</text>
+
+        <path d="M300,76 L120,152" fill="none" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#arrowMuted)" />
+        <path d="M350,76 L350,152" fill="none" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#arrowMuted)" />
+        <path d="M400,76 L580,152" fill="none" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#arrowMuted)" />
+        <text x="350" y="108" text-anchor="middle" font-size="11" class="muted">レプリケーション(複製)</text>
+
+        <rect x="40" y="156" width="160" height="52" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="120" y="186" text-anchor="middle" font-size="12" font-weight="600">リードレプリカ1</text>
+        <rect x="270" y="156" width="160" height="52" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="350" y="186" text-anchor="middle" font-size="12" font-weight="600">リードレプリカ2</text>
+        <rect x="500" y="156" width="160" height="52" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="580" y="186" text-anchor="middle" font-size="12" font-weight="600">リードレプリカ3</text>
+
+        <path d="M120,208 L120,236" fill="none" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrowMuted)" />
+        <path d="M350,208 L350,236" fill="none" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrowMuted)" />
+        <path d="M580,208 L580,236" fill="none" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrowMuted)" />
+
+        <text x="350" y="256" text-anchor="middle" font-size="11" class="muted">参照(SELECT)クエリを分散</text>
+        <text x="350" y="284" text-anchor="middle" font-size="11" class="muted">
+          プライマリ故障時はいずれかのレプリカを昇格させ、フェイルオーバーする
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 620 400"
+        role="img"
+        aria-label="DHCPのDORAプロセスの図解。クライアントがDiscoverをブロードキャストし、サーバーがOfferで候補のIPアドレスを提示し、クライアントがRequestでそのアドレスを要求し、サーバーがAckで確定する、という4段階のやり取りでIPアドレスが割り当てられる。"
+      >
+        <defs>
+          <marker
+            id="arrowDh"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <rect x="40" y="10" width="120" height="34" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="100" y="32" text-anchor="middle" font-size="12.5" font-weight="600">クライアント</text>
+        <rect x="460" y="10" width="120" height="34" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="520" y="32" text-anchor="middle" font-size="12.5" font-weight="600">DHCPサーバー</text>
+
+        <line x1="100" y1="44" x2="100" y2="360" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 4" />
+        <line x1="520" y1="44" x2="520" y2="360" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 4" />
+
+        <line x1="100" y1="80" x2="520" y2="80" stroke="var(--primary)" stroke-width="1.6" marker-end="url(#arrowDh)" />
+        <text x="310" y="70" text-anchor="middle" font-size="12" style="fill: var(--primary)">① Discover(ブロードキャスト)</text>
+        <text x="310" y="96" text-anchor="middle" font-size="10.5" class="muted">「IPアドレスが欲しい」を全体に呼びかける</text>
+
+        <line x1="520" y1="140" x2="100" y2="140" stroke="var(--fg)" stroke-width="1.6" marker-end="url(#arrowDh)" />
+        <text x="310" y="130" text-anchor="middle" font-size="12">② Offer(候補を提示)</text>
+        <text x="310" y="156" text-anchor="middle" font-size="10.5" class="muted">「このIPアドレスはどう?」と候補を提案する</text>
+
+        <line x1="100" y1="200" x2="520" y2="200" stroke="var(--primary)" stroke-width="1.6" marker-end="url(#arrowDh)" />
+        <text x="310" y="190" text-anchor="middle" font-size="12" style="fill: var(--primary)">③ Request(ブロードキャスト)</text>
+        <text x="310" y="216" text-anchor="middle" font-size="10.5" class="muted">「そのIPアドレスをください」と要求する</text>
+
+        <line x1="520" y1="260" x2="100" y2="260" stroke="var(--fg)" stroke-width="1.6" marker-end="url(#arrowDh)" />
+        <text x="310" y="250" text-anchor="middle" font-size="12">④ ACK(確定通知)</text>
+        <text x="310" y="276" text-anchor="middle" font-size="10.5" class="muted">「そのIPアドレスで確定」と割り当てを確定する</text>
+
+        <rect x="185" y="300" width="250" height="42" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="310" y="326" text-anchor="middle" font-size="12.5" font-weight="600" style="fill: var(--primary)">
+          IPアドレスの割り当てが完了
+        </text>
+
+        <text x="310" y="375" text-anchor="middle" font-size="11.5" class="muted">
+          DiscoverとRequestがブロードキャストなのは、クライアントがまだIPを持たないため
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

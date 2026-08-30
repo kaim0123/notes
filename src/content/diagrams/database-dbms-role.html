@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 420"
+        role="img"
+        aria-label="DBMSが仲介する仕組みの図解。アプリA・アプリB・アプリCの3つのアプリケーションは、データファイルに直接アクセスせず、必ずDBMSを経由する。DBMSは内部で同時実行制御・制約・インデックスによる検索・ログとバックアップの4つの役割を担い、整合性を保った状態でデータを読み書きする。"
+      >
+        <defs>
+          <marker
+            id="arrowMuted"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker
+            id="arrowPrimary"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <!-- クライアントアプリ -->
+        <g>
+          <rect x="16" y="30" width="118" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+          <text x="75" y="58" text-anchor="middle" font-size="13" font-weight="600">アプリA</text>
+
+          <rect x="16" y="187" width="118" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+          <text x="75" y="215" text-anchor="middle" font-size="13" font-weight="600">アプリB</text>
+
+          <rect x="16" y="344" width="118" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+          <text x="75" y="372" text-anchor="middle" font-size="13" font-weight="600">アプリC</text>
+        </g>
+
+        <!-- アプリ→DBMS -->
+        <path d="M134,53 L230,53 L230,150" fill="none" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrowMuted)" />
+        <path d="M134,210 L226,210" fill="none" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrowMuted)" />
+        <path d="M134,367 L230,367 L230,270" fill="none" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrowMuted)" />
+
+        <text x="180" y="120" text-anchor="middle" font-size="11" class="muted">SQLで</text>
+        <text x="180" y="134" text-anchor="middle" font-size="11" class="muted">読み書きを依頼</text>
+
+        <!-- DBMS本体 -->
+        <rect x="230" y="14" width="300" height="392" rx="12" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="380" y="42" text-anchor="middle" font-size="14.5" font-weight="700" style="fill: var(--primary)">
+          DBMS
+        </text>
+        <text x="380" y="60" text-anchor="middle" font-size="11" class="muted">
+          (データベース管理システム)
+        </text>
+
+        <g>
+          <rect x="252" y="80" width="256" height="66" rx="8" fill="none" stroke="var(--border)" />
+          <text x="272" y="106" font-size="12.5" font-weight="600">同時実行制御</text>
+          <text x="272" y="126" font-size="11" class="muted">ロックで複数アクセスを調停</text>
+
+          <rect x="252" y="158" width="256" height="66" rx="8" fill="none" stroke="var(--border)" />
+          <text x="272" y="184" font-size="12.5" font-weight="600">制約</text>
+          <text x="272" y="204" font-size="11" class="muted">NOT NULL・UNIQUEなどを強制</text>
+
+          <rect x="252" y="236" width="256" height="66" rx="8" fill="none" stroke="var(--border)" />
+          <text x="272" y="262" font-size="12.5" font-weight="600">インデックス</text>
+          <text x="272" y="282" font-size="11" class="muted">必要な行だけ高速に検索</text>
+
+          <rect x="252" y="314" width="256" height="66" rx="8" fill="none" stroke="var(--border)" />
+          <text x="272" y="340" font-size="12.5" font-weight="600">ログ・バックアップ</text>
+          <text x="272" y="360" font-size="11" class="muted">障害からの回復を保証</text>
+        </g>
+
+        <!-- DBMS→データ -->
+        <path d="M530,210 L610,210" fill="none" stroke="var(--primary)" stroke-width="1.8" marker-end="url(#arrowPrimary)" />
+        <text x="570" y="196" text-anchor="middle" font-size="11" style="fill: var(--primary)">整合性を保って</text>
+        <text x="570" y="240" text-anchor="middle" font-size="11" style="fill: var(--primary)">書き込み・読み出し</text>
+
+        <!-- データストア(円柱) -->
+        <g>
+          <path
+            d="M612,150 a52,14 0 1 0 104,0 a52,14 0 1 0 -104,0 M612,150 L612,270 a52,14 0 0 0 104,0 L716,150"
+            fill="var(--card)"
+            stroke="var(--border)"
+            stroke-width="1.4"
+          />
+          <ellipse cx="664" cy="150" rx="52" ry="14" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+          <text x="664" y="205" text-anchor="middle" font-size="12.5" font-weight="600">データ</text>
+          <text x="664" y="222" text-anchor="middle" font-size="10.5" class="muted">(テーブル)</text>
+        </g>
+
+        <text x="380" y="416" text-anchor="middle" font-size="11" class="muted">
+          アプリはデータへ直接アクセスせず、常にDBMSを経由する
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

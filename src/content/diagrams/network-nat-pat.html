@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 400"
+        role="img"
+        aria-label="PAT(NAPT)の図解。3台のPCがそれぞれ違うプライベートIPとポートで通信するが、ルーターは全員を同じグローバルIP(203.0.113.1)に変換し、ポート番号だけを変えて区別する。変換対応表(NATテーブル)に各PCの内部アドレスと変換後のグローバルポートが記録される。"
+      >
+        <defs>
+          <marker
+            id="arrowNat"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="30" width="160" height="46" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="100" y="49" text-anchor="middle" font-size="11.5" font-weight="600">PC1</text>
+        <text x="100" y="65" text-anchor="middle" font-size="10" class="mono muted">192.168.1.10:1025</text>
+
+        <rect x="20" y="100" width="160" height="46" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="100" y="119" text-anchor="middle" font-size="11.5" font-weight="600">PC2</text>
+        <text x="100" y="135" text-anchor="middle" font-size="10" class="mono muted">192.168.1.11:1025</text>
+
+        <rect x="20" y="170" width="160" height="46" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="100" y="189" text-anchor="middle" font-size="11.5" font-weight="600">PC3</text>
+        <text x="100" y="205" text-anchor="middle" font-size="10" class="mono muted">192.168.1.12:2048</text>
+
+        <rect x="300" y="80" width="150" height="90" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="375" y="120" text-anchor="middle" font-size="13" font-weight="700" style="fill: var(--primary)">ルーター</text>
+        <text x="375" y="140" text-anchor="middle" font-size="11" class="muted">NAT/PAT</text>
+
+        <rect x="580" y="90" width="160" height="70" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="660" y="130" text-anchor="middle" font-size="13" font-weight="600">インターネット</text>
+
+        <line x1="180" y1="53" x2="300" y2="105" stroke="var(--fg)" stroke-width="1.4" marker-end="url(#arrowNat)" />
+        <line x1="180" y1="123" x2="300" y2="123" stroke="var(--fg)" stroke-width="1.4" marker-end="url(#arrowNat)" />
+        <line x1="180" y1="193" x2="300" y2="145" stroke="var(--fg)" stroke-width="1.4" marker-end="url(#arrowNat)" />
+
+        <line x1="450" y1="100" x2="580" y2="100" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowNat)" />
+        <text x="515" y="93" text-anchor="middle" font-size="9.5" class="mono" style="fill: var(--primary)">:40001</text>
+        <line x1="450" y1="125" x2="580" y2="125" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowNat)" />
+        <text x="515" y="118" text-anchor="middle" font-size="9.5" class="mono" style="fill: var(--primary)">:40002</text>
+        <line x1="450" y1="150" x2="580" y2="150" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowNat)" />
+        <text x="515" y="163" text-anchor="middle" font-size="9.5" class="mono" style="fill: var(--primary)">:40003</text>
+
+        <text x="660" y="150" text-anchor="middle" font-size="10" class="mono muted">送信元は全員 203.0.113.1</text>
+
+        <rect x="170" y="255" width="420" height="120" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="380" y="277" text-anchor="middle" font-size="11" class="muted">NATテーブル(変換対応表)</text>
+        <text x="200" y="297" font-size="10" class="mono muted">Inside Local</text>
+        <text x="420" y="297" font-size="10" class="mono muted">Inside Global</text>
+        <text x="200" y="317" font-size="10.5" class="mono">192.168.1.10:1025</text>
+        <text x="420" y="317" font-size="10.5" class="mono" style="fill: var(--primary)">203.0.113.1:40001</text>
+        <text x="200" y="337" font-size="10.5" class="mono">192.168.1.11:1025</text>
+        <text x="420" y="337" font-size="10.5" class="mono" style="fill: var(--primary)">203.0.113.1:40002</text>
+        <text x="200" y="357" font-size="10.5" class="mono">192.168.1.12:2048</text>
+        <text x="420" y="357" font-size="10.5" class="mono" style="fill: var(--primary)">203.0.113.1:40003</text>
+      </svg>
+    </div>
+  </body>
+</html>

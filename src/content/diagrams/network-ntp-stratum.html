@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 360"
+        role="img"
+        aria-label="NTPのStratum階層の図解。原子時計やGPSを基準とするStratum0を頂点に、それに直結したNTPサーバーがStratum1、そこから時刻をもらうサーバーがStratum2、さらにその下がStratum3となる。階層が下がるほど基準時計からの経由数が増え、Stratum番号が大きくなる。"
+      >
+        <defs>
+          <marker
+            id="arrowNtp"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <rect x="250" y="20" width="140" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="320" y="40" text-anchor="middle" font-size="12.5" font-weight="600">Stratum 0</text>
+        <text x="320" y="56" text-anchor="middle" font-size="9.5" class="muted">原子時計/GPS(基準)</text>
+
+        <line x1="320" y1="64" x2="320" y2="95" stroke="var(--fg)" stroke-width="1.4" marker-end="url(#arrowNtp)" />
+
+        <rect x="250" y="100" width="140" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="320" y="120" text-anchor="middle" font-size="12.5" font-weight="600">Stratum 1</text>
+        <text x="320" y="136" text-anchor="middle" font-size="9.5" class="muted">基準に直結したNTPサーバー</text>
+
+        <line x1="300" y1="144" x2="180" y2="175" stroke="var(--fg)" stroke-width="1.4" marker-end="url(#arrowNtp)" />
+        <line x1="340" y1="144" x2="460" y2="175" stroke="var(--fg)" stroke-width="1.4" marker-end="url(#arrowNtp)" />
+
+        <rect x="110" y="180" width="140" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="180" y="207" text-anchor="middle" font-size="12.5" font-weight="600">Stratum 2</text>
+
+        <rect x="390" y="180" width="140" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="460" y="207" text-anchor="middle" font-size="12.5" font-weight="600">Stratum 2</text>
+
+        <line x1="180" y1="224" x2="180" y2="255" stroke="var(--primary)" stroke-width="1.6" marker-end="url(#arrowNtp)" />
+
+        <rect x="110" y="260" width="140" height="44" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="180" y="280" text-anchor="middle" font-size="12.5" font-weight="700" style="fill: var(--primary)">Stratum 3</text>
+        <text x="180" y="296" text-anchor="middle" font-size="9.5" style="fill: var(--primary)">社内ルーターなど</text>
+
+        <text x="320" y="335" text-anchor="middle" font-size="11.5" class="muted">
+          階層が下がるほど基準時計からの経由数が増え、Stratum番号が大きくなる
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

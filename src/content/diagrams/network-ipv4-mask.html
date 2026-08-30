@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 260"
+        role="img"
+        aria-label="IPアドレスとサブネットマスクの関係の図解。例として192.168.1.10/24を4つのオクテットに分解し、マスク255.255.255.0の1が並ぶ最初の3オクテットがネットワーク部、0が並ぶ最後の1オクテットがホスト部であることを示す。"
+      >
+        <text x="380" y="18" text-anchor="middle" font-size="12.5" font-weight="700">
+          IPアドレスとサブネットマスク(例: 192.168.1.10/24)
+        </text>
+
+        <text x="30" y="42" font-size="11" class="muted">IPアドレス</text>
+        <rect x="30" y="50" width="150" height="64" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="105" y="75" text-anchor="middle" font-size="15" font-weight="700">192</text>
+        <text x="105" y="100" text-anchor="middle" font-size="11" class="mono muted">11000000</text>
+
+        <rect x="200" y="50" width="150" height="64" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="275" y="75" text-anchor="middle" font-size="15" font-weight="700">168</text>
+        <text x="275" y="100" text-anchor="middle" font-size="11" class="mono muted">10101000</text>
+
+        <rect x="370" y="50" width="150" height="64" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="445" y="75" text-anchor="middle" font-size="15" font-weight="700">1</text>
+        <text x="445" y="100" text-anchor="middle" font-size="11" class="mono muted">00000001</text>
+
+        <rect x="540" y="50" width="150" height="64" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="615" y="75" text-anchor="middle" font-size="15" font-weight="700">10</text>
+        <text x="615" y="100" text-anchor="middle" font-size="11" class="mono muted">00001010</text>
+
+        <text x="30" y="132" font-size="11" class="muted">サブネットマスク</text>
+        <rect x="30" y="140" width="150" height="50" rx="6" fill="var(--primary)" />
+        <text x="105" y="160" text-anchor="middle" font-size="13" font-weight="700" style="fill: var(--primary-fg)">255</text>
+        <text x="105" y="178" text-anchor="middle" font-size="10.5" class="mono" style="fill: var(--primary-fg)">11111111</text>
+
+        <rect x="200" y="140" width="150" height="50" rx="6" fill="var(--primary)" />
+        <text x="275" y="160" text-anchor="middle" font-size="13" font-weight="700" style="fill: var(--primary-fg)">255</text>
+        <text x="275" y="178" text-anchor="middle" font-size="10.5" class="mono" style="fill: var(--primary-fg)">11111111</text>
+
+        <rect x="370" y="140" width="150" height="50" rx="6" fill="var(--primary)" />
+        <text x="445" y="160" text-anchor="middle" font-size="13" font-weight="700" style="fill: var(--primary-fg)">255</text>
+        <text x="445" y="178" text-anchor="middle" font-size="10.5" class="mono" style="fill: var(--primary-fg)">11111111</text>
+
+        <rect x="540" y="140" width="150" height="50" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="615" y="160" text-anchor="middle" font-size="13" font-weight="700">0</text>
+        <text x="615" y="178" text-anchor="middle" font-size="10.5" class="mono muted">00000000</text>
+
+        <line x1="30" y1="205" x2="520" y2="205" stroke="var(--primary)" stroke-width="1.5" />
+        <line x1="30" y1="200" x2="30" y2="210" stroke="var(--primary)" stroke-width="1.5" />
+        <line x1="520" y1="200" x2="520" y2="210" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="275" y="222" text-anchor="middle" font-size="11.5" style="fill: var(--primary)">
+          ネットワーク部 ― マスクが1のところ
+        </text>
+
+        <line x1="540" y1="205" x2="690" y2="205" stroke="var(--muted)" stroke-width="1.5" />
+        <line x1="540" y1="200" x2="540" y2="210" stroke="var(--muted)" stroke-width="1.5" />
+        <line x1="690" y1="200" x2="690" y2="210" stroke="var(--muted)" stroke-width="1.5" />
+        <text x="615" y="222" text-anchor="middle" font-size="11.5" class="muted">
+          ホスト部 ― マスクが0
+        </text>
+
+        <text x="380" y="248" text-anchor="middle" font-size="11.5" class="muted">
+          /24 は「先頭24ビット(=3オクテット)がネットワーク部」という意味の別表記
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 980 260"
+        role="img"
+        aria-label="カプセル化の図解。アプリケーション層のデータに、トランスポート層でTCPヘッダが付いてセグメントになり、インターネット層でIPヘッダが付いてパケットになり、ネットワークインターフェース層でイーサネットヘッダとトレーラが付いてフレームになる。下の層に渡るたびにヘッダ(まれにトレーラ)が1つずつ外側に追加されていく。"
+      >
+        <defs>
+          <marker
+            id="arrowE"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <!-- Stage1: データ -->
+        <text x="85" y="24" text-anchor="middle" font-size="11" class="muted">アプリケーション層</text>
+        <rect x="20" y="50" width="130" height="70" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="85" y="90" text-anchor="middle" font-size="14" font-weight="600">データ</text>
+        <text x="85" y="148" text-anchor="middle" font-size="11.5" class="muted">PDU: データ</text>
+
+        <line x1="155" y1="85" x2="200" y2="85" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#arrowE)" />
+        <text x="177" y="70" text-anchor="middle" font-size="10.5" style="fill: var(--primary)">+TCPヘッダ</text>
+
+        <!-- Stage2: TCP + データ -->
+        <text x="287" y="24" text-anchor="middle" font-size="11" class="muted">トランスポート層</text>
+        <rect x="205" y="50" width="45" height="70" fill="var(--primary)" />
+        <text x="227" y="90" text-anchor="middle" font-size="11" font-weight="700" style="fill: var(--primary-fg)">TCP</text>
+        <rect x="250" y="50" width="120" height="70" fill="var(--card)" stroke="var(--border)" />
+        <text x="310" y="90" text-anchor="middle" font-size="13" font-weight="600">データ</text>
+        <text x="287" y="148" text-anchor="middle" font-size="11.5" class="muted">PDU: セグメント</text>
+
+        <line x1="375" y1="85" x2="420" y2="85" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#arrowE)" />
+        <text x="397" y="70" text-anchor="middle" font-size="10.5" style="fill: var(--primary)">+IPヘッダ</text>
+
+        <!-- Stage3: IP + TCP + データ -->
+        <text x="526" y="24" text-anchor="middle" font-size="11" class="muted">インターネット層</text>
+        <rect x="425" y="45" width="45" height="80" fill="var(--primary)" />
+        <text x="447" y="90" text-anchor="middle" font-size="11" font-weight="700" style="fill: var(--primary-fg)">IP</text>
+        <rect x="470" y="45" width="42" height="80" fill="var(--card)" stroke="var(--border)" />
+        <text x="491" y="90" text-anchor="middle" font-size="10.5">TCP</text>
+        <rect x="512" y="45" width="115" height="80" fill="var(--card)" stroke="var(--border)" />
+        <text x="569" y="90" text-anchor="middle" font-size="13" font-weight="600">データ</text>
+        <text x="526" y="148" text-anchor="middle" font-size="11.5" class="muted">PDU: パケット</text>
+
+        <line x1="632" y1="85" x2="677" y2="85" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#arrowE)" />
+        <text x="654" y="62" text-anchor="middle" font-size="10.5" style="fill: var(--primary)">+イーサネット</text>
+        <text x="654" y="75" text-anchor="middle" font-size="10.5" style="fill: var(--primary)">ヘッダ/トレーラ</text>
+
+        <!-- Stage4: Eth + IP + TCP + データ + Eth -->
+        <text x="791" y="24" text-anchor="middle" font-size="11" class="muted">ネットワークインターフェース層</text>
+        <rect x="682" y="40" width="42" height="90" fill="var(--primary)" />
+        <text x="703" y="90" text-anchor="middle" font-size="10" font-weight="700" style="fill: var(--primary-fg)">Eth</text>
+        <rect x="724" y="40" width="38" height="90" fill="var(--card)" stroke="var(--border)" />
+        <text x="743" y="90" text-anchor="middle" font-size="10">IP</text>
+        <rect x="762" y="40" width="34" height="90" fill="var(--card)" stroke="var(--border)" />
+        <text x="779" y="90" text-anchor="middle" font-size="9.5">TCP</text>
+        <rect x="796" y="40" width="75" height="90" fill="var(--card)" stroke="var(--border)" />
+        <text x="833" y="90" text-anchor="middle" font-size="12" font-weight="600">データ</text>
+        <rect x="871" y="40" width="30" height="90" fill="var(--primary)" />
+        <text x="886" y="90" text-anchor="middle" font-size="9" font-weight="700" style="fill: var(--primary-fg)">FCS</text>
+        <text x="791" y="148" text-anchor="middle" font-size="11.5" class="muted">PDU: フレーム</text>
+
+        <text x="490" y="200" text-anchor="middle" font-size="12" class="muted">
+          受信側ではこの逆(ヘッダ/トレーラを外側から1つずつ外す「非カプセル化」)が行われる
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+        --danger: oklch(0.65 0.22 25);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 780 300"
+        role="img"
+        aria-label="Sagaの図解。上段は注文確定・在庫引当・決済の順にフォワードステップが実行される流れを示す。決済ステップが失敗したため、下段では逆方向に補償トランザクションが実行され、在庫引当を取り消して在庫を戻し、続いて注文をキャンセルする様子を示す。"
+      >
+        <defs>
+          <marker id="arrowM" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+          <marker id="arrowD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--danger)" />
+          </marker>
+        </defs>
+
+        <text x="20" y="26" font-size="11.5" font-weight="600" style="fill: var(--primary)">
+          フォワードステップ(各サービスのローカルACID)
+        </text>
+
+        <!-- フォワード -->
+        <rect x="20" y="40" width="220" height="60" rx="9" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="130" y="65" text-anchor="middle" font-size="12.5" font-weight="600">① 注文確定</text>
+        <text x="130" y="84" text-anchor="middle" font-size="10.5" class="muted">注文サービスDB</text>
+
+        <rect x="290" y="40" width="220" height="60" rx="9" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="400" y="65" text-anchor="middle" font-size="12.5" font-weight="600">② 在庫引当</text>
+        <text x="400" y="84" text-anchor="middle" font-size="10.5" class="muted">在庫サービスDB</text>
+
+        <rect x="560" y="40" width="200" height="60" rx="9" fill="var(--card)" stroke="var(--danger)" stroke-width="1.8" />
+        <text x="660" y="65" text-anchor="middle" font-size="12.5" font-weight="600" style="fill: var(--danger)">③ 決済 ✕ 失敗</text>
+        <text x="660" y="84" text-anchor="middle" font-size="10.5" class="muted">決済サービスDB</text>
+
+        <path d="M240,70 L290,70" stroke="var(--primary)" stroke-width="1.6" fill="none" marker-end="url(#arrowP)" />
+        <path d="M510,70 L560,70" stroke="var(--primary)" stroke-width="1.6" fill="none" marker-end="url(#arrowP)" />
+
+        <text x="20" y="150" font-size="11.5" font-weight="600" style="fill: var(--danger)">
+          補償トランザクション(逆方向にビジネス上の逆操作で取り消す)
+        </text>
+
+        <!-- 補償(逆方向) -->
+        <rect x="290" y="164" width="220" height="60" rx="9" fill="var(--card)" stroke="var(--danger)" stroke-width="1.5" />
+        <text x="400" y="189" text-anchor="middle" font-size="12.5" font-weight="600">在庫を戻す</text>
+        <text x="400" y="208" text-anchor="middle" font-size="10.5" class="muted">補償①: 引当を取り消す</text>
+
+        <rect x="20" y="164" width="220" height="60" rx="9" fill="var(--card)" stroke="var(--danger)" stroke-width="1.5" />
+        <text x="130" y="189" text-anchor="middle" font-size="12.5" font-weight="600">注文をキャンセル</text>
+        <text x="130" y="208" text-anchor="middle" font-size="10.5" class="muted">補償②: 注文を取り消す</text>
+
+        <path d="M660,100 L660,194 L510,194" stroke="var(--danger)" stroke-width="1.6" fill="none" marker-end="url(#arrowD)" />
+        <path d="M290,194 L240,194" stroke="var(--danger)" stroke-width="1.6" fill="none" marker-end="url(#arrowD)" />
+
+        <text x="400" y="264" text-anchor="middle" font-size="11.5" class="muted">
+          各ステップはコミット済みのまま。取り消しは「ロールバック」ではなく業務上の逆操作(補償)として設計する
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

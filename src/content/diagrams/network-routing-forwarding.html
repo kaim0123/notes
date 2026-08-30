@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 400"
+        role="img"
+        aria-label="ルーターのパケット転送の図解。LAN Aのホストから送られたLAN B宛のパケットがルーターのG0/0インタフェースに届き、ルーターはルーティングテーブルの宛先192.168.2.0/24の行を見つけて、対応する出力インタフェースG0/1からLAN Bへ転送する。"
+      >
+        <defs>
+          <marker
+            id="arrowR"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <rect x="30" y="30" width="170" height="60" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="115" y="55" text-anchor="middle" font-size="13" font-weight="600">LAN A</text>
+        <text x="115" y="73" text-anchor="middle" font-size="11" class="muted mono">192.168.1.0/24</text>
+
+        <rect x="560" y="30" width="170" height="60" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="645" y="55" text-anchor="middle" font-size="13" font-weight="600">LAN B</text>
+        <text x="645" y="73" text-anchor="middle" font-size="11" class="muted mono">192.168.2.0/24</text>
+
+        <rect x="290" y="140" width="180" height="70" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="380" y="170" text-anchor="middle" font-size="13" font-weight="600">ルーター</text>
+        <text x="380" y="188" text-anchor="middle" font-size="10.5" class="muted">宛先を見て出力IFを決める</text>
+
+        <line x1="140" y1="90" x2="315" y2="140" stroke="var(--fg)" stroke-width="1.6" marker-end="url(#arrowR)" />
+        <text x="185" y="120" font-size="11" style="fill: var(--primary)">宛先: 192.168.2.20</text>
+        <text x="205" y="135" font-size="10.5" class="muted">→ G0/0で受信</text>
+
+        <line x1="445" y1="140" x2="620" y2="90" stroke="var(--primary)" stroke-width="1.6" marker-end="url(#arrowR)" />
+        <text x="500" y="115" font-size="10.5" class="muted">G0/1から送出</text>
+
+        <rect x="230" y="250" width="300" height="110" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="380" y="272" text-anchor="middle" font-size="11" class="muted">ルーティングテーブル</text>
+        <line x1="245" y1="282" x2="515" y2="282" stroke="var(--border)" stroke-width="1" />
+        <text x="255" y="300" font-size="10.5" class="mono muted">宛先</text>
+        <text x="420" y="300" font-size="10.5" class="mono muted">出力IF</text>
+        <text x="255" y="320" font-size="10.5" class="mono muted">192.168.1.0/24</text>
+        <text x="420" y="320" font-size="10.5" class="mono muted">G0/0(直結)</text>
+
+        <rect x="240" y="330" width="280" height="22" rx="4" fill="var(--primary)" />
+        <text x="255" y="346" font-size="10.5" class="mono" style="fill: var(--primary-fg)">192.168.2.0/24</text>
+        <text x="420" y="346" font-size="10.5" class="mono" style="fill: var(--primary-fg)">G0/1(直結)</text>
+
+        <line x1="380" y1="210" x2="380" y2="250" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 3" />
+        <text x="380" y="240" text-anchor="middle" font-size="10" class="muted">表を参照</text>
+      </svg>
+    </div>
+  </body>
+</html>

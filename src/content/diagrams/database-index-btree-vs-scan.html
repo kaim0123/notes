@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 400"
+        role="img"
+        aria-label="インデックスの有無による検索方法の違いを示す図解。左側はインデックスがない場合で、テーブルの行を1行目から順に7行すべて確認してようやく該当行に到達する。右側はB-treeインデックスがある場合で、ルートから条件分岐をたどり、2段階の比較だけで該当行に到達する。"
+      >
+        <defs>
+          <marker id="arrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowPrimary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="185" y="28" text-anchor="middle" font-size="13.5" font-weight="700">インデックスなし ― フルスキャン</text>
+        <text x="580" y="28" text-anchor="middle" font-size="13.5" font-weight="700" style="fill: var(--primary)">B-treeインデックスあり</text>
+
+        <line x1="380" y1="14" x2="380" y2="360" stroke="var(--border)" stroke-width="1" stroke-dasharray="3 4" />
+
+        <!-- 左: フルスキャン -->
+        <g>
+          <rect x="40" y="46" width="290" height="26" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <text x="55" y="63" font-size="11.5">id=12 の行</text>
+
+          <rect x="40" y="78" width="290" height="26" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <text x="55" y="95" font-size="11.5">id=27 の行</text>
+
+          <rect x="40" y="110" width="290" height="26" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <text x="55" y="127" font-size="11.5">id=33 の行</text>
+
+          <rect x="40" y="142" width="290" height="26" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <text x="55" y="159" font-size="11.5">id=41 の行</text>
+
+          <rect x="40" y="174" width="290" height="26" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <text x="55" y="191" font-size="11.5">id=58 の行</text>
+
+          <rect x="40" y="206" width="290" height="26" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <text x="55" y="223" font-size="11.5">id=67 の行</text>
+
+          <rect x="40" y="238" width="290" height="30" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+          <text x="55" y="257" font-size="11.5" font-weight="700" style="fill: var(--primary)">id=82 の行 ― これが目的</text>
+
+          <path d="M22,59 L22,251" fill="none" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrowMuted)" />
+          <text x="22" y="285" text-anchor="middle" font-size="10.5" class="muted">①→②→③→④</text>
+          <text x="22" y="299" text-anchor="middle" font-size="10.5" class="muted">→⑤→⑥→⑦</text>
+
+          <text x="185" y="332" text-anchor="middle" font-size="11.5" class="muted">先頭から1行ずつ確認し、7行目でようやく到達</text>
+        </g>
+
+        <!-- 右: B-tree -->
+        <g>
+          <rect x="510" y="46" width="140" height="38" rx="8" fill="var(--card)" stroke="var(--border)" />
+          <text x="580" y="70" text-anchor="middle" font-size="12.5" font-weight="600">id &lt; 50 ?</text>
+
+          <rect x="410" y="112" width="110" height="38" rx="8" fill="var(--card)" stroke="var(--border)" />
+          <text x="465" y="136" text-anchor="middle" font-size="11.5" class="muted">はい(&lt;50)</text>
+
+          <rect x="600" y="112" width="120" height="38" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+          <text x="660" y="136" text-anchor="middle" font-size="11.5" style="fill: var(--primary)">いいえ(≥50)</text>
+
+          <path d="M580,84 L465,112" fill="none" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrowMuted)" />
+          <path d="M580,84 L660,112" fill="none" stroke="var(--primary)" stroke-width="1.8" marker-end="url(#arrowPrimary)" />
+
+          <rect x="560" y="178" width="90" height="34" rx="8" fill="var(--card)" stroke="var(--border)" />
+          <text x="605" y="200" text-anchor="middle" font-size="11" class="muted">50〜74</text>
+
+          <rect x="660" y="178" width="90" height="34" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+          <text x="705" y="200" text-anchor="middle" font-size="11" style="fill: var(--primary)">75〜99</text>
+
+          <path d="M660,150 L605,178" fill="none" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arrowMuted)" />
+          <path d="M660,150 L705,178" fill="none" stroke="var(--primary)" stroke-width="1.8" marker-end="url(#arrowPrimary)" />
+
+          <rect x="555" y="238" width="200" height="32" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+          <text x="655" y="259" text-anchor="middle" font-size="11.5" font-weight="700" style="fill: var(--primary)">id=82 の行 ― これが目的</text>
+
+          <path d="M705,212 L680,238" fill="none" stroke="var(--primary)" stroke-width="1.8" marker-end="url(#arrowPrimary)" />
+
+          <text x="580" y="332" text-anchor="middle" font-size="11.5" class="muted">条件分岐を2回たどるだけで到達</text>
+        </g>
+
+        <text x="380" y="382" text-anchor="middle" font-size="11.5" style="fill: var(--primary)">
+          行数が増えるほど、インデックスとフルスキャンの差は大きくなる
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

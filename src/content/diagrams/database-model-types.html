@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="データベースをデータモデルで分類した図解。頂点の「データベース」から4種類に分岐する。関係データベース(RDB)は行と列の表でSQLを使い業務システム全般で使われる中心的な方式として強調表示され、他に階層型・網型、NoSQL、分散データベースがある。"
+      >
+        <defs>
+          <marker
+            id="arrowM"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="5"
+            markerHeight="5"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <rect x="290" y="14" width="180" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="380" y="42" text-anchor="middle" font-size="13" font-weight="700">データベース</text>
+
+        <!-- 分岐線 -->
+        <path d="M380,60 L380,80" stroke="var(--muted)" stroke-width="1.4" fill="none" />
+        <path d="M105,80 L655,80" stroke="var(--muted)" stroke-width="1.4" fill="none" />
+        <path d="M105,80 L105,104" stroke="var(--muted)" stroke-width="1.4" fill="none" marker-end="url(#arrowM)" />
+        <path d="M295,80 L295,104" stroke="var(--muted)" stroke-width="1.4" fill="none" marker-end="url(#arrowM)" />
+        <path d="M465,80 L465,104" stroke="var(--muted)" stroke-width="1.4" fill="none" marker-end="url(#arrowM)" />
+        <path d="M655,80 L655,104" stroke="var(--muted)" stroke-width="1.4" fill="none" marker-end="url(#arrowM)" />
+
+        <!-- RDB(強調) -->
+        <rect x="20" y="106" width="170" height="150" rx="10" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="105" y="132" text-anchor="middle" font-size="12.5" font-weight="700" style="fill: var(--primary)">
+          関係データベース
+        </text>
+        <text x="105" y="148" text-anchor="middle" font-size="11" style="fill: var(--primary)">(RDB)</text>
+        <text x="105" y="176" text-anchor="middle" font-size="10.5" class="muted">行と列の表(テーブル)</text>
+        <text x="105" y="192" text-anchor="middle" font-size="10.5" class="muted">SQLで操作</text>
+        <text x="105" y="222" text-anchor="middle" font-size="10.5" font-weight="600" style="fill: var(--primary)">
+          業務システム全般
+        </text>
+        <text x="105" y="238" text-anchor="middle" font-size="10.5" font-weight="600" style="fill: var(--primary)">
+          事実上の標準
+        </text>
+
+        <!-- 階層型・網型 -->
+        <rect x="210" y="106" width="170" height="150" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="295" y="132" text-anchor="middle" font-size="12.5" font-weight="600">階層型・網型</text>
+        <text x="295" y="160" text-anchor="middle" font-size="10.5" class="muted">木構造・網目状に</text>
+        <text x="295" y="176" text-anchor="middle" font-size="10.5" class="muted">データをつなぐ</text>
+        <text x="295" y="204" text-anchor="middle" font-size="10.5" class="muted">RDB以前の</text>
+        <text x="295" y="220" text-anchor="middle" font-size="10.5" class="muted">古典的モデル</text>
+
+        <!-- NoSQL -->
+        <rect x="380" y="106" width="170" height="150" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="465" y="132" text-anchor="middle" font-size="12.5" font-weight="600">NoSQL</text>
+        <text x="465" y="160" text-anchor="middle" font-size="10.5" class="muted">キーバリュー型・</text>
+        <text x="465" y="176" text-anchor="middle" font-size="10.5" class="muted">ドキュメント型など</text>
+        <text x="465" y="204" text-anchor="middle" font-size="10.5" class="muted">大量データ・高速アクセス・</text>
+        <text x="465" y="220" text-anchor="middle" font-size="10.5" class="muted">柔軟なスキーマ</text>
+
+        <!-- 分散データベース -->
+        <rect x="570" y="106" width="170" height="150" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="655" y="132" text-anchor="middle" font-size="12.5" font-weight="600">分散データベース</text>
+        <text x="655" y="160" text-anchor="middle" font-size="10.5" class="muted">複数サーバーに</text>
+        <text x="655" y="176" text-anchor="middle" font-size="10.5" class="muted">データを分散保持</text>
+        <text x="655" y="204" text-anchor="middle" font-size="10.5" class="muted">大規模・高可用が</text>
+        <text x="655" y="220" text-anchor="middle" font-size="10.5" class="muted">求められる用途</text>
+
+        <text x="380" y="284" text-anchor="middle" font-size="11" class="muted">
+          このサイトでは以降、関係データベース(RDB)を軸に解説する
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

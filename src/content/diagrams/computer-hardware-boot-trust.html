@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 340"
+        role="img"
+        aria-label="UEFIによる起動時の信頼チェーンの図解。電源ONの後、UEFIが初期化を行い、ブートローダーの署名を検証する。署名が正しければブートローダーからOSが起動し、正しくなければ起動を拒否して停止する。TPMはこの検証や暗号化に使う鍵をOSからも読み取りにくい形で保管する、破線でつながる金庫役として脇に置かれる。"
+      >
+        <defs>
+          <marker
+            id="arrowD"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <!-- 電源ON -->
+        <rect x="15" y="115" width="100" height="60" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="65" y="140" text-anchor="middle" font-size="12.5" font-weight="600">電源ON</text>
+        <text x="65" y="157" text-anchor="middle" font-size="10" class="muted">起動開始</text>
+
+        <line x1="115" y1="145" x2="163" y2="145" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#arrowD)" />
+
+        <!-- UEFI -->
+        <rect x="175" y="105" width="150" height="80" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="250" y="135" text-anchor="middle" font-size="13" font-weight="600">UEFI</text>
+        <text x="250" y="153" text-anchor="middle" font-size="10.5" class="muted">POST + 初期化</text>
+        <text x="250" y="168" text-anchor="middle" font-size="10.5" class="muted">ファームウェア</text>
+
+        <line x1="325" y1="145" x2="373" y2="145" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#arrowD)" />
+
+        <!-- 判定ダイヤモンド -->
+        <polygon points="450,95 545,145 450,195 355,145" fill="var(--card)" stroke="var(--border)" />
+        <text x="450" y="140" text-anchor="middle" font-size="11.5">署名は</text>
+        <text x="450" y="156" text-anchor="middle" font-size="11.5">正しいか?</text>
+        <text x="450" y="75" text-anchor="middle" font-size="11" class="muted">Secure Boot による検証</text>
+
+        <!-- OK 分岐 -->
+        <line x1="545" y1="145" x2="600" y2="115" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#arrowD)" />
+        <text x="558" y="112" font-size="11" style="fill: var(--primary)">OK</text>
+
+        <rect x="605" y="65" width="140" height="65" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="675" y="92" text-anchor="middle" font-size="12" font-weight="600">ブートローダー</text>
+        <text x="675" y="108" text-anchor="middle" font-size="10.5" style="fill: var(--primary)">→ OS起動 ✓</text>
+
+        <!-- NG 分岐 -->
+        <line x1="450" y1="195" x2="450" y2="245" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#arrowD)" />
+        <text x="460" y="222" font-size="11">NG</text>
+
+        <rect x="350" y="250" width="200" height="55" rx="8" fill="none" stroke="var(--fg)" stroke-width="1.5" stroke-dasharray="5 4" />
+        <text x="450" y="273" text-anchor="middle" font-size="12" font-weight="600">起動を拒否</text>
+        <text x="450" y="290" text-anchor="middle" font-size="10.5" class="muted">× 停止(先へ進ませない)</text>
+
+        <!-- TPM -->
+        <rect x="605" y="200" width="140" height="70" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="675" y="228" text-anchor="middle" font-size="12" font-weight="600">TPM</text>
+        <text x="675" y="245" text-anchor="middle" font-size="10" class="muted">鍵を保管する</text>
+        <text x="675" y="258" text-anchor="middle" font-size="10" class="muted">専用チップ</text>
+
+        <path
+          d="M 605 220 C 480 210 350 180 300 150"
+          fill="none"
+          stroke="var(--muted)"
+          stroke-width="1.3"
+          stroke-dasharray="4 3"
+          marker-end="url(#arrowD)"
+        />
+        <text x="500" y="205" text-anchor="middle" font-size="10.5" class="muted">鍵・証明書の照会/保管</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 340"
+        role="img"
+        aria-label="非スカラ値アンチパターンの比較図解。悪い例は顧客テーブルの電話番号列に「090-1111-2222, 03-3333-4444」のように複数の値を1つの列に詰め込んでおり、個々の値の検索や結合ができない。良い例は顧客テーブルと電話番号テーブルを分け、電話番号は顧客IDに対して1対多の行として持つことで、値が増えても行を足すだけで対応できる。"
+      >
+        <defs>
+          <marker
+            id="arrowP"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="5"
+            markerHeight="5"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <!-- 悪い例パネル -->
+        <rect x="16" y="20" width="340" height="290" rx="12" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="186" y="46" text-anchor="middle" font-size="13.5" font-weight="700" class="muted">悪い例 ― 非スカラ値</text>
+
+        <rect x="36" y="64" width="300" height="32" fill="none" stroke="var(--border)" />
+        <rect x="36" y="96" width="300" height="60" fill="none" stroke="var(--border)" />
+        <line x1="126" y1="64" x2="126" y2="156" stroke="var(--border)" />
+        <text x="81" y="85" text-anchor="middle" font-size="12" font-weight="600">顧客ID</text>
+        <text x="231" y="85" text-anchor="middle" font-size="12" font-weight="600">電話番号</text>
+        <text x="81" y="130" text-anchor="middle" font-size="12">1</text>
+        <text x="231" y="121" text-anchor="middle" font-size="10.5">090-1111-2222,</text>
+        <text x="231" y="139" text-anchor="middle" font-size="10.5">03-3333-4444</text>
+
+        <text x="186" y="196" text-anchor="middle" font-size="11" class="muted">1つの列に複数の値を詰め込む</text>
+        <text x="186" y="214" text-anchor="middle" font-size="11" class="muted">→ 個々の値の検索・結合ができない</text>
+
+        <!-- 良い例パネル -->
+        <rect x="404" y="20" width="340" height="290" rx="12" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="574" y="46" text-anchor="middle" font-size="13.5" font-weight="700" style="fill: var(--primary)">良い例 ― 行に分ける</text>
+
+        <!-- 顧客テーブル -->
+        <rect x="424" y="70" width="110" height="28" fill="none" stroke="var(--border)" />
+        <rect x="424" y="98" width="110" height="28" fill="none" stroke="var(--border)" />
+        <text x="479" y="89" text-anchor="middle" font-size="11.5" font-weight="600">顧客ID</text>
+        <text x="479" y="117" text-anchor="middle" font-size="11.5">1</text>
+        <text x="479" y="58" text-anchor="middle" font-size="10.5" class="muted">顧客</text>
+
+        <!-- 電話番号テーブル -->
+        <rect x="580" y="70" width="160" height="28" fill="none" stroke="var(--border)" />
+        <rect x="580" y="98" width="160" height="28" fill="none" stroke="var(--border)" />
+        <rect x="580" y="126" width="160" height="28" fill="none" stroke="var(--border)" />
+        <line x1="650" y1="70" x2="650" y2="154" stroke="var(--border)" />
+        <text x="615" y="89" text-anchor="middle" font-size="11.5" font-weight="600">顧客ID</text>
+        <text x="695" y="89" text-anchor="middle" font-size="11.5" font-weight="600">番号</text>
+        <text x="615" y="117" text-anchor="middle" font-size="10.5">1</text>
+        <text x="695" y="117" text-anchor="middle" font-size="10.5">090-1111-2222</text>
+        <text x="615" y="145" text-anchor="middle" font-size="10.5">1</text>
+        <text x="695" y="145" text-anchor="middle" font-size="10.5">03-3333-4444</text>
+        <text x="660" y="58" text-anchor="middle" font-size="10.5" class="muted">電話番号(行を分けて複数保持)</text>
+
+        <path d="M534,84 L580,84" fill="none" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arrowP)" />
+        <text x="557" y="72" text-anchor="middle" font-size="10" style="fill: var(--primary)">1 : 多</text>
+
+        <text x="574" y="196" text-anchor="middle" font-size="11" style="fill: var(--primary)">顧客IDで関連付け、値は行を分けて持つ</text>
+        <text x="574" y="214" text-anchor="middle" font-size="11" class="muted">→ 増えても行を足すだけで対応できる</text>
+
+        <text x="380" y="332" text-anchor="middle" font-size="11.5" class="muted">
+          1つの列・1つのテーブルには、1つの明確な意味だけを持たせる
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

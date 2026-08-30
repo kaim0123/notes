@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 560"
+        role="img"
+        aria-label="正規化によるテーブル分割の流れ。最上段は注文ID・商品ID・顧客ID・顧客名・郵便番号・住所・商品名・単価・数量をすべて含む1つの表。第二正規化(2NF)で部分関数従属を取り除き、注文明細・注文・商品の3テーブルに分割する。さらに第三正規化(3NF)で注文テーブルの推移的関数従属を取り除き、注文・顧客・郵便番号マスタに分割することで、最終的に注文明細・注文・顧客・郵便番号マスタ・商品の5テーブルになる。"
+      >
+        <defs>
+          <marker id="arrowMuted2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arrowPrimary2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <!-- 段0: 正規化前の1テーブル -->
+        <rect x="20" y="16" width="720" height="86" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.6" />
+        <text x="380" y="42" text-anchor="middle" font-size="13" font-weight="700">正規化前(1テーブル)</text>
+        <text x="380" y="64" text-anchor="middle" font-size="10.5" class="muted">
+          注文ID・商品ID・顧客ID・顧客名・郵便番号・住所・商品名・単価・数量
+        </text>
+        <text x="380" y="82" text-anchor="middle" font-size="10.5" class="muted">
+          同じ顧客・同じ商品の情報が行ごとに重複する
+        </text>
+
+        <!-- 矢印: 段0→段1 -->
+        <path d="M380,102 L380,132" fill="none" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#arrowMuted2)" />
+        <text x="500" y="122" text-anchor="middle" font-size="11" class="muted">2NF: 部分関数従属を分離</text>
+
+        <!-- 段1: 2NF後の3テーブル -->
+        <rect x="20" y="140" width="150" height="100" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.6" />
+        <text x="95" y="164" text-anchor="middle" font-size="12.5" font-weight="700">注文明細</text>
+        <text x="95" y="184" text-anchor="middle" font-size="10" class="muted">注文ID+商品ID(PK)</text>
+        <text x="95" y="200" text-anchor="middle" font-size="10" class="muted">数量</text>
+
+        <rect x="180" y="140" width="420" height="100" rx="10" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="390" y="164" text-anchor="middle" font-size="12.5" font-weight="700" style="fill: var(--primary)">注文</text>
+        <text x="390" y="184" text-anchor="middle" font-size="10" class="muted">注文ID(PK)・顧客ID・顧客名・郵便番号・住所</text>
+        <text x="390" y="202" text-anchor="middle" font-size="10" style="fill: var(--primary)">→ 郵便番号から住所が決まる推移的関数従属が残る</text>
+
+        <rect x="610" y="140" width="130" height="100" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.6" />
+        <text x="675" y="164" text-anchor="middle" font-size="12.5" font-weight="700">商品</text>
+        <text x="675" y="184" text-anchor="middle" font-size="10" class="muted">商品ID(PK)</text>
+        <text x="675" y="200" text-anchor="middle" font-size="10" class="muted">商品名・単価</text>
+
+        <!-- 段1→段2 のうち注文明細・商品はそのまま引き継ぐ -->
+        <path d="M95,240 L95,340" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arrowMuted2)" />
+        <path d="M675,240 L675,340" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arrowMuted2)" />
+        <text x="115" y="290" font-size="9.5" class="muted">変化なし</text>
+        <text x="620" y="290" font-size="9.5" class="muted">変化なし</text>
+
+        <!-- 段1→段2 のうち注文は3分割 -->
+        <path d="M390,240 L250,340" fill="none" stroke="var(--primary)" stroke-width="1.6" marker-end="url(#arrowPrimary2)" />
+        <path d="M390,240 L390,340" fill="none" stroke="var(--primary)" stroke-width="1.6" marker-end="url(#arrowPrimary2)" />
+        <path d="M390,240 L545,340" fill="none" stroke="var(--primary)" stroke-width="1.6" marker-end="url(#arrowPrimary2)" />
+        <rect x="288" y="252" width="204" height="20" fill="var(--bg)" />
+        <text x="390" y="266" text-anchor="middle" font-size="11" style="fill: var(--primary)">3NF: 推移的関数従属を分離</text>
+
+        <!-- 段2: 3NF後の5テーブル -->
+        <rect x="20" y="348" width="150" height="90" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.6" />
+        <text x="95" y="372" text-anchor="middle" font-size="12.5" font-weight="700">注文明細</text>
+        <text x="95" y="392" text-anchor="middle" font-size="10" class="muted">注文ID+商品ID(PK)</text>
+        <text x="95" y="408" text-anchor="middle" font-size="10" class="muted">数量</text>
+
+        <rect x="185" y="348" width="130" height="90" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.6" />
+        <text x="250" y="372" text-anchor="middle" font-size="12.5" font-weight="700">注文</text>
+        <text x="250" y="392" text-anchor="middle" font-size="10" class="muted">注文ID(PK)</text>
+        <text x="250" y="408" text-anchor="middle" font-size="10" class="muted">顧客ID</text>
+
+        <rect x="330" y="348" width="150" height="90" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.6" />
+        <text x="405" y="372" text-anchor="middle" font-size="12.5" font-weight="700">顧客</text>
+        <text x="405" y="392" text-anchor="middle" font-size="10" class="muted">顧客ID(PK)</text>
+        <text x="405" y="408" text-anchor="middle" font-size="10" class="muted">顧客名・郵便番号</text>
+
+        <rect x="495" y="348" width="140" height="90" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.6" />
+        <text x="565" y="372" text-anchor="middle" font-size="12.5" font-weight="700">郵便番号マスタ</text>
+        <text x="565" y="392" text-anchor="middle" font-size="10" class="muted">郵便番号(PK)</text>
+        <text x="565" y="408" text-anchor="middle" font-size="10" class="muted">住所</text>
+
+        <rect x="650" y="348" width="90" height="90" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.6" />
+        <text x="695" y="372" text-anchor="middle" font-size="12.5" font-weight="700">商品</text>
+        <text x="695" y="392" text-anchor="middle" font-size="10" class="muted">商品ID(PK)</text>
+        <text x="695" y="408" text-anchor="middle" font-size="10" class="muted">商品名・単価</text>
+
+        <text x="380" y="466" text-anchor="middle" font-size="12" font-weight="600">
+          最終的に5テーブルへ:注文明細・注文・顧客・郵便番号マスタ・商品
+        </text>
+        <text x="380" y="488" text-anchor="middle" font-size="10.5" class="muted">
+          分割はいずれも結合(JOIN)すれば元の1テーブルへ復元できる(無損失分解)
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

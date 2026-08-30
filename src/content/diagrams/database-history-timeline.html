@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+        --warn: oklch(0.75 0.19 35);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 980 220"
+        role="img"
+        aria-label="データベースの歴史年表。紀元前の粘土板から1890年のパンチカード、1950年代の磁気テープ、1966年のIMS(階層型)と続き、1970年の関係モデル・1979年のOracle商用化・1981年のACID確立で関係データベースが確立する。2009年にNoSQLが登場して主役を奪うが、2012年のNewSQL(Spanner)で分散対応したSQLが復権し、2020年代はAIとの融合が進む。関係モデル・Oracle・ACID・NewSQLの4点は強調色、NoSQL登場は警告色で示される。"
+      >
+        <line x1="40" y1="110" x2="940" y2="110" stroke="var(--border)" stroke-width="1.4" />
+
+        <!-- 0: 紀元前 -->
+        <circle cx="40" cy="110" r="5" fill="var(--muted)" />
+        <text x="40" y="90" text-anchor="middle" font-size="11" font-weight="600">紀元前</text>
+        <text x="40" y="132" text-anchor="middle" font-size="10" class="muted">粘土板</text>
+
+        <!-- 1: 1890 -->
+        <circle cx="140" cy="110" r="5" fill="var(--muted)" />
+        <text x="140" y="135" text-anchor="middle" font-size="11" font-weight="600">1890</text>
+        <text x="140" y="88" text-anchor="middle" font-size="10" class="muted">パンチカード</text>
+
+        <!-- 2: 1950s -->
+        <circle cx="240" cy="110" r="5" fill="var(--muted)" />
+        <text x="240" y="90" text-anchor="middle" font-size="11" font-weight="600">1950s</text>
+        <text x="240" y="132" text-anchor="middle" font-size="10" class="muted">磁気テープ</text>
+
+        <!-- 3: 1966 -->
+        <circle cx="340" cy="110" r="5" fill="var(--muted)" />
+        <text x="340" y="135" text-anchor="middle" font-size="11" font-weight="600">1966</text>
+        <text x="340" y="88" text-anchor="middle" font-size="10" class="muted">IMS(階層型)</text>
+
+        <!-- 4: 1970 関係モデル(強調) -->
+        <circle cx="440" cy="110" r="7" fill="var(--primary)" />
+        <text x="440" y="90" text-anchor="middle" font-size="12" font-weight="700" style="fill: var(--primary)">1970</text>
+        <text x="440" y="132" text-anchor="middle" font-size="10.5" font-weight="600" style="fill: var(--primary)">関係モデル</text>
+
+        <!-- 5: 1979 Oracle(強調) -->
+        <circle cx="540" cy="110" r="6" fill="var(--primary)" />
+        <text x="540" y="135" text-anchor="middle" font-size="11.5" font-weight="700" style="fill: var(--primary)">1979</text>
+        <text x="540" y="88" text-anchor="middle" font-size="10" font-weight="600" style="fill: var(--primary)">Oracle商用化</text>
+
+        <!-- 6: 1981 ACID(強調) -->
+        <circle cx="640" cy="110" r="6" fill="var(--primary)" />
+        <text x="640" y="90" text-anchor="middle" font-size="11.5" font-weight="700" style="fill: var(--primary)">1981</text>
+        <text x="640" y="132" text-anchor="middle" font-size="10" font-weight="600" style="fill: var(--primary)">ACID確立</text>
+
+        <!-- 7: 2009 NoSQL(警告色) -->
+        <circle cx="740" cy="110" r="6" fill="var(--warn)" />
+        <text x="740" y="135" text-anchor="middle" font-size="11.5" font-weight="700" style="fill: var(--warn)">2009</text>
+        <text x="740" y="88" text-anchor="middle" font-size="10" font-weight="600" style="fill: var(--warn)">NoSQL台頭</text>
+
+        <!-- 8: 2012 NewSQL(強調) -->
+        <circle cx="840" cy="110" r="7" fill="var(--primary)" />
+        <text x="840" y="90" text-anchor="middle" font-size="12" font-weight="700" style="fill: var(--primary)">2012</text>
+        <text x="840" y="132" text-anchor="middle" font-size="10.5" font-weight="600" style="fill: var(--primary)">NewSQL復権</text>
+
+        <!-- 9: 2020s -->
+        <circle cx="940" cy="110" r="5" fill="var(--muted)" />
+        <text x="940" y="135" text-anchor="middle" font-size="11" font-weight="600">2020s</text>
+        <text x="920" y="88" text-anchor="middle" font-size="10" class="muted">AIとの融合</text>
+
+        <text x="490" y="200" text-anchor="middle" font-size="11" class="muted">
+          NoSQLに一度は主役を奪われかけたが、分散対応を得たSQL(NewSQL)が復権した
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

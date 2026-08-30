@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 320"
+        role="img"
+        aria-label="RAID0・RAID1・RAID5のデータ配置を比較した図解。RAID0は2台のディスクにデータを分割して書き込むストライピングで冗長性がない。RAID1は2台のディスクに同じデータを複製するミラーリングで容量効率は半分になる。RAID5は3台のディスクにデータとパリティを分散配置し、1台の故障までデータを復元できる。"
+      >
+        <!-- RAID0 -->
+        <text x="115" y="28" text-anchor="middle" font-size="13.5" font-weight="700">RAID 0</text>
+        <text x="115" y="46" text-anchor="middle" font-size="10.5" class="muted">ストライピング</text>
+
+        <g font-size="11" text-anchor="middle">
+          <rect x="45" y="64" width="60" height="182" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <rect x="53" y="72" width="44" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="75" y="101">A1</text>
+          <rect x="53" y="130" width="44" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="75" y="159">A3</text>
+          <rect x="53" y="188" width="44" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="75" y="217">A5</text>
+
+          <rect x="125" y="64" width="60" height="182" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <rect x="133" y="72" width="44" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="155" y="101">A2</text>
+          <rect x="133" y="130" width="44" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="155" y="159">A4</text>
+          <rect x="133" y="188" width="44" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="155" y="217">A6</text>
+        </g>
+        <text x="115" y="270" text-anchor="middle" font-size="11" class="muted">2台に分散書き込み</text>
+        <text x="115" y="288" text-anchor="middle" font-size="11" font-weight="600">冗長性なし</text>
+
+        <line x1="230" y1="20" x2="230" y2="300" stroke="var(--border)" stroke-width="1" />
+
+        <!-- RAID1 -->
+        <text x="345" y="28" text-anchor="middle" font-size="13.5" font-weight="700">RAID 1</text>
+        <text x="345" y="46" text-anchor="middle" font-size="10.5" class="muted">ミラーリング</text>
+
+        <g font-size="11" text-anchor="middle">
+          <rect x="275" y="64" width="60" height="182" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <rect x="283" y="72" width="44" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="305" y="101">A1</text>
+          <rect x="283" y="130" width="44" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="305" y="159">A2</text>
+          <rect x="283" y="188" width="44" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="305" y="217">A3</text>
+
+          <rect x="355" y="64" width="60" height="182" rx="6" fill="var(--card)" stroke="var(--primary)" />
+          <rect x="363" y="72" width="44" height="50" rx="4" fill="none" stroke="var(--primary)" /><text x="385" y="101" style="fill: var(--primary)">A1</text>
+          <rect x="363" y="130" width="44" height="50" rx="4" fill="none" stroke="var(--primary)" /><text x="385" y="159" style="fill: var(--primary)">A2</text>
+          <rect x="363" y="188" width="44" height="50" rx="4" fill="none" stroke="var(--primary)" /><text x="385" y="217" style="fill: var(--primary)">A3</text>
+        </g>
+        <text x="345" y="270" text-anchor="middle" font-size="11" class="muted">全く同じ内容を複製</text>
+        <text x="345" y="288" text-anchor="middle" font-size="11" font-weight="600">1台故障まで耐える</text>
+
+        <line x1="460" y1="20" x2="460" y2="300" stroke="var(--border)" stroke-width="1" />
+
+        <!-- RAID5 -->
+        <text x="575" y="28" text-anchor="middle" font-size="13.5" font-weight="700">RAID 5</text>
+        <text x="575" y="46" text-anchor="middle" font-size="10.5" class="muted">パリティ分散</text>
+
+        <g font-size="10.5" text-anchor="middle">
+          <rect x="490" y="64" width="55" height="182" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <rect x="497" y="72" width="41" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="517" y="101">A1</text>
+          <rect x="497" y="130" width="41" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="517" y="159">A3</text>
+          <rect x="497" y="188" width="41" height="50" rx="4" fill="var(--primary)" fill-opacity="0.18" stroke="var(--primary)" /><text x="517" y="217" style="fill: var(--primary)">P</text>
+
+          <rect x="558" y="64" width="55" height="182" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <rect x="565" y="72" width="41" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="585" y="101">A2</text>
+          <rect x="565" y="130" width="41" height="50" rx="4" fill="var(--primary)" fill-opacity="0.18" stroke="var(--primary)" /><text x="585" y="159" style="fill: var(--primary)">P</text>
+          <rect x="565" y="188" width="41" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="585" y="217">A4</text>
+
+          <rect x="626" y="64" width="55" height="182" rx="6" fill="var(--card)" stroke="var(--border)" />
+          <rect x="633" y="72" width="41" height="50" rx="4" fill="var(--primary)" fill-opacity="0.18" stroke="var(--primary)" /><text x="653" y="101" style="fill: var(--primary)">P</text>
+          <rect x="633" y="130" width="41" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="653" y="159">A5</text>
+          <rect x="633" y="188" width="41" height="50" rx="4" fill="none" stroke="var(--border)" /><text x="653" y="217">A6</text>
+        </g>
+        <text x="585" y="270" text-anchor="middle" font-size="11" class="muted">パリティ(P)を分散配置</text>
+        <text x="585" y="288" text-anchor="middle" font-size="11" font-weight="600">1台故障まで復元可能</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 20%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 270"
+        role="img"
+        aria-label="整列済み配列1,3,5,7,9,11,13から9を2分探索で見つける図解。まず全体の中央7と比較して右半分に絞り、次に11と比較して左側に絞り、最後にindex4の9を発見する"
+      >
+        <text x="330" y="18" text-anchor="middle" font-size="12" class="muted">
+          整列済み配列から9を探す(2分探索)
+        </text>
+
+        <!-- 配列本体 -->
+        <rect x="25" y="35" width="70" height="50" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="60" y="66" text-anchor="middle" font-size="20" font-weight="700" class="mono">1</text>
+        <text x="60" y="100" text-anchor="middle" font-size="11" class="muted">0</text>
+
+        <rect x="115" y="35" width="70" height="50" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="66" text-anchor="middle" font-size="20" font-weight="700" class="mono">3</text>
+        <text x="150" y="100" text-anchor="middle" font-size="11" class="muted">1</text>
+
+        <rect x="205" y="35" width="70" height="50" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="240" y="66" text-anchor="middle" font-size="20" font-weight="700" class="mono">5</text>
+        <text x="240" y="100" text-anchor="middle" font-size="11" class="muted">2</text>
+
+        <rect x="295" y="35" width="70" height="50" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="330" y="66" text-anchor="middle" font-size="20" font-weight="700" class="mono">7</text>
+        <text x="330" y="100" text-anchor="middle" font-size="11" class="muted">3</text>
+
+        <rect x="385" y="35" width="70" height="50" rx="8" fill="var(--primary)" />
+        <text x="420" y="66" text-anchor="middle" font-size="20" font-weight="700" class="mono" style="fill: var(--primary-fg)">9</text>
+        <text x="420" y="100" text-anchor="middle" font-size="11" class="muted">4</text>
+
+        <rect x="475" y="35" width="70" height="50" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="510" y="66" text-anchor="middle" font-size="20" font-weight="700" class="mono">11</text>
+        <text x="510" y="100" text-anchor="middle" font-size="11" class="muted">5</text>
+
+        <rect x="565" y="35" width="70" height="50" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="600" y="66" text-anchor="middle" font-size="20" font-weight="700" class="mono">13</text>
+        <text x="600" y="100" text-anchor="middle" font-size="11" class="muted">6</text>
+
+        <!-- Step1: 全体、中央index3 -->
+        <line x1="25" y1="128" x2="635" y2="128" stroke="var(--border)" stroke-width="2" />
+        <line x1="25" y1="122" x2="25" y2="134" stroke="var(--border)" stroke-width="2" />
+        <line x1="635" y1="122" x2="635" y2="134" stroke="var(--border)" stroke-width="2" />
+        <line x1="330" y1="116" x2="330" y2="140" stroke="var(--primary)" stroke-width="2.5" />
+        <text x="330" y="150" text-anchor="middle" font-size="12">
+          ① 中央(index3)=7: 9&gt;7 → 右半分へ
+        </text>
+
+        <!-- Step2: index4-6、中央index5 -->
+        <line x1="385" y1="178" x2="635" y2="178" stroke="var(--border)" stroke-width="2" />
+        <line x1="385" y1="172" x2="385" y2="184" stroke="var(--border)" stroke-width="2" />
+        <line x1="635" y1="172" x2="635" y2="184" stroke="var(--border)" stroke-width="2" />
+        <line x1="510" y1="166" x2="510" y2="190" stroke="var(--primary)" stroke-width="2.5" />
+        <text x="510" y="200" text-anchor="middle" font-size="12">
+          ② 中央(index5)=11: 9&lt;11 → 左側へ
+        </text>
+
+        <!-- Step3: index4のみ、発見 -->
+        <line x1="385" y1="228" x2="455" y2="228" stroke="var(--primary)" stroke-width="2" />
+        <line x1="385" y1="222" x2="385" y2="234" stroke="var(--primary)" stroke-width="2" />
+        <line x1="455" y1="222" x2="455" y2="234" stroke="var(--primary)" stroke-width="2" />
+        <text x="420" y="250" text-anchor="middle" font-size="12" font-weight="600" style="fill: var(--primary)">
+          ③ index4=9 を発見!
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

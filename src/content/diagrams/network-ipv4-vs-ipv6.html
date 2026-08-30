@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 340"
+        role="img"
+        aria-label="IPv4とIPv6の違いの比較図解。アドレス長は32ビットと128ビット、表記は10進数4組のドット区切りと16進数8組のコロン区切り、ブロードキャストはIPv4にはあるがIPv6では廃止されマルチキャストに置き換えられ、アドレス自動設定はIPv4がDHCP頼みなのに対しIPv6はSLAACを標準装備する。"
+      >
+        <text x="175" y="22" text-anchor="middle" font-size="13" font-weight="700">IPv4</text>
+        <text x="525" y="22" text-anchor="middle" font-size="13" font-weight="700" style="fill: var(--primary)">IPv6</text>
+
+        <text x="350" y="42" text-anchor="middle" font-size="10.5" class="muted">アドレス長</text>
+        <rect x="40" y="48" width="270" height="46" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="175" y="76" text-anchor="middle" font-size="13" font-weight="600">32ビット</text>
+        <rect x="390" y="48" width="270" height="46" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="525" y="76" text-anchor="middle" font-size="13" font-weight="600" style="fill: var(--primary)">128ビット</text>
+
+        <text x="350" y="112" text-anchor="middle" font-size="10.5" class="muted">表記</text>
+        <rect x="40" y="118" width="270" height="46" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="175" y="146" text-anchor="middle" font-size="12">10進数4組(ドット区切り)</text>
+        <rect x="390" y="118" width="270" height="46" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="525" y="146" text-anchor="middle" font-size="12" style="fill: var(--primary)">16進数8組(コロン区切り)</text>
+
+        <text x="350" y="182" text-anchor="middle" font-size="10.5" class="muted">ブロードキャスト</text>
+        <rect x="40" y="188" width="270" height="46" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="175" y="216" text-anchor="middle" font-size="13" font-weight="600">あり</text>
+        <rect x="390" y="188" width="270" height="46" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="525" y="216" text-anchor="middle" font-size="12" style="fill: var(--primary)">廃止(マルチキャストで代替)</text>
+
+        <text x="350" y="252" text-anchor="middle" font-size="10.5" class="muted">アドレス自動設定</text>
+        <rect x="40" y="258" width="270" height="46" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="175" y="286" text-anchor="middle" font-size="12">DHCPが基本</text>
+        <rect x="390" y="258" width="270" height="46" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="525" y="286" text-anchor="middle" font-size="12" style="fill: var(--primary)">SLAACを標準装備</text>
+
+        <text x="350" y="325" text-anchor="middle" font-size="11.5" class="muted">
+          実際のアドレス空間の差は桁違いに大きい(2³²個 と 2¹²⁸個)
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

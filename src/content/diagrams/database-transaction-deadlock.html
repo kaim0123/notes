@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 440"
+        role="img"
+        aria-label="デッドロックの循環待機を示す図解。左のトランザクションAはデータ1をロック中、右のトランザクションBはデータ2をロック中。AはBが保持するデータ2の解放を上側の矢印で待ち、BはAが保持するデータ1の解放を下側の矢印で待っている。互いに相手の解放を待ち続ける循環が生じ、これがデッドロックである。DBMSはこれを検知すると、一方のトランザクションを強制的にロールバックして解消する。"
+      >
+        <defs>
+          <marker
+            id="arrowMuted"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <!-- トランザクションA -->
+        <rect x="70" y="170" width="210" height="72" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="175" y="198" text-anchor="middle" font-size="13.5" font-weight="700">トランザクションA</text>
+        <text x="175" y="220" text-anchor="middle" font-size="11" class="muted">データ1をロック中</text>
+
+        <!-- トランザクションB -->
+        <rect x="420" y="170" width="210" height="72" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="525" y="198" text-anchor="middle" font-size="13.5" font-weight="700">トランザクションB</text>
+        <text x="525" y="220" text-anchor="middle" font-size="11" class="muted">データ2をロック中</text>
+
+        <!-- 上側: AがBの保持するデータ2を待つ -->
+        <path
+          d="M215,170 C215,70 480,70 480,170"
+          fill="none"
+          stroke="var(--muted)"
+          stroke-width="1.6"
+          stroke-dasharray="5 4"
+          marker-end="url(#arrowMuted)"
+        />
+        <text x="350" y="52" text-anchor="middle" font-size="12" class="muted">Aがデータ2の解放を待つ</text>
+        <text x="350" y="68" text-anchor="middle" font-size="11" class="muted">(データ2はBが保持中)</text>
+
+        <!-- 下側: BがAの保持するデータ1を待つ -->
+        <path
+          d="M485,242 C485,352 215,352 215,242"
+          fill="none"
+          stroke="var(--muted)"
+          stroke-width="1.6"
+          stroke-dasharray="5 4"
+          marker-end="url(#arrowMuted)"
+        />
+        <text x="350" y="378" text-anchor="middle" font-size="12" class="muted">Bがデータ1の解放を待つ</text>
+        <text x="350" y="394" text-anchor="middle" font-size="11" class="muted">(データ1はAが保持中)</text>
+
+        <!-- 中央: 循環待機 -->
+        <text x="350" y="198" text-anchor="middle" font-size="20" style="fill: var(--primary)" font-weight="700">⇄</text>
+        <text x="350" y="222" text-anchor="middle" font-size="11.5" font-weight="600" style="fill: var(--primary)">
+          循環待機
+        </text>
+        <text x="350" y="236" text-anchor="middle" font-size="10.5" style="fill: var(--primary)">= デッドロック</text>
+
+        <text x="350" y="424" text-anchor="middle" font-size="11" class="muted">
+          DBMSはこの循環を検知すると、一方を強制的にロールバックして解消する
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

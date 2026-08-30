@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 620 400"
+        role="img"
+        aria-label="SNMPのポーリングとトラップの図解。ポーリングはマネージャが定期的にGETで値を尋ね、エージェントが応答する仕組み。トラップはエージェント側で異常が起きたときに、尋ねられなくても即座にマネージャへ通知する仕組み。"
+      >
+        <defs>
+          <marker
+            id="arrowSnmp"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <rect x="40" y="10" width="140" height="34" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="110" y="32" text-anchor="middle" font-size="12.5" font-weight="600">SNMPマネージャ</text>
+        <rect x="440" y="10" width="140" height="34" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="510" y="32" text-anchor="middle" font-size="12.5" font-weight="600">エージェント(機器)</text>
+
+        <line x1="110" y1="44" x2="110" y2="380" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 4" />
+        <line x1="510" y1="44" x2="510" y2="380" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 4" />
+
+        <text x="310" y="72" text-anchor="middle" font-size="11.5" class="muted">ポーリング(マネージャ主導・定期的)</text>
+
+        <line x1="110" y1="95" x2="510" y2="95" stroke="var(--fg)" stroke-width="1.6" marker-end="url(#arrowSnmp)" />
+        <text x="310" y="88" text-anchor="middle" font-size="11">① GET(値をください)</text>
+
+        <line x1="510" y1="140" x2="110" y2="140" stroke="var(--fg)" stroke-width="1.6" marker-end="url(#arrowSnmp)" />
+        <text x="310" y="133" text-anchor="middle" font-size="11">② Response(値はこれです)</text>
+
+        <line x1="0" y1="175" x2="620" y2="175" stroke="var(--border)" stroke-width="1" />
+
+        <text x="310" y="205" text-anchor="middle" font-size="11.5" style="fill: var(--primary)">トラップ(エージェント主導・即時)</text>
+
+        <line x1="510" y1="230" x2="110" y2="230" stroke="var(--primary)" stroke-width="1.8" marker-end="url(#arrowSnmp)" />
+        <text x="310" y="223" text-anchor="middle" font-size="11" style="fill: var(--primary)">① Trap(異常発生を即通知!)</text>
+
+        <text x="310" y="270" text-anchor="middle" font-size="11" class="muted">
+          尋ねられていなくても、エージェント側の判断で即座に送られる
+        </text>
+
+        <text x="310" y="340" text-anchor="middle" font-size="11.5" class="muted">
+          ポーリングは定期的な健康診断、トラップは異常時の緊急連絡 ― 両方を組み合わせて使うのが基本
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

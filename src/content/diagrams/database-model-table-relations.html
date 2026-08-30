@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 800 380"
+        role="img"
+        aria-label="テーブル間の主キー・外部キーの関連図。customersテーブル(主キーid)とordersテーブル(主キーid、外部キーcustomer_idがcustomers.idを参照)が1対多で結びつく。ordersとproductsテーブル(主キーid)は、中間テーブルorder_items(主キーはorder_idとproduct_idの組、外部キーがordersとproductsそれぞれのidを参照)を挟むことで、多対多の関連を2本の1対多に分解して表現している。"
+      >
+        <defs>
+          <marker
+            id="arrowRel"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <!-- customers -->
+        <rect x="20" y="40" width="210" height="108" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="125" y="64" text-anchor="middle" font-size="13.5" font-weight="700">customers</text>
+        <line x1="20" y1="74" x2="230" y2="74" stroke="var(--border)" stroke-width="1" />
+        <text x="40" y="89" font-size="11.5"><tspan font-weight="700" fill="var(--primary)">PK </tspan><tspan>id</tspan></text>
+        <text x="40" y="109" font-size="11.5" class="muted">name</text>
+        <text x="40" y="129" font-size="11.5" class="muted">email</text>
+
+        <!-- orders -->
+        <rect x="295" y="30" width="230" height="128" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="410" y="54" text-anchor="middle" font-size="13.5" font-weight="700">orders</text>
+        <line x1="295" y1="64" x2="525" y2="64" stroke="var(--border)" stroke-width="1" />
+        <text x="315" y="79" font-size="11.5"><tspan font-weight="700" fill="var(--primary)">PK </tspan><tspan>id</tspan></text>
+        <text x="315" y="99" font-size="11.5"><tspan font-weight="700" fill="var(--muted)">FK </tspan><tspan class="muted">customer_id</tspan></text>
+        <text x="315" y="119" font-size="11.5" class="muted">total_price</text>
+        <text x="315" y="139" font-size="11.5" class="muted">ordered_at</text>
+
+        <!-- products -->
+        <rect x="580" y="40" width="200" height="108" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="680" y="64" text-anchor="middle" font-size="13.5" font-weight="700">products</text>
+        <line x1="580" y1="74" x2="780" y2="74" stroke="var(--border)" stroke-width="1" />
+        <text x="600" y="89" font-size="11.5"><tspan font-weight="700" fill="var(--primary)">PK </tspan><tspan>id</tspan></text>
+        <text x="600" y="109" font-size="11.5" class="muted">name</text>
+        <text x="600" y="129" font-size="11.5" class="muted">price</text>
+
+        <!-- order_items (中間テーブル) -->
+        <rect x="295" y="230" width="230" height="108" rx="10" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="410" y="254" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--primary)">order_items</text>
+        <text x="410" y="270" text-anchor="middle" font-size="10" class="muted">(中間テーブル)</text>
+        <line x1="295" y1="278" x2="525" y2="278" stroke="var(--border)" stroke-width="1" />
+        <text x="315" y="293" font-size="11.5"><tspan font-weight="700" fill="var(--primary)">PK/FK </tspan><tspan>order_id</tspan></text>
+        <text x="315" y="313" font-size="11.5"><tspan font-weight="700" fill="var(--primary)">PK/FK </tspan><tspan>product_id</tspan></text>
+        <text x="315" y="333" font-size="11.5" class="muted">quantity</text>
+
+        <!-- orders -> customers (1対多) -->
+        <path d="M295,99 L260,99 L260,89 L230,89" fill="none" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrowRel)" />
+        <text x="262" y="182" text-anchor="middle" font-size="11" class="muted">customer_id → customers.id</text>
+        <text x="262" y="196" text-anchor="middle" font-size="11" font-weight="600" style="fill: var(--muted)">(1対多)</text>
+
+        <!-- order_items -> orders -->
+        <path d="M340,230 L340,158" fill="none" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrowRel)" />
+        <text x="200" y="200" text-anchor="middle" font-size="11" class="muted">order_id →</text>
+        <text x="200" y="214" text-anchor="middle" font-size="11" class="muted">orders.id</text>
+
+        <!-- order_items -> products -->
+        <path d="M525,275 L555,275 L555,90 L580,90" fill="none" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arrowRel)" />
+        <text x="630" y="200" text-anchor="middle" font-size="11" class="muted">product_id →</text>
+        <text x="630" y="214" text-anchor="middle" font-size="11" class="muted">products.id</text>
+
+        <text x="400" y="368" text-anchor="middle" font-size="11" class="muted">
+          多対多は中間テーブル(order_items)を挟み、2本の1対多に分解して表現する
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

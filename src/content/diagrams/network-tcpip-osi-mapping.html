@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 620 440"
+        role="img"
+        aria-label="OSI参照モデル7層とTCP/IPモデル4層の対応図。OSIのアプリケーション層・プレゼンテーション層・セッション層はTCP/IPのアプリケーション層1つにまとまる。トランスポート層とネットワーク層(TCP/IPではインターネット層)はほぼ1対1で対応する。データリンク層と物理層はTCP/IPのネットワークインターフェース層1つにまとまる。"
+      >
+        <text x="150" y="20" text-anchor="middle" font-size="13" font-weight="700">OSI参照モデル(7層)</text>
+        <text x="470" y="20" text-anchor="middle" font-size="13" font-weight="700">TCP/IPモデル(4層)</text>
+
+        <!-- OSI 7層 -->
+        <rect x="40" y="40" width="220" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="67" text-anchor="middle" font-size="12.5">7 アプリケーション層</text>
+
+        <rect x="40" y="90" width="220" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="117" text-anchor="middle" font-size="12.5">6 プレゼンテーション層</text>
+
+        <rect x="40" y="140" width="220" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="167" text-anchor="middle" font-size="12.5">5 セッション層</text>
+
+        <rect x="40" y="190" width="220" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="217" text-anchor="middle" font-size="12.5">4 トランスポート層</text>
+
+        <rect x="40" y="240" width="220" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="267" text-anchor="middle" font-size="12.5">3 ネットワーク層</text>
+
+        <rect x="40" y="290" width="220" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="317" text-anchor="middle" font-size="12.5">2 データリンク層</text>
+
+        <rect x="40" y="340" width="220" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="150" y="367" text-anchor="middle" font-size="12.5">1 物理層</text>
+
+        <!-- 対応ブリッジ -->
+        <polygon points="260,40 260,184 360,184 360,40" fill="var(--border)" />
+        <polygon points="260,190 260,234 360,234 360,190" fill="var(--border)" />
+        <polygon points="260,240 260,284 360,284 360,240" fill="var(--border)" />
+        <polygon points="260,290 260,384 360,384 360,290" fill="var(--border)" />
+
+        <!-- TCP/IP 4層 -->
+        <rect x="360" y="40" width="220" height="144" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="470" y="118" text-anchor="middle" font-size="13" font-weight="600">アプリケーション層</text>
+
+        <rect x="360" y="190" width="220" height="44" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="470" y="217" text-anchor="middle" font-size="13" font-weight="600">トランスポート層</text>
+
+        <rect x="360" y="240" width="220" height="44" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="470" y="267" text-anchor="middle" font-size="13" font-weight="600">インターネット層</text>
+
+        <rect x="360" y="290" width="220" height="94" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="470" y="332" text-anchor="middle" font-size="13" font-weight="600">ネットワーク</text>
+        <text x="470" y="349" text-anchor="middle" font-size="13" font-weight="600">インターフェース層</text>
+
+        <text x="310" y="405" text-anchor="middle" font-size="11.5" class="muted">
+          実務では7層より少ない4層(または物理層/データリンク層を分けた5層)で考えることが多い
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 420"
+        role="img"
+        aria-label="SDNの図解。従来型は各機器が経路計算を行うコントロールプレーンとパケットを転送するデータプレーンの両方を自分の中に持つ。SDNではコントロールプレーンをSDNコントローラに集約し、各機器はOpenFlowなどで指示された通りに転送するデータプレーンだけを担当する。"
+      >
+        <!-- ============ 従来型 ============ -->
+        <text x="350" y="18" text-anchor="middle" font-size="13" font-weight="700">
+          従来型 ― 各機器がコントロールプレーンを持つ
+        </text>
+
+        <rect x="60" y="55" width="140" height="95" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="130" y="75" text-anchor="middle" font-size="11.5" font-weight="600">SW1</text>
+        <line x1="70" y1="100" x2="190" y2="100" stroke="var(--border)" stroke-width="1" />
+        <text x="130" y="92" text-anchor="middle" font-size="9">コントロールプレーン</text>
+        <text x="130" y="128" text-anchor="middle" font-size="9" class="muted">データプレーン</text>
+
+        <rect x="300" y="55" width="140" height="95" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="370" y="75" text-anchor="middle" font-size="11.5" font-weight="600">SW2</text>
+        <line x1="310" y1="100" x2="430" y2="100" stroke="var(--border)" stroke-width="1" />
+        <text x="370" y="92" text-anchor="middle" font-size="9">コントロールプレーン</text>
+        <text x="370" y="128" text-anchor="middle" font-size="9" class="muted">データプレーン</text>
+
+        <rect x="540" y="55" width="140" height="95" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="610" y="75" text-anchor="middle" font-size="11.5" font-weight="600">SW3</text>
+        <line x1="550" y1="100" x2="670" y2="100" stroke="var(--border)" stroke-width="1" />
+        <text x="610" y="92" text-anchor="middle" font-size="9">コントロールプレーン</text>
+        <text x="610" y="128" text-anchor="middle" font-size="9" class="muted">データプレーン</text>
+
+        <text x="350" y="180" text-anchor="middle" font-size="11.5" class="muted">
+          各機器が経路計算(制御)とパケット転送(データ)の両方を自分の中に持つ
+        </text>
+
+        <line x1="0" y1="205" x2="700" y2="205" stroke="var(--border)" stroke-width="1" />
+
+        <!-- ============ SDN ============ -->
+        <text x="350" y="232" text-anchor="middle" font-size="13" font-weight="700">
+          SDN ― コントロールプレーンを集中化
+        </text>
+
+        <rect x="270" y="255" width="160" height="55" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="350" y="278" text-anchor="middle" font-size="12.5" font-weight="700" style="fill: var(--primary)">SDNコントローラ</text>
+        <text x="350" y="295" text-anchor="middle" font-size="9" style="fill: var(--primary)">コントロールプレーンを集中管理</text>
+
+        <rect x="60" y="345" width="140" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="130" y="367" text-anchor="middle" font-size="11.5" font-weight="600">SW1</text>
+        <text x="130" y="383" text-anchor="middle" font-size="9" class="muted">データプレーンのみ</text>
+
+        <rect x="300" y="345" width="140" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="370" y="367" text-anchor="middle" font-size="11.5" font-weight="600">SW2</text>
+        <text x="370" y="383" text-anchor="middle" font-size="9" class="muted">データプレーンのみ</text>
+
+        <rect x="540" y="345" width="140" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="610" y="367" text-anchor="middle" font-size="11.5" font-weight="600">SW3</text>
+        <text x="610" y="383" text-anchor="middle" font-size="9" class="muted">データプレーンのみ</text>
+
+        <line x1="320" y1="310" x2="130" y2="345" stroke="var(--primary)" stroke-width="1.4" />
+        <line x1="350" y1="310" x2="370" y2="345" stroke="var(--primary)" stroke-width="1.4" />
+        <line x1="380" y1="310" x2="610" y2="345" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="350" y="330" text-anchor="middle" font-size="9.5" style="fill: var(--primary)">OpenFlow等で転送ルールを指示</text>
+      </svg>
+    </div>
+  </body>
+</html>

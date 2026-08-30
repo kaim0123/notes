@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --destructive: oklch(0.6 0.24 27);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+      .warn {
+        fill: var(--destructive);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 340"
+        role="img"
+        aria-label="複合インデックスの列順の図。一覧画面のクエリが等値条件のテナントIDとステータス、範囲条件と並び替えに使う更新日時を持つとき、インデックスは等値で絞る列を先頭に、範囲・並び替えに使う列を最後に置く。先頭に範囲条件の列を置くと、それより後ろの列が絞り込みに使われなくなる。"
+      >
+        <text x="30" y="28" font-size="12" class="muted">一覧画面のクエリ</text>
+        <rect x="30" y="38" width="700" height="56" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="46" y="61" font-size="12" class="mono">WHERE テナントID = ? AND ステータス = '公開' AND 更新日時 &gt; ?</text>
+        <text x="46" y="82" font-size="12" class="mono">ORDER BY 更新日時 DESC LIMIT 20</text>
+
+        <!-- 良い列順 -->
+        <text x="30" y="126" font-size="12.5" font-weight="600" class="accent">効く列順</text>
+        <rect x="30" y="138" width="200" height="62" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="130" y="163" text-anchor="middle" font-size="12.5" class="mono">テナントID</text>
+        <text x="130" y="184" text-anchor="middle" font-size="10.5" class="muted">等値で大きく絞る</text>
+
+        <rect x="248" y="138" width="200" height="62" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="348" y="163" text-anchor="middle" font-size="12.5" class="mono">ステータス</text>
+        <text x="348" y="184" text-anchor="middle" font-size="10.5" class="muted">等値でさらに絞る</text>
+
+        <rect x="466" y="138" width="264" height="62" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="598" y="163" text-anchor="middle" font-size="12.5" class="mono">更新日時</text>
+        <text x="598" y="184" text-anchor="middle" font-size="10.5" class="muted">範囲条件 + ORDER BY を兼ねる</text>
+
+        <text x="30" y="222" font-size="11" class="accent">
+          等値の列を先頭に置くと、絞り込みが最後の列まで届き、整列済みなのでソート処理も省ける
+        </text>
+
+        <!-- 悪い列順 -->
+        <text x="30" y="262" font-size="12.5" font-weight="600" class="warn">効きにくい列順</text>
+        <rect x="30" y="274" width="200" height="44" rx="8" fill="var(--card)" stroke="var(--destructive)" stroke-width="1.4" />
+        <text x="130" y="301" text-anchor="middle" font-size="12.5" class="mono">更新日時</text>
+
+        <rect x="248" y="274" width="200" height="44" rx="8" fill="none" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <text x="348" y="301" text-anchor="middle" font-size="12.5" class="mono muted">テナントID</text>
+
+        <rect x="466" y="274" width="264" height="44" rx="8" fill="none" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <text x="598" y="296" text-anchor="middle" font-size="11" class="muted">先頭が範囲条件のため</text>
+        <text x="598" y="312" text-anchor="middle" font-size="11" class="muted">後続の列は絞り込みに使われない</text>
+      </svg>
+    </div>
+  </body>
+</html>

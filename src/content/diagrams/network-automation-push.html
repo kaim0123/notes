@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 720 490"
+        role="img"
+        aria-label="ネットワーク自動化の図解。手作業では担当者が4台のスイッチに1台ずつ順番にログインして同じコマンドを打つ必要がある。自動化ツールを使うと、担当者は1つの定義ファイルを実行するだけで、ツールが4台へ同時に設定を一括投入する。"
+      >
+        <defs>
+          <marker
+            id="arrowAu"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <text x="360" y="18" text-anchor="middle" font-size="13" font-weight="700">手作業 ― 1台ずつCLIにログインして設定</text>
+
+        <rect x="300" y="40" width="120" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="360" y="67" text-anchor="middle" font-size="12">担当者</text>
+
+        <rect x="30" y="130" width="140" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="100" y="160" text-anchor="middle" font-size="12">SW1</text>
+        <rect x="190" y="130" width="140" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="260" y="160" text-anchor="middle" font-size="12">SW2</text>
+        <rect x="350" y="130" width="140" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="420" y="160" text-anchor="middle" font-size="12">SW3</text>
+        <rect x="510" y="130" width="140" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="580" y="160" text-anchor="middle" font-size="12">SW4</text>
+
+        <line x1="330" y1="84" x2="110" y2="130" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrowAu)" />
+        <text x="200" y="110" text-anchor="middle" font-size="10" class="muted">①</text>
+        <line x1="345" y1="84" x2="260" y2="130" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrowAu)" />
+        <text x="320" y="110" text-anchor="middle" font-size="10" class="muted">②</text>
+        <line x1="375" y1="84" x2="410" y2="130" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrowAu)" />
+        <text x="410" y="110" text-anchor="middle" font-size="10" class="muted">③</text>
+        <line x1="390" y1="84" x2="570" y2="130" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrowAu)" />
+        <text x="510" y="110" text-anchor="middle" font-size="10" class="muted">④</text>
+
+        <text x="360" y="205" text-anchor="middle" font-size="11.5" class="muted">
+          1台ずつ順番に同じコマンドを打つ ― 台数分の時間がかかりミスや設定漏れも起きやすい
+        </text>
+
+        <line x1="0" y1="228" x2="720" y2="228" stroke="var(--border)" stroke-width="1" />
+
+        <text x="360" y="255" text-anchor="middle" font-size="13" font-weight="700">自動化 ― 定義ファイルを1つ実行するだけ</text>
+
+        <rect x="300" y="270" width="120" height="44" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="360" y="297" text-anchor="middle" font-size="12">担当者</text>
+
+        <line x1="360" y1="314" x2="360" y2="335" stroke="var(--fg)" stroke-width="1.5" marker-end="url(#arrowAu)" />
+        <text x="440" y="328" text-anchor="middle" font-size="10" class="muted">定義ファイルを実行</text>
+
+        <rect x="285" y="340" width="150" height="50" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="360" y="362" text-anchor="middle" font-size="12" font-weight="700" style="fill: var(--primary)">自動化ツール</text>
+        <text x="360" y="378" text-anchor="middle" font-size="9.5" style="fill: var(--primary)">(Ansibleなど)</text>
+
+        <rect x="30" y="415" width="140" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="100" y="445" text-anchor="middle" font-size="12">SW1</text>
+        <rect x="190" y="415" width="140" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="260" y="445" text-anchor="middle" font-size="12">SW2</text>
+        <rect x="350" y="415" width="140" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="420" y="445" text-anchor="middle" font-size="12">SW3</text>
+        <rect x="510" y="415" width="140" height="50" rx="7" fill="var(--card)" stroke="var(--border)" />
+        <text x="580" y="445" text-anchor="middle" font-size="12">SW4</text>
+
+        <line x1="330" y1="390" x2="100" y2="415" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#arrowAu)" />
+        <line x1="345" y1="390" x2="260" y2="415" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#arrowAu)" />
+        <line x1="375" y1="390" x2="420" y2="415" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#arrowAu)" />
+        <line x1="390" y1="390" x2="580" y2="415" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#arrowAu)" />
+        <text x="360" y="480" text-anchor="middle" font-size="11.5" style="fill: var(--primary)">
+          同時に一括投入 ― 全台に同じ内容が確実に反映される
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>

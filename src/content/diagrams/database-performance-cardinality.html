@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --destructive: oklch(0.6 0.24 27);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+      .warn {
+        fill: var(--destructive);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 320"
+        role="img"
+        aria-label="カーディナリティとインデックスの効き方の比較。値が2種類しかない性別列では100万行が50万行にしか絞り込めずインデックスの効果が薄い。値の種類が多い顧客ID列では100万行から目的の1行まで絞り込めるため効果が大きい。"
+      >
+        <text x="380" y="28" text-anchor="middle" font-size="12" class="muted">
+          同じ100万行のテーブルでも、条件に使う列のカーディナリティ(値の種類の多さ)で効き方が変わる
+        </text>
+
+        <!-- 左: 低カーディナリティ -->
+        <rect x="30" y="48" width="340" height="230" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="200" y="76" text-anchor="middle" font-size="13" font-weight="600">カーディナリティが低い列</text>
+        <text x="200" y="97" text-anchor="middle" font-size="11.5" class="mono muted">WHERE 性別 = '女'</text>
+        <text x="200" y="117" text-anchor="middle" font-size="11" class="muted">とりうる値は2種類だけ</text>
+
+        <rect x="60" y="136" width="280" height="26" rx="5" fill="none" stroke="var(--border)" stroke-width="1.2" />
+        <text x="200" y="154" text-anchor="middle" font-size="11" class="muted">全100万行</text>
+
+        <rect x="60" y="176" width="140" height="26" rx="5" fill="none" stroke="var(--destructive)" stroke-width="1.6" />
+        <text x="130" y="194" text-anchor="middle" font-size="11" class="warn">50万行</text>
+        <text x="216" y="194" font-size="11" class="muted">← 半分しか減らない</text>
+
+        <text x="200" y="232" text-anchor="middle" font-size="11" class="warn">結局ほぼ全体を読むことになり、</text>
+        <text x="200" y="250" text-anchor="middle" font-size="11" class="warn">索引をたどる分むしろ遅くなることもある</text>
+        <text x="200" y="270" text-anchor="middle" font-size="11.5" font-weight="600" class="muted">インデックスの効果は薄い</text>
+
+        <!-- 右: 高カーディナリティ -->
+        <rect x="390" y="48" width="340" height="230" rx="10" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="560" y="76" text-anchor="middle" font-size="13" font-weight="600">カーディナリティが高い列</text>
+        <text x="560" y="97" text-anchor="middle" font-size="11.5" class="mono muted">WHERE 顧客ID = 12345</text>
+        <text x="560" y="117" text-anchor="middle" font-size="11" class="muted">値の種類は行数とほぼ同じ</text>
+
+        <rect x="420" y="136" width="280" height="26" rx="5" fill="none" stroke="var(--border)" stroke-width="1.2" />
+        <text x="560" y="154" text-anchor="middle" font-size="11" class="muted">全100万行</text>
+
+        <rect x="420" y="176" width="10" height="26" rx="3" fill="none" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="446" y="194" font-size="11" class="accent">1行 ← 一直線に辿れる</text>
+
+        <text x="560" y="232" text-anchor="middle" font-size="11" class="accent">読む行数が桁違いに減り、</text>
+        <text x="560" y="250" text-anchor="middle" font-size="11" class="accent">B-treeをたどるコストが確実に報われる</text>
+        <text x="560" y="270" text-anchor="middle" font-size="11.5" font-weight="600" class="accent">インデックスの最有力候補</text>
+
+        <text x="380" y="306" text-anchor="middle" font-size="11" class="muted">
+          カーディナリティが高く、かつ検索・JOINの条件に頻繁に使われる列を狙う
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>
