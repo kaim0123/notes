@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 290"
+        role="img"
+        aria-label="ブランチの寿命と統合の苦しさの関係を示した図。上段は短命なブランチで、mainの線から短く枝分かれしてすぐ戻る合流が4回繰り返される。枝分かれしている間にmainが進む量が小さいため、衝突はほとんど起きず、レビューも小さな差分で済む。下段は長命なブランチで、1本の枝が長く伸びている間にmainには他の変更が何度も入る。合流の時点で差が大きくなっており、大量の衝突が起き、その解決の過程で新しいバグが生まれる。ブランチが1日なら衝突はほぼなく、1週間なら時々、1か月なら大量の衝突、3か月ならマージそのものが1つのプロジェクトになる。対策はブランチを長く持つことではなく、未完成のまま無効にした状態で早く合流させること。"
+      >
+        <defs>
+          <marker id="argb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="26" font-size="12" class="lbl">短命なブランチ ― 1日で戻す</text>
+
+        <line x1="16" y1="80" x2="600" y2="80" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#argb)" />
+        <text x="624" y="84" text-anchor="end" font-size="10.5" class="muted">main</text>
+
+        <path d="M60,80 C80,52 110,52 130,80" fill="none" stroke="var(--primary)" stroke-width="1.5" />
+        <path d="M180,80 C200,52 230,52 250,80" fill="none" stroke="var(--primary)" stroke-width="1.5" />
+        <path d="M300,80 C320,52 350,52 370,80" fill="none" stroke="var(--primary)" stroke-width="1.5" />
+        <path d="M420,80 C440,52 470,52 490,80" fill="none" stroke="var(--primary)" stroke-width="1.5" />
+
+        <circle cx="60" cy="80" r="3.5" fill="var(--primary)" />
+        <circle cx="130" cy="80" r="3.5" fill="var(--primary)" />
+        <circle cx="180" cy="80" r="3.5" fill="var(--primary)" />
+        <circle cx="250" cy="80" r="3.5" fill="var(--primary)" />
+        <circle cx="300" cy="80" r="3.5" fill="var(--primary)" />
+        <circle cx="370" cy="80" r="3.5" fill="var(--primary)" />
+        <circle cx="420" cy="80" r="3.5" fill="var(--primary)" />
+        <circle cx="490" cy="80" r="3.5" fill="var(--primary)" />
+
+        <text x="16" y="108" font-size="10.5" class="muted">枝分かれしている間に main が進む量が小さい → 衝突はほぼ起きない</text>
+
+        <line x1="16" y1="128" x2="624" y2="128" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="154" font-size="12" class="muted">長命なブランチ ― 1か月持ち歩く</text>
+
+        <line x1="16" y1="216" x2="600" y2="216" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#argb)" />
+        <text x="624" y="220" text-anchor="end" font-size="10.5" class="muted">main</text>
+
+        <circle cx="140" cy="216" r="3.5" fill="var(--muted)" />
+        <circle cx="220" cy="216" r="3.5" fill="var(--muted)" />
+        <circle cx="300" cy="216" r="3.5" fill="var(--muted)" />
+        <circle cx="380" cy="216" r="3.5" fill="var(--muted)" />
+        <text x="260" y="238" text-anchor="middle" font-size="10.5" class="muted">その間に main には他の変更が何度も入る</text>
+
+        <path d="M60,216 C90,170 100,170 100,176 L100,176 L440,176 C470,176 470,196 480,214" fill="none" stroke="var(--border)" stroke-width="1.6" />
+        <circle cx="60" cy="216" r="3.5" fill="var(--border)" />
+        <text x="250" y="168" text-anchor="middle" font-size="10.5" class="muted">長く伸びた枝</text>
+
+        <circle cx="482" cy="214" r="7" fill="none" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="530" y="196" font-size="11" class="lbl">大量の衝突</text>
+        <text x="530" y="212" font-size="10.5" class="muted">解決の過程で</text>
+        <text x="530" y="228" font-size="10.5" class="muted">新しいバグが出る</text>
+
+        <text x="16" y="270" font-size="11" class="muted">1日ならほぼ衝突しない / 1週間なら時々 / 1か月なら大量 / 3か月ならマージ自体が1つのプロジェクトになる</text>
+        <text x="16" y="286" font-size="11" class="lbl">対策はブランチを長く持つことではなく、未完成のまま無効にして早く合流させること</text>
+      </svg>
+    </div>
+  </body>
+</html>

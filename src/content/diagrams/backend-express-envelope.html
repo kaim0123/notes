@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --warn: oklch(0.82 0.16 75);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .warn { fill: var(--warn); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="応答の包み方を最初に決めておくかどうかで、あとから項目を足せるかが変わることを示した図。上段は配列をそのまま返す設計で、最初は単純で気持ちがよい。しかし総件数やページ情報を足したくなったとき、返す形そのものを配列からオブジェクトへ変えるしかなく、これはすべての呼び出し側を壊す変更になる。下段は最初からデータという名前の欄で包んでおく設計で、最初のうちは1段深くなるだけの無駄に見える。しかし後からメタ情報の欄を足しても、既存の呼び出し側は何も壊れない。追加は安全で、形の変更は破壊的、というAPIの一般則が、ここでも同じ形で現れている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11.5" class="muted">あとから「総件数も返したい」となったとき</text>
+
+        <text x="16" y="52" font-size="11" class="muted">配列をそのまま返していた場合</text>
+        <rect x="16" y="62" width="230" height="46" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="90" font-size="10" class="mono muted">[ { id: 1 }, { id: 2 } ]</text>
+        <line x1="246" y1="85" x2="286" y2="85" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="290" y="62" width="250" height="46" rx="6" fill="var(--card)" stroke="var(--warn)" stroke-width="1.5" />
+        <text x="304" y="84" font-size="10" class="mono warn">{ data: [...], meta: {...} }</text>
+        <text x="304" y="100" font-size="8.5" class="muted">配列 → オブジェクト。形そのものが変わる</text>
+        <text x="16" y="132" font-size="10" class="warn">すべての呼び出し側が壊れる ― 破壊的変更</text>
+
+        <line x1="16" y1="156" x2="624" y2="156" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="184" font-size="11" class="lbl">最初から包んでいた場合</text>
+        <rect x="16" y="194" width="230" height="46" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="222" font-size="10" class="mono muted">{ data: [...] }</text>
+        <line x1="246" y1="217" x2="286" y2="217" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arp)" />
+        <rect x="290" y="194" width="250" height="46" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="304" y="216" font-size="10" class="mono lbl">{ data: [...], meta: {...} }</text>
+        <text x="304" y="232" font-size="8.5" class="muted">欄がひとつ増えただけ</text>
+        <text x="16" y="264" font-size="10" class="lbl">既存の呼び出し側は、何も壊れない ― ただの追加</text>
+
+        <line x1="16" y1="284" x2="624" y2="284" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="310" font-size="10.5" class="muted">「追加は安全、形の変更は破壊的」という一般則が、応答の設計にもそのまま現れる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

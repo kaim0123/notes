@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 340" role="img" aria-label="キャッシュの有効期限が一斉に切れたときに起きる殺到を示した図。上段は有効期限を全部同じ長さにした場合で、時間軸の上に複数のキーの有効期間の帯が完全に揃って並び、同じ瞬間にいっせいに切れる。その瞬間、待っていたリクエストがすべてデータベースへ流れ込み、下の負荷のグラフが鋭い山になる。データベースが落ち、復旧してもまた同じことが繰り返される。下段は有効期限に少しずつばらつきを持たせた場合で、帯の終わりがずれるため、データベースへ流れる量が時間的に散らばり、負荷のグラフはなだらかになる。図の右下には、これに加えて再計算をひとつに絞る、あるいは再計算中は古い値を返す、という対策が添えられている。">
+        <text x="16" y="24" font-size="11.5" class="muted">人気のあるキーの有効期限が切れた、その瞬間</text>
+
+        <text x="16" y="52" font-size="11" class="muted">期限を全部同じにすると</text>
+        <g stroke="var(--muted)" stroke-width="1.2" fill="var(--card)">
+          <rect x="70" y="62" width="220" height="12" rx="3" />
+          <rect x="70" y="78" width="220" height="12" rx="3" />
+          <rect x="70" y="94" width="220" height="12" rx="3" />
+          <rect x="70" y="110" width="220" height="12" rx="3" />
+        </g>
+        <text x="16" y="98" font-size="9" class="muted">キー</text>
+        <line x1="290" y1="56" x2="290" y2="170" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="4 3" />
+        <text x="298" y="70" font-size="9.5" class="muted">同じ瞬間に、いっせいに切れる</text>
+
+        <path d="M70,170 L286,170 L292,132 L298,170 L560,170" fill="none" stroke="var(--muted)" stroke-width="1.6" />
+        <text x="300" y="128" font-size="9.5" class="muted">待っていた全部がデータベースへ</text>
+        <text x="16" y="166" font-size="9" class="muted">負荷</text>
+        <text x="300" y="188" font-size="9.5" class="muted">落ちる。復旧しても、また同じことが起きる。</text>
+
+        <line x1="16" y1="204" x2="624" y2="204" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="232" font-size="11" class="lbl">期限を少しずつずらすと</text>
+        <g stroke="var(--primary)" stroke-width="1.2" fill="var(--card)">
+          <rect x="70" y="242" width="196" height="10" rx="3" />
+          <rect x="70" y="256" width="228" height="10" rx="3" />
+          <rect x="70" y="270" width="212" height="10" rx="3" />
+          <rect x="70" y="284" width="244" height="10" rx="3" />
+        </g>
+        <text x="330" y="262" font-size="9.5" class="lbl">切れる時刻が散らばる</text>
+
+        <path d="M70,320 L256,320 L266,306 L276,320 L288,308 L300,320 L312,310 L324,320 L560,320" fill="none" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="330" y="292" font-size="9.5" class="muted">加えて ― 再計算はひとつに絞る、</text>
+        <text x="330" y="310" font-size="9.5" class="muted">あるいは再計算中は古い値を返す。</text>
+        <text x="16" y="316" font-size="9" class="muted">負荷</text>
+      </svg>
+    </div>
+  </body>
+</html>

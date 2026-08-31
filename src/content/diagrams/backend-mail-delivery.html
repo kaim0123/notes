@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 340" role="img" aria-label="送信したことと届いたことの間にある距離を示した図。左からアプリ、ジョブキュー、送信サービス、受信側の判定、そして受信箱へと横に流れる。送信サービスがAPIで200を返す位置に印が付いており、そこが送信したという地点。しかしその先に受信側の判定があり、SPFとDKIMとDMARCの3つが揃っているか、送信元の評価はどうか、苦情の割合はどうかが問われる。判定を通れば受信箱に入り、通らなければ迷惑メールフォルダか受け取り拒否になる。届いたと言えるのは受信箱に入ったときだけで、200が返った地点との間にはこれだけの距離がある。図の下部には戻りの経路が描かれ、宛先不明や苦情の通知が受信側から送信サービスを経てアプリへ返り、アプリはそれを抑制リストに反映する。この戻りを処理しないと送信元の評価が下がり続け、次のメールも届かなくなることが示されている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="16" y="60" width="86" height="42" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="42" y="86" font-size="10.5">アプリ</text>
+        <line x1="102" y1="81" x2="120" y2="81" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="124" y="60" width="86" height="42" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="140" y="80" font-size="10.5">ジョブ</text>
+        <text x="134" y="95" font-size="8.5" class="muted">冪等に送る</text>
+        <line x1="210" y1="81" x2="228" y2="81" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="232" y="60" width="96" height="42" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="248" y="86" font-size="10.5">送信サービス</text>
+        <text x="236" y="40" font-size="10" class="muted">ここで 200 が返る</text>
+        <line x1="280" y1="46" x2="280" y2="56" stroke="var(--muted)" stroke-width="1" />
+        <text x="236" y="24" font-size="10.5" class="muted">＝「送信した」</text>
+
+        <line x1="328" y1="81" x2="346" y2="81" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="350" y="46" width="130" height="70" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="366" y="66" font-size="10.5" class="lbl">受信側の判定</text>
+        <text x="360" y="82" font-size="8.5" class="muted">SPF / DKIM / DMARC</text>
+        <text x="360" y="96" font-size="8.5" class="muted">送信元の評価</text>
+        <text x="360" y="110" font-size="8.5" class="muted">苦情の割合</text>
+
+        <line x1="480" y1="66" x2="512" y2="52" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arp)" />
+        <rect x="516" y="30" width="106" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="532" y="52" font-size="10.5" class="lbl">受信箱</text>
+        <text x="516" y="20" font-size="10.5" class="lbl">＝「届いた」</text>
+
+        <line x1="480" y1="98" x2="512" y2="112" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <rect x="516" y="98" width="106" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="524" y="112" font-size="9" class="muted">迷惑メール</text>
+        <text x="524" y="126" font-size="9" class="muted">／ 受け取り拒否</text>
+
+        <line x1="16" y1="164" x2="624" y2="164" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="190" font-size="11" class="muted">そして、戻ってくるものがある ―</text>
+
+        <rect x="440" y="206" width="180" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="454" y="228" font-size="10" class="muted">宛先不明 / 苦情の通知</text>
+        <line x1="436" y1="223" x2="240" y2="223" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arp)" />
+        <rect x="60" y="206" width="176" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="76" y="228" font-size="10" class="lbl">抑制リストに反映する</text>
+
+        <text x="16" y="278" font-size="10.5" class="muted">この戻りを処理しないと、存在しない宛先へ送り続けることになる。</text>
+        <text x="16" y="298" font-size="10.5" class="muted">その結果として送信元の評価が下がり、次のメールも届かなくなる。</text>
+        <text x="16" y="326" font-size="10.5" class="lbl">「送信した」は自分で確認できるが、「届いた」は相手が決める。</text>
+      </svg>
+    </div>
+  </body>
+</html>

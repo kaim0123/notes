@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="RESTが名詞と動詞を分けて表す設計であることを示した格子図。縦軸に対象となるリソースのURLが2つ並ぶ。ひとつは一覧を指すスラッシュusers、もうひとつは1件を指すスラッシュusersスラッシュ1。横軸にHTTPメソッドがGET、POST、PATCH、DELETEの順に並ぶ。交点にその組み合わせが意味する操作が入り、一覧に対するGETは一覧取得、POSTは新規作成、1件に対するGETは1件取得、PATCHは一部更新、DELETEは削除になる。一覧に対するPATCHとDELETEの交点は空欄で、すべての組み合わせが意味を持つわけではないことを示す。下部には、URLに動詞を入れてしまった悪い例スラッシュgetUsersが×印付きで置かれ、対象と操作が混ざると格子が成立しなくなることを対比している。">
+        <text x="16" y="24" font-size="11.5" class="muted">対象(名詞=URL) × 操作(動詞=メソッド)</text>
+
+        <text x="196" y="56" font-size="11" class="lbl mono">GET</text>
+        <text x="286" y="56" font-size="11" class="lbl mono">POST</text>
+        <text x="382" y="56" font-size="11" class="lbl mono">PATCH</text>
+        <text x="486" y="56" font-size="11" class="lbl mono">DELETE</text>
+
+        <line x1="16" y1="66" x2="600" y2="66" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="106" font-size="11" class="mono">/users</text>
+        <text x="16" y="122" font-size="9.5" class="muted">一覧</text>
+        <rect x="180" y="82" width="86" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="196" y="104" font-size="10.5">一覧取得</text>
+        <rect x="276" y="82" width="86" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="292" y="104" font-size="10.5">新規作成</text>
+        <rect x="372" y="82" width="86" height="34" rx="6" fill="none" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4" />
+        <rect x="468" y="82" width="86" height="34" rx="6" fill="none" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4" />
+        <text x="568" y="104" font-size="9.5" class="muted">空欄あり</text>
+
+        <line x1="16" y1="134" x2="600" y2="134" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="174" font-size="11" class="mono">/users/1</text>
+        <text x="16" y="190" font-size="9.5" class="muted">1件</text>
+        <rect x="180" y="150" width="86" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="196" y="172" font-size="10.5">1件取得</text>
+        <rect x="276" y="150" width="86" height="34" rx="6" fill="none" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4" />
+        <rect x="372" y="150" width="86" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="388" y="172" font-size="10.5">一部更新</text>
+        <rect x="468" y="150" width="86" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="492" y="172" font-size="10.5">削除</text>
+
+        <line x1="16" y1="212" x2="600" y2="212" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="244" font-size="11.5" class="muted">対象に操作を混ぜると、この格子は成立しない</text>
+        <rect x="16" y="256" width="200" height="34" rx="6" fill="var(--card)" stroke="var(--muted)" stroke-width="1.1" />
+        <text x="34" y="278" font-size="11" class="mono muted">GET /getUsers</text>
+        <circle cx="238" cy="273" r="11" fill="var(--bg)" stroke="var(--muted)" stroke-width="1.2" />
+        <text x="232" y="278" font-size="12" class="muted">×</text>
+        <text x="262" y="270" font-size="10.5" class="muted">URLが操作を名乗ると、対象の軸が消える。</text>
+        <text x="262" y="288" font-size="10.5" class="muted">同じ対象への別操作を、毎回新しい名前で作ることになる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 330" role="img" aria-label="よくあるページ構成をセマンティックなタグで表した図。最上段の横長の枠がheaderで、その右側にnavの小さな枠が入っている。中段の大きな枠がmainで、その内側の左にarticle、articleの中にsection、右にasideが並ぶ。最下段の横長の枠がfooter。右端には注記があり、同じ見た目はdivだけでも作れるが、タグを選ぶことで読み上げソフトや検索エンジンにページの構造が伝わることを示している。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <rect x="16" y="16" width="608" height="56" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="32" y="40" font-size="12.5">&lt;header&gt;</text>
+        <text x="32" y="60" font-size="10.5" class="muted">ロゴ・サイト名</text>
+        <rect x="380" y="28" width="228" height="32" rx="5" fill="var(--bg)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="396" y="49" font-size="11.5" class="muted">&lt;nav&gt; 案内リンク</text>
+
+        <rect x="16" y="86" width="608" height="184" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="32" y="110" font-size="12.5">&lt;main&gt;</text>
+        <text x="90" y="110" font-size="10.5" class="muted">1ページに1つだけ</text>
+
+        <rect x="32" y="122" width="386" height="132" rx="6" fill="var(--bg)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="48" y="144" font-size="11.5" class="muted">&lt;article&gt; 単体で意味が通るまとまり</text>
+        <rect x="48" y="156" width="354" height="40" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" stroke-dasharray="4 3" />
+        <text x="64" y="181" font-size="11" class="muted">&lt;section&gt; 見出しを伴うテーマ区画</text>
+        <rect x="48" y="204" width="354" height="38" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" stroke-dasharray="4 3" />
+        <text x="64" y="228" font-size="11" class="muted">&lt;section&gt;</text>
+
+        <rect x="432" y="122" width="176" height="132" rx="6" fill="var(--bg)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="448" y="144" font-size="11.5" class="muted">&lt;aside&gt;</text>
+        <text x="448" y="164" font-size="10.5" class="muted">本文から独立した補足</text>
+
+        <rect x="16" y="284" width="608" height="34" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="32" y="306" font-size="12.5">&lt;footer&gt;</text>
+        <text x="432" y="306" font-size="10.5" class="lbl">タグの選択が、機械への申し送りになる</text>
+      </svg>
+    </div>
+  </body>
+</html>

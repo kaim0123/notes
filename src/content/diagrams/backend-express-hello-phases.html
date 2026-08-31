@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="Expressのコードが2つの異なるタイミングで動くことを示した図。左は起動時で、ここは一度しか通らない。アプリ本体を作り、ルートやミドルウェアを登録し、最後に待ち受けを始める、という順に進む。登録はあくまで表に書き込む作業であって、この時点ではハンドラの中身は実行されない。右はリクエストが来たときで、ここは何度でも通る。届いたパスとメソッドで表を引き、該当するハンドラの中身が実行される。この2つを混同すると、たとえば待ち受けを始めたあとにルートを登録する、といった順序の誤りが起きる。図の下部には、ハンドラの外側に書いたコードは起動時に一度だけ動き、内側に書いたコードはリクエストのたびに動く、という区別が要点として記されている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <line x1="320" y1="30" x2="320" y2="250" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="30" font-size="11.5" class="lbl">起動時 ― 一度しか通らない</text>
+
+        <rect x="16" y="46" width="270" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="32" y="67" font-size="10" class="mono">const app = express()</text>
+        <line x1="150" y1="80" x2="150" y2="98" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="16" y="102" width="270" height="52" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="32" y="123" font-size="10" class="mono lbl">app.use(...) / app.get(...)</text>
+        <text x="32" y="143" font-size="9" class="muted">表に書き込むだけ。中身はまだ動かない</text>
+        <line x1="150" y1="154" x2="150" y2="172" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="16" y="176" width="270" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="32" y="197" font-size="10" class="mono">app.listen(3000)</text>
+        <text x="16" y="232" font-size="9.5" class="muted">登録を全部済ませてから、最後に待ち受けを始める</text>
+
+        <text x="354" y="30" font-size="11.5" class="lbl">リクエストが来たとき ― 何度でも通る</text>
+
+        <rect x="354" y="46" width="270" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="370" y="67" font-size="10" class="muted">GET /users が届く</text>
+        <line x1="488" y1="80" x2="488" y2="98" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="354" y="102" width="270" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="370" y="123" font-size="10" class="muted">登録された表を、上から順に引く</text>
+        <line x1="488" y1="136" x2="488" y2="154" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+
+        <rect x="354" y="158" width="270" height="52" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="370" y="179" font-size="10" class="lbl">該当するハンドラの中身が動く</text>
+        <text x="370" y="199" font-size="9" class="muted">ここだけが、毎回実行される</text>
+
+        <text x="354" y="232" font-size="9.5" class="muted">同じ関数が、リクエストの数だけ呼ばれる</text>
+
+        <line x1="16" y1="264" x2="624" y2="264" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="288" font-size="10.5" class="muted">ハンドラの<tspan class="lbl">外側</tspan>に書いたコードは、起動時に一度だけ動く。</text>
+        <text x="16" y="310" font-size="10.5" class="muted">ハンドラの<tspan class="lbl">内側</tspan>に書いたコードは、リクエストのたびに動く。― この区別が、あらゆる混乱の分かれ目。</text>
+      </svg>
+    </div>
+  </body>
+</html>

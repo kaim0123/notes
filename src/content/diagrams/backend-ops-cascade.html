@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="1つの外部APIが遅くなっただけで、無関係な機能まで止まるまでの流れを時間軸で示した図。起点はゼロ秒で、外部APIが応答を返さなくなる。ただし落ちてはおらず、遅いだけである点が強調されている。数秒後、その呼び出しを含むリクエストが完了せずに滞留し始める。数十秒後、滞留したリクエストがデータベースへの接続やメモリを掴んだまま溜まっていく。1分後、接続が枯渇し、その外部APIとまったく関係のない機能まで応答しなくなる。数分後には死活確認まで失敗し、本来は正常だったサーバーが切り離される。図の右側には、この連鎖のどこを切れば止まるかが示されており、最初の段階でタイムアウトを設定してあれば、そこから先へは進まない。図の下部には、落ちている相手より遅い相手のほうがはるかに危険である、という結論が置かれている。落ちていれば即座にエラーが返って次へ進めるが、返らない相手は資源を静かに食い潰すためである。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11.5" class="muted">外部APIが1つ、遅くなっただけで ―</text>
+
+        <line x1="80" y1="40" x2="80" y2="248" stroke="var(--border)" stroke-width="1.2" />
+
+        <circle cx="80" cy="56" r="4.5" fill="var(--primary)" />
+        <text x="20" y="60" font-size="9" class="muted">0秒</text>
+        <text x="96" y="60" font-size="10.5">応答が返らなくなる ― <tspan class="lbl">落ちてはいない。遅いだけ</tspan></text>
+
+        <circle cx="80" cy="102" r="4.5" fill="var(--muted)" />
+        <text x="16" y="106" font-size="9" class="muted">数秒後</text>
+        <text x="96" y="106" font-size="10.5" class="muted">その呼び出しを含むリクエストが、完了せずに溜まり始める</text>
+
+        <circle cx="80" cy="148" r="4.5" fill="var(--muted)" />
+        <text x="12" y="152" font-size="9" class="muted">数十秒後</text>
+        <text x="96" y="152" font-size="10.5" class="muted">溜まったリクエストが、接続とメモリを掴んだまま離さない</text>
+
+        <circle cx="80" cy="194" r="4.5" fill="var(--muted)" />
+        <text x="24" y="198" font-size="9" class="muted">1分後</text>
+        <text x="96" y="198" font-size="10.5" class="muted">接続が枯渇し、<tspan class="lbl">その外部APIと無関係な機能まで止まる</tspan></text>
+
+        <circle cx="80" cy="240" r="4.5" fill="var(--muted)" />
+        <text x="16" y="244" font-size="9" class="muted">数分後</text>
+        <text x="96" y="244" font-size="10.5" class="muted">死活確認が失敗し、正常だったサーバーまで切り離される</text>
+
+        <path d="M556,56 v186" fill="none" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <line x1="556" y1="56" x2="524" y2="56" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#ar)" />
+        <text x="470" y="150" font-size="10" class="lbl" transform="rotate(-90 470 150)">ここで切れば、先へ進まない</text>
+        <rect x="500" y="40" width="120" height="30" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="512" y="60" font-size="10" class="lbl">タイムアウト</text>
+
+        <line x1="16" y1="270" x2="624" y2="270" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="294" font-size="10.5" class="lbl">落ちている相手より、遅い相手のほうがはるかに危険。</text>
+        <text x="16" y="314" font-size="10.5" class="muted">落ちていれば即座にエラーが返り、次へ進める。返らない相手は、資源を静かに食い潰す。</text>
+      </svg>
+    </div>
+  </body>
+</html>

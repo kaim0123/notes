@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="ロジック再利用の4つの技法を、コンポーネント階層への影響という観点で左から右へ並べた図。左端のContainerとPresentationalの分離では、ロジックを持つコンポーネントと表示するコンポーネントが親子として固定され、再利用はコピーするしかない。次の高階コンポーネントでは、コンポーネントを別のコンポーネントで包むため、重ねるほど階層が深くなる。次のRender Propsでは階層は増えないが、JSXの中に関数を渡す入れ子が深くなる。右端のカスタムフックでは、ロジックが関数として切り出されるためコンポーネント階層に一切影響せず、入れ子も生まれない。器を経由しないことが、この形の要点。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <rect x="16" y="44" width="146" height="150" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="32" y="68" font-size="11.5">Container /</text>
+        <text x="32" y="86" font-size="11.5">Presentational</text>
+        <rect x="32" y="98" width="114" height="26" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="42" y="116" font-size="9.5" class="muted">ロジックを持つ</text>
+        <rect x="44" y="130" width="102" height="26" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="54" y="148" font-size="9.5" class="muted">表示する</text>
+        <text x="32" y="180" font-size="10" class="muted">再利用はコピーのみ</text>
+
+        <rect x="172" y="44" width="146" height="150" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="188" y="68" font-size="11.5">高階コンポーネント</text>
+        <rect x="188" y="82" width="114" height="72" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <rect x="198" y="94" width="94" height="50" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1" />
+        <rect x="208" y="106" width="74" height="28" rx="4" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="218" y="124" font-size="9" class="lbl">本体</text>
+        <text x="188" y="180" font-size="10" class="muted">重ねるほど階層が深い</text>
+
+        <rect x="328" y="44" width="146" height="150" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="344" y="68" font-size="11.5">Render Props</text>
+        <text x="344" y="94" font-size="9.5" class="muted">&lt;A render={"{"}(x) =&gt;</text>
+        <text x="356" y="112" font-size="9.5" class="muted">&lt;B render={"{"}(y) =&gt;</text>
+        <text x="368" y="130" font-size="9.5" class="lbl">&lt;C ... /&gt;</text>
+        <text x="356" y="148" font-size="9.5" class="muted">{"}"} /&gt;{"}"} /&gt;</text>
+        <text x="344" y="180" font-size="10" class="muted">入れ子が深くなる</text>
+
+        <rect x="484" y="44" width="140" height="150" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="500" y="68" font-size="11.5" class="lbl">カスタムフック</text>
+        <rect x="500" y="86" width="108" height="30" rx="4" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="510" y="106" font-size="9.5" class="lbl">useUsers()</text>
+        <line x1="554" y1="116" x2="554" y2="132" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <rect x="500" y="136" width="108" height="30" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="510" y="156" font-size="9.5" class="muted">コンポーネント</text>
+        <text x="500" y="186" font-size="10" class="lbl">階層に影響しない</text>
+
+        <line x1="16" y1="216" x2="624" y2="216" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="244" font-size="10.5" class="muted">前の3つが抱えていた問題は、どれも「器を経由していた」ことから来ていた ―</text>
+        <text x="16" y="266" font-size="10.5" class="muted">器がコンポーネントなら階層が、関数なら入れ子が深くなる</text>
+        <text x="16" y="292" font-size="11" class="lbl">器そのものをやめると、両方が消える</text>
+      </svg>
+    </div>
+  </body>
+</html>

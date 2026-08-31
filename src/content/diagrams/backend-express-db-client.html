@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --warn: oklch(0.82 0.16 75);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .warn { fill: var(--warn); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="データベースへの接続を作る場所によって何が変わるかを示した図。上段はハンドラの中で毎回作った場合で、リクエストが来るたびに新しい接続が生まれ、データベース側の受け口が次々に埋まっていく。開発中は1人で試すので気づかないが、同時アクセスが増えた瞬間に上限に達し、それ以上は誰も接続できなくなる。下段は起動時に一度だけ作る場合で、その1つを全ハンドラが使い回す。接続の数は一定に保たれ、同時アクセスが増えても待つだけで済む。図の下部には、ハンドラの外側に書いたコードは起動時に一度だけ動き、内側は毎回動く、という最初のページで見た区別が、ここで具体的な結果として現れることが記されている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--warn)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11" class="warn">ハンドラの中で毎回作ると</text>
+
+        <g fill="var(--card)" stroke="var(--border)" stroke-width="1.1">
+          <rect x="16" y="38" width="66" height="22" rx="4" />
+          <rect x="16" y="66" width="66" height="22" rx="4" />
+          <rect x="16" y="94" width="66" height="22" rx="4" />
+        </g>
+        <text x="26" y="53" font-size="8.5" class="muted">リクエスト</text>
+        <text x="26" y="81" font-size="8.5" class="muted">リクエスト</text>
+        <text x="26" y="109" font-size="8.5" class="muted">リクエスト</text>
+
+        <line x1="82" y1="49" x2="112" y2="49" stroke="var(--warn)" stroke-width="1.2" marker-end="url(#arw)" />
+        <line x1="82" y1="77" x2="112" y2="77" stroke="var(--warn)" stroke-width="1.2" marker-end="url(#arw)" />
+        <line x1="82" y1="105" x2="112" y2="105" stroke="var(--warn)" stroke-width="1.2" marker-end="url(#arw)" />
+
+        <g fill="var(--card)" stroke="var(--warn)" stroke-width="1.3">
+          <rect x="116" y="38" width="90" height="22" rx="4" />
+          <rect x="116" y="66" width="90" height="22" rx="4" />
+          <rect x="116" y="94" width="90" height="22" rx="4" />
+        </g>
+        <text x="124" y="53" font-size="8.5" class="warn">新しい接続</text>
+        <text x="124" y="81" font-size="8.5" class="warn">新しい接続</text>
+        <text x="124" y="109" font-size="8.5" class="warn">新しい接続</text>
+
+        <line x1="206" y1="77" x2="240" y2="77" stroke="var(--warn)" stroke-width="1.3" marker-end="url(#arw)" />
+        <rect x="244" y="38" width="110" height="78" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="256" y="60" font-size="9.5" class="muted">受け口が</text>
+        <text x="256" y="78" font-size="9.5" class="muted">次々に埋まる</text>
+        <text x="256" y="102" font-size="9.5" class="warn">→ 上限で全滅</text>
+
+        <text x="372" y="60" font-size="10" class="muted">開発中は1人で試すので気づかない。</text>
+        <text x="372" y="80" font-size="10" class="muted">同時アクセスが増えた瞬間に、</text>
+        <text x="372" y="100" font-size="10" class="warn">それ以上は誰も接続できなくなる。</text>
+
+        <line x1="16" y1="142" x2="624" y2="142" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="170" font-size="11" class="lbl">起動時に一度だけ作ると</text>
+
+        <g fill="var(--card)" stroke="var(--border)" stroke-width="1.1">
+          <rect x="16" y="184" width="66" height="22" rx="4" />
+          <rect x="16" y="212" width="66" height="22" rx="4" />
+          <rect x="16" y="240" width="66" height="22" rx="4" />
+        </g>
+        <text x="26" y="199" font-size="8.5" class="muted">リクエスト</text>
+        <text x="26" y="227" font-size="8.5" class="muted">リクエスト</text>
+        <text x="26" y="255" font-size="8.5" class="muted">リクエスト</text>
+
+        <path d="M82,195 C 100,195 100,223 114,223" fill="none" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <path d="M82,223 h32" fill="none" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <path d="M82,251 C 100,251 100,223 114,223" fill="none" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+
+        <rect x="118" y="206" width="120" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="130" y="227" font-size="9.5" class="lbl">1つを使い回す</text>
+
+        <line x1="238" y1="223" x2="268" y2="223" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <rect x="272" y="196" width="110" height="54" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="284" y="220" font-size="9.5" class="muted">接続の数は</text>
+        <text x="284" y="238" font-size="9.5" class="muted">一定のまま</text>
+
+        <text x="400" y="220" font-size="10" class="muted">同時アクセスが増えても、</text>
+        <text x="400" y="240" font-size="10" class="lbl">待つだけで済む。</text>
+
+        <text x="16" y="292" font-size="10.5" class="muted">ハンドラの外側は起動時に一度だけ、内側は毎回 ― 最初のページで見た区別が、</text>
+        <text x="16" y="312" font-size="10.5" class="lbl">ここで具体的な結果として現れる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

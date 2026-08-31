@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="契約ファイルが1つあることで何が導けるかを示した図。中央左に契約ファイルopenapi.yamlが置かれ、そこから右に4本の線が伸びる。伸びた先は、人間が読む説明書、呼ぶ側の型定義、実装前に使えるモックサーバー、そして継続的インテグレーションでの差分検査の4つ。いずれも契約から導かれるので、契約を直せば4つとも同時に追従する。下段には対比として、契約ファイルがない場合が置かれ、説明書と型とモックがそれぞれ別に手で書かれ、時間とともに互いにずれていく様子が波線で示されている。ずれても誰も気づかないことが、契約を持たない場合の本質的な問題であることを表す。">
+        <defs>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11.5" class="muted">契約が1つあると ―</text>
+
+        <rect x="16" y="72" width="146" height="72" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="34" y="102" font-size="11.5" class="lbl">openapi.yaml</text>
+        <text x="34" y="124" font-size="10" class="muted">唯一の参照元</text>
+
+        <line x1="162" y1="94" x2="288" y2="58" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <line x1="162" y1="104" x2="288" y2="94" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <line x1="162" y1="114" x2="288" y2="130" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <line x1="162" y1="124" x2="288" y2="166" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+
+        <rect x="296" y="42" width="200" height="30" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="312" y="62" font-size="10.5">人間が読む説明書</text>
+        <rect x="296" y="80" width="200" height="30" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="312" y="100" font-size="10.5">呼ぶ側の型定義</text>
+        <rect x="296" y="118" width="200" height="30" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="312" y="138" font-size="10.5">実装前に使えるモック</text>
+        <rect x="296" y="156" width="200" height="30" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="312" y="176" font-size="10.5">CIでの差分検査</text>
+        <text x="506" y="118" font-size="10" class="lbl">契約を直せば</text>
+        <text x="506" y="136" font-size="10" class="lbl">4つとも追従する</text>
+
+        <line x1="16" y1="206" x2="624" y2="206" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="230" font-size="11.5" class="muted">契約が無いと ― それぞれ手で書かれ、時間とともにずれていく</text>
+
+        <rect x="16" y="244" width="170" height="26" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1" />
+        <text x="30" y="262" font-size="10" class="muted">Wikiの説明</text>
+        <rect x="200" y="244" width="170" height="26" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1" />
+        <text x="214" y="262" font-size="10" class="muted">手書きの型</text>
+        <rect x="384" y="244" width="170" height="26" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1" />
+        <text x="398" y="262" font-size="10" class="muted">手作りのモック</text>
+
+        <path d="M16,290 q26,-8 52,0 t52,0 t52,0" fill="none" stroke="var(--muted)" stroke-width="1.1" />
+        <path d="M200,290 q26,8 52,0 t52,0 t52,0" fill="none" stroke="var(--muted)" stroke-width="1.1" />
+        <path d="M384,290 q26,-8 52,0 t52,0 t52,0" fill="none" stroke="var(--muted)" stroke-width="1.1" />
+        <text x="16" y="312" font-size="10.5" class="muted">ずれても誰も気づかない ― これが契約を持たないことの本当の問題。</text>
+      </svg>
+    </div>
+  </body>
+</html>

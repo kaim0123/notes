@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 280" role="img" aria-label="stateとrefとローカル変数の違いを2つの軸で比べた表。縦軸は再描画をまたいで値が保たれるかどうか、横軸は書き換えたときに再描画が起きるかどうか。右上のstateは保たれて再描画も起きる。左上のrefは保たれるが再描画は起きない。左下のローカル変数は保たれず再描画も起きないため、毎回作り直される。右下の再描画は起きるが保たれない、という組み合わせは存在しない。この表から、画面に映したい値はstate、覚えておきたいが映さない値はrefという使い分けが導かれる。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="240" y="34" text-anchor="middle" font-size="11.5" class="muted">再描画は起きない</text>
+        <text x="470" y="34" text-anchor="middle" font-size="11.5" class="muted">再描画が起きる</text>
+        <text x="20" y="100" font-size="11.5" class="muted">値が</text>
+        <text x="20" y="118" font-size="11.5" class="muted">保たれる</text>
+        <text x="20" y="204" font-size="11.5" class="muted">保たれない</text>
+
+        <rect x="120" y="52" width="240" height="94" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="140" y="78" font-size="12.5" class="lbl">useRef</text>
+        <text x="140" y="102" font-size="10.5" class="muted">タイマーの識別子、直前の値、</text>
+        <text x="140" y="120" font-size="10.5" class="muted">外部ライブラリの実体、DOM参照</text>
+        <text x="140" y="138" font-size="10" class="muted">覚えておきたいが、映さないもの</text>
+
+        <rect x="370" y="52" width="250" height="94" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="390" y="78" font-size="12.5" class="lbl">useState</text>
+        <text x="390" y="102" font-size="10.5" class="muted">画面に映る値。変わったら</text>
+        <text x="390" y="120" font-size="10.5" class="muted">画面も変わってほしいもの</text>
+
+        <rect x="120" y="158" width="240" height="86" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="140" y="184" font-size="12.5" class="muted">ローカル変数</text>
+        <text x="140" y="208" font-size="10.5" class="muted">その回の描画だけで使う計算</text>
+        <text x="140" y="228" font-size="10.5" class="muted">毎回作り直される</text>
+
+        <rect x="370" y="158" width="250" height="86" rx="8" fill="none" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <text x="495" y="206" text-anchor="middle" font-size="11" class="muted">この組み合わせは存在しない</text>
+
+        <text x="20" y="270" font-size="10.5" class="lbl">映したい値は state、覚えたいが映さない値は ref ― 迷ったらこの1行で決まる</text>
+      </svg>
+    </div>
+  </body>
+</html>

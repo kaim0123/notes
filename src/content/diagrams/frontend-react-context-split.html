@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="Contextを1つにまとめた場合と分割した場合を比べた図。上段では、めったに変わらないユーザー情報と頻繁に変わるカウンタを1つのContextに詰め込んでいる。カウンタだけが変わっても、ユーザーしか読んでいないコンポーネントまで再描画される。下段では、めったに変わらない値と頻繁に変わる値を別のContextに分けている。カウンタが変わっても、ユーザーを読んでいるコンポーネントは再描画されない。Contextには変わった部分だけを配る仕組みがないため、分けることそのものが最適化になる。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="20" y="28" font-size="11.5" class="muted">1つにまとめた場合</text>
+        <rect x="20" y="40" width="220" height="76" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="36" y="64" font-size="11.5">AppContext</text>
+        <text x="36" y="86" font-size="10.5" class="muted">{ user, count }</text>
+        <text x="36" y="106" font-size="10" class="muted">count だけが頻繁に変わる</text>
+
+        <line x1="240" y1="62" x2="286" y2="62" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <line x1="240" y1="96" x2="286" y2="96" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="290" y="42" width="150" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="306" y="66" font-size="10.5" class="muted">user を読む部品</text>
+        <rect x="290" y="86" width="150" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="306" y="110" font-size="10.5" class="muted">count を読む部品</text>
+
+        <text x="456" y="66" font-size="10.5" class="lbl">← 巻き添えで再描画</text>
+        <text x="456" y="110" font-size="10.5" class="muted">← 当然 再描画</text>
+
+        <line x1="20" y1="150" x2="620" y2="150" stroke="var(--border)" stroke-width="1" />
+
+        <text x="20" y="178" font-size="11.5" class="lbl">用途で分割した場合</text>
+        <rect x="20" y="190" width="220" height="46" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="36" y="212" font-size="11.5">UserContext</text>
+        <text x="36" y="230" font-size="10" class="muted">めったに変わらない</text>
+
+        <rect x="20" y="246" width="220" height="46" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="36" y="268" font-size="11.5" class="lbl">CountContext</text>
+        <text x="36" y="286" font-size="10" class="muted">頻繁に変わる</text>
+
+        <line x1="240" y1="212" x2="286" y2="212" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <line x1="240" y1="268" x2="286" y2="268" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+
+        <rect x="290" y="192" width="150" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="306" y="216" font-size="10.5" class="muted">user を読む部品</text>
+        <rect x="290" y="248" width="150" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="306" y="272" font-size="10.5" class="lbl">count を読む部品</text>
+
+        <text x="456" y="216" font-size="10.5" class="lbl">← 再描画されない</text>
+        <text x="456" y="272" font-size="10.5" class="muted">← ここだけ再描画</text>
+      </svg>
+    </div>
+  </body>
+</html>

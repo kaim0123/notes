@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 300" role="img" aria-label="真偽値を並べた型と判別可能なユニオンを比べた図。左側では読み込み中かどうか、成功したかどうか、失敗したかどうかを3つの独立した真偽値で表しており、組み合わせは8通りある。そのうち意味があるのは3通りだけで、残りは表現できてしまうが定義されていない状態になる。たとえば読み込み中でありながら成功もしている、という組み合わせが型として書けてしまう。右側では取りうる状態を1つの列挙で表しており、状態は3通りしかなく、それぞれに必要な値だけが型に現れる。読み込み中なら進捗、成功ならデータ、失敗ならエラーと再試行の関数が結び付いている。ありえない組み合わせを型として書けなくすることが、この設計の効きどころ。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="20" y="30" font-size="11.5" class="muted">真偽値を並べる ― 8通り表現できる</text>
+        <rect x="20" y="42" width="280" height="112" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="38" y="68" font-size="10.5" class="muted">isLoading: boolean</text>
+        <text x="38" y="90" font-size="10.5" class="muted">data: T | null</text>
+        <text x="38" y="112" font-size="10.5" class="muted">error: Error | null</text>
+        <text x="38" y="140" font-size="10.5" class="lbl">意味があるのは3通りだけ</text>
+
+        <rect x="20" y="168" width="280" height="106" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <text x="38" y="192" font-size="10.5" class="muted">書けてしまう、定義されていない状態:</text>
+        <text x="38" y="216" font-size="10" class="muted">・読み込み中なのに data もある</text>
+        <text x="38" y="236" font-size="10" class="muted">・data も error も両方 null</text>
+        <text x="38" y="256" font-size="10" class="muted">・data も error も両方ある</text>
+
+        <line x1="320" y1="30" x2="320" y2="280" stroke="var(--border)" stroke-width="1" />
+
+        <text x="342" y="30" font-size="11.5" class="lbl">列挙にまとめる ― 3通りしかない</text>
+        <rect x="342" y="42" width="278" height="60" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="360" y="66" font-size="10.5">{ status: "loading" }</text>
+        <text x="360" y="88" font-size="10" class="muted">この状態では data も error も存在しない</text>
+
+        <rect x="342" y="112" width="278" height="60" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="360" y="136" font-size="10.5">{ status: "success"; data: T }</text>
+        <text x="360" y="158" font-size="10" class="muted">data は必ず存在する ― null チェック不要</text>
+
+        <rect x="342" y="182" width="278" height="70" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="360" y="206" font-size="10.5">{ status: "error"; error: Error;</text>
+        <text x="360" y="226" font-size="10.5">  retry: () =&gt; void }</text>
+        <text x="360" y="246" font-size="10" class="muted">再試行はこの状態にだけ存在する</text>
+
+        <text x="342" y="278" font-size="10.5" class="lbl">ありえない組み合わせを、そもそも書けなくする</text>
+      </svg>
+    </div>
+  </body>
+</html>

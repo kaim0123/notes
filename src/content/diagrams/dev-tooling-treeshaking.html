@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 290"
+        role="img"
+        aria-label="ツリーシェイキングがモジュール形式に依存することを示した図。上段は静的に解決されるESM形式で、importとexportの関係が実行前に確定するため、バンドラはどのエクスポートがどこからも参照されていないかを判定できる。ライブラリが3つの関数を公開していて、アプリが1つしか使っていない場合、残りの2つは配布物から削除される。下段は動的に解決されるCommonJS形式で、requireは実行時に評価され、条件によって読み込む対象が変わりうるため、バンドラは安全側に倒して全部を残す。結果として、使っていない関数まで配布物に含まれる。同じことは副作用の宣言が無い場合にも起きる。読み込むだけで何かをするモジュールかもしれないと判断されると、削除が諦められる。"
+      >
+        <defs>
+          <marker id="arts" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="26" font-size="12" class="lbl">静的に解決される形式(ESM) ― 削れる</text>
+
+        <rect x="16" y="38" width="150" height="86" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="91" y="58" text-anchor="middle" font-size="10.5" class="muted">ライブラリ</text>
+        <rect x="30" y="66" width="122" height="16" rx="3" fill="none" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="91" y="79" text-anchor="middle" font-size="9.5" class="lbl">export a()</text>
+        <rect x="30" y="86" width="122" height="16" rx="3" fill="none" stroke="var(--muted)" stroke-width="1.1" />
+        <text x="91" y="99" text-anchor="middle" font-size="9.5" class="muted">export b()</text>
+        <rect x="30" y="104" width="122" height="16" rx="3" fill="none" stroke="var(--muted)" stroke-width="1.1" />
+        <text x="91" y="117" text-anchor="middle" font-size="9.5" class="muted">export c()</text>
+
+        <line x1="166" y1="80" x2="204" y2="80" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arts)" />
+        <text x="185" y="72" text-anchor="middle" font-size="9" class="lbl">a のみ</text>
+
+        <rect x="210" y="52" width="130" height="58" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="275" y="76" text-anchor="middle" font-size="10.5" class="muted">アプリ</text>
+        <text x="275" y="94" text-anchor="middle" font-size="10" font-family="monospace" class="muted">import &#123; a &#125;</text>
+
+        <line x1="340" y1="80" x2="378" y2="80" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arts)" />
+
+        <rect x="384" y="52" width="240" height="58" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="504" y="76" text-anchor="middle" font-size="11">配布物には a だけが残る</text>
+        <text x="504" y="96" text-anchor="middle" font-size="10.5" class="muted">b と c は削除される</text>
+
+        <line x1="16" y1="146" x2="624" y2="146" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="172" font-size="12" class="muted">動的に解決される形式(CommonJS) ― 削れない</text>
+
+        <rect x="16" y="184" width="150" height="86" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="91" y="204" text-anchor="middle" font-size="10.5" class="muted">ライブラリ</text>
+        <rect x="30" y="212" width="122" height="16" rx="3" fill="none" stroke="var(--muted)" stroke-width="1.1" />
+        <text x="91" y="225" text-anchor="middle" font-size="9.5" class="muted">exports.a</text>
+        <rect x="30" y="232" width="122" height="16" rx="3" fill="none" stroke="var(--muted)" stroke-width="1.1" />
+        <text x="91" y="245" text-anchor="middle" font-size="9.5" class="muted">exports.b</text>
+        <rect x="30" y="250" width="122" height="16" rx="3" fill="none" stroke="var(--muted)" stroke-width="1.1" />
+        <text x="91" y="263" text-anchor="middle" font-size="9.5" class="muted">exports.c</text>
+
+        <line x1="166" y1="226" x2="204" y2="226" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arts)" />
+        <text x="185" y="218" text-anchor="middle" font-size="9" class="muted">全部</text>
+
+        <rect x="210" y="198" width="130" height="58" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="275" y="222" text-anchor="middle" font-size="10.5" class="muted">アプリ</text>
+        <text x="275" y="240" text-anchor="middle" font-size="10" font-family="monospace" class="muted">require(...)</text>
+
+        <line x1="340" y1="226" x2="378" y2="226" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#arts)" />
+
+        <rect x="384" y="198" width="240" height="58" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="504" y="222" text-anchor="middle" font-size="11" class="muted">実行時に何を読むか分からない</text>
+        <text x="504" y="242" text-anchor="middle" font-size="10.5" class="muted">安全側に倒して全部残す</text>
+      </svg>
+    </div>
+  </body>
+</html>

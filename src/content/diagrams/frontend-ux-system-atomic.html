@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 300" role="img" aria-label="Atomic Designの5段階を左から右へ並べた図。いちばん左が原子で、ボタンや入力欄やラベルといったこれ以上分けられない最小部品。次が分子で、ラベルと入力欄を組み合わせた検索ボックスなど。次が有機体で、分子をまとめたヘッダーやフォーム全体。次がテンプレートで、中身をプレースホルダにしたレイアウトの骨組み。いちばん右がページで、実データを載せた完成形。下に矢印があり、左へ行くほど再利用され、右へ行くほどその画面固有の事情を持つことを示している。段階の名前を厳密に守ることより、再利用される部品と固有の部品を分けることが目的である。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <rect x="16" y="50" width="110" height="120" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="71" y="76" text-anchor="middle" font-size="12">原子</text>
+        <text x="71" y="100" text-anchor="middle" font-size="10" class="muted">ボタン</text>
+        <text x="71" y="120" text-anchor="middle" font-size="10" class="muted">入力欄</text>
+        <text x="71" y="140" text-anchor="middle" font-size="10" class="muted">ラベル・アイコン</text>
+
+        <line x1="126" y1="110" x2="142" y2="110" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="146" y="50" width="110" height="120" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="201" y="76" text-anchor="middle" font-size="12">分子</text>
+        <text x="201" y="100" text-anchor="middle" font-size="10" class="muted">ラベル+入力欄</text>
+        <text x="201" y="120" text-anchor="middle" font-size="10" class="muted">検索ボックス</text>
+
+        <line x1="256" y1="110" x2="272" y2="110" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="276" y="50" width="110" height="120" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="331" y="76" text-anchor="middle" font-size="12">有機体</text>
+        <text x="331" y="100" text-anchor="middle" font-size="10" class="muted">ヘッダー</text>
+        <text x="331" y="120" text-anchor="middle" font-size="10" class="muted">フォーム全体</text>
+        <text x="331" y="140" text-anchor="middle" font-size="10" class="muted">カード一覧</text>
+
+        <line x1="386" y1="110" x2="402" y2="110" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="406" y="50" width="106" height="120" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="459" y="76" text-anchor="middle" font-size="12">テンプレート</text>
+        <text x="459" y="100" text-anchor="middle" font-size="10" class="muted">レイアウトの骨組み</text>
+        <text x="459" y="120" text-anchor="middle" font-size="10" class="muted">中身は仮</text>
+
+        <line x1="512" y1="110" x2="528" y2="110" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="532" y="50" width="92" height="120" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="578" y="76" text-anchor="middle" font-size="12">ページ</text>
+        <text x="578" y="100" text-anchor="middle" font-size="10" class="muted">実データを</text>
+        <text x="578" y="120" text-anchor="middle" font-size="10" class="muted">載せた完成形</text>
+
+        <line x1="16" y1="204" x2="624" y2="204" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="228" font-size="10.5" class="lbl">← 再利用される</text>
+        <text x="624" y="228" text-anchor="end" font-size="10.5" class="muted">その画面固有の事情を持つ →</text>
+        <text x="320" y="266" text-anchor="middle" font-size="10.5" class="muted">段階の名前で議論が止まるなら本末転倒 ―</text>
+        <text x="320" y="286" text-anchor="middle" font-size="10.5" class="muted">目的は「再利用される部品」と「固有の部品」を分けることだけ</text>
+      </svg>
+    </div>
+  </body>
+</html>

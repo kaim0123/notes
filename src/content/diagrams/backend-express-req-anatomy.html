@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 340" role="img" aria-label="生のHTTPリクエストの各部分が、reqのどのプロパティに対応するかを示した図。左に実際のリクエストの文面が並ぶ。1行目はPOSTというメソッドと、スラッシュusersスラッシュ42スラッシュpostsという疑問符付きのURL。次にHostやContent-TypeやAuthorizationといったヘッダーが続き、空行を挟んで本文のJSONが置かれる。右にはreqのプロパティが並び、それぞれ対応する箇所から線が引かれている。URLのうちルートで定義したコロン付きの部分はreq.params、疑問符以降はreq.query、ヘッダーの並びはreq.headers、そして本文はreq.bodyになる。ただしreq.bodyだけは扱いが違い、本文を解釈するミドルウェアを先に登録していないと中身が入らない。図の下部には、reqの値はすべて外から来たものであり、型も範囲も何ひとつ保証されていない、という注意が置かれている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11" class="muted">届いたリクエストの文面</text>
+        <text x="420" y="24" font-size="11" class="lbl">req のどこに入るか</text>
+
+        <rect x="16" y="36" width="340" height="200" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="32" y="62" font-size="10.5" class="mono">POST /users/42/posts?sort=new HTTP/1.1</text>
+        <text x="32" y="94" font-size="10.5" class="mono muted">Host: api.example.com</text>
+        <text x="32" y="114" font-size="10.5" class="mono muted">Content-Type: application/json</text>
+        <text x="32" y="134" font-size="10.5" class="mono muted">Authorization: Bearer ...</text>
+        <line x1="32" y1="150" x2="340" y2="150" stroke="var(--border)" stroke-width="1" stroke-dasharray="3 3" />
+        <text x="32" y="176" font-size="10.5" class="mono">{</text>
+        <text x="46" y="196" font-size="10.5" class="mono">"title": "はじめての投稿"</text>
+        <text x="32" y="216" font-size="10.5" class="mono">}</text>
+
+        <line x1="120" y1="52" x2="416" y2="52" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <text x="424" y="56" font-size="10" class="mono lbl">req.params</text>
+        <text x="510" y="56" font-size="9" class="muted">ルートの :id 部分</text>
+
+        <line x1="238" y1="66" x2="416" y2="90" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <text x="424" y="94" font-size="10" class="mono lbl">req.query</text>
+        <text x="510" y="94" font-size="9" class="muted">? 以降</text>
+
+        <line x1="356" y1="114" x2="416" y2="128" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="424" y="132" font-size="10" class="mono">req.headers</text>
+
+        <line x1="356" y1="190" x2="416" y2="176" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <rect x="418" y="158" width="204" height="52" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="430" y="178" font-size="10" class="mono lbl">req.body</text>
+        <text x="430" y="197" font-size="9" class="muted">解釈するミドルウェアが要る</text>
+
+        <line x1="16" y1="256" x2="624" y2="256" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="282" font-size="10.5" class="muted">本文だけは扱いが違う ― 先に解釈する段を登録していなければ、req.body は空のままになる。</text>
+        <text x="16" y="310" font-size="10.5" class="lbl">そして、ここに入る値はすべて外から来たもの。</text>
+        <text x="16" y="332" font-size="10.5" class="muted">型も範囲も、何ひとつ保証されていない ― これがバリデーションの出発点になる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 250" role="img" aria-label="ブラウザが画面を描くまでの流れを示した図。左側でHTMLがDOMに、CSSがCSSOMに変換され、その2つが合流してレンダーツリーになる。レンダーツリーから右へ、位置と大きさを計算するレイアウト、色を置くペイントへと進む。下にはJavaScriptからの矢印があり、DOMを書き換えるとレイアウトから、色だけを変えるとペイントからやり直しになることが示されている。やり直しの範囲が広いほど表示は重くなる。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <rect x="14" y="30" width="96" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="62" y="55" text-anchor="middle" font-size="12">HTML</text>
+        <rect x="14" y="104" width="96" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="62" y="129" text-anchor="middle" font-size="12">CSS</text>
+
+        <line x1="110" y1="50" x2="150" y2="50" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ar)" />
+        <line x1="110" y1="124" x2="150" y2="124" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ar)" />
+
+        <rect x="154" y="30" width="96" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="202" y="55" text-anchor="middle" font-size="12">DOM</text>
+        <rect x="154" y="104" width="96" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="202" y="129" text-anchor="middle" font-size="12">CSSOM</text>
+
+        <path d="M250 50 L286 50 L286 82" fill="none" stroke="var(--muted)" stroke-width="1.4" />
+        <path d="M250 124 L286 124 L286 92" fill="none" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ar)" />
+        <line x1="286" y1="50" x2="300" y2="87" stroke="none" />
+        <line x1="290" y1="87" x2="316" y2="87" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ar)" />
+
+        <rect x="320" y="67" width="104" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="372" y="92" text-anchor="middle" font-size="11.5">レンダーツリー</text>
+
+        <line x1="424" y1="87" x2="452" y2="87" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ar)" />
+        <rect x="456" y="67" width="76" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="494" y="92" text-anchor="middle" font-size="11.5">レイアウト</text>
+        <line x1="532" y1="87" x2="552" y2="87" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ar)" />
+        <rect x="556" y="67" width="70" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="591" y="92" text-anchor="middle" font-size="11.5">ペイント</text>
+
+        <rect x="154" y="182" width="120" height="36" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="214" y="205" text-anchor="middle" font-size="11.5">JavaScript</text>
+
+        <path d="M274 194 L494 194 L494 111" fill="none" stroke="var(--primary)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arp)" />
+        <path d="M274 200 L591 200 L591 111" fill="none" stroke="var(--primary)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arp)" />
+        <text x="300" y="186" font-size="10.5" class="lbl">位置が変われば レイアウトから</text>
+        <text x="300" y="228" font-size="10.5" class="lbl">色だけなら ペイントから</text>
+        <text x="14" y="228" font-size="10.5" class="muted">やり直しの範囲が広いほど重い</text>
+      </svg>
+    </div>
+  </body>
+</html>

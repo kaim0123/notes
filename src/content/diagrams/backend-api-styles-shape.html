@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 300" role="img" aria-label="同じ1画面を描くのに必要なやり取りが方式ごとにどう変わるかを示した図。上段のRESTは、ユーザー・投稿・コメントの3つのURLへ3往復し、それぞれ画面で使わない項目まで丸ごと返ってくる。中段のGraphQLは、1つの窓口へ欲しい形を書いて送り、1往復で過不足のない形が返る。下段のgRPCは、あらかじめ決めた型に沿ったバイナリで1往復し、人間には読めない代わりにサーバー間で速い。往復回数と、返ってくる中身の余りの量が方式ごとに違うことが要点。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11.5" class="muted">同じ1画面を描くのに ―</text>
+
+        <text x="16" y="58" font-size="12" class="lbl">REST</text>
+        <line x1="90" y1="46" x2="240" y2="46" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="90" y1="62" x2="240" y2="62" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="90" y1="78" x2="240" y2="78" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="96" y="42" font-size="9.5" class="muted">/users/1</text>
+        <text x="96" y="58" font-size="9.5" class="muted">/users/1/posts</text>
+        <text x="96" y="74" font-size="9.5" class="muted">/posts/9/comments</text>
+        <rect x="248" y="34" width="150" height="56" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="256" y="42" width="134" height="8" rx="2" fill="var(--primary)" opacity="0.85" />
+        <rect x="256" y="54" width="134" height="8" rx="2" fill="var(--muted)" opacity="0.35" />
+        <rect x="256" y="66" width="134" height="8" rx="2" fill="var(--muted)" opacity="0.35" />
+        <rect x="256" y="78" width="134" height="8" rx="2" fill="var(--primary)" opacity="0.85" />
+        <text x="410" y="52" font-size="10.5" class="muted">3往復。決まった単位で</text>
+        <text x="410" y="70" font-size="10.5" class="muted">丸ごと返る(灰=使わない分)</text>
+
+        <line x1="16" y1="106" x2="624" y2="106" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="146" font-size="12" class="lbl">GraphQL</text>
+        <line x1="90" y1="142" x2="240" y2="142" stroke="var(--primary)" stroke-width="1.6" marker-end="url(#arp)" />
+        <text x="96" y="136" font-size="9.5" class="lbl">1つの窓口へ「欲しい形」</text>
+        <rect x="248" y="126" width="150" height="32" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <rect x="256" y="134" width="134" height="8" rx="2" fill="var(--primary)" opacity="0.85" />
+        <rect x="256" y="146" width="134" height="8" rx="2" fill="var(--primary)" opacity="0.85" />
+        <text x="410" y="140" font-size="10.5" class="muted">1往復。過不足のない形</text>
+        <text x="410" y="158" font-size="10.5" class="muted">(その分サーバー側が複雑)</text>
+
+        <line x1="16" y1="182" x2="624" y2="182" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="222" font-size="12" class="lbl">gRPC</text>
+        <line x1="90" y1="218" x2="240" y2="218" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#ar)" />
+        <text x="96" y="212" font-size="9.5" class="muted">型を先に決めたバイナリ</text>
+        <rect x="248" y="204" width="150" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="262" y="223" font-size="10" class="muted">10110100 01101…</text>
+        <text x="410" y="216" font-size="10.5" class="muted">1往復。人間には読めない</text>
+        <text x="410" y="234" font-size="10.5" class="muted">代わりにサーバー間で速い</text>
+
+        <text x="16" y="272" font-size="10.5" class="muted">違うのは「往復の回数」と「返ってくる中身の余り」。目的はどれも同じ ― 頼んで返してもらうこと。</text>
+      </svg>
+    </div>
+  </body>
+</html>

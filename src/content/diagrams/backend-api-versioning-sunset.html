@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 300" role="img" aria-label="古いAPIを終わらせる手順を6段階の流れとして示した図。左端の起点は計測で、誰がいつ使っているかを記録することが最初に来る。そこから右へ、予告する、機械が読める形で示す、移行を支援する、短時間だけ止めて試す、そして停止する、と進む。各段階の下に補足があり、予告は公開APIなら数か月から一年前、機械可読な形とはDeprecationヘッダーとSunsetヘッダーのこと、短時間だけ止めて試すのはブラウンアウトと呼ばれる手法で、気づいていなかった利用者を本番停止の前に発見できる、停止は410 Goneで移行先を案内する、と説明されている。図の下部には、起点の計測に戻る破線の矢印と、計測が無ければ判断ができず永久に消せない、という注意が置かれている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11.5" class="muted">v2を出すのは1日。v1を消すのに1年。</text>
+
+        <rect x="16" y="44" width="92" height="40" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="34" y="60" font-size="10.5" class="lbl">① 計測する</text>
+        <text x="26" y="76" font-size="9" class="muted">誰がいつ使うか</text>
+        <line x1="108" y1="64" x2="124" y2="64" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+
+        <rect x="128" y="44" width="92" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="146" y="60" font-size="10.5">② 予告する</text>
+        <text x="138" y="76" font-size="9" class="muted">数か月〜1年前</text>
+        <line x1="220" y1="64" x2="236" y2="64" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="240" y="44" width="112" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="252" y="60" font-size="10.5">③ 機械に伝える</text>
+        <text x="250" y="76" font-size="9" class="muted">Deprecation / Sunset</text>
+        <line x1="352" y1="64" x2="368" y2="64" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="372" y="44" width="102" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="384" y="60" font-size="10.5">④ 移行を支援</text>
+        <text x="382" y="76" font-size="9" class="muted">差分表・個別連絡</text>
+        <line x1="474" y1="64" x2="490" y2="64" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="494" y="44" width="112" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="506" y="60" font-size="10.5">⑤ 短時間止める</text>
+        <text x="504" y="76" font-size="9" class="muted">ブラウンアウト</text>
+
+        <path d="M550,84 v28 h-262" fill="none" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="176" y="122" width="106" height="40" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="192" y="138" font-size="10.5" class="lbl">⑥ 停止する</text>
+        <text x="188" y="154" font-size="9" class="muted">410 Gone で案内</text>
+
+        <path d="M176,142 h-100 v-58" fill="none" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#arp)" />
+        <text x="300" y="146" font-size="10" class="lbl">← 判断の根拠は、すべて①に戻る</text>
+
+        <line x1="16" y1="192" x2="624" y2="192" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="218" font-size="10.5" class="muted">⑤ ブラウンアウト: 廃止日の前に1時間だけ止めてみる。気づいていなかった利用者が</text>
+        <text x="16" y="238" font-size="10.5" class="muted">問い合わせてくるので、本番の停止前に発見できる。必ず事前に日程を公表して行う。</text>
+        <text x="16" y="270" font-size="10.5" class="lbl">①が無いと:</text>
+        <text x="90" y="270" font-size="10.5" class="muted">「まだ使われているかもしれない」という不安だけが残り、判断ができない。</text>
+        <text x="90" y="290" font-size="10.5" class="muted">結果として、誰も使っていない窓口を永久に維持し続けることになる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

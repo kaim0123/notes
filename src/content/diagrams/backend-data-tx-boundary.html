@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="トランザクションの中に何を入れるかで占有時間がどれだけ変わるかを比べた図。上段は外部への通知をトランザクションの中に入れた場合で、注文の保存と在庫の減算に続いてメール送信が枠の中に入っている。メール送信は外部の相手次第で数秒かかるため、枠が大きく右へ伸び、その間ずっと接続とロックを握り続ける。しかも失敗して巻き戻しても、送ってしまったメールは取り消せない。下段は通知を枠の外に出した場合で、枠は保存と減算だけの短いものになり、確定したあとで通知を行う。占有時間が短くなるだけでなく、外部の障害が自分のデータベースの障害にならなくなる。図の下部には、確実に通知したい場合の方法として、送りたい内容を同じトランザクションの中で別のテーブルに書いておき、別のワーカーがそれを読んで送る、という手順が添えられている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11.5" class="muted">枠の中に何を入れるか ＝ どれだけ長く占有するか</text>
+
+        <text x="16" y="56" font-size="10.5" class="muted">通知を中に入れると</text>
+        <rect x="16" y="66" width="500" height="52" rx="8" fill="none" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="6 4" />
+        <text x="24" y="80" font-size="9" class="muted">BEGIN</text>
+        <rect x="70" y="82" width="86" height="26" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="84" y="99" font-size="9.5">注文を保存</text>
+        <rect x="164" y="82" width="86" height="26" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="178" y="99" font-size="9.5">在庫を減算</text>
+        <rect x="258" y="82" width="240" height="26" rx="5" fill="var(--card)" stroke="var(--muted)" stroke-width="1.4" />
+        <text x="272" y="99" font-size="9.5" class="muted">メール送信 ― 相手次第で数秒</text>
+        <text x="522" y="96" font-size="9" class="muted">COMMIT</text>
+        <line x1="16" y1="128" x2="516" y2="128" stroke="var(--muted)" stroke-width="2.4" />
+        <text x="16" y="146" font-size="10" class="muted">この間ずっと、接続とロックを握り続ける</text>
+        <text x="330" y="146" font-size="10" class="muted">巻き戻しても、送ったメールは戻せない</text>
+
+        <line x1="16" y1="164" x2="624" y2="164" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="196" font-size="10.5" class="lbl">通知を外に出すと</text>
+        <rect x="16" y="206" width="250" height="52" rx="8" fill="none" stroke="var(--primary)" stroke-width="1.6" stroke-dasharray="6 4" />
+        <text x="24" y="220" font-size="9" class="lbl">BEGIN</text>
+        <rect x="70" y="222" width="86" height="26" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="84" y="239" font-size="9.5">注文を保存</text>
+        <rect x="164" y="222" width="86" height="26" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="178" y="239" font-size="9.5">在庫を減算</text>
+        <text x="272" y="236" font-size="9" class="lbl">COMMIT</text>
+        <line x1="322" y1="235" x2="346" y2="235" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <rect x="350" y="222" width="240" height="26" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="364" y="239" font-size="9.5" class="muted">確定した「後」に通知する</text>
+        <line x1="16" y1="268" x2="266" y2="268" stroke="var(--primary)" stroke-width="2.4" />
+        <text x="16" y="286" font-size="10" class="lbl">占有はここまで。外部の障害が、自分のデータベースの障害にならない。</text>
+
+        <text x="16" y="312" font-size="10" class="muted">確実に通知したいなら ― 送りたい内容を同じトランザクションで別のテーブルに書き、別のワーカーがそれを読んで送る。</text>
+      </svg>
+    </div>
+  </body>
+</html>

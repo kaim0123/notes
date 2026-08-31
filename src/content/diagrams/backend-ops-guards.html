@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 350" role="img" aria-label="障害がどこから来るかと、それを止める4つの手立てを示した図。中央にアプリケーションがあり、左から利用者のリクエストが流れ込む。その入口に置かれるのがレート制限で、入ってくる量そのものを絞る。右にはデータベースや外部APIといった、自分より先に壊れるものがある。そこへ向かう出口に置かれるのが、タイムアウトとリトライと遮断で、相手の遅さと故障が自分に伝わるのを止める。上からはデプロイが降りてくる。その受け止めに要るのが起動と停止の作法で、入れ替えの瞬間に取りこぼしを出さないためのもの。そして図の全体を横切る形で、追跡が置かれる。これは壊れることを防ぐのではなく、壊れたときにどこで何が起きたかを辿れるようにするためのもの。図の下部には、入る量を絞る、伝わるのを止める、切り替えを取りこぼさない、起きたことを辿れる、という4つの言葉でまとめられている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <rect x="248" y="112" width="140" height="76" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="272" y="156" font-size="12">アプリケーション</text>
+
+        <text x="16" y="130" font-size="10" class="muted">利用者の</text>
+        <text x="16" y="146" font-size="10" class="muted">リクエスト</text>
+        <line x1="70" y1="150" x2="140" y2="150" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="146" y="130" width="92" height="40" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="160" y="147" font-size="10" class="lbl">レート制限</text>
+        <text x="156" y="162" font-size="8.5" class="muted">入る量を絞る</text>
+
+        <line x1="398" y1="150" x2="418" y2="150" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="422" y="122" width="106" height="56" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="432" y="142" font-size="10" class="lbl">待つ・諦める</text>
+        <text x="432" y="157" font-size="10" class="lbl">・遮断する</text>
+        <text x="430" y="172" font-size="8.5" class="muted">伝わるのを止める</text>
+
+        <line x1="528" y1="150" x2="548" y2="150" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <text x="554" y="140" font-size="10" class="muted">データベース</text>
+        <text x="554" y="156" font-size="10" class="muted">外部API</text>
+        <text x="554" y="176" font-size="8.5" class="muted">自分より先に壊れる</text>
+
+        <text x="248" y="36" font-size="10" class="muted">デプロイ</text>
+        <line x1="286" y1="44" x2="286" y2="72" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="240" y="72" width="156" height="32" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="254" y="93" font-size="10" class="lbl">起動と停止の作法</text>
+        <text x="404" y="93" font-size="8.5" class="muted">切り替えで取りこぼさない</text>
+
+        <rect x="60" y="220" width="500" height="36" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" stroke-dasharray="6 4" />
+        <text x="80" y="243" font-size="10.5" class="lbl">追跡 ― 1本のリクエストが、どこで何秒使ったかを辿れるようにする</text>
+        <line x1="310" y1="188" x2="310" y2="216" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="4 3" />
+        <text x="60" y="274" font-size="9.5" class="muted">これだけは壊れることを防がない。壊れたあとに原因へ辿り着くためのもの。</text>
+
+        <line x1="16" y1="292" x2="624" y2="292" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="318" font-size="10.5" class="muted">入る量を絞る / 伝わるのを止める / 切り替えを取りこぼさない / 起きたことを辿れる</text>
+        <text x="16" y="340" font-size="10.5" class="lbl">この4つは、どれも「正しく動く」ためではなく「壊れ方を選ぶ」ための実装。</text>
+      </svg>
+    </div>
+  </body>
+</html>

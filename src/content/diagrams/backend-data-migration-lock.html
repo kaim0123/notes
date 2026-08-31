@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 330" role="img" aria-label="スキーマ変更が全体を巻き込んで止める仕組みを、時間軸で示した図。上から4本の帯が並ぶ。1本目は先に走っていた長い集計クエリで、テーブルを読むためのロックを握ったまま数十秒続く。2本目はスキーマ変更で、テーブル全体のロックを要求するため1本目の終了を待つ。ここまでなら待っているのはスキーマ変更だけだが、問題は3本目と4本目で、そのあとに来たごく普通の読み取りクエリが、待機中のスキーマ変更の後ろに並ばされる。結果として、1本の長いクエリと1本のスキーマ変更のせいで、そのテーブルへのアクセスがすべて止まる。図の下部には対策として、ロックを待つ時間に上限を設けておけば、取れなかった時点でスキーマ変更だけが失敗して終わり、後続を巻き込まずに済むことが示されている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11.5" class="muted">1本の長いクエリと、1本のスキーマ変更だけで、テーブル全体が止まる</text>
+
+        <line x1="150" y1="40" x2="620" y2="40" stroke="var(--border)" stroke-width="1" marker-end="url(#ar)" />
+        <text x="592" y="34" font-size="9" class="muted">時間</text>
+
+        <text x="16" y="66" font-size="10" class="muted">先に走っていた</text>
+        <text x="16" y="80" font-size="10" class="muted">長い集計クエリ</text>
+        <rect x="150" y="56" width="220" height="24" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="166" y="72" font-size="9.5" class="muted">読み取りのロックを握ったまま … 数十秒</text>
+
+        <text x="16" y="118" font-size="10" class="lbl">スキーマ変更</text>
+        <text x="16" y="132" font-size="10" class="muted">(ALTER TABLE)</text>
+        <rect x="150" y="106" width="220" height="24" rx="4" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 3" />
+        <text x="182" y="122" font-size="9.5" class="muted">待つ(テーブル全体のロックが要る)</text>
+        <rect x="374" y="106" width="60" height="24" rx="4" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="386" y="122" font-size="9.5" class="lbl">実行</text>
+
+        <text x="16" y="170" font-size="10" class="muted">後から来た</text>
+        <text x="16" y="184" font-size="10" class="muted">普通の読み取り</text>
+        <rect x="212" y="158" width="222" height="24" rx="4" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 3" />
+        <text x="230" y="174" font-size="9.5" class="muted">待つ ← スキーマ変更の後ろに並ばされる</text>
+
+        <text x="16" y="216" font-size="10" class="muted">さらに後の</text>
+        <text x="16" y="230" font-size="10" class="muted">全リクエスト</text>
+        <rect x="266" y="204" width="168" height="24" rx="4" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 3" />
+        <text x="292" y="220" font-size="9.5" class="muted">待つ … 事実上の障害</text>
+
+        <line x1="16" y1="252" x2="624" y2="252" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="278" font-size="10.5" class="lbl">対策:</text>
+        <text x="70" y="278" font-size="10.5" class="muted">ロックを待つ時間に上限を設けておく。</text>
+        <text x="70" y="298" font-size="10.5" class="muted">取れなければスキーマ変更だけが失敗して終わり、後続を巻き込まない。</text>
+        <text x="70" y="320" font-size="10.5" class="muted">失敗して出直すほうが、全アクセスを止めるよりはるかに安い。</text>
+      </svg>
+    </div>
+  </body>
+</html>

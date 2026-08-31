@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --warn: oklch(0.82 0.16 75);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .warn { fill: var(--warn); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 340" role="img" aria-label="停止の合図を受けてからサーバーを閉じるまでに待ち時間が要る理由を示した図。上段は待たずにすぐ閉じた場合で、停止の合図を受けた瞬間にサーバーが新規の受付を止める。しかし振り分け装置はまだこのサーバーが生きていると思っており、数秒のあいだリクエストを送り続ける。その数秒に届いた分は接続を拒否されて失敗する。この隙間が、デプロイのたびに少しだけエラーが出る現象の正体である。下段は正しい順序で、停止の合図を受けたらまず準備できていないと宣言し、振り分け装置がそれに気づいて送るのをやめるまで待つ。振り分けが止まってからサーバーを閉じ、処理中のものを最後まで終えて、それから依存先を閉じる。図の下部には順序が逆になる失敗として、先にデータベースを閉じると処理中のリクエストが全部失敗することが注記されている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11.5" class="muted">停止の合図を受けたあと ―</text>
+
+        <text x="16" y="52" font-size="11" class="muted">待たずにすぐ閉じると</text>
+        <line x1="150" y1="62" x2="150" y2="150" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="4 3" />
+        <text x="112" y="76" font-size="9" class="muted">停止の合図</text>
+
+        <text x="16" y="102" font-size="9.5" class="muted">サーバー</text>
+        <rect x="60" y="88" width="90" height="18" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="70" y="101" font-size="8.5" class="muted">受け付け中</text>
+        <rect x="150" y="88" width="330" height="18" rx="4" fill="none" stroke="var(--muted)" stroke-width="1.1" stroke-dasharray="4 3" />
+        <text x="160" y="101" font-size="8.5" class="muted">閉じた</text>
+
+        <text x="16" y="132" font-size="9.5" class="muted">振り分け</text>
+        <rect x="60" y="118" width="150" height="18" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="70" y="131" font-size="8.5" class="muted">まだ送り続けている</text>
+
+        <rect x="150" y="112" width="60" height="30" rx="4" fill="none" stroke="var(--warn)" stroke-width="1.6" />
+        <text x="218" y="132" font-size="9.5" class="warn">← この数秒に届いた分が、接続を拒否されて失敗する</text>
+
+        <line x1="16" y1="172" x2="624" y2="172" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="200" font-size="11" class="lbl">正しい順序</text>
+        <line x1="150" y1="210" x2="150" y2="300" stroke="var(--primary)" stroke-width="1.4" stroke-dasharray="4 3" />
+        <text x="112" y="224" font-size="9" class="lbl">停止の合図</text>
+
+        <text x="16" y="250" font-size="9.5" class="muted">サーバー</text>
+        <rect x="60" y="236" width="90" height="18" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="70" y="249" font-size="8.5" class="muted">受け付け中</text>
+        <rect x="150" y="236" width="110" height="18" rx="4" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="158" y="249" font-size="8.5" class="lbl">「準備できていない」と宣言し、待つ</text>
+        <rect x="264" y="236" width="120" height="18" rx="4" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="272" y="249" font-size="8.5" class="lbl">閉じて、処理中を終える</text>
+        <rect x="388" y="236" width="100" height="18" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="396" y="249" font-size="8.5" class="muted">依存先を閉じる</text>
+
+        <text x="16" y="280" font-size="9.5" class="muted">振り分け</text>
+        <rect x="60" y="266" width="200" height="18" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="70" y="279" font-size="8.5" class="muted">送っている</text>
+        <text x="270" y="279" font-size="8.5" class="lbl">← ここで止まってから、初めて閉じる</text>
+
+        <line x1="16" y1="312" x2="624" y2="312" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="334" font-size="10.5" class="muted">順序が逆になる失敗もある ― 先に依存先を閉じると、処理中のリクエストが全部失敗する。</text>
+      </svg>
+    </div>
+  </body>
+</html>

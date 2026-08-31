@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 360" role="img" aria-label="オーケストレーション層を挟む前と後を比べた図。左は層がない状態で、画面から3つのコアAPIへ3本の線が伸び、遅い回線を3回またぐ。失敗時の処理も画面側で3回書くことになる。右は画面とコアAPIの間にBFFを挟んだ状態で、画面からBFFへの線は1本だけになり、遅い回線をまたぐのは1回で済む。BFFからコアAPIへの3本は速い内部の回線で、しかも同時に投げられる。図の中央には回線の速さの差を示す帯があり、画面とサーバーの間が遅く、サーバー同士の間が速いことを表している。下部には境界の原則として、業務のルールは奥のコアに置き、BFFに置くのは集約と変換と認可の橋渡しだけ、と記されている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <line x1="320" y1="16" x2="320" y2="286" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="26" font-size="11.5" class="muted">層を挟まないと</text>
+        <text x="344" y="26" font-size="11.5" class="lbl">BFFを挟むと</text>
+
+        <rect x="80" y="40" width="150" height="30" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="122" y="60" font-size="11">商品詳細画面</text>
+
+        <line x1="110" y1="70" x2="60" y2="176" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <line x1="155" y1="70" x2="155" y2="176" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <line x1="200" y1="70" x2="250" y2="176" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <text x="86" y="130" font-size="10" class="muted">3往復</text>
+
+        <rect x="20" y="180" width="80" height="28" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="36" y="199" font-size="10" class="muted">users</text>
+        <rect x="115" y="180" width="80" height="28" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="130" y="199" font-size="10" class="muted">orders</text>
+        <rect x="210" y="180" width="80" height="28" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="222" y="199" font-size="10" class="muted">products</text>
+
+        <text x="20" y="238" font-size="10.5" class="muted">遅い回線を3回またぐ。</text>
+        <text x="20" y="256" font-size="10.5" class="muted">失敗時の処理も画面側で3回書く。</text>
+
+        <rect x="400" y="40" width="150" height="30" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="442" y="60" font-size="11">商品詳細画面</text>
+        <line x1="475" y1="70" x2="475" y2="106" stroke="var(--primary)" stroke-width="1.8" marker-end="url(#arp)" />
+        <text x="486" y="92" font-size="10" class="lbl">1往復</text>
+        <rect x="400" y="110" width="150" height="30" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="446" y="130" font-size="11" class="lbl">Web BFF</text>
+
+        <line x1="440" y1="140" x2="390" y2="176" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="475" y1="140" x2="475" y2="176" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="510" y1="140" x2="560" y2="176" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="524" y="160" font-size="9.5" class="muted">同時に</text>
+
+        <rect x="350" y="180" width="80" height="28" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="366" y="199" font-size="10" class="muted">users</text>
+        <rect x="435" y="180" width="80" height="28" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="450" y="199" font-size="10" class="muted">orders</text>
+        <rect x="520" y="180" width="80" height="28" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="532" y="199" font-size="10" class="muted">products</text>
+
+        <text x="350" y="238" font-size="10.5" class="muted">遅い回線をまたぐのは1回だけ。</text>
+        <text x="350" y="256" font-size="10.5" class="muted">3本は速い内部の回線で同時に投げる。</text>
+
+        <line x1="16" y1="292" x2="624" y2="292" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="316" font-size="10.5" class="lbl">境界の原則:</text>
+        <text x="100" y="316" font-size="10.5" class="muted">業務のルール(在庫の引当・料金の計算)は奥のコアに置く。</text>
+        <text x="100" y="336" font-size="10.5" class="muted">BFFに置くのは、集約・変換・認可の橋渡しだけ。</text>
+      </svg>
+    </div>
+  </body>
+</html>

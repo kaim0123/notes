@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 310" role="img" aria-label="keyに添字を使った場合とIDを使った場合の違いを示した図。上段は添字をkeyにした場合で、AとBという2項目のリストの先頭にCを挿入すると、key0だったAがkey0のCに、key1だったBがkey1のAになる。Reactは同じkeyを同じ要素とみなすため、中身だけが書き換わったと判断し、各要素が保持していた入力中の値やフォーカスは元の位置に取り残される。下段はデータ固有のIDをkeyにした場合で、AとBのkeyは挿入後も変わらないため、Reactは新しい要素Cが1つ増えただけだと正しく判断し、既存の要素とその状態はそのまま保たれる。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="20" y="28" font-size="11.5" class="muted">key に配列の添字を使うと</text>
+        <rect x="20" y="40" width="120" height="88" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="34" y="62" font-size="10" class="muted">挿入前</text>
+        <rect x="32" y="70" width="96" height="22" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="40" y="86" font-size="10">key=0  A</text>
+        <rect x="32" y="98" width="96" height="22" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="40" y="114" font-size="10">key=1  B</text>
+
+        <line x1="146" y1="84" x2="180" y2="84" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <text x="163" y="76" text-anchor="middle" font-size="9.5" class="muted">先頭にC</text>
+
+        <rect x="186" y="40" width="120" height="116" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="200" y="62" font-size="10" class="muted">挿入後</text>
+        <rect x="198" y="70" width="96" height="22" rx="4" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="206" y="86" font-size="10">key=0  C</text>
+        <rect x="198" y="98" width="96" height="22" rx="4" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="206" y="114" font-size="10">key=1  A</text>
+        <rect x="198" y="126" width="96" height="22" rx="4" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="206" y="142" font-size="10">key=2  B</text>
+
+        <text x="326" y="70" font-size="10.5" class="muted">Reactの判断: key=0 の中身が A から C に、</text>
+        <text x="326" y="90" font-size="10.5" class="muted">key=1 の中身が B から A に書き換わった</text>
+        <text x="326" y="116" font-size="10.5" class="lbl">→ 各要素が持っていた入力値やフォーカスは</text>
+        <text x="326" y="134" font-size="10.5" class="lbl">   元の位置に取り残され、別の行に付いて見える</text>
+
+        <line x1="20" y1="176" x2="620" y2="176" stroke="var(--border)" stroke-width="1" />
+
+        <text x="20" y="202" font-size="11.5" class="lbl">key にデータ固有の ID を使うと</text>
+        <rect x="20" y="214" width="120" height="88" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="34" y="236" font-size="10" class="muted">挿入前</text>
+        <rect x="32" y="244" width="96" height="22" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="40" y="260" font-size="10">key=a  A</text>
+        <rect x="32" y="272" width="96" height="22" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="40" y="288" font-size="10">key=b  B</text>
+
+        <line x1="146" y1="258" x2="180" y2="258" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="186" y="214" width="120" height="116" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="200" y="236" font-size="10" class="muted">挿入後</text>
+        <rect x="198" y="244" width="96" height="22" rx="4" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="206" y="260" font-size="10">key=c  C</text>
+        <rect x="198" y="272" width="96" height="22" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="206" y="288" font-size="10">key=a  A</text>
+
+        <text x="326" y="244" font-size="10.5" class="muted">Reactの判断: key=c が1つ増えただけ</text>
+        <text x="326" y="270" font-size="10.5" class="lbl">→ A と B はそのまま。状態もフォーカスも保たれる</text>
+      </svg>
+    </div>
+  </body>
+</html>

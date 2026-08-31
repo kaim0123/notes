@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="スタッキングコンテキストによって z-index が効かなくなる仕組みを示した図。左に親Aがあり z-index は1、その内側に z-index を9999に指定した子が入っている。右に親Bがあり z-index は2。中央下の説明のとおり、重なり順はまず親Aと親Bの間で比較され、値の大きい親Bが手前になる。その結果、9999を指定した子は親Aの土俵の中でしか意味を持たず、親Bの裏に隠れてしまう。下部に、最前面が必要なら値を上げるのではなくDOM上の位置そのものを最上位へ移すのが確実だという注記がある。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <rect x="24" y="40" width="240" height="150" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="40" y="66" font-size="12">親A</text>
+        <text x="76" y="66" font-size="11" class="muted">z-index: 1</text>
+        <text x="40" y="86" font-size="10.5" class="muted">土俵をひとつ作る</text>
+        <rect x="48" y="100" width="192" height="70" rx="6" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="64" y="126" font-size="11.5" class="lbl">子</text>
+        <text x="86" y="126" font-size="11" class="lbl">z-index: 9999</text>
+        <text x="64" y="150" font-size="10.5" class="muted">この値は親Aの内側でしか効かない</text>
+
+        <rect x="360" y="40" width="240" height="150" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="376" y="66" font-size="12">親B</text>
+        <text x="412" y="66" font-size="11" class="lbl">z-index: 2</text>
+        <text x="376" y="94" font-size="10.5" class="muted">親Aより大きいので手前になる</text>
+        <text x="376" y="126" font-size="11">→ 親Aの子(9999)は</text>
+        <text x="376" y="148" font-size="11" class="lbl">この裏に隠れる</text>
+
+        <line x1="264" y1="115" x2="352" y2="115" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ar)" />
+        <text x="308" y="106" text-anchor="middle" font-size="10.5" class="muted">比較</text>
+        <text x="308" y="136" text-anchor="middle" font-size="10" class="muted">1 &lt; 2</text>
+
+        <rect x="24" y="214" width="576" height="84" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <text x="44" y="240" font-size="11.5">順位はまず土俵どうしで決まり、その中の順位は内側だけの話</text>
+        <text x="44" y="266" font-size="10.5" class="muted">position・opacity・transform・filter などが、意図せず土俵を作っていることが多い</text>
+        <text x="44" y="288" font-size="10.5" class="lbl">最前面が必要なら、値を上げるのではなく DOM 上の位置そのものを最上位へ移す</text>
+      </svg>
+    </div>
+  </body>
+</html>

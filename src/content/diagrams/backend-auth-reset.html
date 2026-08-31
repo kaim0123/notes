@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 360" role="img" aria-label="認証システムの強度が最も弱い回復手段で決まることを示した図。上段には正面のログイン画面が、長いパスワードと多要素認証と試行回数の制限で厚く守られた扉として描かれる。その隣に、パスワードリセットという別の扉があり、こちらはパスワードを知らない人がアカウントに入るための正規の経路であることが注記されている。攻撃者はどちらか弱いほうを通ればよいので、正面をいくら厚くしても、リセット側が薄ければ全体の強度はそちらで決まる。下段はリセットの導線に置くべき守りを、申請から完了までの流れに沿って並べたもの。申請では、アカウントの有無にかかわらず同じ応答を同じ時間で返し、申請自体にも回数の制限をかける。発行するトークンは推測できない乱数とし、保存はハッシュで行い、有効期限を短く切る。使用時は一度きりに限り、確定は画面からの送信で行う。完了後は、既存のセッションをすべて失効させ、本人に通知する。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11.5" class="muted">攻撃者は、弱いほうの扉を通ればよい</text>
+
+        <rect x="60" y="42" width="180" height="86" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="3" />
+        <text x="82" y="66" font-size="11.5" class="lbl">ログイン画面</text>
+        <text x="76" y="86" font-size="9.5" class="muted">長いパスワード</text>
+        <text x="76" y="102" font-size="9.5" class="muted">多要素認証</text>
+        <text x="76" y="118" font-size="9.5" class="muted">試行回数の制限</text>
+
+        <rect x="330" y="42" width="220" height="86" rx="8" fill="var(--card)" stroke="var(--muted)" stroke-width="1" />
+        <text x="352" y="66" font-size="11.5" class="muted">パスワードリセット</text>
+        <text x="346" y="88" font-size="9.5" class="muted">＝ パスワードを知らない人が</text>
+        <text x="346" y="104" font-size="9.5" class="muted">　 アカウントに入るための</text>
+        <text x="346" y="120" font-size="9.5" class="muted">　 正規の経路</text>
+
+        <text x="256" y="90" font-size="16" class="muted">or</text>
+        <text x="16" y="152" font-size="10.5" class="muted">正面をいくら厚くしても、全体の強度はこちらで決まる。</text>
+
+        <line x1="16" y1="170" x2="624" y2="170" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="194" font-size="11" class="lbl">だから、この導線にこそ守りを置く</text>
+
+        <rect x="16" y="208" width="180" height="80" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="32" y="228" font-size="10.5" class="lbl">申請</text>
+        <text x="28" y="246" font-size="9" class="muted">有無にかかわらず同じ応答</text>
+        <text x="28" y="262" font-size="9" class="muted">同じ所要時間で返す</text>
+        <text x="28" y="278" font-size="9" class="muted">申請自体にも回数の制限</text>
+
+        <line x1="196" y1="248" x2="216" y2="248" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="220" y="208" width="180" height="80" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="236" y="228" font-size="10.5" class="lbl">発行と保管</text>
+        <text x="232" y="246" font-size="9" class="muted">推測できない乱数</text>
+        <text x="232" y="262" font-size="9" class="muted">保存はハッシュで</text>
+        <text x="232" y="278" font-size="9" class="muted">有効期限は短く</text>
+
+        <line x1="400" y1="248" x2="420" y2="248" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="424" y="208" width="196" height="80" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="440" y="228" font-size="10.5" class="lbl">使用と完了</text>
+        <text x="436" y="246" font-size="9" class="muted">一度きり。確定は画面から送信</text>
+        <text x="436" y="262" font-size="9" class="muted">既存のセッションを全部失効</text>
+        <text x="436" y="278" font-size="9" class="muted">本人に通知する</text>
+
+        <text x="16" y="320" font-size="10.5" class="muted">最後の2つを忘れやすい ― すでに侵入されていた場合、パスワードを変えただけでは追い出せない。</text>
+        <text x="16" y="342" font-size="10.5" class="lbl">そして通知は、破られたあとに本人が気づける唯一の手段になる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

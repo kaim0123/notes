@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 360" role="img" aria-label="認可コードフローのやり取りを示した順序図。縦線が3本あり、左からブラウザ、自分のサーバー、外部のIdP。上から順に、ブラウザが自分のサーバーにログインを求め、サーバーは検証用の秘密をセッションに保管したうえでIdPへの誘導を返す。ブラウザはIdPの画面へ移り、そこで本人確認と同意が行われる。IdPは認可コードだけを付けてブラウザを自分のサイトへ戻す。ブラウザはそのコードをサーバーへ渡し、最後にサーバーがIdPへ直接、コードと手元の秘密とクライアントの資格情報を送って、IDトークンを受け取る。この最後の1本だけがブラウザを通らないサーバー同士の通信であり、そこが設計の核心。ブラウザを通るのは一度きりで短命な、それ単体では何の役にも立たないコードだけなので、URLや履歴にトークンが残らない。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="20" y="20" font-size="10.5" class="muted">ブラウザ</text>
+        <text x="252" y="20" font-size="10.5" class="muted">自分のサーバー</text>
+        <text x="536" y="20" font-size="10.5" class="muted">外部のIdP</text>
+        <line x1="60" y1="28" x2="60" y2="300" stroke="var(--border)" stroke-width="1.2" />
+        <line x1="300" y1="28" x2="300" y2="300" stroke="var(--border)" stroke-width="1.2" />
+        <line x1="560" y1="28" x2="560" y2="300" stroke="var(--border)" stroke-width="1.2" />
+
+        <line x1="60" y1="56" x2="294" y2="56" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="76" y="50" font-size="9.5" class="muted">① ログインしたい</text>
+
+        <line x1="300" y1="92" x2="66" y2="92" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="76" y="86" font-size="9.5" class="muted">② IdPへの誘導(照合用の値と、秘密の指紋を添えて)</text>
+        <text x="308" y="80" font-size="9" class="lbl">秘密は手元の</text>
+        <text x="308" y="94" font-size="9" class="lbl">セッションに保管</text>
+
+        <line x1="60" y1="130" x2="554" y2="130" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="76" y="124" font-size="9.5" class="muted">③ IdPの画面で本人確認と同意</text>
+
+        <line x1="560" y1="168" x2="66" y2="168" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="76" y="162" font-size="9.5" class="muted">④ 認可コードだけを付けて、自分のサイトへ戻す</text>
+
+        <line x1="60" y1="204" x2="294" y2="204" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="76" y="198" font-size="9.5" class="muted">⑤ そのコードを渡す</text>
+
+        <line x1="300" y1="248" x2="554" y2="248" stroke="var(--primary)" stroke-width="2.4" marker-end="url(#arp)" />
+        <text x="306" y="242" font-size="9.5" class="lbl">⑥ コード＋手元の秘密＋自分の資格情報</text>
+        <line x1="560" y1="278" x2="306" y2="278" stroke="var(--primary)" stroke-width="2.4" marker-end="url(#arp)" />
+        <text x="330" y="272" font-size="9.5" class="lbl">IDトークン</text>
+
+        <rect x="296" y="228" width="270" height="66" rx="8" fill="none" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <text x="300" y="310" font-size="9.5" class="lbl">この1往復だけが、ブラウザを通らない</text>
+
+        <line x1="16" y1="324" x2="624" y2="324" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="348" font-size="10.5" class="muted">ブラウザを通るのは、一度きり・短命・それ単体では無価値なコードだけ。だからURLにも履歴にもトークンが残らない。</text>
+      </svg>
+    </div>
+  </body>
+</html>

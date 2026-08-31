@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 350" role="img" aria-label="認証の実装で決めることを、一連の流れとして示した図。左から順に4つの段がある。第1段は本人であることを確かめる段で、パスワードで確かめるか、外部のIdPに委ねるかの分岐がある。第2段は確かめた結果を証として発行する段。第3段は、以降のリクエストでその証を毎回検証する段。第4段は、その人がこの操作をしてよいかを判定する認可の段で、ここは認証とは別の問いであることが強調されている。それぞれの段の下に、対応するページが示されている。本人確認と回復はパスワードとアカウント回復のページ、外部への委譲は外部IdP連携のページ、証の発行と検証はトークンの運用のページが扱う。図の下部には境界の説明があり、なぜその方式が安全なのかという原理と、攻撃の手口はセキュリティのセクションが扱い、ここでは実装の手順を扱うことが記されている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <rect x="16" y="40" width="136" height="76" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="32" y="62" font-size="11" class="lbl">① 本人か確かめる</text>
+        <rect x="28" y="72" width="112" height="18" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="38" y="85" font-size="9" class="muted">パスワードで確かめる</text>
+        <rect x="28" y="94" width="112" height="18" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="38" y="107" font-size="9" class="muted">外部のIdPに委ねる</text>
+
+        <line x1="152" y1="78" x2="176" y2="78" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="180" y="52" width="120" height="52" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="196" y="76" font-size="11" class="lbl">② 証を発行する</text>
+        <text x="196" y="93" font-size="9" class="muted">寿命をどうするか</text>
+
+        <line x1="300" y1="78" x2="324" y2="78" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="328" y="52" width="130" height="52" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="344" y="76" font-size="11" class="lbl">③ 毎回検証する</text>
+        <text x="344" y="93" font-size="9" class="muted">どこに置き、どう送るか</text>
+
+        <line x1="458" y1="78" x2="482" y2="78" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="486" y="52" width="132" height="52" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="502" y="76" font-size="11">④ 認可の判定</text>
+        <text x="502" y="93" font-size="9" class="muted">これは別の問い</text>
+
+        <line x1="16" y1="140" x2="624" y2="140" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="164" font-size="10.5" class="muted">それぞれを扱うページ</text>
+
+        <rect x="16" y="178" width="180" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="30" y="199" font-size="10" class="muted">パスワードとアカウント回復</text>
+        <line x1="84" y1="178" x2="84" y2="120" stroke="var(--border)" stroke-width="1" stroke-dasharray="3 3" />
+
+        <rect x="16" y="220" width="180" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="30" y="241" font-size="10" class="muted">外部IdP連携</text>
+
+        <rect x="212" y="178" width="246" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="226" y="199" font-size="10" class="muted">トークンの運用</text>
+        <line x1="335" y1="178" x2="335" y2="120" stroke="var(--border)" stroke-width="1" stroke-dasharray="3 3" />
+
+        <line x1="16" y1="276" x2="624" y2="276" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="302" font-size="10.5" class="muted">なぜその方式が安全なのかという原理と、攻撃の手口は、セキュリティのセクションが扱う。</text>
+        <text x="16" y="322" font-size="10.5" class="lbl">ここで扱うのは、それを実際にどう組むか ― 手順と、間違えやすい箇所。</text>
+        <text x="16" y="344" font-size="10.5" class="muted">④の認可は、認証とは別の問い。「誰か」が分かっても「してよいか」は決まらない。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 280"
+        role="img"
+        aria-label="1回のリリースに含まれる変更の数と、障害が起きたときにできることの関係を示した図。上段は変更1件のリリースで、戻せば確実に直り、原因調査もほぼ不要。中段は10件をまとめたリリースで、戻すと関係のない機能まで消えるため、どれが原因かの特定が必要になる。下段は50件をまとめた月次リリースで、戻す判断自体が困難になり、前へ進んで直す方法しか選べなくなる。リリースを増やすとリスクが上がるというのは直感に反して誤りで、小さく頻繁に出すほど1回あたりの不確実性が下がり、戻すのも容易になる。これが継続的デリバリーの根拠。"
+      >
+        <text x="16" y="26" font-size="12" class="lbl">1回のリリースに含まれる変更の数と、障害時にできること</text>
+
+        <rect x="16" y="40" width="150" height="52" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="91" y="62" text-anchor="middle" font-size="11.5">変更 1件</text>
+        <rect x="40" y="70" width="14" height="12" rx="2" fill="none" stroke="var(--primary)" stroke-width="1.2" />
+
+        <rect x="198" y="40" width="426" height="52" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="218" y="62" font-size="11.5">戻せば確実に直る</text>
+        <text x="218" y="80" font-size="10.5" class="muted">原因調査もほぼ不要。判断は数秒で済む</text>
+
+        <rect x="16" y="106" width="150" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="91" y="128" text-anchor="middle" font-size="11.5" class="muted">変更 10件</text>
+        <rect x="30" y="136" width="12" height="10" rx="2" fill="none" stroke="var(--muted)" stroke-width="1" />
+        <rect x="46" y="136" width="12" height="10" rx="2" fill="none" stroke="var(--muted)" stroke-width="1" />
+        <rect x="62" y="136" width="12" height="10" rx="2" fill="none" stroke="var(--muted)" stroke-width="1" />
+        <rect x="78" y="136" width="12" height="10" rx="2" fill="none" stroke="var(--muted)" stroke-width="1" />
+        <rect x="94" y="136" width="12" height="10" rx="2" fill="none" stroke="var(--muted)" stroke-width="1" />
+        <rect x="110" y="136" width="12" height="10" rx="2" fill="none" stroke="var(--muted)" stroke-width="1" />
+        <rect x="126" y="136" width="12" height="10" rx="2" fill="none" stroke="var(--muted)" stroke-width="1" />
+        <rect x="142" y="136" width="12" height="10" rx="2" fill="none" stroke="var(--muted)" stroke-width="1" />
+
+        <rect x="198" y="106" width="426" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="218" y="128" font-size="11.5" class="muted">戻すと関係ない機能まで消える</text>
+        <text x="218" y="146" font-size="10.5" class="muted">どれが原因かの特定が先に必要になる</text>
+
+        <rect x="16" y="172" width="150" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="91" y="194" text-anchor="middle" font-size="11.5" class="muted">変更 50件(月次)</text>
+        <rect x="30" y="202" width="128" height="12" rx="2" fill="none" stroke="var(--muted)" stroke-width="1" />
+        <text x="94" y="212" text-anchor="middle" font-size="9" class="muted">大量の変更が1つの塊に</text>
+
+        <rect x="198" y="172" width="426" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="218" y="194" font-size="11.5" class="muted">戻す判断自体が困難</text>
+        <text x="218" y="212" font-size="10.5" class="muted">前へ進んで直す方法しか選べなくなる</text>
+
+        <line x1="16" y1="242" x2="624" y2="242" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="264" font-size="11" class="lbl">小さく頻繁に出すほど、1回あたりの不確実性が下がり、戻すのも容易になる</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 300"
+        role="img"
+        aria-label="依存の供給網に攻撃が入り込む経路を示した図。中央に自分たちの成果物があり、そこへ向かって左から依存パッケージが取り込まれる。取り込みの経路には4つの入り口がある。1つ目は既知の脆弱性で、古い版を使い続けているために公開済みの弱点をそのまま突かれる。2つ目は偽パッケージで、紛らわしい名前や社内用と同名の公開パッケージを取得してしまう。3つ目は正規パッケージの乗っ取りで、信頼していたパッケージの新しい版に悪意あるコードが混入する。4つ目はインストール時のスクリプト実行で、インストールしただけで開発者のPCやCIの権限で任意のコードが動く。右側には守り方が3つ並ぶ。ロックファイルとハッシュで取得物を固定すること、定期更新で修正を取り込むこと、インストールとCIの権限を絞ることで、現実的なリスクの大半は下げられる。"
+      >
+        <defs>
+          <marker id="arsc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="26" font-size="12" class="muted">攻撃が入り込む4つの経路</text>
+
+        <rect x="16" y="38" width="216" height="34" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="60" font-size="11" class="muted">① 既知の脆弱性を放置している</text>
+        <rect x="16" y="80" width="216" height="34" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="102" font-size="11" class="muted">② 紛らわしい名前の偽パッケージ</text>
+        <rect x="16" y="122" width="216" height="34" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="144" font-size="11" class="muted">③ 正規パッケージの乗っ取り</text>
+        <rect x="16" y="164" width="216" height="34" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="186" font-size="11" class="muted">④ インストール時のスクリプト実行</text>
+
+        <line x1="232" y1="55" x2="266" y2="105" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arsc)" />
+        <line x1="232" y1="97" x2="266" y2="112" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arsc)" />
+        <line x1="232" y1="139" x2="266" y2="124" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arsc)" />
+        <line x1="232" y1="181" x2="266" y2="131" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#arsc)" />
+
+        <rect x="272" y="84" width="130" height="68" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="337" y="110" text-anchor="middle" font-size="12" font-weight="600">自分たちの</text>
+        <text x="337" y="128" text-anchor="middle" font-size="12" font-weight="600">成果物</text>
+        <text x="337" y="146" text-anchor="middle" font-size="10" class="muted">全部が本番で動く</text>
+
+        <line x1="402" y1="118" x2="436" y2="118" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arsc)" />
+        <text x="502" y="112" text-anchor="middle" font-size="11" class="muted">利用者から見れば、自作か</text>
+        <text x="502" y="130" text-anchor="middle" font-size="11" class="muted">依存かの区別はない</text>
+
+        <line x1="16" y1="220" x2="624" y2="220" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="244" font-size="12" class="lbl">効果の大きい守り方は3つ</text>
+
+        <rect x="16" y="254" width="196" height="34" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="114" y="276" text-anchor="middle" font-size="11">固定する(ロック + ハッシュ)</text>
+        <rect x="222" y="254" width="196" height="34" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="320" y="276" text-anchor="middle" font-size="11">定期的に上げる</text>
+        <rect x="428" y="254" width="196" height="34" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="526" y="276" text-anchor="middle" font-size="11">権限を絞る</text>
+      </svg>
+    </div>
+  </body>
+</html>

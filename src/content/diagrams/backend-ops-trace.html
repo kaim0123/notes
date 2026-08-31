@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --warn: oklch(0.82 0.16 75);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .warn { fill: var(--warn); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="1本のリクエストを構成する作業単位を、横軸を時間として入れ子に並べた図。いちばん上に、注文の作成という全体の帯が820ミリ秒の長さで置かれる。その下に、そこから枝分かれした作業が並ぶ。認証が12ミリ秒、商品の取得が60ミリ秒、そして決済サービスの呼び出しが640ミリ秒と、他より際立って長い。さらにその中を覗くと、決済サービス側のデータベース書き込みが610ミリ秒を占めていることが分かる。これは別のサービスの中で起きていることだが、共通の識別子を引き継いでいるため1本の木として再構成できる。最後に保存が短く入る。横軸が時間なので、入れ子と長さが一目で分かり、どこが遅いのかを探さずに特定できる。図の下部には、識別子だけでは同じリクエストの行を集めることしかできず、どこで何秒使ったかを知るにはこの構造が要る、と記されている。">
+        <text x="16" y="24" font-size="11.5" class="muted">横軸は時間。入れ子と長さが、そのまま見える。</text>
+
+        <rect x="20" y="40" width="580" height="24" rx="4" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="32" y="57" font-size="10.5" class="lbl">POST /orders ― 820ms</text>
+
+        <rect x="46" y="74" width="34" height="22" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="88" y="90" font-size="9.5" class="muted">認証 ― 12ms</text>
+
+        <rect x="46" y="104" width="70" height="22" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="124" y="120" font-size="9.5" class="muted">商品の取得 ― 60ms</text>
+
+        <rect x="120" y="134" width="440" height="22" rx="4" fill="var(--card)" stroke="var(--warn)" stroke-width="1.8" />
+        <text x="132" y="150" font-size="9.5" class="warn">決済サービスの呼び出し ― 640ms</text>
+
+        <rect x="140" y="164" width="418" height="22" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" stroke-dasharray="4 3" />
+        <text x="152" y="180" font-size="9.5" class="muted">(別サービスの中)決済の書き込み ― 610ms</text>
+
+        <rect x="566" y="194" width="30" height="22" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="500" y="210" font-size="9.5" class="muted">保存 ― 20ms</text>
+
+        <text x="120" y="240" font-size="10" class="warn">↑ 探さなくても、遅い場所がここだと分かる</text>
+
+        <line x1="16" y1="258" x2="624" y2="258" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="282" font-size="10.5" class="muted">共通の識別子だけでは、同じリクエストの行を「集める」ことしかできない。</text>
+        <text x="16" y="302" font-size="10.5" class="lbl">どこで何秒使ったかを知るには、この入れ子の構造が要る。</text>
+      </svg>
+    </div>
+  </body>
+</html>

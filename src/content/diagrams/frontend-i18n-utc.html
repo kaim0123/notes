@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 280" role="img" aria-label="時刻の扱いを層ごとに分けた図。左に保存層があり、データベースにはUTCの絶対時刻を1つだけ持つ。中央が通信層で、APIはISO 8601のUTC文字列でそのまま受け渡す。右が表示層で、ここで初めて利用者のタイムゾーンに変換され、同じ絶対時刻が東京では9時間進んだ表示に、ニューヨークでは4時間戻った表示になる。変換は表示の直前で1回だけ行い、保存側は決して現地時刻にしない。下部に、保存を現地時刻にするとサーバーの移設やサマータイムで基準そのものが動いてしまうという注記がある。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <rect x="16" y="40" width="176" height="120" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="32" y="66" font-size="12">保存(DB)</text>
+        <text x="32" y="92" font-size="11" class="lbl">2026-08-08T15:30:00Z</text>
+        <text x="32" y="114" font-size="10.5" class="muted">常にUTCの絶対時刻</text>
+        <text x="32" y="134" font-size="10.5" class="muted">タイムゾーン付きの型で持つ</text>
+
+        <line x1="192" y1="100" x2="222" y2="100" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ar)" />
+        <rect x="226" y="60" width="150" height="80" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="242" y="86" font-size="12">通信(API)</text>
+        <text x="242" y="110" font-size="10.5" class="muted">ISO 8601 のまま渡す</text>
+        <text x="242" y="128" font-size="10.5" class="muted">ここでは変換しない</text>
+
+        <line x1="376" y1="100" x2="406" y2="100" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arp)" />
+        <text x="391" y="88" text-anchor="middle" font-size="10" class="lbl">変換</text>
+
+        <rect x="410" y="34" width="214" height="60" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="426" y="56" font-size="11">表示 ― 東京(UTC+9)</text>
+        <text x="426" y="78" font-size="11" class="lbl">2026年8月9日 0:30</text>
+
+        <rect x="410" y="106" width="214" height="60" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="426" y="128" font-size="11">表示 ― ニューヨーク(UTC-4)</text>
+        <text x="426" y="150" font-size="11" class="lbl">2026年8月8日 11:30</text>
+
+        <text x="410" y="192" font-size="10.5" class="muted">同じ1つの絶対時刻を、見せ方だけ変えている</text>
+
+        <rect x="16" y="204" width="608" height="56" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <text x="32" y="228" font-size="11">保存側を現地時刻にすると ―</text>
+        <text x="32" y="248" font-size="10.5" class="muted">サーバーを別リージョンへ移した時点、サマータイムが切り替わった時点で、基準そのものが動く</text>
+      </svg>
+    </div>
+  </body>
+</html>

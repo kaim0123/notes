@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 330" role="img" aria-label="利用者像の違いが設計の優先順位を決めることを示した比較図。左はLSUD、大量の未知の開発者向けで、窓口の上に多数の小さな四角が不揃いに並び、誰がいつどう使っているか分からないことを表す。窓口と利用者の間の線は一方通行で、約束は錠前の印とともに固定され、変更はバージョンを切って行う。右はSSKD、少数の既知の開発者向けで、窓口の上には2つの四角しかなく、線は双方向で、相談しながら形を変えられることを表す。下段にはそれぞれの典型的な失敗が置かれ、LSUDは破壊的変更で外部連携が止まること、SSKDは画面ごとに窓口が乱立することが挙げられている。">
+        <text x="16" y="24" font-size="11.5" class="muted">同じRESTでも、誰が使うかで何を守るかが変わる</text>
+
+        <line x1="320" y1="36" x2="320" y2="252" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="56" font-size="12" class="lbl">LSUD ― 大量の未知の開発者</text>
+        <g fill="var(--card)" stroke="var(--border)" stroke-width="1.1">
+          <rect x="20" y="70" width="34" height="20" rx="4" />
+          <rect x="62" y="66" width="34" height="20" rx="4" />
+          <rect x="104" y="72" width="34" height="20" rx="4" />
+          <rect x="146" y="66" width="34" height="20" rx="4" />
+          <rect x="188" y="72" width="34" height="20" rx="4" />
+          <rect x="230" y="68" width="34" height="20" rx="4" />
+          <rect x="41" y="96" width="34" height="20" rx="4" />
+          <rect x="104" y="98" width="34" height="20" rx="4" />
+          <rect x="188" y="96" width="34" height="20" rx="4" />
+        </g>
+        <text x="240" y="112" font-size="9.5" class="muted">…</text>
+        <line x1="150" y1="122" x2="150" y2="150" stroke="var(--muted)" stroke-width="1.2" />
+        <text x="20" y="142" font-size="10" class="muted">一方通行(相談できない)</text>
+        <rect x="40" y="154" width="220" height="40" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="58" y="179" font-size="11" class="lbl">汎用リソースAPI</text>
+        <rect x="182" y="162" width="14" height="10" rx="2" fill="none" stroke="var(--primary)" stroke-width="1.2" />
+        <path d="M185,162 v-4 a4,4 0 0 1 8,0 v4" fill="none" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="204" y="180" font-size="9.5" class="lbl">契約は固定</text>
+        <text x="40" y="216" font-size="10.5" class="muted">名詞のURL / 機械可読な仕様 /</text>
+        <text x="40" y="234" font-size="10.5" class="muted">変更はバージョンを切る</text>
+
+        <text x="344" y="56" font-size="12" class="lbl">SSKD ― 少数の既知の開発者</text>
+        <g fill="var(--card)" stroke="var(--border)" stroke-width="1.1">
+          <rect x="384" y="70" width="70" height="24" rx="5" />
+          <rect x="474" y="70" width="70" height="24" rx="5" />
+        </g>
+        <text x="396" y="86" font-size="9.5" class="muted">自社Web</text>
+        <text x="482" y="86" font-size="9.5" class="muted">自社アプリ</text>
+        <line x1="464" y1="102" x2="464" y2="150" stroke="var(--primary)" stroke-width="1.4" />
+        <path d="M460,106 l4,-5 l4,5" fill="none" stroke="var(--primary)" stroke-width="1.4" />
+        <path d="M460,146 l4,5 l4,-5" fill="none" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="348" y="132" font-size="10" class="lbl">双方向(相談して直せる)</text>
+        <rect x="354" y="154" width="220" height="40" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="372" y="179" font-size="11" class="lbl">画面に寄せた窓口</text>
+        <text x="354" y="216" font-size="10.5" class="muted">ユースケース名も可 / 1往復で返す /</text>
+        <text x="354" y="234" font-size="10.5" class="muted">口頭の合意でも回る</text>
+
+        <line x1="16" y1="256" x2="624" y2="256" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="280" font-size="10.5" class="muted">典型的な失敗:</text>
+        <text x="16" y="302" font-size="10.5" class="muted">壊す変更で外部連携が止まる</text>
+        <text x="354" y="302" font-size="10.5" class="muted">画面ごとに窓口が乱立して保守できなくなる</text>
+      </svg>
+    </div>
+  </body>
+</html>

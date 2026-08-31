@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 300" role="img" aria-label="1つのHTMLが画面幅に応じて異なるレイアウトになる様子を示した図。左は狭い画面で、ヘッダーの下に本文とサイドバーの内容が縦に積まれ、ナビゲーションは折り畳まれたボタンになっている。中央は中くらいの画面で、カードが2列に並ぶ。右は広い画面で、本文とサイドバーが横に並び、ナビゲーションは展開されている。3つとも中身のHTMLは同じで、切り替えているのはCSSだけである。下部に、狭い画面を既定として書き、広い画面で上書きしていくのが基本の順序だという注記がある。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="70" y="28" text-anchor="middle" font-size="11" class="muted">狭い(既定)</text>
+        <rect x="20" y="38" width="100" height="200" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <rect x="30" y="48" width="80" height="20" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="36" y="62" font-size="8" class="muted">header ☰</text>
+        <rect x="30" y="76" width="80" height="46" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="36" y="102" font-size="8" class="muted">main</text>
+        <rect x="30" y="130" width="80" height="46" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="36" y="156" font-size="8" class="muted">aside</text>
+        <rect x="30" y="184" width="80" height="44" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="36" y="210" font-size="8" class="muted">footer</text>
+
+        <text x="240" y="28" text-anchor="middle" font-size="11" class="muted">中くらい</text>
+        <rect x="150" y="38" width="180" height="200" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <rect x="160" y="48" width="160" height="20" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="166" y="62" font-size="8" class="muted">header</text>
+        <rect x="160" y="76" width="76" height="46" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <rect x="244" y="76" width="76" height="46" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <rect x="160" y="130" width="76" height="46" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <rect x="244" y="130" width="76" height="46" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="166" y="102" font-size="8" class="muted">card</text>
+        <rect x="160" y="184" width="160" height="44" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="166" y="210" font-size="8" class="muted">footer</text>
+
+        <text x="480" y="28" text-anchor="middle" font-size="11" class="muted">広い</text>
+        <rect x="360" y="38" width="260" height="200" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <rect x="370" y="48" width="240" height="20" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="376" y="62" font-size="8" class="muted">header ― nav は展開</text>
+        <rect x="370" y="76" width="156" height="100" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="376" y="102" font-size="8" class="muted">main</text>
+        <rect x="534" y="76" width="76" height="100" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="540" y="102" font-size="8" class="muted">aside</text>
+        <rect x="370" y="184" width="240" height="44" rx="3" fill="var(--bg)" stroke="var(--border)" stroke-width="1" />
+        <text x="376" y="210" font-size="8" class="muted">footer</text>
+
+        <text x="20" y="266" font-size="11" class="lbl">中身のHTMLは3つとも同じ ― 切り替えているのはCSSだけ</text>
+        <text x="20" y="288" font-size="10.5" class="muted">狭い画面を既定として書き、広い画面で上書きしていく(逆順にすると削る作業になる)</text>
+      </svg>
+    </div>
+  </body>
+</html>

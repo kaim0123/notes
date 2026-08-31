@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 290"
+        role="img"
+        aria-label="構成管理と変更管理が対になっていることを示した図。左には構成管理があり、いま何が正なのかを記録する台帳の役割を持つ。管理対象にはソースコード、設定、設計や仕様の文書、依存ライブラリの一覧、そしてビルド成果物が並び、それぞれに版が付いている。右には変更管理があり、その台帳をどう更新してよいかを定めるルールの役割を持つ。手順は、変更の要求を記録すること、影響を評価すること、承認すること、反映して回帰テストで確認することの4段階。中央の矢印は、変更管理の手順を通ったものだけが構成管理の台帳を更新できることを示す。現代のチームでは、この2つの多くがバージョン管理とプルリクエストの仕組みに置き換わっている。台帳がリポジトリ、変更要求と承認がPRとレビュー、確認がCIにあたる。"
+      >
+        <defs>
+          <marker id="arcc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="16" y="38" width="264" height="176" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="148" y="62" text-anchor="middle" font-size="12.5" font-weight="600">構成管理</text>
+        <text x="148" y="80" text-anchor="middle" font-size="10.5" class="lbl">いま何が正なのかを記録する台帳</text>
+        <line x1="34" y1="90" x2="262" y2="90" stroke="var(--border)" stroke-width="1" />
+        <text x="34" y="112" font-size="10.5" class="muted">ソースコード</text>
+        <text x="262" y="112" text-anchor="end" font-size="10" class="muted">版あり</text>
+        <text x="34" y="134" font-size="10.5" class="muted">設定</text>
+        <text x="262" y="134" text-anchor="end" font-size="10" class="muted">版あり</text>
+        <text x="34" y="156" font-size="10.5" class="muted">設計・仕様の文書</text>
+        <text x="262" y="156" text-anchor="end" font-size="10" class="muted">版あり</text>
+        <text x="34" y="178" font-size="10.5" class="muted">依存ライブラリの一覧</text>
+        <text x="262" y="178" text-anchor="end" font-size="10" class="muted">版あり</text>
+        <text x="34" y="200" font-size="10.5" class="muted">ビルド成果物</text>
+        <text x="262" y="200" text-anchor="end" font-size="10" class="muted">版あり</text>
+
+        <line x1="356" y1="126" x2="288" y2="126" stroke="var(--primary)" stroke-width="1.5" marker-end="url(#arcc)" />
+        <text x="322" y="114" text-anchor="middle" font-size="9.5" class="lbl">通ったものだけが</text>
+        <text x="322" y="146" text-anchor="middle" font-size="9.5" class="lbl">台帳を更新できる</text>
+
+        <rect x="360" y="38" width="264" height="176" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.5" />
+        <text x="492" y="62" text-anchor="middle" font-size="12.5" font-weight="600">変更管理</text>
+        <text x="492" y="80" text-anchor="middle" font-size="10.5" class="muted">台帳をどう更新してよいかのルール</text>
+        <line x1="378" y1="90" x2="606" y2="90" stroke="var(--border)" stroke-width="1" />
+        <text x="378" y="114" font-size="10.5" class="muted">① 変更要求 ― 内容と理由を記録する</text>
+        <text x="378" y="140" font-size="10.5" class="muted">② 影響評価 ― 波及とコストを見る</text>
+        <text x="378" y="166" font-size="10.5" class="muted">③ 承認 ― 実施の可否を判断する</text>
+        <text x="378" y="192" font-size="10.5" class="muted">④ 実施・確認 ― 回帰テストで確かめる</text>
+
+        <line x1="16" y1="236" x2="624" y2="236" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="258" font-size="11" class="lbl">現代のチームでは、この2つの多くがバージョン管理とPRの仕組みに置き換わっている</text>
+        <text x="16" y="278" font-size="11" class="muted">台帳 = リポジトリ / 変更要求と承認 = PRとレビュー / 確認 = CI</text>
+      </svg>
+    </div>
+  </body>
+</html>

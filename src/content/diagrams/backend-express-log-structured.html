@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="同じ出来事を文字列として残した場合と、構造として残した場合を比べた図。上段は文字列で、ユーザー42の取得に失敗しました、という一文だけが記録される。人間には読めるが、あとから機械で絞り込むには本文を文字列として検索するしかない。表記が少しでも揺れれば、その行は検索から漏れる。下段は構造で、同じ内容が、レベル、時刻、利用者、経路、所要時間、メッセージという名前付きの欄に分かれて記録される。だからレベルが誤りのものだけ、ある利用者に関するものだけ、所要時間が1秒を超えたものだけ、といった条件で機械的に絞り込める。図の下部には、判断の基準が置かれている。書くときの手間はほとんど変わらないが、読むときにできることが決定的に違う。そして、ログを読むのは何かが壊れたときであり、そのとき条件で絞り込めるかどうかが復旧までの時間を決める。">
+        <text x="16" y="24" font-size="11.5" class="muted">同じ出来事を、どう残すか</text>
+
+        <text x="16" y="52" font-size="11" class="muted">文字列として</text>
+        <rect x="16" y="62" width="600" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="84" font-size="10" class="mono muted">ユーザー42の取得に失敗しました</text>
+
+        <text x="16" y="122" font-size="10" class="muted">あとから絞り込むには、本文を文字列で検索するしかない。</text>
+        <text x="16" y="140" font-size="10" class="muted">表記が少しでも揺れれば、その行は検索から漏れる。</text>
+
+        <line x1="16" y1="162" x2="624" y2="162" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="190" font-size="11" class="lbl">構造として</text>
+        <rect x="16" y="200" width="600" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="30" y="222" font-size="9.5" class="mono lbl">{ level: "error", time: …, userId: 42, path: "/users/42", ms: 1240 }</text>
+
+        <rect x="16" y="244" width="190" height="26" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="30" y="262" font-size="9" class="muted">レベルが error のものだけ</text>
+        <rect x="216" y="244" width="190" height="26" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="230" y="262" font-size="9" class="muted">この利用者に関するものだけ</text>
+        <rect x="416" y="244" width="200" height="26" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="430" y="262" font-size="9" class="muted">1秒を超えたものだけ</text>
+
+        <text x="16" y="296" font-size="10.5" class="muted">書くときの手間はほとんど変わらない。違うのは<tspan class="lbl">読むときにできること</tspan>。</text>
+        <text x="16" y="316" font-size="10.5" class="muted">そしてログを読むのは、何かが壊れたとき ― そこで絞り込めるかどうかが、復旧までの時間を決める。</text>
+      </svg>
+    </div>
+  </body>
+</html>

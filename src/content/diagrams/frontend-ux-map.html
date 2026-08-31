@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 300" role="img" aria-label="UX・UIの配下を4つの段階に整理した図。左から調べる、決める、見せる、確かめるの順に並ぶ。調べるにはUXの基礎、人間中心設計と評価、デザイン思考が入る。決めるには画面設計と入力チェック、フォーム作成時の注意が入る。見せるには視覚デザイン、GUIの部品、Web UIデザイン、コンポーネントとデザインシステムが入る。確かめるにはユーザビリティとアクセシビリティが入る。いちばん右から左端へ戻る大きな矢印があり、確かめた結果が調べる段階へ戻る循環であることを示している。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <rect x="14" y="46" width="146" height="164" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="30" y="72" font-size="12.5">調べる</text>
+        <text x="30" y="100" font-size="10.5" class="muted">UXの基礎</text>
+        <text x="30" y="122" font-size="10.5" class="muted">人間中心設計と評価</text>
+        <text x="30" y="144" font-size="10.5" class="muted">デザイン思考</text>
+        <text x="30" y="180" font-size="10" class="lbl">誰のために、何を</text>
+
+        <line x1="160" y1="128" x2="182" y2="128" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ar)" />
+
+        <rect x="186" y="46" width="146" height="164" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="202" y="72" font-size="12.5">決める</text>
+        <text x="202" y="100" font-size="10.5" class="muted">画面設計と入力チェック</text>
+        <text x="202" y="122" font-size="10.5" class="muted">フォーム作成時の注意</text>
+        <text x="202" y="180" font-size="10" class="lbl">何をどう置くか</text>
+
+        <line x1="332" y1="128" x2="354" y2="128" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ar)" />
+
+        <rect x="358" y="46" width="146" height="164" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="374" y="72" font-size="12.5">見せる</text>
+        <text x="374" y="100" font-size="10.5" class="muted">視覚デザイン</text>
+        <text x="374" y="122" font-size="10.5" class="muted">GUIの部品</text>
+        <text x="374" y="144" font-size="10.5" class="muted">Web UIデザイン</text>
+        <text x="374" y="166" font-size="10.5" class="muted">デザインシステム</text>
+        <text x="374" y="196" font-size="10" class="lbl">目に見える形にする</text>
+
+        <line x1="504" y1="128" x2="526" y2="128" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ar)" />
+
+        <rect x="530" y="46" width="96" height="164" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="546" y="72" font-size="12.5">確かめる</text>
+        <text x="546" y="100" font-size="10.5" class="muted">ユーザビリティ</text>
+        <text x="546" y="120" font-size="10.5" class="muted">と</text>
+        <text x="546" y="140" font-size="10.5" class="muted">アクセシビリティ</text>
+        <text x="546" y="180" font-size="10" class="lbl">誰にでも</text>
+        <text x="546" y="196" font-size="10" class="lbl">使えるか</text>
+
+        <path d="M578 210 L578 254 L88 254 L88 214" fill="none" stroke="var(--primary)" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#arp)" />
+        <text x="333" y="276" text-anchor="middle" font-size="10.5" class="lbl">確かめた結果を、調べる段階へ戻す ― 一方通行ではない</text>
+      </svg>
+    </div>
+  </body>
+</html>

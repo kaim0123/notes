@@ -399,9 +399,232 @@ export const sections: NavSection[] = [
       },
     ],
   },
-  { href: "/dev", title: "開発の進め方", icon: Wrench, tree: [] },
-  { href: "/frontend", title: "フロントエンド", icon: AppWindow, tree: [] },
-  { href: "/backend", title: "バックエンド", icon: ServerCog, tree: [] },
+  {
+    href: "/dev",
+    title: "開発の進め方",
+    icon: Wrench,
+    // 第二階層の4見出しはそれぞれ本文を持つページ。URLは第二階層を挟まない
+    // フラットなまま(/dev/xxx)で、language・design と同じ方針。
+    // 第三階層(工程の各論・ツールの各論・Gitの各論等)は執筆次第ここへ足す。
+    tree: [
+      {
+        href: "/dev/process",
+        title: "開発プロセス",
+        children: [
+          { href: "/dev/process-agile", title: "スクラムとアジャイル実践" },
+          { href: "/dev/process-advanced", title: "プロセス成熟度" },
+          { href: "/dev/process-history", title: "開発手法の変遷" },
+          { href: "/dev/requirements", title: "要件定義" },
+          { href: "/dev/requirements-modeling", title: "要件の表現方法" },
+          { href: "/dev/implementation", title: "設計をコードに落とす" },
+          { href: "/dev/stack", title: "技術スタックの組み合わせ" },
+        ],
+      },
+      {
+        href: "/dev/tooling",
+        title: "開発環境とツール",
+        children: [
+          { href: "/dev/environments", title: "環境の全体像" },
+          { href: "/dev/dotenv", title: ".envと.gitignore" },
+          { href: "/dev/tooling-deps", title: "依存とバージョン" },
+          { href: "/dev/tooling-security", title: "依存の脆弱性とサプライチェーン" },
+          { href: "/dev/tooling-build", title: "ビルドの中身" },
+          { href: "/dev/tooling-monorepo", title: "モノレポとワークスペース" },
+          { href: "/dev/tooling-license", title: "知的財産とライセンス" },
+        ],
+      },
+      {
+        href: "/dev/git-ci",
+        title: "Git・CI/CD",
+        children: [
+          { href: "/dev/git-basics", title: "Gitの仕組み" },
+          { href: "/dev/git-conflict", title: "マージ・リベースとコンフリクト解決" },
+          { href: "/dev/git-recovery", title: "履歴のやり直しと復旧" },
+          { href: "/dev/git-release", title: "バージョニングとリリース" },
+          { href: "/dev/git-config-change", title: "構成管理と変更管理" },
+          { href: "/dev/ci-actions", title: "GitHub Actionsの実務" },
+          { href: "/dev/ci-deploy", title: "デプロイ戦略とロールバック" },
+        ],
+      },
+      {
+        href: "/dev/debug",
+        title: "デバッグと性能改善",
+        children: [
+          { href: "/dev/debug-profiling", title: "プロファイリング" },
+          { href: "/dev/cache", title: "キャッシュの全体像" },
+        ],
+      },
+    ],
+  },
+  {
+    href: "/frontend",
+    title: "フロントエンド",
+    icon: AppWindow,
+    // 第二階層の7見出しはそれぞれ本文を持つページ。URLは第二階層を挟まない
+    // フラットなまま(/frontend/xxx)で、theory・computer・design・languageと
+    // 同じ方針。ReactとNext.jsは束ねラベルではなく見出しページとして置く。
+    tree: [
+      {
+        href: "/frontend/web",
+        title: "Web基礎",
+        children: [
+          { href: "/frontend/perf", title: "表示速度を測って直す" },
+          { href: "/frontend/i18n", title: "国際化と日時" },
+        ],
+      },
+      {
+        href: "/frontend/styling",
+        title: "スタイリング",
+        children: [
+          { href: "/frontend/layout", title: "CSSレイアウト" },
+          { href: "/frontend/tailwind", title: "Tailwind CSS" },
+        ],
+      },
+      {
+        href: "/frontend/data",
+        title: "通信とデータ保存",
+        children: [
+          { href: "/frontend/http", title: "HTTP通信" },
+          { href: "/frontend/realtime", title: "リアルタイム通信" },
+          { href: "/frontend/storage", title: "ブラウザストレージ" },
+        ],
+      },
+      {
+        href: "/frontend/ux",
+        title: "UX・UI",
+        children: [
+          { href: "/frontend/ux-basics", title: "UXの基礎" },
+          { href: "/frontend/ux-hcd", title: "人間中心設計と評価" },
+          { href: "/frontend/ux-design-thinking", title: "デザイン思考" },
+          { href: "/frontend/ux-visual", title: "視覚デザイン" },
+          { href: "/frontend/ux-gui", title: "GUIの部品" },
+          { href: "/frontend/ux-screen", title: "画面設計と入力チェック" },
+          { href: "/frontend/ux-form", title: "フォーム作成時の注意" },
+          { href: "/frontend/ux-web", title: "Web UIデザイン" },
+          { href: "/frontend/ux-system", title: "コンポーネントとデザインシステム" },
+          { href: "/frontend/ux-a11y", title: "ユーザビリティとアクセシビリティ" },
+        ],
+      },
+      {
+        href: "/frontend/components",
+        title: "コンポーネントと状態",
+        children: [
+          { href: "/frontend/components-state", title: "コンポーネント別の状態設計" },
+          { href: "/frontend/state", title: "状態管理設計" },
+        ],
+      },
+      {
+        href: "/frontend/react",
+        title: "React",
+        children: [
+          { href: "/frontend/react-functional", title: "関数型として読むReact" },
+          { href: "/frontend/react-typescript", title: "TypeScriptでコンポーネントを書く" },
+          { href: "/frontend/react-jsx", title: "JSXとレンダリング" },
+          { href: "/frontend/react-props", title: "Propsと一方向データフロー" },
+          { href: "/frontend/react-state", title: "Stateと更新" },
+          { href: "/frontend/react-effects", title: "副作用(Effects)" },
+          { href: "/frontend/react-ref", title: "Ref" },
+          { href: "/frontend/react-performance", title: "メモ化とパフォーマンス" },
+          { href: "/frontend/react-context", title: "Context" },
+          { href: "/frontend/react-logic-reuse", title: "ロジックを再利用する" },
+          { href: "/frontend/react-composition", title: "コンポーネントを組み合わせる" },
+          { href: "/frontend/react-forms", title: "フォームの値を管理する" },
+          { href: "/frontend/react-boundary", title: "エラー境界とフォールバックUI" },
+        ],
+      },
+      {
+        href: "/frontend/nextjs",
+        title: "Next.js",
+        children: [
+          { href: "/frontend/nextjs-routing", title: "ルーティングとレイアウト" },
+          { href: "/frontend/nextjs-components", title: "Server/Clientコンポーネントの境界" },
+          { href: "/frontend/nextjs-data", title: "データフェッチ・キャッシュ・再検証" },
+          { href: "/frontend/nextjs-rendering", title: "配信を最適化する" },
+        ],
+      },
+    ],
+  },
+  {
+    href: "/backend",
+    title: "バックエンド",
+    icon: ServerCog,
+    // 第二階層の6見出しはそれぞれ本文を持つページ。URLは第二階層を挟まない
+    // フラットなまま(/backend/xxx)で、frontend・dev と同じ方針。
+    // 「認証の実装」はセキュリティセクションの「認証・認可」と区別するための名前
+    // (概念・脅威=セキュリティ / 実装手順=ここ)。
+    tree: [
+      {
+        href: "/backend/api",
+        title: "API",
+        children: [
+          { href: "/backend/api-styles", title: "APIの種類と選び方" },
+          { href: "/backend/api-rest", title: "REST API" },
+          { href: "/backend/api-design", title: "API設計(LSUD / SSKD)" },
+          { href: "/backend/api-orchestration", title: "オーケストレーションとBFF" },
+          { href: "/backend/api-openapi", title: "OpenAPIと契約" },
+          { href: "/backend/api-versioning", title: "バージョニングと廃止" },
+        ],
+      },
+      {
+        href: "/backend/layers",
+        title: "アプリケーションの組み立て",
+        children: [
+          { href: "/backend/upload", title: "ファイルアップロード" },
+          { href: "/backend/mail", title: "メール送信と通知" },
+          { href: "/backend/jobs", title: "ジョブキューとワーカー" },
+        ],
+      },
+      {
+        href: "/backend/data",
+        title: "データ層",
+        children: [
+          { href: "/backend/data-transaction", title: "トランザクション境界" },
+          { href: "/backend/data-pool", title: "コネクションプールとN+1" },
+          { href: "/backend/data-migration", title: "マイグレーション" },
+          { href: "/backend/cache", title: "サーバーサイドキャッシュ" },
+        ],
+      },
+      {
+        href: "/backend/auth",
+        title: "認証の実装",
+        children: [
+          { href: "/backend/auth-token", title: "トークンの運用" },
+          { href: "/backend/auth-oauth", title: "外部IdP連携(OAuth 2.0 / OIDC)" },
+          { href: "/backend/auth-account", title: "パスワードとアカウント回復" },
+        ],
+      },
+      {
+        href: "/backend/ops",
+        title: "本番運用",
+        children: [
+          { href: "/backend/ops-rate-limit", title: "レート制限" },
+          { href: "/backend/ops-resilience", title: "タイムアウト・リトライ・遮断" },
+          { href: "/backend/ops-lifecycle", title: "起動と停止" },
+          { href: "/backend/ops-tracing", title: "リクエストIDと分散トレーシング" },
+        ],
+      },
+      {
+        href: "/backend/express",
+        title: "Node.js・Express",
+        children: [
+          { href: "/backend/express-hello", title: "最初のサーバー" },
+          { href: "/backend/express-routing", title: "ルーティング" },
+          { href: "/backend/express-router", title: "ルーターに分割する" },
+          { href: "/backend/express-request", title: "Requestオブジェクト" },
+          { href: "/backend/express-response", title: "Responseオブジェクト" },
+          { href: "/backend/express-middleware", title: "ミドルウェア" },
+          { href: "/backend/express-json", title: "JSON API" },
+          { href: "/backend/express-async", title: "非同期処理" },
+          { href: "/backend/express-error", title: "エラーハンドリング" },
+          { href: "/backend/express-validation", title: "バリデーション" },
+          { href: "/backend/express-logging", title: "ログ" },
+          { href: "/backend/express-design", title: "Expressでの API設計" },
+          { href: "/backend/express-auth", title: "認証・認可の実装" },
+          { href: "/backend/express-database", title: "データベース連携" },
+        ],
+      },
+    ],
+  },
   { href: "/test", title: "テスト", icon: FlaskConical, tree: [] },
   { href: "/security", title: "セキュリティ", icon: ShieldCheck, tree: [] },
   {

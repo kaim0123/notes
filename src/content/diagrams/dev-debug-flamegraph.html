@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 290"
+        role="img"
+        aria-label="フレームグラフの読み方を示した図。横軸は時間の割合を表し、広い箱ほどそこで多くの時間を使っている。縦は呼び出しの深さを表し、上に積まれている箱は下の箱から呼び出された関数を示す。一番下に全体を表す箱があり、その上に3つの処理が並ぶ。左の処理は幅が狭く、上に何も積まれていない。中央の処理は幅が広く、その上にさらに深い呼び出しが積まれており、最上段に平らで広い箱がある。この平らな頂上こそが、実際にCPUを使っている場所になる。右の処理も幅は狭い。読み方の要点は3つで、横幅だけを見ること、深さ自体は速度と無関係であること、そして上に何も積まれていない広い箱を探すこと。左右の並び順は多くの実装で名前順にすぎず、時系列ではない。"
+      >
+        <rect x="16" y="228" width="608" height="30" rx="3" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="320" y="248" text-anchor="middle" font-size="10.5" class="muted">全体(100%)</text>
+
+        <rect x="16" y="194" width="120" height="30" rx="3" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="76" y="214" text-anchor="middle" font-size="10" class="muted">処理A(20%)</text>
+
+        <rect x="140" y="194" width="380" height="30" rx="3" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="330" y="214" text-anchor="middle" font-size="10.5">処理B(62%)</text>
+
+        <rect x="524" y="194" width="100" height="30" rx="3" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="574" y="214" text-anchor="middle" font-size="10" class="muted">処理C(18%)</text>
+
+        <rect x="160" y="160" width="340" height="30" rx="3" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="330" y="180" text-anchor="middle" font-size="10.5">B が呼ぶ処理(56%)</text>
+
+        <rect x="180" y="126" width="300" height="30" rx="3" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="330" y="146" text-anchor="middle" font-size="10.5">平らな頂上(52%)</text>
+
+        <text x="500" y="146" font-size="10.5" class="lbl">← 上に何も積まれていない</text>
+        <text x="500" y="162" font-size="10.5" class="lbl">   実際にCPUを使っている場所</text>
+
+        <line x1="16" y1="272" x2="624" y2="272" stroke="var(--muted)" stroke-width="1.2" />
+        <text x="16" y="288" font-size="10.5" class="muted">横軸 = 時間の割合(左右の並び順に意味はない ― 時系列ではない)</text>
+
+        <line x1="8" y1="126" x2="8" y2="258" stroke="var(--muted)" stroke-width="1.2" />
+        <text x="16" y="112" font-size="10.5" class="muted">縦 = 呼び出しの深さ(深さ自体は速度と無関係)</text>
+
+        <text x="16" y="42" font-size="12" class="lbl">読み方の要点は3つだけ</text>
+        <text x="16" y="66" font-size="11" class="muted">① 横幅だけを見る ― 広い箱ほど時間を使っている</text>
+        <text x="16" y="86" font-size="11" class="muted">② 深さは呼び出しの階層。深いこと自体は問題ではない</text>
+        <text x="330" y="66" font-size="11" class="muted">③ 上に何も積まれていない広い箱を探す</text>
+        <text x="330" y="86" font-size="11" class="muted">   そこが実際に時間を使っている場所</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="待ち時間が重なるかどうかで応答の速さが変わることを示した図。上段は1つずつ待つ書き方で、ユーザーの取得に150ミリ秒、続いて投稿の取得に200ミリ秒、さらに通知の取得に100ミリ秒と、3つの帯が順に並ぶ。合計は450ミリ秒になる。下段は同時に投げてまとめて待つ書き方で、3つの帯が同じ位置から始まって重なり合い、いちばん長い200ミリ秒で全体が終わる。250ミリ秒が浮くことになる。ただし、この書き換えができるのは3つが互いに独立している場合だけで、前の結果を使って次を引く場合は順序に意味があるため、1つずつ待つ形のままにする必要がある。図の下部には、待ちを減らす前にまず往復の数そのものを疑うこと、という注意も添えられている。">
+        <text x="16" y="24" font-size="11.5" class="muted">互いに独立した3つの取得を、どう待つか</text>
+
+        <text x="16" y="56" font-size="11" class="muted">1つずつ待つ</text>
+
+        <line x1="120" y1="140" x2="600" y2="140" stroke="var(--border)" stroke-width="1" />
+
+        <rect x="120" y="66" width="120" height="20" rx="4" fill="var(--muted)" opacity="0.45" />
+        <text x="130" y="81" font-size="9" class="muted">ユーザー 150ms</text>
+        <rect x="240" y="90" width="160" height="20" rx="4" fill="var(--muted)" opacity="0.45" />
+        <text x="250" y="105" font-size="9" class="muted">投稿 200ms</text>
+        <rect x="400" y="114" width="80" height="20" rx="4" fill="var(--muted)" opacity="0.45" />
+        <text x="410" y="129" font-size="9" class="muted">通知 100ms</text>
+
+        <line x1="120" y1="152" x2="480" y2="152" stroke="var(--muted)" stroke-width="3" />
+        <text x="490" y="157" font-size="10" class="muted">合計 450ms</text>
+
+        <line x1="16" y1="180" x2="624" y2="180" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="212" font-size="11" class="lbl">同時に投げて、まとめて待つ</text>
+
+        <rect x="120" y="222" width="120" height="18" rx="4" fill="var(--primary)" opacity="0.8" />
+        <text x="130" y="235" font-size="9" style="fill: oklch(0 0 0)">ユーザー 150ms</text>
+        <rect x="120" y="244" width="160" height="18" rx="4" fill="var(--primary)" opacity="0.8" />
+        <text x="130" y="257" font-size="9" style="fill: oklch(0 0 0)">投稿 200ms</text>
+        <rect x="120" y="266" width="80" height="18" rx="4" fill="var(--primary)" opacity="0.8" />
+        <text x="130" y="279" font-size="9" style="fill: oklch(0 0 0)">通知 100ms</text>
+
+        <line x1="120" y1="294" x2="280" y2="294" stroke="var(--primary)" stroke-width="3" />
+        <text x="290" y="299" font-size="10" class="lbl">いちばん長い 200ms で終わる</text>
+
+        <text x="16" y="252" font-size="9.5" class="muted">独立して</text>
+        <text x="16" y="268" font-size="9.5" class="muted">いる場合だけ</text>
+
+        <text x="400" y="212" font-size="10" class="muted">前の結果を使って次を引くなら、順序に意味がある。</text>
+        <text x="400" y="230" font-size="10" class="muted">その場合は1つずつ待つ形のままにする。</text>
+        <text x="400" y="256" font-size="10" class="muted">そして ― 待ちを減らす前に、</text>
+        <text x="400" y="274" font-size="10" class="lbl">往復の数そのものを疑う。</text>
+      </svg>
+    </div>
+  </body>
+</html>

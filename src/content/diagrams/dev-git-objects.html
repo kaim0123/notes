@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 300"
+        role="img"
+        aria-label="Gitのデータ構造を示した図。下段には3つのコミットが左から右へ並び、それぞれが1つ前のコミットを親として指している。矢印は新しいものから古いものへ向かっており、履歴が鎖になっていることを表す。各コミットは、その時点のファイル全体の状態であるツリーを持ち、ツリーはファイルの中身であるブロブを指す。中身が変わっていないファイルは、前のコミットと同じブロブを指すだけなので容量を無駄にしない。上段にはブランチ名とHEADが置かれ、ブランチ名は特定のコミットを指す付箋にすぎず、HEADはいまどのブランチにいるかを指すポインタであることが示されている。コミットの名前は中身から計算したハッシュなので、1つ書き換えると、それを親として指している以降のコミットのハッシュもすべて変わる。リベースや直前コミットの修正が履歴を作り直す操作だと言われるのはこのため。"
+      >
+        <defs>
+          <marker id="argo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="argop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="466" y="34" width="70" height="28" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="501" y="53" text-anchor="middle" font-size="11">main</text>
+        <rect x="548" y="34" width="76" height="28" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="586" y="53" text-anchor="middle" font-size="11">HEAD</text>
+        <line x1="548" y1="48" x2="540" y2="48" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#argop)" />
+        <line x1="501" y1="62" x2="501" y2="88" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#argop)" />
+        <text x="380" y="53" text-anchor="end" font-size="10.5" class="lbl">ブランチ名はコミットを指す付箋にすぎない</text>
+
+        <rect x="16" y="92" width="140" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="86" y="114" text-anchor="middle" font-size="11">commit a1b2</text>
+        <text x="86" y="132" text-anchor="middle" font-size="10" class="muted">親なし(最初)</text>
+
+        <rect x="188" y="92" width="140" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="258" y="114" text-anchor="middle" font-size="11">commit c3d4</text>
+        <text x="258" y="132" text-anchor="middle" font-size="10" class="muted">親: a1b2</text>
+
+        <rect x="431" y="92" width="140" height="52" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="501" y="114" text-anchor="middle" font-size="11">commit e5f6</text>
+        <text x="501" y="132" text-anchor="middle" font-size="10" class="muted">親: c3d4</text>
+
+        <line x1="188" y1="118" x2="160" y2="118" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#argo)" />
+        <line x1="431" y1="118" x2="332" y2="118" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#argo)" />
+        <text x="380" y="110" text-anchor="middle" font-size="10" class="muted">親を指す</text>
+
+        <line x1="86" y1="144" x2="86" y2="166" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#argo)" />
+        <line x1="258" y1="144" x2="258" y2="166" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#argo)" />
+        <line x1="501" y1="144" x2="501" y2="166" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#argo)" />
+
+        <rect x="26" y="170" width="120" height="30" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="86" y="190" text-anchor="middle" font-size="10.5" class="muted">tree(その時点の全体)</text>
+        <rect x="198" y="170" width="120" height="30" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="258" y="190" text-anchor="middle" font-size="10.5" class="muted">tree</text>
+        <rect x="441" y="170" width="120" height="30" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="501" y="190" text-anchor="middle" font-size="10.5" class="muted">tree</text>
+
+        <rect x="198" y="218" width="240" height="34" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="318" y="240" text-anchor="middle" font-size="10.5">blob(ファイルの中身)</text>
+        <line x1="86" y1="200" x2="196" y2="222" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#argo)" />
+        <line x1="258" y1="200" x2="288" y2="214" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#argo)" />
+        <line x1="501" y1="200" x2="440" y2="226" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#argo)" />
+        <text x="318" y="268" text-anchor="middle" font-size="10.5" class="muted">変わっていないファイルは、同じ実体を指すだけ ― 容量を無駄にしない</text>
+
+        <text x="16" y="292" font-size="11" class="lbl">名前は中身のハッシュ ― 1つ書き換えると、以降のコミットのハッシュもすべて変わる</text>
+      </svg>
+    </div>
+  </body>
+</html>

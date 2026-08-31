@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="フォーム送信の経路と二重送信への対策を示した図。上段は連打された場合で、同じ内容の送信が2回サーバーに届く。サーバーは添えられた冪等キーを見て、1回目は処理し、2回目は処理せず1回目と同じ結果を返すため、二重登録にならない。下段は送信後の再読み込みへの対策で、サーバーはPOSTを処理したあとリダイレクトを返し、表示はGETで行う。こうすると利用者が再読み込みしても繰り返されるのはGETだけになり、意図しない再送信が起きない。図の下に、フロント側のボタン無効化は体験のための一次対策であり、二重実行を無害にするのはサーバー側の冪等性だという注記がある。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="20" y="30" font-size="11.5" class="muted">連打された場合</text>
+        <rect x="20" y="42" width="150" height="94" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="36" y="66" font-size="11.5">ブラウザ</text>
+        <text x="36" y="88" font-size="10.5" class="muted">送信中は無効化する</text>
+        <text x="36" y="110" font-size="10.5" class="lbl">同じ冪等キーを添える</text>
+
+        <line x1="170" y1="70" x2="392" y2="70" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <text x="281" y="62" text-anchor="middle" font-size="10" class="muted">1回目 key=abc</text>
+        <line x1="170" y1="108" x2="392" y2="108" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <text x="281" y="100" text-anchor="middle" font-size="10" class="muted">2回目 key=abc(連打)</text>
+
+        <rect x="396" y="42" width="224" height="94" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="412" y="66" font-size="11.5" class="lbl">サーバー ― 冪等な受け付け</text>
+        <text x="412" y="90" font-size="10.5" class="muted">1回目: 処理して結果を記録</text>
+        <text x="412" y="112" font-size="10.5" class="muted">2回目: 処理せず、同じ結果を返す</text>
+
+        <line x1="20" y1="156" x2="620" y2="156" stroke="var(--border)" stroke-width="1" />
+
+        <text x="20" y="180" font-size="11.5" class="muted">送信後に再読み込みされた場合</text>
+        <rect x="20" y="192" width="150" height="94" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="36" y="216" font-size="11.5">ブラウザ</text>
+        <text x="36" y="240" font-size="10.5" class="muted">POST を送る</text>
+        <text x="36" y="264" font-size="10.5" class="muted">→ 表示は GET になる</text>
+
+        <line x1="170" y1="214" x2="392" y2="214" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <text x="281" y="206" text-anchor="middle" font-size="10" class="muted">POST</text>
+        <line x1="396" y1="240" x2="174" y2="240" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <text x="281" y="232" text-anchor="middle" font-size="10" class="lbl">リダイレクト</text>
+        <line x1="170" y1="268" x2="392" y2="268" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <text x="281" y="282" text-anchor="middle" font-size="10" class="muted">GET(再読み込みで繰り返されるのはこれだけ)</text>
+
+        <rect x="396" y="192" width="224" height="94" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="412" y="216" font-size="11.5" class="lbl">サーバー</text>
+        <text x="412" y="240" font-size="10.5" class="muted">処理してからリダイレクトを返す</text>
+        <text x="412" y="264" font-size="10.5" class="muted">結果表示は GET で行う</text>
+
+        <text x="20" y="310" font-size="10.5" class="lbl">ボタンの無効化は一次対策 ― 二重実行を無害にするのはサーバー側の冪等性</text>
+      </svg>
+    </div>
+  </body>
+</html>

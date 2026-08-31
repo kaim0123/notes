@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 290"
+        role="img"
+        aria-label="技術スタックの4層と、その相性を示した図。上から順に、画面を描くフロント、フロントとサーバーのやり取りの約束事であるAPI、オブジェクトと表を橋渡しするORM、データを保存するDBの4層が積み重なっている。リクエストは上から下へ、レスポンスは下から上へこの順に通る。右側には相性の縛りが2つ示されている。1つ目はORMとDBの紐づきで、PrismaはリレーショナルDB、MongooseはMongoDB専用というように、ORMを選ぶとDBがほぼ決まる。2つ目はAPIとコード基盤の紐づきで、tRPCはフロントとサーバーが同じTypeScriptのコード基盤を共有していることが前提になる。相性の大半はこの2つの縛りから決まる。"
+      >
+        <rect x="16" y="40" width="330" height="46" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="36" y="62" font-size="11.5" font-weight="600">フロント</text>
+        <text x="330" y="62" text-anchor="end" font-size="10.5" class="muted">画面を描き、操作を受け取る</text>
+        <text x="330" y="78" text-anchor="end" font-size="10.5" class="muted">React / Next.js</text>
+
+        <rect x="16" y="96" width="330" height="46" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="36" y="118" font-size="11.5" font-weight="600">API</text>
+        <text x="330" y="118" text-anchor="end" font-size="10.5" class="muted">やり取りの約束事</text>
+        <text x="330" y="134" text-anchor="end" font-size="10.5" class="muted">REST / GraphQL / tRPC</text>
+
+        <rect x="16" y="152" width="330" height="46" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="36" y="174" font-size="11.5" font-weight="600">ORM</text>
+        <text x="330" y="174" text-anchor="end" font-size="10.5" class="muted">オブジェクトと表の橋渡し</text>
+        <text x="330" y="190" text-anchor="end" font-size="10.5" class="muted">Prisma / Mongoose</text>
+
+        <rect x="16" y="208" width="330" height="46" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="36" y="230" font-size="11.5" font-weight="600">DB</text>
+        <text x="330" y="230" text-anchor="end" font-size="10.5" class="muted">データを保存する</text>
+        <text x="330" y="246" text-anchor="end" font-size="10.5" class="muted">PostgreSQL / MongoDB</text>
+
+        <path d="M366,175 C392,175 392,120 366,120" fill="none" stroke="var(--primary)" stroke-width="1.5" />
+        <rect x="398" y="96" width="226" height="50" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="414" y="116" font-size="11" class="lbl">縛り① APIとコード基盤</text>
+        <text x="414" y="134" font-size="10.5" class="muted">tRPCは同じTypeScript基盤が前提</text>
+
+        <path d="M366,231 C392,231 392,176 366,176" fill="none" stroke="var(--primary)" stroke-width="1.5" />
+        <rect x="398" y="180" width="226" height="50" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="414" y="200" font-size="11" class="lbl">縛り② ORMとDB</text>
+        <text x="414" y="218" font-size="10.5" class="muted">ORMを選ぶとDBはほぼ決まる</text>
+
+        <text x="16" y="28" font-size="11" class="muted">リクエストは上から下へ、レスポンスは下から上へ、この順に通る</text>
+        <text x="16" y="278" font-size="11" class="lbl">相性の大半は、この2つの縛りから決まる</text>
+      </svg>
+    </div>
+  </body>
+</html>

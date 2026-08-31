@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 300" role="img" aria-label="値を渡す更新と関数を渡す更新の違いを示した図。上段では現在の値である0に1を足した結果を3回渡している。3回とも同じ古い0をもとに計算しているため、予約される値はすべて1になり、最終的に1しか増えない。下段では前の値を受け取って1を足す関数を3回渡している。Reactは予約された関数を順に適用するため、1つ目は0を受け取って1を返し、2つ目は1を受け取って2を返し、3つ目は2を受け取って3を返す。3つ分が正しく積み上がる。前の状態に依存する更新では必ず関数を渡す。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="20" y="30" font-size="11.5" class="muted">値を渡す ― setCount(count + 1) を3回</text>
+        <rect x="20" y="42" width="80" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="60" y="67" text-anchor="middle" font-size="11">count = 0</text>
+
+        <line x1="100" y1="62" x2="128" y2="62" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="132" y="42" width="140" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="202" y="67" text-anchor="middle" font-size="10.5" class="muted">0 + 1 → 1 を予約</text>
+        <rect x="284" y="42" width="140" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="354" y="67" text-anchor="middle" font-size="10.5" class="muted">0 + 1 → 1 を予約</text>
+        <rect x="436" y="42" width="140" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="506" y="67" text-anchor="middle" font-size="10.5" class="muted">0 + 1 → 1 を予約</text>
+
+        <text x="20" y="108" font-size="11" class="muted">3回とも同じ古い 0 を見ている →</text>
+        <text x="240" y="108" font-size="11" class="lbl">結果は 1</text>
+
+        <line x1="20" y1="130" x2="620" y2="130" stroke="var(--border)" stroke-width="1" />
+
+        <text x="20" y="158" font-size="11.5" class="lbl">関数を渡す ― setCount(prev =&gt; prev + 1) を3回</text>
+        <rect x="20" y="170" width="80" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="60" y="195" text-anchor="middle" font-size="11">count = 0</text>
+
+        <line x1="100" y1="190" x2="128" y2="190" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <rect x="132" y="170" width="140" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="202" y="195" text-anchor="middle" font-size="10.5">0 を受け取り → 1</text>
+        <line x1="272" y1="190" x2="280" y2="190" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <rect x="284" y="170" width="140" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="354" y="195" text-anchor="middle" font-size="10.5">1 を受け取り → 2</text>
+        <line x1="424" y1="190" x2="432" y2="190" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <rect x="436" y="170" width="140" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="506" y="195" text-anchor="middle" font-size="10.5">2 を受け取り → 3</text>
+
+        <text x="20" y="236" font-size="11" class="muted">予約された関数が順に適用される →</text>
+        <text x="252" y="236" font-size="11" class="lbl">結果は 3</text>
+
+        <text x="20" y="276" font-size="10.5" class="lbl">判断は単純 ― 次の値の計算に現在の値が要るなら、関数を渡す</text>
+      </svg>
+    </div>
+  </body>
+</html>

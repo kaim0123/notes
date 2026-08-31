@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --warn: oklch(0.82 0.16 75);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .warn { fill: var(--warn); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 340" role="img" aria-label="ルートが上から順に照合され、最初に一致したものが実行されることを示した図。左には登録した順に4つのルートが縦に並ぶ。1つ目は特定のパスであるスラッシュusersスラッシュmeへのGET、2つ目はパラメータを含むスラッシュusersスラッシュコロンidへのGET、3つ目はスラッシュusersへのPOST、そして最後に該当なしを受け止めるハンドラ。右にはリクエストが届いたときの照合の様子があり、GETスラッシュusersスラッシュmeは1つ目で止まる。もしパラメータを含む2つ目を先に登録していたら、meという文字列がIDとして解釈されてしまい、1つ目には永久に到達しない。図の下部には、具体的なパスをパラメータ付きのパスより先に置くこと、そして該当なしの受け皿は必ず全部の後ろに置くこと、先頭に置けばすべてのリクエストが即座にそこへ落ちること、が要点として記されている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="24" font-size="11" class="muted">登録した順</text>
+        <text x="320" y="24" font-size="11" class="lbl">GET /users/me が届いた</text>
+
+        <rect x="16" y="38" width="240" height="32" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="30" y="59" font-size="10" class="mono lbl">GET /users/me</text>
+        <line x1="256" y1="54" x2="310" y2="54" stroke="var(--primary)" stroke-width="1.6" marker-end="url(#arp)" />
+        <text x="320" y="50" font-size="10" class="lbl">一致 → ここで止まる</text>
+        <text x="320" y="66" font-size="9" class="muted">以降は見に行かない</text>
+
+        <rect x="16" y="82" width="240" height="32" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="103" font-size="10" class="mono muted">GET /users/:id</text>
+        <text x="270" y="103" font-size="9.5" class="muted">(ここまで来ない)</text>
+
+        <rect x="16" y="126" width="240" height="32" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="147" font-size="10" class="mono muted">POST /users</text>
+
+        <rect x="16" y="170" width="240" height="32" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <text x="30" y="191" font-size="10" class="mono muted">該当なしの受け皿(404)</text>
+
+        <line x1="16" y1="222" x2="624" y2="222" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="248" font-size="10.5" class="warn">順序を逆にすると ―</text>
+        <rect x="120" y="234" width="200" height="26" rx="5" fill="var(--card)" stroke="var(--warn)" stroke-width="1.4" />
+        <text x="132" y="252" font-size="10" class="mono warn">GET /users/:id  を先に登録</text>
+        <line x1="320" y1="247" x2="344" y2="247" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="352" y="251" font-size="10" class="muted">me が id として解釈され、上の行には永久に届かない</text>
+
+        <text x="16" y="292" font-size="10.5" class="muted">具体的なパスは、パラメータを含むパスより<tspan class="lbl">先に</tspan>置く。</text>
+        <text x="16" y="314" font-size="10.5" class="muted">該当なしの受け皿は、必ず全部の<tspan class="lbl">後ろに</tspan>。先頭に置けば、すべてのリクエストが即座にそこへ落ちる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

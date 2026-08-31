@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --warn: oklch(0.82 0.16 75);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+      .warn { fill: var(--warn); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 340" role="img" aria-label="認証と認可を2つの関門として積む形と、関門だけでは足りない場合を示した図。上段は関門の並びで、リクエストはまず認証の関門を通る。ここで身元が確かめられなければ401として返される。通れば役割による認可の関門があり、権限が足りなければ403として返される。両方を通ったものだけがハンドラに届く。下段は、関門だけでは守れない場合の説明。ある注文が本当にその人のものかという判定は、注文を取得してみるまで分からない。つまり所有者の確認は入口では行えず、データを取得したあとに行うしかない。そこを飛ばすと、URLの番号を1つ変えるだけで他人のデータが見える状態になる。認証が完璧に動いていても、この確認が抜けていれば成立してしまうため、最も多い事故の形になっている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+          <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--warn)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="52" font-size="10" class="muted">リクエスト</text>
+        <line x1="76" y1="70" x2="106" y2="70" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="110" y="50" width="130" height="40" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="126" y="68" font-size="10" class="lbl">認証 ― 誰か</text>
+        <text x="126" y="83" font-size="8.5" class="muted">身元を確かめ、名札を付ける</text>
+        <line x1="240" y1="70" x2="270" y2="70" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <line x1="175" y1="90" x2="175" y2="118" stroke="var(--warn)" stroke-width="1.3" marker-end="url(#arw)" />
+        <text x="120" y="134" font-size="9.5" class="warn">401 ― 名乗り直せ</text>
+
+        <rect x="274" y="50" width="130" height="40" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="290" y="68" font-size="10" class="lbl">認可 ― 役割</text>
+        <text x="290" y="83" font-size="8.5" class="muted">その役職で入れる部屋か</text>
+        <line x1="404" y1="70" x2="434" y2="70" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <line x1="339" y1="90" x2="339" y2="118" stroke="var(--warn)" stroke-width="1.3" marker-end="url(#arw)" />
+        <text x="284" y="134" font-size="9.5" class="warn">403 ― 名乗りは分かった</text>
+
+        <rect x="438" y="50" width="130" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="466" y="75" font-size="10">ハンドラ</text>
+
+        <line x1="16" y1="162" x2="624" y2="162" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="188" font-size="11" class="warn">しかし、関門だけでは守れないものがある</text>
+
+        <rect x="16" y="202" width="290" height="76" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="224" font-size="10" class="mono muted">GET /orders/123</text>
+        <text x="30" y="246" font-size="9.5" class="muted">その注文が本当にこの人のものかは、</text>
+        <text x="30" y="264" font-size="9.5" class="lbl">注文を取得してみるまで分からない</text>
+
+        <line x1="306" y1="240" x2="336" y2="240" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+
+        <rect x="340" y="202" width="280" height="76" rx="7" fill="var(--card)" stroke="var(--warn)" stroke-width="1.5" />
+        <text x="354" y="224" font-size="9.5" class="warn">所有者の確認は、入口では行えない</text>
+        <text x="354" y="246" font-size="9.5" class="muted">取得したあとに確かめる。飛ばすと、</text>
+        <text x="354" y="264" font-size="9.5" class="muted">番号を1つ変えるだけで他人のものが見える</text>
+
+        <text x="16" y="306" font-size="10.5" class="muted">認証が完璧に動いていても、この確認が抜けていれば成立してしまう。</text>
+        <text x="16" y="328" font-size="10.5" class="warn">だからこれが、最も多い事故の形になっている。</text>
+      </svg>
+    </div>
+  </body>
+</html>

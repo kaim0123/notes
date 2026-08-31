@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="スタイリング手法を左から右へ並べた図。横軸は左が命名で解く方法、右が名前そのものをなくす方法。左端は素のCSSで、すべての規則がグローバルに効き、衝突は運任せ。次がBEMなどの命名規約で、規律によって衝突を避けるが強制力はない。中央はCSS Modulesとcss-in-jsで、ビルドやランタイムがクラス名を機械的に固有化するため仕組みとして衝突しない。右端はユーティリティファーストで、意味のあるクラス名を作らないため、名前の衝突も未使用クラスの判定問題も起きない。下部に、どの手法も未使用コードを消せるかという同じ問いに答えようとしているという注記がある。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="16" y="28" font-size="11.5" class="muted">名前で解く</text>
+        <text x="624" y="28" text-anchor="end" font-size="11.5" class="lbl">名前をなくす</text>
+        <line x1="16" y1="40" x2="624" y2="40" stroke="var(--border)" stroke-width="1" />
+        <path d="M560 40 L624 40" stroke="var(--primary)" stroke-width="1.4" marker-end="url(#arp)" />
+
+        <rect x="16" y="60" width="140" height="126" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="32" y="86" font-size="12">素のCSS</text>
+        <text x="32" y="110" font-size="10.5" class="muted">全体に効く</text>
+        <text x="32" y="130" font-size="10.5" class="muted">衝突は運任せ</text>
+        <text x="32" y="150" font-size="10.5" class="muted">詳細度で殴り合う</text>
+        <text x="32" y="172" font-size="10" class="muted">スコープ: なし</text>
+
+        <rect x="170" y="60" width="140" height="126" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="186" y="86" font-size="12">命名規約(BEM)</text>
+        <text x="186" y="110" font-size="10.5" class="muted">規約で衝突を避ける</text>
+        <text x="186" y="130" font-size="10.5" class="muted">強制力はない</text>
+        <text x="186" y="150" font-size="10.5" class="muted">守られる間だけ有効</text>
+        <text x="186" y="172" font-size="10" class="muted">スコープ: 規律</text>
+
+        <rect x="324" y="60" width="140" height="126" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="340" y="86" font-size="12">CSS Modules</text>
+        <text x="340" y="104" font-size="12">css-in-js</text>
+        <text x="340" y="128" font-size="10.5" class="muted">名前を機械が固有化</text>
+        <text x="340" y="148" font-size="10.5" class="muted">往復と命名は残る</text>
+        <text x="340" y="172" font-size="10" class="lbl">スコープ: 仕組み</text>
+
+        <rect x="478" y="60" width="146" height="126" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="494" y="86" font-size="12">ユーティリティ</text>
+        <text x="494" y="104" font-size="12">ファースト</text>
+        <text x="494" y="128" font-size="10.5" class="muted">意味のある名前を作らない</text>
+        <text x="494" y="148" font-size="10.5" class="muted">マークアップが長い</text>
+        <text x="494" y="172" font-size="10" class="lbl">スコープ: 不要</text>
+
+        <rect x="16" y="208" width="608" height="90" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <text x="32" y="234" font-size="11.5">どの手法も、答えようとしている問いは同じ ―</text>
+        <text x="32" y="258" font-size="10.5" class="muted">この規則はどこに当たるのか / どうすれば上書きできるのか / これはもう消してよいのか</text>
+        <text x="32" y="282" font-size="10.5" class="lbl">右へ行くほど、3つ目の「消してよいか」が機械的に答えられるようになる</text>
+      </svg>
+    </div>
+  </body>
+</html>

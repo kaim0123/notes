@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 290"
+        role="img"
+        aria-label="package.jsonとロックファイルの役割の違いを示した図。左のpackage.jsonには希望が書かれている。キャレット付きの1.2.3という記法は、1.2.3以上2.0.0未満ならどれでもよいという範囲の宣言で、書いてある直接依存は10個ほど。右のロックファイルには事実が記録されている。実際に入った正確なバージョンと、取得元、そして中身が改ざんされていないかを検証するためのハッシュが、間接依存も含めて数百件ぶん並ぶ。中央には、直接依存10個の裏に数百の間接依存が広がる様子が示されている。範囲の宣言だけでは、いつインストールするかによって入る版が変わるため再現性がない。ロックファイルがあって初めて、他人の手元でもCIでも本番でも同じものが入る。"
+      >
+        <defs>
+          <marker id="arlk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <rect x="16" y="40" width="180" height="140" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="106" y="64" text-anchor="middle" font-size="12" font-family="monospace">package.json</text>
+        <text x="106" y="84" text-anchor="middle" font-size="11" class="lbl">希望を書く場所</text>
+        <line x1="34" y1="94" x2="178" y2="94" stroke="var(--border)" stroke-width="1" />
+        <text x="106" y="114" text-anchor="middle" font-size="11" font-family="monospace" class="muted">&quot;react&quot;: &quot;^18.2.0&quot;</text>
+        <text x="106" y="134" text-anchor="middle" font-size="10.5" class="muted">18.2.0 以上 19.0.0 未満</text>
+        <text x="106" y="156" text-anchor="middle" font-size="10.5" class="muted">なら、どれでもよい</text>
+        <text x="106" y="172" text-anchor="middle" font-size="10.5" class="muted">直接依存は10個ほど</text>
+
+        <line x1="196" y1="110" x2="228" y2="110" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arlk)" />
+
+        <rect x="234" y="40" width="150" height="140" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" stroke-dasharray="5 4" />
+        <text x="309" y="62" text-anchor="middle" font-size="11" class="muted">解決すると…</text>
+        <circle cx="270" cy="88" r="5" fill="none" stroke="var(--primary)" stroke-width="1.4" />
+        <circle cx="309" cy="88" r="5" fill="none" stroke="var(--primary)" stroke-width="1.4" />
+        <circle cx="348" cy="88" r="5" fill="none" stroke="var(--primary)" stroke-width="1.4" />
+        <circle cx="258" cy="112" r="3.5" fill="var(--muted)" />
+        <circle cx="282" cy="112" r="3.5" fill="var(--muted)" />
+        <circle cx="306" cy="112" r="3.5" fill="var(--muted)" />
+        <circle cx="330" cy="112" r="3.5" fill="var(--muted)" />
+        <circle cx="354" cy="112" r="3.5" fill="var(--muted)" />
+        <circle cx="252" cy="134" r="2.5" fill="var(--muted)" />
+        <circle cx="270" cy="134" r="2.5" fill="var(--muted)" />
+        <circle cx="288" cy="134" r="2.5" fill="var(--muted)" />
+        <circle cx="306" cy="134" r="2.5" fill="var(--muted)" />
+        <circle cx="324" cy="134" r="2.5" fill="var(--muted)" />
+        <circle cx="342" cy="134" r="2.5" fill="var(--muted)" />
+        <circle cx="360" cy="134" r="2.5" fill="var(--muted)" />
+        <text x="309" y="160" text-anchor="middle" font-size="10.5" class="muted">裏に数百の</text>
+        <text x="309" y="174" text-anchor="middle" font-size="10.5" class="muted">間接依存</text>
+
+        <line x1="384" y1="110" x2="416" y2="110" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#arlk)" />
+
+        <rect x="422" y="40" width="202" height="140" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="523" y="64" text-anchor="middle" font-size="12" font-family="monospace">ロックファイル</text>
+        <text x="523" y="84" text-anchor="middle" font-size="11" class="lbl">事実を記録する場所</text>
+        <line x1="440" y1="94" x2="606" y2="94" stroke="var(--border)" stroke-width="1" />
+        <text x="523" y="114" text-anchor="middle" font-size="11" font-family="monospace" class="muted">react 18.3.1</text>
+        <text x="523" y="134" text-anchor="middle" font-size="10.5" class="muted">取得元 + ハッシュ</text>
+        <text x="523" y="156" text-anchor="middle" font-size="10.5" class="muted">間接依存も含めて</text>
+        <text x="523" y="172" text-anchor="middle" font-size="10.5" class="muted">数百件すべて固定</text>
+
+        <line x1="16" y1="206" x2="624" y2="206" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="230" font-size="11" class="muted">範囲の宣言だけでは、いつインストールするかで入る版が変わる ― 再現性はない</text>
+        <text x="16" y="250" font-size="11" class="lbl">ロックファイルがあって初めて、手元でもCIでも本番でも同じものが入る</text>
+        <text x="16" y="274" font-size="11" class="muted">だから自動化では、ロックを更新しうる install ではなく、厳密に従う ci を使う</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 280"
+        role="img"
+        aria-label="組織のプロセス成熟度を5段階の階段で示した図。一番下のレベル1は初期で、進め方が個人任せで場当たり的、結果は担当者次第で大きく変わる。レベル2は管理された段階で、プロジェクト単位で計画と進捗の管理ができており、似た規模の仕事なら再現できる。レベル3は定義された段階で、組織として標準の進め方が定義され、どのプロジェクトでも同じやり方が使える。レベル4は定量的に管理された段階で、工数や欠陥率を数値で把握し、ばらつきを統計的に制御できる。レベル5は最適化している段階で、データをもとにプロセス自体を継続的に改善していく。下の段が固まっていないのに上の段だけ真似ても機能しないため、自組織の現在地を知り、次の1段を目標にするのが使い方になる。"
+      >
+        <rect x="16" y="212" width="608" height="48" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="34" y="232" font-size="11.5" class="lbl">1 初期</text>
+        <text x="120" y="232" font-size="11" class="muted">進め方は個人任せで場当たり的</text>
+        <text x="608" y="232" text-anchor="end" font-size="10.5" class="muted">結果は担当者次第で大きく変わる</text>
+        <text x="120" y="250" font-size="10.5" class="muted">同じ成功を再現できない</text>
+
+        <rect x="70" y="168" width="554" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="88" y="185" font-size="11.5" class="lbl">2 管理された</text>
+        <text x="200" y="185" font-size="11" class="muted">プロジェクト単位で計画と進捗を管理できる</text>
+        <text x="200" y="201" font-size="10.5" class="muted">似た規模の仕事なら再現できる</text>
+
+        <rect x="124" y="124" width="500" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="142" y="141" font-size="11.5" class="lbl">3 定義された</text>
+        <text x="254" y="141" font-size="11" class="muted">組織として標準の進め方が定義されている</text>
+        <text x="254" y="157" font-size="10.5" class="muted">どのプロジェクトでも同じやり方が使える</text>
+
+        <rect x="178" y="80" width="446" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="196" y="97" font-size="11.5" class="lbl">4 定量的に管理された</text>
+        <text x="352" y="97" font-size="11" class="muted">工数や欠陥率を数値で把握する</text>
+        <text x="352" y="113" font-size="10.5" class="muted">ばらつきを統計的に制御できる</text>
+
+        <rect x="232" y="36" width="392" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="250" y="53" font-size="11.5" class="lbl">5 最適化している</text>
+        <text x="382" y="53" font-size="11" class="muted">データをもとにプロセス自体を改善し続ける</text>
+        <text x="382" y="69" font-size="10.5" class="muted">改善が仕組みとして回っている</text>
+
+        <text x="16" y="24" font-size="11" class="muted">下の段が固まっていないのに上の段だけ真似ても機能しない ― 現在地を知り、次の1段を目標にする</text>
+      </svg>
+    </div>
+  </body>
+</html>

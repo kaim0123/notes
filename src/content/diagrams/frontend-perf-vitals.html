@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 300" role="img" aria-label="Core Web Vitalsの3指標と原因と打ち手の対応表を図にしたもの。3行あり、1行目はLCPで、主要な内容が出るまでの時間を測り、原因は届くまでの重さ、打ち手は画像とフォントの見直しとサーバー側での描画。2行目はINPで、操作への反応時間を測り、原因はJavaScriptの実行でメインスレッドが詰まること、打ち手は長い処理を分割して割り込ませないこと。3行目はCLSで、表示中のずれを測り、原因は寸法の指定漏れ、打ち手は場所を先に予約すること。下部に、どの指標が悪いかを先に見れば打ち手を探す必要がないという注記がある。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <text x="16" y="26" font-size="11" class="muted">指標</text>
+        <text x="150" y="26" font-size="11" class="muted">何が起きているか</text>
+        <text x="404" y="26" font-size="11" class="muted">打ち手</text>
+        <line x1="16" y1="36" x2="624" y2="36" stroke="var(--border)" stroke-width="1" />
+
+        <rect x="16" y="48" width="112" height="60" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="72" y="72" text-anchor="middle" font-size="13">LCP</text>
+        <text x="72" y="92" text-anchor="middle" font-size="10" class="muted">2.5秒以下</text>
+        <line x1="128" y1="78" x2="146" y2="78" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="150" y="48" width="234" height="60" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="164" y="72" font-size="11">届くまでが重い</text>
+        <text x="164" y="92" font-size="10" class="muted">大きな画像・遅いフォント・厚いJS</text>
+        <line x1="384" y1="78" x2="400" y2="78" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="404" y="48" width="220" height="60" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="418" y="72" font-size="11" class="lbl">送る量を削る</text>
+        <text x="418" y="92" font-size="10" class="muted">形式変換・優先読み込み・サーバー描画</text>
+
+        <rect x="16" y="122" width="112" height="60" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="72" y="146" text-anchor="middle" font-size="13">INP</text>
+        <text x="72" y="166" text-anchor="middle" font-size="10" class="muted">200ms以下</text>
+        <line x1="128" y1="152" x2="146" y2="152" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="150" y="122" width="234" height="60" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="164" y="146" font-size="11">メインスレッドが詰まっている</text>
+        <text x="164" y="166" font-size="10" class="muted">50ms超の処理の間は何も反応しない</text>
+        <line x1="384" y1="152" x2="400" y2="152" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="404" y="122" width="220" height="60" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="418" y="146" font-size="11" class="lbl">長い処理を割り込ませない</text>
+        <text x="418" y="166" font-size="10" class="muted">分割・仮想スクロール・Worker</text>
+
+        <rect x="16" y="196" width="112" height="60" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="72" y="220" text-anchor="middle" font-size="13">CLS</text>
+        <text x="72" y="240" text-anchor="middle" font-size="10" class="muted">0.1以下</text>
+        <line x1="128" y1="226" x2="146" y2="226" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="150" y="196" width="234" height="60" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="164" y="220" font-size="11">後から来たものが押しのけている</text>
+        <text x="164" y="240" font-size="10" class="muted">寸法の指定漏れ・遅れて挿入される要素</text>
+        <line x1="384" y1="226" x2="400" y2="226" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <rect x="404" y="196" width="220" height="60" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="418" y="220" font-size="11" class="lbl">場所を先に予約する</text>
+        <text x="418" y="240" font-size="10" class="muted">寸法指定・最小高さ・同寸法の仮表示</text>
+
+        <text x="16" y="284" font-size="11" class="lbl">どれが悪いかを先に見れば、打ち手は探さなくてよい ― 推測で最適化しない</text>
+      </svg>
+    </div>
+  </body>
+</html>

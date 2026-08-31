@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 300" role="img" aria-label="Effectの実行と後始末の流れを時間軸で示した図。左端の最初の描画のあとにEffectが実行され、外部との同期が始まる。中央で依存配列の値が変わると、まず前回の同期を止める後始末が呼ばれ、そのあとで新しい値による同期が始まる。右端でコンポーネントが画面から消えるときにも後始末が呼ばれ、同期が止まる。下部の注記に、後始末を書き忘れると依存が変わるたびに古い同期が残り続け、接続やタイマーが積み上がっていくこと、そして開発時の二重実行はこの書き忘れを早期に発見させるための仕組みであることが示されている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <line x1="20" y1="150" x2="620" y2="150" stroke="var(--border)" stroke-width="1.2" />
+        <text x="20" y="30" font-size="11.5" class="muted">時間 →</text>
+
+        <line x1="90" y1="150" x2="90" y2="60" stroke="var(--primary)" stroke-width="1.3" />
+        <circle cx="90" cy="150" r="4" fill="var(--primary)" />
+        <rect x="34" y="52" width="130" height="46" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="99" y="72" text-anchor="middle" font-size="10.5">最初の描画のあと</text>
+        <text x="99" y="90" text-anchor="middle" font-size="10.5" class="lbl">Effect 実行 ― 同期開始</text>
+
+        <line x1="290" y1="150" x2="290" y2="60" stroke="var(--muted)" stroke-width="1.3" />
+        <circle cx="290" cy="150" r="4" fill="var(--muted)" />
+        <rect x="212" y="52" width="156" height="46" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="290" y="72" text-anchor="middle" font-size="10.5">依存の値が変わった</text>
+        <text x="290" y="90" text-anchor="middle" font-size="10.5" class="muted">後始末 → 新しい同期を開始</text>
+
+        <line x1="510" y1="150" x2="510" y2="60" stroke="var(--muted)" stroke-width="1.3" />
+        <circle cx="510" cy="150" r="4" fill="var(--muted)" />
+        <rect x="438" y="52" width="150" height="46" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="513" y="72" text-anchor="middle" font-size="10.5">画面から消える</text>
+        <text x="513" y="90" text-anchor="middle" font-size="10.5" class="muted">後始末 ― 同期を止める</text>
+
+        <rect x="90" y="164" width="200" height="26" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="190" y="182" text-anchor="middle" font-size="10.5" class="lbl">同期している区間(1回目)</text>
+        <rect x="290" y="164" width="220" height="26" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="400" y="182" text-anchor="middle" font-size="10.5" class="lbl">同期している区間(2回目)</text>
+
+        <rect x="20" y="214" width="600" height="66" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <text x="38" y="238" font-size="11">後始末を書き忘れると ―</text>
+        <text x="38" y="260" font-size="10.5" class="muted">依存が変わるたびに古い同期が残り、接続やタイマーが積み上がっていく</text>
+        <text x="38" y="276" font-size="10" class="lbl">開発時の二重実行は、この書き忘れを早期に見つけさせるための仕組み</text>
+      </svg>
+    </div>
+  </body>
+</html>

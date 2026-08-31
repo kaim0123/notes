@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 300" role="img" aria-label="エラー境界が捕まえる範囲と捕まえない範囲を示した図。左側の捕まえる欄には、描画中に投げられた例外として、コンポーネント本体で起きたものとフックの初期化で起きたものが並ぶ。右側の捕まえない欄には、イベントハンドラの中で起きた失敗、タイマーや非同期処理の中で起きた失敗、そして境界自身の中で起きた例外が並ぶ。境界が捕まえない失敗は、その場で受け止めて状態に持ち、画面に表示する必要がある。ボタンを押して保存に失敗したというのは境界の仕事ではない、という区別が実務上いちばん重要になる。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <rect x="20" y="34" width="290" height="180" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="38" y="60" font-size="12" class="lbl">境界が捕まえる ― 描画中の例外</text>
+        <rect x="38" y="76" width="254" height="38" rx="6" fill="var(--bg)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="52" y="100" font-size="10.5" class="muted">コンポーネント本体で投げられた例外</text>
+        <rect x="38" y="122" width="254" height="38" rx="6" fill="var(--bg)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="52" y="146" font-size="10.5" class="muted">フックの初期化で投げられた例外</text>
+        <text x="38" y="188" font-size="10.5" class="lbl">→ その枝だけを代わりの表示に差し替える</text>
+
+        <rect x="330" y="34" width="290" height="180" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="348" y="60" font-size="12">境界が捕まえない</text>
+        <rect x="348" y="76" width="254" height="34" rx="6" fill="var(--bg)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="362" y="98" font-size="10.5" class="muted">イベントハンドラの中の失敗</text>
+        <rect x="348" y="118" width="254" height="34" rx="6" fill="var(--bg)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="362" y="140" font-size="10.5" class="muted">タイマー・非同期処理の中の失敗</text>
+        <rect x="348" y="160" width="254" height="34" rx="6" fill="var(--bg)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="362" y="182" font-size="10.5" class="muted">境界自身の中の例外(親へ上がる)</text>
+
+        <rect x="20" y="230" width="600" height="56" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" stroke-dasharray="5 4" />
+        <text x="38" y="254" font-size="11">「ボタンを押したら保存に失敗した」は境界の仕事ではない</text>
+        <text x="38" y="276" font-size="10.5" class="muted">その場で受け止めて state に持ち、読み上げにも届く形で表示する</text>
+      </svg>
+    </div>
+  </body>
+</html>

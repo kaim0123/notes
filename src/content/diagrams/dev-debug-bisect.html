@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 290"
+        role="img"
+        aria-label="二分探索でデバッグの範囲を絞り込む様子を示した図。上段は処理の流れを表す1本の帯で、入口から出口までの間のどこかに原因がある。まず中間地点で値を確認し、そこまでは正常だと分かれば、探す範囲は後ろ半分だけに絞られる。次にその半分の中間地点を確認し、また半分に絞る。これを繰り返すと、1000行のコードでも10回の確認で1行に到達する。下段は同じ考え方を時間軸に当てはめたもので、動いていたコミットと壊れているコミットの間を二分して、壊れ始めたコミットを特定する。怪しい場所を探すのではなく、どこまでは正常かを確定させるのが要点。"
+      >
+        <defs>
+          <marker id="ardb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="26" font-size="12" class="lbl">コードの流れを半分に切る</text>
+
+        <text x="16" y="54" font-size="10.5" class="muted">1回目</text>
+        <rect x="70" y="38" width="277" height="24" rx="4" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="208" y="55" text-anchor="middle" font-size="10.5" class="lbl">ここまでは正常だった</text>
+        <rect x="347" y="38" width="277" height="24" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="485" y="55" text-anchor="middle" font-size="10.5" class="muted">原因はこの中にある</text>
+
+        <text x="16" y="94" font-size="10.5" class="muted">2回目</text>
+        <rect x="347" y="78" width="138" height="24" rx="4" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="416" y="95" text-anchor="middle" font-size="10.5" class="lbl">正常</text>
+        <rect x="485" y="78" width="139" height="24" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="554" y="95" text-anchor="middle" font-size="10.5" class="muted">この中</text>
+
+        <text x="16" y="134" font-size="10.5" class="muted">3回目</text>
+        <rect x="485" y="118" width="69" height="24" rx="4" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="519" y="135" text-anchor="middle" font-size="10.5" class="lbl">正常</text>
+        <rect x="554" y="118" width="70" height="24" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="589" y="135" text-anchor="middle" font-size="10.5" class="muted">この中</text>
+
+        <text x="70" y="166" font-size="11" class="muted">1000行でも、範囲を半分にする操作を10回行えば1行に到達する</text>
+
+        <line x1="16" y1="186" x2="624" y2="186" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="212" font-size="12" class="lbl">同じ考え方を、時間(コミット履歴)に当てはめる</text>
+
+        <line x1="60" y1="248" x2="596" y2="248" stroke="var(--muted)" stroke-width="1.4" marker-end="url(#ardb)" />
+        <circle cx="76" cy="248" r="5" fill="none" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="76" y="272" text-anchor="middle" font-size="10" class="lbl">動いていた</text>
+        <circle cx="196" cy="248" r="4" fill="var(--muted)" />
+        <circle cx="316" cy="248" r="6" fill="none" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="316" y="272" text-anchor="middle" font-size="10" class="muted">ここを試す</text>
+        <circle cx="436" cy="248" r="4" fill="var(--muted)" />
+        <circle cx="556" cy="248" r="5" fill="none" stroke="var(--border)" stroke-width="1.6" />
+        <text x="556" y="272" text-anchor="middle" font-size="10" class="muted">壊れている</text>
+
+        <text x="16" y="290" font-size="11" class="muted">「どこが怪しいか」を考える前に、「どこまでは正常か」を確定させるほうが速い</text>
+      </svg>
+    </div>
+  </body>
+</html>

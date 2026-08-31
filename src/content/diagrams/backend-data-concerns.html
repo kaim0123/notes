@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: var(--bg); }
+      body { display: flex; align-items: center; justify-content: center; padding: 8px; }
+      svg {
+        width: 100%; height: auto; max-height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text { fill: var(--fg); }
+      .muted { fill: var(--muted); }
+      .lbl { fill: var(--primary); }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 340" role="img" aria-label="アプリケーションとデータベースの間にある4つの関心事を示した図。左端にアプリケーション、右端にデータベースが置かれ、その間の帯に4つの層が縦に並ぶ。手前から順に、キャッシュ、クエリの回数と接続の本数、トランザクションの境界、スキーマの変更。それぞれに問いが添えられており、キャッシュは同じ問いに毎回答えるべきかを、クエリと接続は1回の依頼で何往復し何本の接続を使うかを、トランザクションはどこからどこまでを一括りにするかを、スキーマの変更は動いたまま形を変えられるかを問う。図の下部には境界の説明があり、データベースそのものの理論はデータベースのセクションが扱い、ここで扱うのはアプリケーションの側からどう使うかであることが記されている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <rect x="16" y="90" width="86" height="130" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="34" y="150" font-size="11">アプリ</text>
+        <text x="26" y="168" font-size="11">ケーション</text>
+
+        <rect x="538" y="90" width="86" height="130" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="548" y="158" font-size="11">データベース</text>
+
+        <line x1="102" y1="155" x2="130" y2="155" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="510" y1="155" x2="534" y2="155" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <text x="134" y="34" font-size="11.5" class="muted">この間に、4つの関心事がある</text>
+
+        <rect x="134" y="46" width="372" height="46" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="150" y="66" font-size="11" class="lbl">キャッシュ</text>
+        <text x="150" y="83" font-size="9.5" class="muted">同じ問いに、毎回答えるべきか</text>
+
+        <rect x="134" y="98" width="372" height="46" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="150" y="118" font-size="11" class="lbl">クエリの回数と接続の本数</text>
+        <text x="150" y="135" font-size="9.5" class="muted">1回の依頼で、何往復し、何本使うか</text>
+
+        <rect x="134" y="150" width="372" height="46" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="150" y="170" font-size="11" class="lbl">トランザクションの境界</text>
+        <text x="150" y="187" font-size="9.5" class="muted">どこからどこまでを、一括りにするか</text>
+
+        <rect x="134" y="202" width="372" height="46" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="150" y="222" font-size="11" class="lbl">スキーマの変更</text>
+        <text x="150" y="239" font-size="9.5" class="muted">動いたまま、形を変えられるか</text>
+
+        <line x1="16" y1="272" x2="624" y2="272" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="298" font-size="10.5" class="muted">データベースそのものの理論(ACID・分離レベル・索引・正規化)は、データベースのセクションが扱う。</text>
+        <text x="16" y="318" font-size="10.5" class="lbl">ここで扱うのは、アプリケーションの側から「どう使うか」。同じ理論でも、置き場所を間違えれば壊れる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

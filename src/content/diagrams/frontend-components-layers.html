@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="コンポーネントを3つの層に分け、それぞれが何を知っているかを示した図。いちばん上がページで、URL1つ分に対応し、データの取得元と画面全体の状態を知っている。中間が機能ブロックで、画面内の独立した機能単位にあたり、渡された値の扱い方は知っているがデータの取得元は知らない。いちばん下が汎用部品で、ボタンや入力欄のようにプロダクト横断で使われ、見た目と操作の通知だけを知っている。左側の下向き矢印は、値と通知が上から下へ渡ることを示す。右側の上向き矢印は、操作があったことが下から上へ通知されることを示す。状態は原則として上の層が持ち、下の層は持たない。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <rect x="60" y="34" width="440" height="66" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="80" y="60" font-size="12.5">ページ</text>
+        <text x="80" y="84" font-size="10.5" class="muted">URL 1つ分 ― データの取得元と、画面全体の状態を知っている</text>
+        <text x="520" y="72" font-size="10" class="lbl">状態はここ</text>
+
+        <rect x="60" y="122" width="440" height="66" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="80" y="148" font-size="12.5">機能ブロック</text>
+        <text x="80" y="172" font-size="10.5" class="muted">画面内の独立した機能単位 ― 取得元は知らない</text>
+        <text x="520" y="160" font-size="10" class="muted">持つこともある</text>
+
+        <rect x="60" y="210" width="440" height="66" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="80" y="236" font-size="12.5">汎用部品</text>
+        <text x="80" y="260" font-size="10.5" class="muted">ボタン・入力欄 ― 見た目と、操作があったという通知だけ</text>
+        <text x="520" y="248" font-size="10" class="muted">持たない</text>
+
+        <line x1="40" y1="46" x2="40" y2="264" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <text x="10" y="150" font-size="10" class="muted">値</text>
+        <text x="10" y="166" font-size="10" class="muted">↓</text>
+
+        <line x1="508" y1="264" x2="508" y2="46" stroke="none" />
+        <text x="320" y="304" text-anchor="middle" font-size="10.5" class="lbl">上へ行くほど固有の事情を知り、下へ行くほど何も知らない</text>
+      </svg>
+    </div>
+  </body>
+</html>

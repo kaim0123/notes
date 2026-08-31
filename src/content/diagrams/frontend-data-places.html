@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg viewBox="0 0 640 320" role="img" aria-label="フロントエンドから見たデータの4つの居場所を、奥から手前へ並べた図。いちばん奥がサーバーで、これが正本であり消えない。手前にメモリ上のstateとキャッシュがあり、リロードで消える。その手前がブラウザの永続領域で、Cookie・sessionStorage・localStorage・IndexedDBが並び、それぞれ寿命が異なる。いちばん手前がURLで、検索条件や選択中のタブのように、共有とリロードと戻る操作に追従してほしい状態を置く。Cookieからサーバーへ向かう矢印があり、Cookieだけは全リクエストに自動で付いて回ることが示されている。">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+        <rect x="20" y="30" width="600" height="58" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.6" />
+        <text x="38" y="54" font-size="12.5">サーバー ― 正本</text>
+        <text x="38" y="76" font-size="10.5" class="muted">失われて困るものはすべてここにも置く。他の3つは、あくまで手元の写し</text>
+
+        <rect x="20" y="106" width="600" height="52" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="38" y="130" font-size="12">メモリ ― state・取得済みキャッシュ</text>
+        <text x="38" y="150" font-size="10.5" class="muted">リロードで消える。速いが、閉じれば何も残らない</text>
+
+        <rect x="20" y="176" width="600" height="82" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="38" y="200" font-size="12">ブラウザの永続領域</text>
+        <rect x="38" y="212" width="126" height="34" rx="5" fill="var(--bg)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="101" y="234" text-anchor="middle" font-size="10.5" class="lbl">Cookie 約4KB</text>
+        <rect x="176" y="212" width="140" height="34" rx="5" fill="var(--bg)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="246" y="234" text-anchor="middle" font-size="10.5" class="muted">sessionStorage</text>
+        <rect x="328" y="212" width="126" height="34" rx="5" fill="var(--bg)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="391" y="234" text-anchor="middle" font-size="10.5" class="muted">localStorage</text>
+        <rect x="466" y="212" width="136" height="34" rx="5" fill="var(--bg)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="534" y="234" text-anchor="middle" font-size="10.5" class="muted">IndexedDB 数百MB</text>
+
+        <path d="M101 212 L101 196 L610 196 L610 92" fill="none" stroke="var(--primary)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arp)" />
+        <text x="330" y="190" text-anchor="middle" font-size="10" class="lbl">Cookieだけは全リクエストに自動で付いて回る</text>
+
+        <rect x="20" y="272" width="600" height="34" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="38" y="294" font-size="12">URL ― 共有・リロード・戻るが効いてほしい状態(検索条件・タブ・ページ番号)</text>
+      </svg>
+    </div>
+  </body>
+</html>

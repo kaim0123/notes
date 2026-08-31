@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .lbl {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 300"
+        role="img"
+        aria-label="設定値と秘密がどこを通るかを示した図。中央に縦の境界線があり、左がリポジトリに載せてよいもの、右が載せてはいけないものを表す。左側には、必要な変数名だけを並べた雛形ファイルと、除外設定を書いたファイルが置かれ、どちらもコミットされる。右側には、手元の実際の値を書いたファイル、CIの秘密管理に登録された値、本番の秘密管理に登録された値の3つが並び、いずれもリポジトリには入らない。新しく参加した人は左の雛形をコピーして自分の値を埋め、CIと本番はそれぞれの秘密管理から値を受け取る。図の下には、一度コミットした秘密は履歴に残り続け、あとから削除しても取得済みの手元には残るため、消すのではなく鍵そのものを無効化して発行し直すしかない、という注意が置かれている。"
+      >
+        <line x1="320" y1="34" x2="320" y2="228" stroke="var(--primary)" stroke-width="1.6" stroke-dasharray="6 4" />
+        <text x="170" y="26" text-anchor="middle" font-size="12" class="lbl">リポジトリに載せる</text>
+        <text x="478" y="26" text-anchor="middle" font-size="12" class="muted">絶対に載せない</text>
+
+        <rect x="16" y="44" width="286" height="64" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="32" y="68" font-size="11.5" font-family="monospace">.env.example</text>
+        <text x="32" y="88" font-size="10.5" class="muted">必要な変数名だけを並べた雛形</text>
+        <text x="32" y="102" font-size="10.5" class="muted">値は空欄かダミー</text>
+
+        <rect x="16" y="120" width="286" height="64" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="32" y="144" font-size="11.5" font-family="monospace">.gitignore</text>
+        <text x="32" y="164" font-size="10.5" class="muted">.env や生成物を除外する設定</text>
+        <text x="32" y="178" font-size="10.5" class="muted">これ自体はコミットする</text>
+
+        <rect x="338" y="44" width="286" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="354" y="66" font-size="11.5" font-family="monospace" class="muted">.env(手元)</text>
+        <text x="354" y="86" font-size="10.5" class="muted">自分の実際の値。各自が作る</text>
+
+        <rect x="338" y="106" width="286" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="354" y="128" font-size="11.5" class="muted">CIの秘密管理</text>
+        <text x="354" y="148" font-size="10.5" class="muted">ビルドとデプロイに必要な値だけ</text>
+
+        <rect x="338" y="168" width="286" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.4" />
+        <text x="354" y="190" font-size="11.5" class="muted">本番の秘密管理</text>
+        <text x="354" y="210" font-size="10.5" class="muted">実行時に読み込まれる</text>
+
+        <text x="16" y="212" font-size="10.5" class="lbl">雛形をコピーして各自が値を埋める →</text>
+
+        <line x1="16" y1="244" x2="624" y2="244" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="266" font-size="11" class="muted">一度コミットした秘密は履歴に残り、削除しても取得済みの手元には残り続ける</text>
+        <text x="16" y="286" font-size="11" class="lbl">対処はファイルを消すことではなく、その鍵自体を無効化して発行し直すこと</text>
+      </svg>
+    </div>
+  </body>
+</html>
