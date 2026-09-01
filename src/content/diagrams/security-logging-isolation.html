@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="ログの保管先を分けることの意味を比べた図。上は、アプリケーションサーバーの中にだけログを置いている構成で、そのサーバーを乗っ取られると、攻撃者は自分の足跡が残ったログを消したり書き換えたりできてしまう。侵入されたことは分かっても、何をされたのかが分からなくなる。下は、書き込んだそばから別系統の保管先へ転送している構成で、アプリケーションサーバー側の権限では転送済みのログを消せない。乗っ取られたあとも記録が残るため、被害の範囲を後から追える。ログは攻撃者にとって都合の悪い記録であり、まず狙われる対象でもある。"
+      >
+        <defs>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="40" font-size="10.5" class="muted">① 同じサーバーの中にだけ置いている</text>
+
+        <rect x="20" y="54" width="260" height="58" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="150" y="76" font-size="10.5" text-anchor="middle" class="accent">アプリケーションサーバー</text>
+        <text x="150" y="95" font-size="9" text-anchor="middle" class="muted">乗っ取られた</text>
+
+        <rect x="330" y="54" width="200" height="58" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="430" y="76" font-size="10.5" text-anchor="middle" class="accent">同じ中にあるログ</text>
+        <text x="430" y="95" font-size="9" text-anchor="middle" class="muted">消せる・書き換えられる</text>
+
+        <line x1="284" y1="83" x2="326" y2="83" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <text x="546" y="79" font-size="9.5" class="muted">侵入されたことは分かる</text>
+        <text x="546" y="97" font-size="9.5" class="accent">何をされたかは分からない</text>
+
+        <line x1="16" y1="132" x2="744" y2="132" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4" />
+
+        <text x="16" y="160" font-size="10.5" class="accent">② 書いたそばから、別系統へ転送している</text>
+
+        <rect x="20" y="174" width="260" height="58" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="150" y="196" font-size="10.5" text-anchor="middle">アプリケーションサーバー</text>
+        <text x="150" y="215" font-size="9" text-anchor="middle" class="muted">乗っ取られた</text>
+
+        <rect x="450" y="174" width="240" height="58" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="570" y="196" font-size="10.5" text-anchor="middle" class="accent">別系統の保管先</text>
+        <text x="570" y="215" font-size="9" text-anchor="middle" class="muted">書き込み専用・削除権限を渡さない</text>
+
+        <line x1="284" y1="203" x2="446" y2="203" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <text x="365" y="195" font-size="9" text-anchor="middle" class="muted">書いたそばから転送</text>
+
+        <text x="16" y="256" font-size="9.5" class="muted">アプリ側の権限では、転送済みのログに手が届かない ― だから足跡が残る。</text>
+
+        <line x1="16" y1="270" x2="744" y2="270" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="292" font-size="10.5" class="accent">ログは攻撃者にとって都合の悪い記録。だから、まず消しにくる対象でもある。</text>
+      </svg>
+    </div>
+  </body>
+</html>

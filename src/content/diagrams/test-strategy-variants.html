@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="テストピラミッドの4つの派生形を、層ごとの厚みの違いとして横に並べた図。左端に段の名前が上からE2E、Integration、Unit、静的解析の順に置かれ、その右に4つの配分が並ぶ。テストピラミッドはUnitが最も厚い。テストダイヤモンドはIntegrationが最も厚くUnitを薄くする。テスティングトロフィーは静的解析とIntegrationをともに厚くし、UnitとE2Eを薄くする。テストハニカムはIntegrationを厚くし、それをサービスの数だけ繰り返す。4つに共通するのは、変わるのは主にIntegrationの厚みであり、どれもE2Eを薄く保っている点だと図の下部に記されている。"
+      >
+        <text x="10" y="30" font-size="11" class="muted">アーキテクチャが違えば、最適な配分も違う</text>
+
+        <text x="10" y="106" font-size="10" class="muted">E2E</text>
+        <text x="10" y="140" font-size="10" class="accent">Integration</text>
+        <text x="10" y="174" font-size="10" class="muted">Unit</text>
+        <text x="10" y="208" font-size="10" class="muted">静的解析</text>
+
+        <text x="172" y="58" font-size="11" text-anchor="middle">テストピラミッド</text>
+        <text x="172" y="74" font-size="9" text-anchor="middle" class="muted">既定の形</text>
+        <rect x="154" y="88" width="36" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="98" y="122" width="148" height="28" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <rect x="98" y="156" width="148" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="147" y="190" width="50" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="337" y="58" font-size="11" text-anchor="middle">テストダイヤモンド</text>
+        <text x="337" y="74" font-size="9" text-anchor="middle" class="muted">つなぎ目にバグが出る系</text>
+        <rect x="319" y="88" width="36" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="263" y="122" width="148" height="28" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <rect x="297" y="156" width="80" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="314" y="190" width="46" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="502" y="58" font-size="11" text-anchor="middle">テスティングトロフィー</text>
+        <text x="502" y="74" font-size="9" text-anchor="middle" class="muted">React・SPA向け</text>
+        <rect x="482" y="88" width="40" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="432" y="122" width="140" height="28" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <rect x="471" y="156" width="62" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="428" y="190" width="148" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="667" y="58" font-size="11" text-anchor="middle">テストハニカム</text>
+        <text x="667" y="74" font-size="9" text-anchor="middle" class="muted">マイクロサービス向け</text>
+        <rect x="650" y="88" width="34" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="594" y="122" width="146" height="28" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <rect x="619" y="156" width="96" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="644" y="190" width="46" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="667" y="234" font-size="9" text-anchor="middle" class="muted">これをサービスの数だけ繰り返す</text>
+
+        <line x1="10" y1="252" x2="750" y2="252" stroke="var(--border)" stroke-width="1" />
+        <text x="10" y="272" font-size="10.5" class="accent">4つを見比べると、動くのは主にIntegrationの厚み。ここをどれだけ積むかがアーキテクチャで決まる。</text>
+        <text x="10" y="292" font-size="10.5" class="muted">どの形もE2Eは薄いまま。合わない配分をそのまま輸入すると、遅くて壊れやすいスイートになる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

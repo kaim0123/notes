@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 340"
+        role="img"
+        aria-label="フレーキーテストの原因を8つに分類し、それぞれの典型的な症状と対処を並べた表形式の図。待ち方の問題は、要素が見つからないとして落ちるが速いマシンでは通るという症状で、固定の待ち時間をやめて条件で待つことで直る。実行順序への依存は、単体では通るが全体実行だと落ちるという症状で、テスト間の状態共有を断つ。並列実行の衝突は、ワーカー数を増やすと落ちるという症状で、データやポートや一時ファイルをテストごとに分ける。時刻とタイムゾーンは、特定の時間帯や月末に落ちる症状で、時刻を注入して固定する。外部依存は、ネットワークや相手の調子で落ちる症状で、代役に置き換えて実物を叩くテストは分離する。順不同の結果は、配列の順序を期待している場合に起き、集合として比較する。リソース不足は、CIでだけ落ちる症状で、並列度を下げるかリソースを増やす。最後の製品側の競合だけは性質が違い、再現性が低くログに異常が残る症状で、テストではなく実装を直す必要がある。テストを緩めて黙らせると、本番で同じことがユーザーに起きる。"
+      >
+        <text x="16" y="26" font-size="11" class="muted">「たぶんタイミング」で止めない。8つのどれかを特定する</text>
+
+        <text x="30" y="52" font-size="9" class="muted">原因</text>
+        <text x="216" y="52" font-size="9" class="muted">典型的な症状</text>
+        <text x="460" y="52" font-size="9" class="muted">対処</text>
+        <line x1="16" y1="58" x2="684" y2="58" stroke="var(--border)" stroke-width="1" />
+
+        <text x="30" y="80" font-size="9.5">待ち方(タイミング)</text>
+        <text x="216" y="80" font-size="9" class="muted">要素が見つからない。速い機械では通る</text>
+        <text x="460" y="80" font-size="9" class="muted">固定の待ち時間をやめ、条件で待つ</text>
+
+        <text x="30" y="106" font-size="9.5">実行順序への依存</text>
+        <text x="216" y="106" font-size="9" class="muted">単体では通るが、全体実行で落ちる</text>
+        <text x="460" y="106" font-size="9" class="muted">テスト間の状態共有を断つ</text>
+
+        <text x="30" y="132" font-size="9.5">並列実行の衝突</text>
+        <text x="216" y="132" font-size="9" class="muted">ワーカー数を増やすと落ちる</text>
+        <text x="460" y="132" font-size="9" class="muted">データ・ポート・一時ファイルを分ける</text>
+
+        <text x="30" y="158" font-size="9.5">時刻・タイムゾーン</text>
+        <text x="216" y="158" font-size="9" class="muted">特定の時間帯や月末に落ちる</text>
+        <text x="460" y="158" font-size="9" class="muted">時刻を注入して固定する</text>
+
+        <text x="30" y="184" font-size="9.5">外部依存</text>
+        <text x="216" y="184" font-size="9" class="muted">相手やネットワークの調子で落ちる</text>
+        <text x="460" y="184" font-size="9" class="muted">代役に置き換え、実物は分離する</text>
+
+        <text x="30" y="210" font-size="9.5">順不同の結果</text>
+        <text x="216" y="210" font-size="9" class="muted">配列の順序を期待している</text>
+        <text x="460" y="210" font-size="9" class="muted">順序を保証しないものは集合で比べる</text>
+
+        <text x="30" y="236" font-size="9.5">リソース不足</text>
+        <text x="216" y="236" font-size="9" class="muted">CIでだけ落ちる。CPU・メモリの逼迫</text>
+        <text x="460" y="236" font-size="9" class="muted">並列度を下げる、資源を増やす</text>
+
+        <rect x="16" y="252" width="668" height="42" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="30" y="270" font-size="9.5" class="accent">製品側の競合</text>
+        <text x="216" y="270" font-size="9" class="muted">再現性が低く、ログに異常が残る</text>
+        <text x="460" y="270" font-size="9" class="accent">テストではなく、実装を直す</text>
+        <text x="30" y="287" font-size="8.5" class="muted">これだけは性質が違う ― テストを緩めて黙らせると、本番で同じことがユーザーに起きる</text>
+
+        <line x1="16" y1="308" x2="684" y2="308" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="330" font-size="10.5" class="muted">「テストが悪い」と決めつけてから調べ始めない。最下段の可能性を、毎回いちばん先に潰す。</text>
+      </svg>
+    </div>
+  </body>
+</html>

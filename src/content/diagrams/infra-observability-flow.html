@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="障害が起きたときに、観測データをどう降りていくかを示した図。まずメトリクスのしきい値超過でアラートが鳴り、次にダッシュボードでどのサービスのどの指標が動いたかを絞る。そこからその時刻のログを検索して何が起きたかを読み、必要ならトレースを見てどの区間で時間を使ったかを特定する。上の段ほど全体を粗く速く見る道具、下の段ほど1件を細かく見る道具になっており、上から順に範囲を狭めることで、いきなり大量のログを読む羽目にならずに済む。各段のデータを共通のIDと時刻でつないでおくことが、この降下を成立させる条件になる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="40" y="40" width="440" height="44" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="60" y="60" font-size="11.5">1. アラート ― しきい値を超えた</text>
+        <text x="60" y="76" font-size="9.5" class="muted">メトリクス(Prometheus)。全体を粗く、速く見る</text>
+        <text x="500" y="68" font-size="10" class="muted">「異常がある」</text>
+
+        <rect x="80" y="98" width="440" height="44" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="100" y="118" font-size="11.5">2. ダッシュボード ― どのサービスか</text>
+        <text x="100" y="134" font-size="9.5" class="muted">Grafana。指標の推移を並べて範囲を絞る</text>
+        <text x="540" y="126" font-size="10" class="muted">「どこが」</text>
+
+        <rect x="120" y="156" width="440" height="44" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="140" y="176" font-size="11.5">3. ログ ― 何が起きたか</text>
+        <text x="140" y="192" font-size="9.5" class="muted">集約したログを時刻で検索する。1件ごとの詳細</text>
+        <text x="580" y="184" font-size="10" class="muted">「なぜ」</text>
+
+        <rect x="160" y="214" width="440" height="44" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="180" y="234" font-size="11.5">4. トレース ― どこで時間を使ったか</text>
+        <text x="180" y="250" font-size="9.5" class="muted">サービスをまたいだ内訳。遅さの原因を1区間に絞る</text>
+        <text x="620" y="242" font-size="10" class="muted">「どの区間で」</text>
+
+        <line x1="60" y1="88" x2="100" y2="94" stroke="var(--muted)" marker-end="url(#ar)" />
+        <line x1="100" y1="146" x2="140" y2="152" stroke="var(--muted)" marker-end="url(#ar)" />
+        <line x1="140" y1="204" x2="180" y2="210" stroke="var(--muted)" marker-end="url(#ar)" />
+
+        <text x="40" y="286" font-size="10.5" class="muted">上ほど広く粗く、下ほど狭く細かい。上から降りるから、いきなり大量のログを読む羽目にならない。</text>
+      </svg>
+    </div>
+  </body>
+</html>

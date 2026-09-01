@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="インフラをコードで書くときの抽象度の階段を示した図。いちばん下は事業者が定義する要素と1対1で対応する層で、すべての項目を自分で指定する代わりに、できることは事業者の機能そのものになる。中間はよく使う構成をまとめた層で、既定値が用意されているため短く書けて、安全側の設定が最初から入っている。いちばん上は用途ごとの型をまとめた層で、たとえばWebサービス一式のように、複数の資源をまとめて1行で組み立てられる。上の層ほど書く量は減るが、細かい調整をしたくなったときに下の層へ降りられることが条件になる。降りられない抽象は、いずれ捨てることになる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="180" y="40" width="500" height="66" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="200" y="64" font-size="11.5">用途ごとの型 ― 一式をまとめて組み立てる</text>
+        <text x="200" y="86" font-size="9.5" class="muted">「Webサービス一式」のような単位。書く量はいちばん少ない</text>
+        <text x="700" y="78" font-size="10" text-anchor="end" class="accent">短い</text>
+
+        <rect x="110" y="120" width="570" height="66" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="130" y="144" font-size="11.5">よく使う構成をまとめた層</text>
+        <text x="130" y="166" font-size="9.5" class="muted">既定値があるので短く書け、安全側の設定が最初から入っている</text>
+
+        <rect x="40" y="200" width="640" height="66" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="60" y="224" font-size="11.5">事業者の定義と1対1の層</text>
+        <text x="60" y="246" font-size="9.5" class="muted">全項目を自分で指定する。できることは事業者の機能そのもの</text>
+        <text x="700" y="238" font-size="10" text-anchor="end" class="muted">細かい</text>
+
+        <line x1="716" y1="250" x2="716" y2="60" stroke="var(--primary)" marker-end="url(#arp)" />
+        <text x="738" y="156" font-size="10" text-anchor="middle" class="accent" transform="rotate(-90 738 156)">抽象度が上がる</text>
+
+        <text x="40" y="290" font-size="10.5" class="muted">上の層で書き始め、細かい調整が要るところだけ下の層へ降りる ― 降りられない抽象は、いずれ捨てることになる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

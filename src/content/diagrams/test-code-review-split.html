@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 300"
+        role="img"
+        aria-label="コードレビューで機械に任せる部分と人が見る部分を分けた図。左には機械が判定できるものが並ぶ。書式とインデント、命名規則の機械的な違反、未使用の変数や到達しないコード、型の不整合、依存ライブラリの既知の脆弱性、そしてテストが通っているかどうか。これらは静的解析とCIが毎回自動で弾くため、人が指摘する必要はない。右には人にしか判定できないものが並ぶ。この設計は要件を満たしているか、この抽象は将来の変更に耐えるか、この境界の引き方は妥当か、テストの観点は正しいか、そしてこの名前は意図を表しているか。いずれも仕様と意図を知っている人にしか判断できない。左の項目を人が指摘し始めると、レビューの時間と注意力が右の項目に届かなくなる。分担を決めることは、レビューの質を上げるための前提にあたる。"
+      >
+        <text x="16" y="26" font-size="11" class="muted">機械が判定できることを人が指摘し始めると、注意力が右側に届かなくなる</text>
+
+        <rect x="16" y="42" width="296" height="196" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="64" font-size="10.5" class="muted">機械に任せる</text>
+        <text x="30" y="90" font-size="9" class="muted">書式・インデント</text>
+        <text x="30" y="112" font-size="9" class="muted">命名規則の機械的な違反</text>
+        <text x="30" y="134" font-size="9" class="muted">未使用の変数・到達しないコード</text>
+        <text x="30" y="156" font-size="9" class="muted">型の不整合</text>
+        <text x="30" y="178" font-size="9" class="muted">依存ライブラリの既知の脆弱性</text>
+        <text x="30" y="200" font-size="9" class="muted">テストが通っているか</text>
+        <text x="30" y="226" font-size="8.5" class="muted">静的解析とCIが、毎回自動で弾く</text>
+
+        <rect x="328" y="42" width="296" height="196" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="342" y="64" font-size="10.5" class="accent">人が見る</text>
+        <text x="342" y="90" font-size="9" class="muted">この設計は要件を満たしているか</text>
+        <text x="342" y="112" font-size="9" class="muted">この抽象は将来の変更に耐えるか</text>
+        <text x="342" y="134" font-size="9" class="muted">この境界の引き方は妥当か</text>
+        <text x="342" y="156" font-size="9" class="muted">テストの観点は正しいか</text>
+        <text x="342" y="178" font-size="9" class="muted">この名前は、意図を表しているか</text>
+        <text x="342" y="200" font-size="9" class="muted">読んで、意味が伝わるか</text>
+        <text x="342" y="226" font-size="8.5" class="accent">仕様と意図を知っている人にしか判断できない</text>
+
+        <line x1="16" y1="258" x2="624" y2="258" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="278" font-size="10.5" class="accent">分担を決めることは、レビューの質を上げるための前提 ― 気を遣う話ではなく、配分の話。</text>
+        <text x="16" y="296" font-size="9.5" class="muted">右の列の下2つは、専門知識がなくても確認できる ― むしろ初見の人のほうが気づきやすい。</text>
+      </svg>
+    </div>
+  </body>
+</html>

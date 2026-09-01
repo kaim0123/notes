@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 320"
+        role="img"
+        aria-label="ボタンを押してから画面に結果が反映されるまでの経過を時間軸で示し、検証を置くタイミングによって何が起きるかを比べた図。時間軸は左から順に、リクエストの送信、サーバーでの処理、応答を受けての1回目の再描画、2回目の再描画、そして表示の演出が終わるまで、と続く。1つ目の検証位置は最も早い段階にあり、まだ要素が現れていないため見つからないとして落ちる。機能は正しく動いているのにテストだけが落ちる、偽陰性にあたる。2つ目の検証位置は1回目の再描画の直後にあり、そこで値を1度だけ取って確定させてしまうため、2回目の再描画で変わる内容を見逃す。テストは緑のまま実際の不具合を見落とす、偽陽性にあたる。3つ目の検証位置はすべてが終わったあとにあり、これが正しい。危険なのは2つ目で、落ちてくれないぶん気づく機会がない、と図の下部に記されている。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="26" font-size="11" class="muted">クリックしてから、結果が画面に載るまでに起きていること</text>
+
+        <text x="60" y="52" font-size="9.5" text-anchor="middle" class="muted">早すぎる</text>
+        <text x="470" y="52" font-size="9.5" text-anchor="middle" class="muted">中途半端</text>
+        <text x="640" y="52" font-size="9.5" text-anchor="middle" class="accent">完了を待つ</text>
+
+        <line x1="60" y1="58" x2="60" y2="92" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="470" y1="58" x2="470" y2="92" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="640" y1="58" x2="640" y2="92" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+
+        <rect x="40" y="96" width="110" height="34" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="95" y="118" font-size="9" text-anchor="middle" class="muted">リクエスト送信</text>
+
+        <rect x="150" y="96" width="140" height="34" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="220" y="118" font-size="9" text-anchor="middle" class="muted">サーバーでの処理</text>
+
+        <rect x="290" y="96" width="130" height="34" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="355" y="118" font-size="9" text-anchor="middle" class="muted">1回目の再描画</text>
+
+        <rect x="420" y="96" width="100" height="34" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="470" y="118" font-size="9" text-anchor="middle" class="muted">2回目の再描画</text>
+
+        <rect x="520" y="96" width="140" height="34" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="590" y="118" font-size="9" text-anchor="middle" class="accent">表示の演出が終わる</text>
+
+        <rect x="16" y="152" width="210" height="76" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="174" font-size="10">偽陰性 ― 早すぎる失敗</text>
+        <text x="30" y="194" font-size="9" class="muted">要素がまだ無い。見つからない</text>
+        <text x="30" y="210" font-size="9" class="muted">としてテストが落ちる</text>
+        <text x="30" y="224" font-size="9" class="muted">機能は正しく動いている</text>
+
+        <rect x="240" y="152" width="210" height="76" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="254" y="174" font-size="10" class="accent">偽陽性 ― 早すぎる成功</text>
+        <text x="254" y="194" font-size="9" class="muted">1回だけ値を取って確定させ</text>
+        <text x="254" y="210" font-size="9" class="muted">2回目の変化を見逃す</text>
+        <text x="254" y="224" font-size="9" class="muted">緑のまま、不具合を見落とす</text>
+
+        <rect x="464" y="152" width="220" height="76" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="478" y="174" font-size="10">正しい ― 完了条件で待つ</text>
+        <text x="478" y="194" font-size="9" class="muted">「何が起きたら次に進んでよいか」</text>
+        <text x="478" y="210" font-size="9" class="muted">を言葉にし、それを条件にする</text>
+        <text x="478" y="224" font-size="9" class="muted">環境の速さに左右されない</text>
+
+        <line x1="16" y1="252" x2="684" y2="252" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="272" font-size="10.5" class="muted">偽陰性はCIを詰まらせる分かりやすい迷惑。落ちるので、必ず誰かが気づく。</text>
+        <text x="16" y="294" font-size="10.5" class="accent">危険なのは偽陽性 ― 落ちてくれないぶん、気づく機会がない。</text>
+        <text x="16" y="314" font-size="9.5" class="muted">待機の設計を軽視すると、テストの信頼性そのものが揺らぐのはこのため。</text>
+      </svg>
+    </div>
+  </body>
+</html>

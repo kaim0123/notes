@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="表示を速くするための手立てを、効き目の大きい順に段として並べた図。いちばん上は送る量を減らすことで、画像や動画の最適化、使っていないコードの削除、圧縮が該当する。次は繰り返さないことで、同じ計算や同じ転送をキャッシュで省く。3段目は近くから返すことで、配信網を使って距離そのものを縮める。いちばん下は速く作ることで、処理やクエリの改善にあたる。上ほど費用対効果が大きく、下ほど手間がかかるため、上から順に手を付けるのが定石になる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="44" width="720" height="52" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="40" y="66" font-size="11.5">1. 送る量を減らす</text>
+        <text x="40" y="86" font-size="9.5" class="muted">画像・動画の最適化 / 使っていないコードの削除 / 圧縮</text>
+        <text x="720" y="76" font-size="10" text-anchor="end" class="accent">効き目が最も大きい</text>
+
+        <rect x="20" y="106" width="720" height="52" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="40" y="128" font-size="11.5">2. 繰り返さない</text>
+        <text x="40" y="148" font-size="9.5" class="muted">同じ計算・同じ転送をキャッシュで省く</text>
+
+        <rect x="20" y="168" width="720" height="52" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="40" y="190" font-size="11.5">3. 近くから返す</text>
+        <text x="40" y="210" font-size="9.5" class="muted">配信網で距離そのものを縮める</text>
+
+        <rect x="20" y="230" width="720" height="52" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="40" y="252" font-size="11.5">4. 速く作る</text>
+        <text x="40" y="272" font-size="9.5" class="muted">処理とクエリの改善 ― 手間はかかるが、効くところには効く</text>
+        <text x="720" y="262" font-size="10" text-anchor="end" class="muted">最後に手を付ける</text>
+      </svg>
+    </div>
+  </body>
+</html>

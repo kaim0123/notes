@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 320"
+        role="img"
+        aria-label="受入れ基準を決める時期によって何が変わるかを、2つの流れの比較で示した図。上の流れでは、要件を決め、作り、テストしたあとで、受け取る側が確認する段になって初めて基準を突き合わせる。ここで解釈の違いが見つかると、要件までさかのぼって作り直すことになり、手戻りが最も大きい工程で発覚する。下の流れでは、要件を決める段で受入れ基準を先に書く。作る側は完成の定義が分かった状態で作り始められ、テストの項目はその基準からそのまま導ける。受け取る側の確認は、すでに合意した基準を1つずつ照合するだけの作業になる。基準を先に書くという一手だけで、確認の工程が交渉ではなく照合に変わる、と図の下部に記されている。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="26" font-size="11" class="muted">受入れ基準を、いつ書くか</text>
+
+        <text x="16" y="52" font-size="10" class="muted">あとから突き合わせる場合</text>
+
+        <rect x="16" y="60" width="128" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="80" y="85" font-size="9.5" text-anchor="middle" class="muted">要件を決める</text>
+        <line x1="148" y1="80" x2="166" y2="80" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <rect x="170" y="60" width="128" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="234" y="85" font-size="9.5" text-anchor="middle" class="muted">作る</text>
+        <line x1="302" y1="80" x2="320" y2="80" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <rect x="324" y="60" width="128" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="388" y="85" font-size="9.5" text-anchor="middle" class="muted">テストする</text>
+        <line x1="456" y1="80" x2="474" y2="80" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <rect x="478" y="60" width="146" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="551" y="85" font-size="9.5" text-anchor="middle" class="muted">受け取る側が確認</text>
+
+        <path d="M551,104 L551,122 L80,122 L80,106" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#ar)" />
+        <text x="316" y="138" font-size="9.5" text-anchor="middle" class="muted">解釈の違いがここで見つかると、要件まで戻る ― 手戻りが最大の位置で発覚する</text>
+
+        <line x1="16" y1="154" x2="624" y2="154" stroke="var(--border)" stroke-width="1" />
+
+        <text x="16" y="178" font-size="10" class="accent">先に書く場合</text>
+
+        <rect x="16" y="186" width="128" height="52" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="80" y="206" font-size="9.5" text-anchor="middle" class="accent">要件を決める</text>
+        <text x="80" y="224" font-size="8.5" text-anchor="middle" class="accent">＋ 受入れ基準</text>
+        <line x1="148" y1="212" x2="166" y2="212" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <rect x="170" y="186" width="128" height="52" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="234" y="206" font-size="9.5" text-anchor="middle" class="muted">作る</text>
+        <text x="234" y="224" font-size="8.5" text-anchor="middle" class="muted">完成の定義が分かる</text>
+        <line x1="302" y1="212" x2="320" y2="212" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <rect x="324" y="186" width="128" height="52" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="388" y="206" font-size="9.5" text-anchor="middle" class="muted">テストする</text>
+        <text x="388" y="224" font-size="8.5" text-anchor="middle" class="muted">項目は基準から導く</text>
+        <line x1="456" y1="212" x2="474" y2="212" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <rect x="478" y="186" width="146" height="52" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="551" y="206" font-size="9.5" text-anchor="middle" class="accent">受け取る側が確認</text>
+        <text x="551" y="224" font-size="8.5" text-anchor="middle" class="muted">合意済みの基準を照合</text>
+
+        <line x1="16" y1="262" x2="624" y2="262" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="282" font-size="10.5" class="muted">同じ工程を同じ順に通っている。違うのは、基準を書く時期だけ。</text>
+        <text x="16" y="304" font-size="10.5" class="accent">先に書くと、最後の確認が「交渉」ではなく「照合」に変わる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 280"
+        role="img"
+        aria-label="ログに揃えておくべき6つの項目と、それぞれが答える問いを並べた図。日時はいつ、送信元IPはどこから、利用者IDは誰が、対象は何に対して、操作は何をして、結果はどうなったか、という問いに対応する。1行のログにこの6つが揃っていれば、事故のあとで経緯をたどれる。下段には実際の1行の例が置かれ、ログイン試行が失敗した記録になっている。どれか1つでも欠けると、調査の途中で必ずそこで止まる。たとえば送信元IPが無ければ、同じ利用者IDへの試行が本人によるものか外部からの総当たりかを区別できない。"
+      >
+        <text x="16" y="42" font-size="10" class="muted">1行に揃える6項目</text>
+
+        <rect x="20" y="56" width="115" height="52" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <rect x="145" y="56" width="115" height="52" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <rect x="270" y="56" width="115" height="52" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <rect x="395" y="56" width="115" height="52" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <rect x="520" y="56" width="115" height="52" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <rect x="645" y="56" width="95" height="52" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+
+        <text x="77" y="80" font-size="10.5" text-anchor="middle">日時</text>
+        <text x="202" y="80" font-size="10.5" text-anchor="middle">送信元IP</text>
+        <text x="327" y="80" font-size="10.5" text-anchor="middle">利用者</text>
+        <text x="452" y="80" font-size="10.5" text-anchor="middle">対象</text>
+        <text x="577" y="80" font-size="10.5" text-anchor="middle">操作</text>
+        <text x="692" y="80" font-size="10.5" text-anchor="middle">結果</text>
+        <text x="77" y="99" font-size="9" text-anchor="middle" class="muted">いつ</text>
+        <text x="202" y="99" font-size="9" text-anchor="middle" class="muted">どこから</text>
+        <text x="327" y="99" font-size="9" text-anchor="middle" class="muted">誰が</text>
+        <text x="452" y="99" font-size="9" text-anchor="middle" class="muted">何に</text>
+        <text x="577" y="99" font-size="9" text-anchor="middle" class="muted">何をして</text>
+        <text x="692" y="99" font-size="9" text-anchor="middle" class="muted">どうなった</text>
+
+        <text x="16" y="146" font-size="10" class="muted">実際の1行</text>
+        <rect x="20" y="158" width="720" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="32" y="180" font-size="9.5" class="mono">2026-09-01T21:14:03+09:00  203.0.113.10  user_1029  /login  ログイン試行  失敗(パスワード不一致)</text>
+
+        <text x="16" y="220" font-size="9.5" class="accent">1つ欠けると、その問いには二度と答えられない。</text>
+        <text x="16" y="238" font-size="9.5" class="muted">送信元IPが無ければ、同じIDへの連続失敗が本人の打ち間違いか、外からの総当たりかを区別できない。</text>
+
+        <line x1="16" y1="254" x2="744" y2="254" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="274" font-size="10.5" class="muted">ログは書いた時点では役に立たない。役に立つのは、必要になった日に必要な列が入っていたときだけ。</text>
+      </svg>
+    </div>
+  </body>
+</html>

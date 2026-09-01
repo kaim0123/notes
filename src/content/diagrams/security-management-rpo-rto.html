@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 290"
+        role="img"
+        aria-label="RPOとRTOの意味を、障害発生の前後に伸びる時間軸として示した図。横軸は時間で、中央に障害発生の時点がある。その左側、直近のバックアップから障害発生までの区間がRPOで、失われるデータの量を表す。この区間の更新はバックアップに入っていないため失われる。右側、障害発生からサービス再開までの区間がRTOで、止まっている時間を表す。RPOを短くするにはバックアップの間隔を詰め、RTOを短くするには復旧の手順や代替系を用意する。どちらも短くするほど費用がかかるため、事業として許せる線を先に決めておく。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <line x1="310" y1="60" x2="310" y2="200" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="310" y="52" font-size="11" text-anchor="middle" class="accent">障害発生</text>
+
+        <text x="230" y="88" font-size="9.5" text-anchor="middle" class="muted">失われるデータの量</text>
+        <text x="230" y="110" font-size="13" text-anchor="middle">RPO</text>
+        <line x1="150" y1="120" x2="310" y2="120" stroke="var(--border)" stroke-width="1.2" />
+        <line x1="150" y1="114" x2="150" y2="126" stroke="var(--border)" stroke-width="1.2" />
+        <line x1="310" y1="114" x2="310" y2="126" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="405" y="88" font-size="9.5" text-anchor="middle" class="muted">止まっている時間</text>
+        <text x="405" y="110" font-size="13" text-anchor="middle">RTO</text>
+        <line x1="310" y1="120" x2="500" y2="120" stroke="var(--border)" stroke-width="1.2" />
+        <line x1="500" y1="114" x2="500" y2="126" stroke="var(--border)" stroke-width="1.2" />
+
+        <line x1="30" y1="150" x2="610" y2="150" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="600" y="142" font-size="9.5" text-anchor="end" class="muted">時間</text>
+
+        <rect x="150" y="158" width="160" height="18" rx="4" fill="var(--card)" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="230" y="171" font-size="9" text-anchor="middle">この間の更新は戻らない</text>
+        <rect x="310" y="158" width="190" height="18" rx="4" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="405" y="171" font-size="9" text-anchor="middle" class="muted">この間サービスは止まる</text>
+
+        <line x1="150" y1="144" x2="150" y2="156" stroke="var(--muted)" stroke-width="1.2" />
+        <line x1="500" y1="144" x2="500" y2="156" stroke="var(--muted)" stroke-width="1.2" />
+        <text x="150" y="196" font-size="9.5" text-anchor="middle" class="muted">直近のバックアップ</text>
+        <text x="500" y="196" font-size="9.5" text-anchor="middle" class="muted">サービス再開</text>
+
+        <line x1="16" y1="222" x2="624" y2="222" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="244" font-size="10.5" class="muted">RPOはバックアップの間隔で決まり、RTOは復旧手順と代替系の準備で決まる。別々の投資先になる。</text>
+        <text x="16" y="266" font-size="10.5" class="accent">どちらも0には近づけられるが、近づけるほど費用は跳ね上がる。先に「事業として許せる線」を決める。</text>
+      </svg>
+    </div>
+  </body>
+</html>

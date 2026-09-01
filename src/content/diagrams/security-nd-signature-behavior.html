@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="既知のパターンと照合する方式と、挙動そのものを監視する方式の違いを示した図。上は従来のウイルス対策ソフトで、手元の定義ファイルにある既知の悪意あるファイルの特徴と照合する。定義に載っているものは止まるが、少し書き換えただけの亜種や、まだ誰も見たことのない新種は特徴が一致しないため素通りしてしまう。下はEDRのような挙動監視で、ファイルの見た目ではなく、端末の中で何が起きたかを見る。見慣れないプロセスが起動し、自分自身を別の場所へコピーして常駐し、外部の見知らぬ宛先へ定期的に通信するという一連の振る舞いは、ファイルが新種であっても同じ形で現れるため検知できる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="40" font-size="10.5" class="muted">① 既知のパターンと照合する(従来のウイルス対策)</text>
+
+        <rect x="20" y="54" width="120" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="80" y="79" font-size="10" text-anchor="middle">届いたファイル</text>
+        <rect x="200" y="54" width="150" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="275" y="72" font-size="9.5" text-anchor="middle">定義ファイルと照合</text>
+        <text x="275" y="88" font-size="8.5" text-anchor="middle" class="muted">見た目の特徴を比べる</text>
+        <line x1="144" y1="74" x2="196" y2="74" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <line x1="354" y1="68" x2="410" y2="62" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="354" y1="82" x2="410" y2="94" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <text x="418" y="62" font-size="9.5" class="muted">載っているもの → 止まる</text>
+        <text x="418" y="98" font-size="9.5" class="accent">1文字書き換えた亜種・新種 → 素通り</text>
+
+        <line x1="16" y1="122" x2="744" y2="122" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4" />
+
+        <text x="16" y="150" font-size="10.5" class="accent">② 端末の中で何が起きたかを見る(EDR)</text>
+
+        <rect x="20" y="164" width="170" height="34" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <rect x="210" y="164" width="170" height="34" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <rect x="400" y="164" width="170" height="34" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="105" y="186" font-size="9.5" text-anchor="middle">見慣れないプロセス起動</text>
+        <text x="295" y="186" font-size="9.5" text-anchor="middle">自分を複製して常駐</text>
+        <text x="485" y="186" font-size="9.5" text-anchor="middle">外部へ定期的に通信</text>
+        <line x1="194" y1="181" x2="206" y2="181" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="384" y1="181" x2="396" y2="181" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="574" y1="181" x2="596" y2="181" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <rect x="600" y="160" width="140" height="42" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="670" y="177" font-size="9.5" text-anchor="middle" class="accent">この並びで検知</text>
+        <text x="670" y="194" font-size="8.5" text-anchor="middle" class="muted">端末を隔離・調査へ</text>
+
+        <text x="16" y="228" font-size="9.5" class="muted">ファイルの見た目は毎回変えられるが、目的を達するための振る舞いはそれほど変えられない。</text>
+
+        <line x1="16" y1="248" x2="744" y2="248" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="270" font-size="10.5" class="muted">照合方式は「知っているものしか止められない」。攻撃側は毎日、亜種を作るだけでその条件を外せる。</text>
+        <text x="16" y="292" font-size="10.5" class="accent">XDRは、この見方をネットワーク・メール・クラウドへ広げたもの。1台では兆候に見えない動きが、束ねると形になる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

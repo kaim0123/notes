@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 340"
+        role="img"
+        aria-label="同じ1つの機能を、機能テストと非機能テストがそれぞれ別の軸で見ていることを示した図。上部に商品を検索するという1つの機能があり、そこから左右に分岐する。左は機能テストで、何をするかを見る。入力に対して期待した出力と一致するかを確かめ、判定は合格か不合格の二択で、仕様書からそのままテストケースを作れる。右は非機能テストで、どう振る舞うかを見る。応答時間が1秒未満か、既知の脆弱性が0件か、キーボードだけで操作を完了できるか、見た目の差分が0ピクセルかというように、測った値を決めておいた閾値と比べる。機能テストが全部通っていても、遅い、危ない、使えない、崩れているという理由で使い物にならないことがある、と図の下部に記されている。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <rect x="190" y="20" width="260" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="320" y="45" font-size="11" text-anchor="middle">同じ1つの機能 ― 商品を検索する</text>
+
+        <line x1="280" y1="60" x2="180" y2="84" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="360" y1="60" x2="460" y2="84" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="24" y="88" width="272" height="40" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="160" y="113" font-size="11" text-anchor="middle" class="muted">機能テスト ― 何をするか</text>
+
+        <rect x="24" y="140" width="272" height="110" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="40" y="168" font-size="10" class="muted">入力 → 期待した出力と一致するか</text>
+        <text x="40" y="194" font-size="10" class="muted">判定は 合格 か 不合格 の二択</text>
+        <text x="40" y="220" font-size="10" class="muted">仕様書からそのままケースを作れる</text>
+        <text x="40" y="242" font-size="9" class="muted">壊れていれば、必ず落ちる</text>
+
+        <rect x="344" y="88" width="272" height="40" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="480" y="113" font-size="11" text-anchor="middle" class="accent">非機能テスト ― どう振る舞うか</text>
+
+        <rect x="344" y="140" width="272" height="110" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="360" y="164" font-size="10">応答時間 &lt; 1秒</text>
+        <text x="360" y="186" font-size="10">既知の脆弱性 0件</text>
+        <text x="360" y="208" font-size="10">キーボードだけで操作を完了できる</text>
+        <text x="360" y="230" font-size="10">見た目の差分 0px</text>
+        <text x="360" y="245" font-size="9" class="muted">測った値を、決めておいた閾値と比べる</text>
+
+        <line x1="16" y1="272" x2="624" y2="272" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="294" font-size="10.5" class="muted">機能テストが全部緑でも、遅い・危ない・使えない・崩れている、という理由で使い物にならないことがある。</text>
+        <text x="16" y="316" font-size="10.5" class="accent">非機能テストは○×では判定できない。先に閾値を決めておかないと、テストとして成立しない。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 300"
+        role="img"
+        aria-label="ハッシュ関数の雪崩効果を、簡単な自作ハッシュの計算過程で示した図。アルファベットをAが1からZが26までの番号に置き換え、初期値1から始めて、1文字ごとに現在の値を7倍して文字番号を足し、下2桁だけを残す、という手順を繰り返す。catという入力では10、71を経て最終値が17になる。1文字目だけを変えたbatでは9、64を経て68になる。入力の違いは1文字でも、途中で値が増幅されては桁を捨てられるため、出力は近い値にならない。増幅してから情報を捨てるという操作の繰り返しが、元に戻せず規則性も見えない変換を生む。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="38" font-size="10" class="muted">手順: 初期値1から「現在の値 × 7 + 文字番号」を1文字ずつ計算し、毎回 下2桁だけを残す(A=1 … Z=26)</text>
+
+        <text x="40" y="100" font-size="12" text-anchor="middle" class="mono">cat</text>
+        <rect x="90" y="78" width="90" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="240" y="78" width="90" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="390" y="78" width="90" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="135" y="100" font-size="11" text-anchor="middle" class="mono">10</text>
+        <text x="285" y="100" font-size="11" text-anchor="middle" class="mono">71</text>
+        <text x="435" y="100" font-size="11" text-anchor="middle" class="mono accent">17</text>
+        <line x1="184" y1="95" x2="236" y2="95" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="334" y1="95" x2="386" y2="95" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="210" y="87" font-size="8.5" text-anchor="middle" class="muted">+a(1)</text>
+        <text x="360" y="87" font-size="8.5" text-anchor="middle" class="muted">+t(20)</text>
+        <text x="135" y="128" font-size="8.5" text-anchor="middle" class="muted">c(3)</text>
+
+        <text x="40" y="190" font-size="12" text-anchor="middle" class="mono">bat</text>
+        <rect x="90" y="168" width="90" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="240" y="168" width="90" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="390" y="168" width="90" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="135" y="190" font-size="11" text-anchor="middle" class="mono">9</text>
+        <text x="285" y="190" font-size="11" text-anchor="middle" class="mono">64</text>
+        <text x="435" y="190" font-size="11" text-anchor="middle" class="mono accent">68</text>
+        <line x1="184" y1="185" x2="236" y2="185" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="334" y1="185" x2="386" y2="185" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="210" y="177" font-size="8.5" text-anchor="middle" class="muted">+a(1)</text>
+        <text x="360" y="177" font-size="8.5" text-anchor="middle" class="muted">+t(20)</text>
+        <text x="135" y="218" font-size="8.5" text-anchor="middle" class="muted">b(2)</text>
+
+        <text x="510" y="100" font-size="9.5" class="muted">1文字目だけの違い</text>
+        <text x="510" y="146" font-size="10" class="accent">17 と 68 ― 出力は近づかない</text>
+        <text x="510" y="190" font-size="9.5" class="muted">これが雪崩効果</text>
+
+        <line x1="16" y1="244" x2="684" y2="244" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="266" font-size="10.5" class="muted">7倍で値を伸ばし、下2桁だけ残して情報を捨てる。この「増幅して捨てる」の繰り返しが、戻せない変換を作る。</text>
+        <text x="16" y="288" font-size="10.5" class="accent">出力が近くても入力が近いとは限らない ― 規則性が残っていたら、総当たりで即座に破られる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

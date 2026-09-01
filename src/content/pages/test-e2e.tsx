@@ -1,0 +1,193 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+import {
+  DocsPage,
+  Hero,
+  Eyebrow,
+  Lead,
+  Term,
+  Heading,
+  DiagramFrame,
+  Card,
+  CardGrid,
+  CardNumber,
+  Analogy,
+  Aside,
+  DocsFooter,
+} from "@/components/docs";
+
+export const metadata: Metadata = { title: "E2Eテストの全体像" };
+
+export default function Page() {
+  return (
+    <DocsPage>
+      <Hero>
+        <Eyebrow>テスト</Eyebrow>
+        <h1>E2Eテストの全体像 ― 同じ経路を、同じ道具でたどる</h1>
+        <Lead>
+          <Link href="/test/api">APIのテスト</Link>までは、すべてプロセスの中で完結していました。ここからはブラウザを本当に起動します。「ボタンが他の要素に隠れて押せない」「遷移の途中で読み込みが終わらない」といった不具合は、実際に操作しない限り見つかりません。このページで扱うのは<strong>組み立て方</strong> ― 構成・設計パターン・速さと独立性です。<Term>何を確認するか</Term>は<Link href="/test/e2e-viewpoints">テスト観点の洗い出し</Link>が担当します。
+        </Lead>
+      </Hero>
+
+      <Heading num="01">頂点を薄くする理由は、遅さだけではない</Heading>
+      <p>
+        E2Eが最も本物に近いことは間違いありません。それでも数を絞るのは、<Link href="/test/levels">テストの段階</Link>で見たとおり<strong>落ちたときに疑う範囲が広すぎるから</strong>です。ブラウザの起動と画面遷移が挟まるので実行は遅く、ネットワークやアニメーションのタイミングに左右されて<Link href="/test/flaky">フレーキー</Link>になりやすい。
+      </p>
+      <p>
+        だから業務上重要な代表的な動線 ― 会員登録からログイン、購入完了まで ― に絞り込み、細かい分岐やエッジケースは内側の段階に任せます。<strong>E2Eが50本あるなら、そのうち何本が本当にE2Eでしか確かめられないか</strong>を一度数えてみる価値があります。
+      </p>
+
+      <Heading num="02">役割ごとに分ける ― 混ぜると必ず肥大化する</Heading>
+      <p>
+        E2Eのコードには「何を確認するか」「どう画面を操作するか」「どうデータを用意するか」という別々の関心が混ざりやすく、1つのファイルに詰め込むとすぐ手に負えなくなります。
+      </p>
+
+      <DiagramFrame
+        slug="test-e2e-structure"
+        aspect="640 / 340"
+        caption="E2Eテストのコードを役割ごとに分けた構成。テスト本体には何を確認するかだけを書き、画面の操作手順はページオブジェクトへ、前提データの作り方はAPIヘルパーへ追い出す。ページオブジェクトはブラウザを操作し、APIヘルパーはAPIとDBへ直接向かう。フィクスチャは「ログイン済みの画面」「注文が1件ある状態」といった前提条件そのものをテスト本体へ渡す。画面が作り直されても直すのはページオブジェクトだけで、テスト本体は1行も変わらない。"
+      />
+
+      <p>
+        ディレクトリの名前は何でも構いませんが、<strong>テスト本体のファイル名を観点に対応させておく</strong>と効果が跳ね上がります。<code>happy-path</code>・<code>validation</code>・<code>cancel-concurrency</code>のように分けておけば、<Link href="/test/e2e-viewpoints">観点表</Link>とコードの対応が一目で分かります。
+      </p>
+
+      <Heading num="03">ページオブジェクト ― 画面の知識を1か所に閉じ込める</Heading>
+      <p>
+        テストコードにセレクタやボタンの文言を直接書き並べると、画面のちょっとしたリニューアルのたびに大量のテストが壊れます。<Term>ページオブジェクトパターン</Term>は、「この画面にはこういう要素があり、こう操作できる」という知識を専用のクラスにまとめ、テスト本体はそのメソッドを呼ぶだけにする設計です。
+      </p>
+
+      <Analogy label="💡 たとえるなら">
+        案内係を挟むようなものです。お客(テスト本体)は「ログインボタンを押して」と頼むだけで、どのセレクタのどのボタンかは案内係(ページオブジェクト)が知っています。ボタンの見た目や場所が変わっても、直すのは案内係だけで、お客の頼み方は変わりません。
+      </Analogy>
+
+      <p>
+        さらに一歩進めて、<strong>前提条件そのものを渡す仕組み</strong>を用意すると、テストの冒頭が「ログインして、商品をカートに入れて…」という手順の羅列になりません。
+      </p>
+
+      <pre>
+        <code>{`test("発送前の注文はキャンセルできる", async ({ page, request }) => {
+  // Arrange: UIを介さず、APIで前提状態を作る
+  const order = await request
+    .post("/api/orders", { data: { items: [{ sku: "A-1", qty: 1 }] } })
+    .then((res) => res.json());
+
+  const checkoutPage = new CheckoutPage(page);
+  await checkoutPage.gotoOrder(order.id);
+
+  // Act & Assert: 確認したい操作だけをUIで行う
+  await checkoutPage.cancel();
+  await expect(checkoutPage.status).toHaveText("キャンセル済み");
+});`}</code>
+      </pre>
+
+      <p>
+        前提データをUIで作らないのには、速度以外の理由があります ― <strong>途中の画面に不具合があると、確かめたいことに到達する前にテストが落ちる</strong>からです。1つの不具合が無関係な10本を巻き添えにする状態は、原因の特定を著しく難しくします。
+      </p>
+
+      <Heading num="04">分割の単位が、そのまま並列実行の単位になる</Heading>
+      <p>
+        1件あたりが重いので、件数の増加はそのままCIの時間になります。並列化には粒度がいくつかあり、組み合わせて使います。
+      </p>
+
+      <DiagramFrame
+        slug="test-e2e-parallel"
+        aspect="700 / 330"
+        caption="E2Eの実行時間を縮める4つの並列化の粒度。ワーカー並列は1台のマシンの中でファイルをプロセスへ分散する基本形。同一ファイル内の並列はファイルの中のテストも分散し、ファイル数が少なく件数が多いときに効く。プロジェクトは実行対象の掛け合わせを定義し、主要動線だけ3ブラウザ、残りは1ブラウザという絞り込みに使う。シャーディングは複数マシンへ分割する。分割の単位はファイルの分け方そのもので、巨大な1ファイルは1プロセスに固定され並列化の恩恵を受けられない。"
+      />
+
+      <Aside label="分割の基準は1つで足りる">
+        「実行時間を減らすための分割」と「読みやすさのための分割」は、ほとんどの場合同じ基準になります。<strong>1ファイル1機能、1ファイル内は同じ観点</strong>にしておけば、並列実行にも人間のレビューにも都合が良くなります。
+      </Aside>
+
+      <Heading num="05">並列にした瞬間に壊れるもの</Heading>
+      <p>
+        並列実行や順序のランダム化で壊れるテストは、たいてい何かを共有しています。<Link href="/test/stability">テストを安定させる</Link>で見た原則がそのまま効きますが、E2E固有の落とし穴が3つあります。
+      </p>
+
+      <CardGrid>
+        <Card>
+          <CardNumber>1</CardNumber>
+          <h4>固定の識別子を使う</h4>
+          <p>同じメールアドレスを複数のテストで使うと、並列実行時に「登録済みです」で衝突する。テストごとに生成する。</p>
+        </Card>
+        <Card>
+          <CardNumber>2</CardNumber>
+          <h4>唯一の資源を書き換える</h4>
+          <p>共有の管理者アカウントの設定を変えるテストは、順序で結果が変わる。専用のものを用意する。</p>
+        </Card>
+        <Card>
+          <CardNumber>3</CardNumber>
+          <h4>前のテストの状態に乗る</h4>
+          <p>直列実行を明示して前のテストの結果を前提にする書き方は、独立性を自ら手放す行為。</p>
+        </Card>
+      </CardGrid>
+
+      <p>
+        自己点検はこの1問で足ります ― <strong>このテストは、他のどのテストが先に、あるいは後に実行されても結果が変わらないか</strong>。
+      </p>
+
+      <Heading num="06">どこまで本物を使うか</Heading>
+      <p>
+        E2Eはシステム全体を通しますが、境界の外側まで全部本物にはできません。判断は2つの問いで決まります。
+      </p>
+
+      <table>
+        <thead>
+          <tr><th>対象</th><th>本物を使うか</th><th>理由</th></tr>
+        </thead>
+        <tbody>
+          <tr><td className="hl">自社のフロント・API・DB</td><td>本物(テスト用)</td><td>これ自体がテスト対象</td></tr>
+          <tr><td className="hl">外部の決済・課金</td><td>代役</td><td>実際に課金と請求が発生する</td></tr>
+          <tr><td className="hl">メール送信</td><td>代役、またはテスト用受信箱</td><td>実際の配信基盤を消費する</td></tr>
+        </tbody>
+      </table>
+
+      <Aside label="判断の合言葉">
+        <strong>本物を使うことで初めて意味のある確認になるか</strong>、そして<strong>本物を使うと取り消せない副作用が出るか</strong>。前者なら本物へ、後者なら代役へ倒します。
+      </Aside>
+
+      <Heading num="07">環境そのものを使い捨てにする</Heading>
+      <p>
+        テスト用DBを1つ用意して全テストで共有すると、結局は独立性の問題に戻ります。<Term>テストコンテナモデル</Term>は、DBのような依存先をテスト実行のたびにコンテナとして立ち上げ、終わったら破棄する考え方です。
+      </p>
+      <p>
+        並列実行と組み合わせるときは、<strong>コンテナもワーカーごとに分ける</strong>のが要点です。1つのコンテナを全ワーカーで共有すれば、結局データの奪い合いに戻ります。起動には数秒かかるので、テストファイル単位ではなくワーカー単位でまとめて立ち上げます。
+      </p>
+
+      <Analogy label="💡 たとえるなら">
+        共有のテスト用DBは、みんなで使う会議室のホワイトボードです。前の人が消し忘れると次の人が困ります。使い捨てにするのは、毎回新しいボードを配って終わったら処分するようなもので、前の利用者の書き込みを気にする必要が最初からなくなります。
+      </Analogy>
+
+      <Heading num="まとめ">絞って、分けて、共有しない</Heading>
+      <CardGrid>
+        <Card>
+          <CardNumber>1</CardNumber>
+          <h4>E2Eでしか確かめられないものだけ</h4>
+          <p>本数を数え直すと、たいてい半分は内側へ移せる。</p>
+        </Card>
+        <Card>
+          <CardNumber>2</CardNumber>
+          <h4>画面の知識を1か所に</h4>
+          <p>リニューアルで壊れるのはページオブジェクトだけ、という状態を作る。</p>
+        </Card>
+        <Card>
+          <CardNumber>3</CardNumber>
+          <h4>前提はUIで作らない</h4>
+          <p>速いだけでなく、無関係な不具合の巻き添えを防げる。</p>
+        </Card>
+        <Card>
+          <CardNumber>4</CardNumber>
+          <h4>分割の単位=並列の単位</h4>
+          <p>1ファイル1機能・1観点。読みやすさと速さの基準は一致する。</p>
+        </Card>
+      </CardGrid>
+
+      <p>
+        組み立て方が決まったら、次は中身です。<Link href="/test/e2e-viewpoints">テスト観点の洗い出し</Link>へ進みます。
+      </p>
+
+      <DocsFooter href="/test/e2e" />
+    </DocsPage>
+  );
+}

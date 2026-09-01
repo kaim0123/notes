@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 320"
+        role="img"
+        aria-label="テストを書くときに感じる苦痛と、それが指している設計上の問題を左右に対応させた図。左の列にはテストを書くときの具体的な苦痛が5つ並ぶ。準備に10行必要、データベースを立ち上げないと試せない、privateな処理をテストしたい、モックが5個必要、結果を確認する手段がない。右の列にはそれぞれが指す設計上の問題が並ぶ。依存が多すぎて責務が集まりすぎている、ロジックがインフラと結合している、そこが独立した責務であり切り出す合図である、他のオブジェクトに指示を出しすぎている、戻り値がなく副作用だけなので純粋な関数に分離できないか。テストが書きにくいという感覚は、設計を見直す合図として使える、と図の下部に記されている。"
+      >
+        <defs>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="42" font-size="11" class="muted">テストを書くときに感じる苦痛</text>
+        <text x="354" y="42" font-size="11" class="accent">それが指している設計の問題</text>
+
+        <rect x="16" y="56" width="264" height="32" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="77" font-size="10" class="muted">準備に10行必要</text>
+        <rect x="360" y="56" width="264" height="32" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="374" y="77" font-size="10">依存が多すぎる。責務が集まりすぎている</text>
+        <line x1="286" y1="72" x2="354" y2="72" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+
+        <rect x="16" y="96" width="264" height="32" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="117" font-size="10" class="muted">DBを立ち上げないと試せない</text>
+        <rect x="360" y="96" width="264" height="32" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="374" y="117" font-size="10">ロジックがインフラと結合している</text>
+        <line x1="286" y1="112" x2="354" y2="112" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+
+        <rect x="16" y="136" width="264" height="32" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="157" font-size="10" class="muted">privateな処理をテストしたい</text>
+        <rect x="360" y="136" width="264" height="32" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="374" y="157" font-size="10">そこが独立した責務。切り出す合図</text>
+        <line x1="286" y1="152" x2="354" y2="152" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+
+        <rect x="16" y="176" width="264" height="32" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="197" font-size="10" class="muted">モックが5個必要</text>
+        <rect x="360" y="176" width="264" height="32" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="374" y="197" font-size="10">他のオブジェクトに指示を出しすぎている</text>
+        <line x1="286" y1="192" x2="354" y2="192" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+
+        <rect x="16" y="216" width="264" height="32" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="237" font-size="10" class="muted">結果を確認する手段がない</text>
+        <rect x="360" y="216" width="264" height="32" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="374" y="237" font-size="9.5">戻り値がなく副作用だけ。純粋関数に分離できないか</text>
+        <line x1="286" y1="232" x2="354" y2="232" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+
+        <line x1="16" y1="272" x2="624" y2="272" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="292" font-size="10.5" class="muted">テストを先に書くと、自分がそのコードの最初の利用者になる。使いにくさは書く時点で苦痛として現れる。</text>
+        <text x="16" y="312" font-size="10.5" class="accent">TDDの実利は、設計のフィードバックを数分単位で受け取れること。テストが揃うのは副産物。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 280"
+        role="img"
+        aria-label="クラウドの費用がどこで発生するかを3つに分けて示した図。1つ目は計算資源を持っている時間で、使っていなくても起動したままの仮想マシンや確保したままのアドレス、消し忘れたディスクに課金が続く。2つ目は外へ出ていくデータの転送量で、配信の多いサービスではここが主役になる。3つ目は保存量と呼び出し回数で、ログの保持期間やスナップショットの世代、APIの呼び出しが積み上がる。どれも1件は小さく、請求書を見るまで気づきにくいという共通点を持つため、上限や保持期間をあらかじめ決めておくことが対策になる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="20" y="28" font-size="12" class="muted">請求を押し上げるのは、この3つ</text>
+
+        <rect x="20" y="44" width="210" height="150" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="125" y="70" font-size="11.5" text-anchor="middle">持っている時間</text>
+        <text x="125" y="96" font-size="10" text-anchor="middle" class="muted">止め忘れた仮想マシン</text>
+        <text x="125" y="116" font-size="10" text-anchor="middle" class="muted">確保したままのIPアドレス</text>
+        <text x="125" y="136" font-size="10" text-anchor="middle" class="muted">消し忘れたディスク</text>
+        <text x="125" y="170" font-size="9.5" text-anchor="middle" class="accent">使っていなくても課金される</text>
+
+        <rect x="245" y="44" width="210" height="150" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="350" y="70" font-size="11.5" text-anchor="middle">出ていくデータ</text>
+        <text x="350" y="96" font-size="10" text-anchor="middle" class="muted">配信した画像・動画</text>
+        <text x="350" y="116" font-size="10" text-anchor="middle" class="muted">別リージョンへの転送</text>
+        <text x="350" y="136" font-size="10" text-anchor="middle" class="muted">外部へのAPI応答</text>
+        <text x="350" y="170" font-size="9.5" text-anchor="middle" class="accent">入れる側は安く、出す側は高い</text>
+
+        <rect x="470" y="44" width="210" height="150" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="575" y="70" font-size="11.5" text-anchor="middle">保存と回数</text>
+        <text x="575" y="96" font-size="10" text-anchor="middle" class="muted">ログの保持期間</text>
+        <text x="575" y="116" font-size="10" text-anchor="middle" class="muted">スナップショットの世代</text>
+        <text x="575" y="136" font-size="10" text-anchor="middle" class="muted">APIの呼び出し回数</text>
+        <text x="575" y="170" font-size="9.5" text-anchor="middle" class="accent">1件は小さく、積み上がる</text>
+
+        <rect x="20" y="212" width="660" height="46" rx="8" fill="none" stroke="var(--border)" />
+        <text x="36" y="232" font-size="10.5">共通点 ― どれも「請求書を見るまで気づかない」</text>
+        <text x="36" y="250" font-size="10" class="muted">対策は安いサービスを探すことではなく、止める・消す・保持期間を決める・上限で通知する、という運用のほう。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 330"
+        role="img"
+        aria-label="洗い出した観点を実装のレイヤーへ振り分ける流れを示した図。左には5つの着眼点があり、誰が、いつ、何を、どこで、どうなるべきか、の順に並ぶ。これを機能に当てて観点を出し、中央でそれぞれを実行できる項目へ分解する。右では各項目の置き場所を決める。画面の表示とサーバー側の状態の食い違いを、実際のブラウザでしか確認できないものだけがE2Eに残る。画面をまたがず本物の依存があれば足りるものはIntegrationへ、ロジック単体で確かめられるものはUnitへ移す。そして4つ目の行き先として対象外があり、ここには外した理由を必ず書いて表の中に残す。書かれていない観点は、まだ気づいていないのか意図的に外したのかが後から誰にも分からないため、理由を残すことで意識された判断として引き継がれる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="26" font-size="11" class="muted">洗い出しと、どこに置くかの判断は別の工程</text>
+
+        <text x="16" y="52" font-size="10" class="muted">5つの着眼点</text>
+        <rect x="16" y="60" width="150" height="30" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="80" font-size="9.5" class="muted">誰が(権限・所有者)</text>
+        <rect x="16" y="96" width="150" height="30" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="116" font-size="9.5" class="muted">いつ(業務上の状態)</text>
+        <rect x="16" y="132" width="150" height="30" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="152" font-size="9.5" class="muted">何を(データの境界)</text>
+        <rect x="16" y="168" width="150" height="30" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="188" font-size="9.5" class="muted">どこで(外部・同時実行)</text>
+        <rect x="16" y="204" width="150" height="30" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="224" font-size="9.5" class="muted">どうなるべきか(失敗時)</text>
+
+        <line x1="172" y1="147" x2="204" y2="147" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <text x="212" y="52" font-size="10" class="muted">観点 → 項目へ分解</text>
+        <rect x="212" y="60" width="196" height="174" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="226" y="84" font-size="9.5" class="muted">1つの観点から</text>
+        <text x="226" y="102" font-size="9.5" class="muted">複数の項目が出る</text>
+        <text x="226" y="130" font-size="9.5" class="muted">状態の粒度をどこまで</text>
+        <text x="226" y="148" font-size="9.5" class="muted">刻むかで件数が変わる</text>
+        <text x="226" y="176" font-size="9.5" class="muted">この時点ではまだ</text>
+        <text x="226" y="194" font-size="9.5" class="muted">置き場所を決めない</text>
+        <text x="226" y="220" font-size="9" class="muted">全部をE2Eに置く前提で考えない</text>
+
+        <line x1="414" y1="147" x2="446" y2="147" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+
+        <text x="454" y="52" font-size="10" class="accent">置き場所を決める</text>
+        <rect x="454" y="60" width="230" height="46" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="468" y="79" font-size="10" class="accent">E2E</text>
+        <text x="468" y="97" font-size="9" class="muted">画面とサーバーの食い違いだけ</text>
+
+        <rect x="454" y="112" width="230" height="38" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="468" y="130" font-size="10" class="muted">Integration</text>
+        <text x="468" y="145" font-size="9" class="muted">本物の依存があれば足りるもの</text>
+
+        <rect x="454" y="156" width="230" height="38" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="468" y="174" font-size="10" class="muted">Unit</text>
+        <text x="468" y="189" font-size="9" class="muted">ロジック単体で確かめられるもの</text>
+
+        <rect x="454" y="200" width="230" height="46" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="468" y="219" font-size="10" class="muted">対象外</text>
+        <text x="468" y="237" font-size="9" class="muted">理由を書いて、表の中に残す</text>
+
+        <line x1="16" y1="266" x2="684" y2="266" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="286" font-size="10.5" class="muted">書かれていない観点は、まだ気づいていないのか意図的に外したのか、後から誰にも分からない。</text>
+        <text x="16" y="308" font-size="10.5" class="accent">対象外は消さずに理由付きで残す ― それで初めて「意識された判断」として引き継がれる。</text>
+        <text x="16" y="326" font-size="9.5" class="muted">E2Eに残るのは、画面の表示とサーバー側の状態の食い違いを実際のブラウザでしか見られない項目だけ。</text>
+      </svg>
+    </div>
+  </body>
+</html>

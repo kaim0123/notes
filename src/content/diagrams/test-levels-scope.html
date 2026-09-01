@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 340"
+        role="img"
+        aria-label="テストの4つの段階を入れ子の長方形で示した図。最も内側にUnitがあり、本物のまま動かすのは自分が書いたロジックだけで、外側はすべて代役に置き換える。その外側がIntegrationで、データベースや外部サービスとの境界までを本物のまま動かす。さらに外側がAPIで、HTTPの入口とルーティングまでが本物になる。最も外側がE2Eで、ブラウザと画面まで含めて丸ごと本物のまま動かす。外側の段階ほど本物の範囲が広く、確かめられることは増えるが、同時に遅くなり、落ちたときに原因を絞る範囲も広がる、と図の下部に記されている。"
+      >
+        <text x="16" y="28" font-size="11" class="muted">段階を分けているのは、どこまでを本物のまま動かすかの違い</text>
+
+        <rect x="16" y="44" width="608" height="228" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="64" font-size="11" class="muted">E2E ― ブラウザと画面まで本物</text>
+
+        <rect x="44" y="76" width="552" height="178" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="58" y="96" font-size="11" class="muted">API ― HTTPの入口とルーティングまで本物</text>
+
+        <rect x="72" y="108" width="496" height="128" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="86" y="128" font-size="11" class="muted">Integration ― DBや外部サービスとの境界まで本物</text>
+
+        <rect x="100" y="140" width="440" height="78" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="114" y="164" font-size="11.5" class="accent">Unit ― 自分が書いたロジックだけが本物</text>
+        <text x="114" y="186" font-size="9.5" class="muted">外側はすべて代役(テストダブル)に置き換える。だから速く、たくさん書ける。</text>
+        <text x="114" y="205" font-size="9.5" class="muted">落ちたら、原因はこの枠の中にしかない。</text>
+
+        <line x1="16" y1="294" x2="624" y2="294" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="314" font-size="10.5" class="muted">外側へ行くほど確かめられることは増えるが、1回の実行は遅くなり、落ちたときに原因を探す範囲も広がる。</text>
+        <text x="16" y="334" font-size="10.5" class="accent">同じバグを2つの段階で捕まえない ― 内側で捕まえられるものは、内側に置く。</text>
+      </svg>
+    </div>
+  </body>
+</html>

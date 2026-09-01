@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="しきい値による警報が状態を持つことを示した図。監視している数値は一定の間隔で評価され、その結果によって警報は3つの状態のいずれかを取る。正常な状態から、決めた回数連続でしきい値を超えると警報の状態へ移り、通知が送られる。データそのものが届かない場合は、正常でも異常でもない第三の状態になり、これをどちらとして扱うかは設定で決める。値が戻れば警報は自動で正常へ戻り、そのときにも通知を出せる。1回の逸脱で鳴らさず、何回中何回でという条件を置けることが、誤報を減らす鍵になる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="40" y="80" width="180" height="70" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="130" y="110" font-size="11.5" text-anchor="middle">正常</text>
+        <text x="130" y="132" font-size="9" text-anchor="middle" class="muted">しきい値の内側</text>
+
+        <rect x="300" y="80" width="180" height="70" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="390" y="110" font-size="11.5" text-anchor="middle" class="accent">警報</text>
+        <text x="390" y="132" font-size="9" text-anchor="middle" class="muted">通知が飛ぶ</text>
+
+        <rect x="560" y="80" width="180" height="70" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="650" y="104" font-size="11.5" text-anchor="middle">データ不足</text>
+        <text x="650" y="126" font-size="9" text-anchor="middle" class="muted">値そのものが届かない</text>
+        <text x="650" y="142" font-size="9" text-anchor="middle" class="muted">どう扱うかは設定で決める</text>
+
+        <path d="M224,102 L296,102" fill="none" stroke="var(--primary)" marker-end="url(#arp)" />
+        <text x="260" y="94" font-size="9" text-anchor="middle" class="accent">3回中3回</text>
+        <text x="260" y="72" font-size="9" text-anchor="middle" class="muted">超えたら</text>
+        <path d="M296,132 L224,132" fill="none" stroke="var(--muted)" marker-end="url(#ar)" />
+        <text x="260" y="150" font-size="9" text-anchor="middle" class="muted">戻れば自動で復帰</text>
+
+        <path d="M484,115 L556,115" fill="none" stroke="var(--muted)" stroke-dasharray="4 3" marker-end="url(#ar)" />
+
+        <rect x="40" y="182" width="700" height="94" rx="8" fill="none" stroke="var(--border)" />
+        <text x="56" y="206" font-size="10.5" class="accent">1回の逸脱では鳴らさない ― 「何回中何回」という条件が、誤報を減らす最大の道具。</text>
+        <text x="56" y="228" font-size="10.5" class="muted">正常へ戻ったときにも通知できる。復旧を人が確認しに行かなくて済む。</text>
+        <text x="56" y="250" font-size="10.5" class="muted">データ不足を異常として扱うか正常として扱うかは、指標の性質で変える ― 止まると値が来ない指標では異常。</text>
+        <text x="56" y="270" font-size="10" class="muted">複数の警報を組み合わせて、両方が同時に成立したときだけ鳴らす、という書き方もできる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

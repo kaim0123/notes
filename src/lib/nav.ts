@@ -625,13 +625,229 @@ export const sections: NavSection[] = [
       },
     ],
   },
-  { href: "/test", title: "テスト", icon: FlaskConical, tree: [] },
-  { href: "/security", title: "セキュリティ", icon: ShieldCheck, tree: [] },
+  {
+    href: "/test",
+    title: "テスト",
+    icon: FlaskConical,
+    // 第二階層の6見出しは索引ページを持つページ付きのノード。配下の第三階層は
+    // まだ未執筆(計画は nav-structure.md 参照)。URLは第二階層を挟まないフラット
+    // なまま(/test/xxx)で、他セクションと同じ方針(2026-09-01時点の決定)。
+    tree: [
+      {
+        href: "/test/strategy",
+        title: "品質計画と戦略",
+        children: [
+          { href: "/test/quality-plan", title: "品質計画" },
+          { href: "/test/design-techniques", title: "テスト設計技法" },
+        ],
+      },
+      {
+        href: "/test/levels",
+        title: "テストの段階",
+        children: [
+          { href: "/test/unit", title: "Unitテスト" },
+          { href: "/test/integration", title: "Integrationテスト" },
+          { href: "/test/api", title: "APIのテスト" },
+          { href: "/test/e2e", title: "E2Eテストの全体像" },
+          { href: "/test/e2e-viewpoints", title: "テスト観点の洗い出し" },
+          { href: "/test/e2e-waiting", title: "描画待機とAI生成テストのレビュー" },
+          { href: "/test/tools", title: "Vitest・Playwright" },
+        ],
+      },
+      { href: "/test/tdd", title: "テスト駆動開発(TDD)" },
+      {
+        href: "/test/stability",
+        title: "テストを安定させる",
+        children: [
+          { href: "/test/doubles", title: "テストダブル" },
+          { href: "/test/data", title: "テストデータ管理" },
+          { href: "/test/patterns", title: "テストパターン" },
+          { href: "/test/flaky", title: "フレーキーテスト" },
+        ],
+      },
+      {
+        href: "/test/non-functional",
+        title: "機能以外のテスト",
+        children: [
+          { href: "/test/performance", title: "性能テストと負荷テスト" },
+          { href: "/test/security", title: "セキュリティテスト" },
+          { href: "/test/non-functional-ci", title: "非機能テストの組み込み" },
+        ],
+      },
+      {
+        href: "/test/review",
+        title: "レビューと品質確認",
+        children: [
+          { href: "/test/code-review", title: "コードレビュー" },
+          { href: "/test/acceptance", title: "受入れ基準とレビュー技法" },
+        ],
+      },
+    ],
+  },
+  {
+    href: "/security",
+    title: "セキュリティ",
+    icon: ShieldCheck,
+    // 第二階層の6見出しは索引ページを持つページ付きのノード。配下の第三階層は
+    // まだ未執筆(計画は nav-structure.md 参照)。URLは第二階層を挟まないフラット
+    // なまま(/security/xxx)で、他セクションと同じ方針(2026-09-01時点の決定)。
+    tree: [
+      { href: "/security/basics", title: "情報セキュリティの目的と脅威" },
+      { href: "/security/management", title: "リスクマネジメント" },
+      {
+        href: "/security/attacks",
+        title: "攻撃手法",
+        children: [
+          { href: "/security/injection", title: "インジェクション攻撃" },
+          { href: "/security/xss", title: "XSSと出力エスケープ" },
+          { href: "/security/csrf", title: "CSRF対策" },
+        ],
+      },
+      {
+        href: "/security/crypto",
+        title: "暗号技術",
+        children: [
+          { href: "/security/hash", title: "ハッシュ関数と衝突攻撃" },
+        ],
+      },
+      {
+        href: "/security/auth",
+        title: "認証・認可",
+        children: [
+          { href: "/security/authz", title: "認可" },
+          { href: "/security/session", title: "セッションとCookie" },
+          { href: "/security/token", title: "トークンの全体像" },
+          { href: "/security/identity", title: "認証プロトコルの変遷" },
+        ],
+      },
+      {
+        href: "/security/countermeasures",
+        title: "セキュリティ対策・実装",
+        children: [
+          { href: "/security/network-defense", title: "ネットワーク層の防御" },
+          { href: "/security/headers", title: "セキュリティヘッダ" },
+          { href: "/security/cache", title: "キャッシュ制御と情報漏洩" },
+          { href: "/security/logging", title: "ログ出力設計" },
+        ],
+      },
+    ],
+  },
   {
     href: "/infra",
     title: "インフラ・クラウド・運用",
     icon: Cloud,
-    tree: [],
+    // 第二階層の8見出しは索引ページを持つページ付きのノード。配下の第三階層は
+    // まだ未執筆(計画は nav-structure.md 参照)。AWS・Google Cloud・Cloudflare を
+    // それぞれ第二階層へ上げたのは、クラウドを1見出しにまとめると個別サービスが
+    // 第四階層になってしまうため(2026-08-30時点の決定)。
+    tree: [
+      {
+        href: "/infra/virtualization",
+        title: "仮想化とコンテナ",
+        children: [
+          { href: "/infra/docker", title: "Docker" },
+          { href: "/infra/kubernetes", title: "Kubernetes" },
+          { href: "/infra/container-security", title: "コンテナセキュリティ" },
+          { href: "/infra/observability", title: "オブザーバビリティ" },
+        ],
+      },
+      {
+        href: "/infra/server",
+        title: "サーバーとストレージ",
+        children: [
+          { href: "/infra/server-build", title: "サーバー構築の実務" },
+          { href: "/infra/storage", title: "ストレージの仕組み" },
+          { href: "/infra/storage-backup", title: "バックアップと復旧" },
+        ],
+      },
+      {
+        href: "/infra/monitoring",
+        title: "監視と障害対応",
+        children: [
+          { href: "/infra/monitoring-data", title: "監視データと統計" },
+          { href: "/infra/monitoring-server", title: "サーバー・機器の監視" },
+          { href: "/infra/monitoring-app", title: "アプリ監視とビジネスKPI" },
+          { href: "/infra/monitoring-frontend", title: "フロントエンド監視" },
+          { href: "/infra/incident", title: "障害の切り分け" },
+        ],
+      },
+      {
+        href: "/infra/deploy",
+        title: "デプロイと公開",
+        children: [
+          { href: "/infra/deployment", title: "導入と受入れ" },
+        ],
+      },
+      {
+        href: "/infra/aws",
+        title: "AWS",
+        children: [
+          { href: "/infra/aws-basics", title: "AWSの基礎" },
+          { href: "/infra/aws-compute", title: "コンピューティング" },
+          { href: "/infra/aws-lambda", title: "Lambda" },
+          { href: "/infra/aws-container", title: "コンテナ" },
+          { href: "/infra/aws-storage", title: "ストレージ" },
+          { href: "/infra/aws-s3", title: "S3" },
+          { href: "/infra/aws-database", title: "データベース" },
+          { href: "/infra/aws-network", title: "ネットワーキングとコンテンツ配信" },
+          { href: "/infra/aws-route53", title: "Route 53" },
+          { href: "/infra/aws-cloudfront", title: "CloudFront" },
+          { href: "/infra/aws-acm", title: "ACM" },
+          { href: "/infra/aws-security", title: "セキュリティ、アイデンティティ、コンプライアンス" },
+          { href: "/infra/aws-secrets-manager", title: "Secrets Manager" },
+          { href: "/infra/aws-integration", title: "アプリケーション統合" },
+          { href: "/infra/aws-sqs", title: "SQS" },
+          { href: "/infra/aws-sns", title: "SNS" },
+          { href: "/infra/aws-eventbridge", title: "EventBridge" },
+          { href: "/infra/aws-monitoring", title: "モニタリングと管理" },
+          { href: "/infra/aws-cloudwatch", title: "CloudWatch" },
+          { href: "/infra/aws-cicd", title: "CI/CD" },
+          { href: "/infra/aws-codebuild", title: "CodeBuild" },
+          { href: "/infra/aws-codepipeline", title: "CodePipeline" },
+          { href: "/infra/aws-iac", title: "IaC" },
+        ],
+      },
+      {
+        href: "/infra/gcp",
+        title: "Google Cloud",
+        children: [
+          { href: "/infra/gcp-basics", title: "Google Cloudの基礎" },
+          { href: "/infra/gcp-compute", title: "コンピューティング" },
+          { href: "/infra/gcp-functions", title: "Cloud Functions" },
+          { href: "/infra/gcp-container", title: "コンテナ" },
+          { href: "/infra/gcp-storage", title: "ストレージ" },
+          { href: "/infra/gcp-cloud-storage", title: "Cloud Storage" },
+          { href: "/infra/gcp-database", title: "データベース" },
+          { href: "/infra/gcp-network", title: "ネットワーキングとコンテンツ配信" },
+          { href: "/infra/gcp-dns", title: "Cloud DNS" },
+          { href: "/infra/gcp-cdn", title: "Cloud CDN" },
+          { href: "/infra/gcp-certificate-manager", title: "Certificate Manager" },
+          { href: "/infra/gcp-security", title: "セキュリティ、アイデンティティ、コンプライアンス" },
+          { href: "/infra/gcp-secret-manager", title: "Secret Manager" },
+          { href: "/infra/gcp-integration", title: "アプリケーション統合" },
+          { href: "/infra/gcp-pubsub", title: "Pub/Sub" },
+          { href: "/infra/gcp-monitoring", title: "モニタリングと管理" },
+          { href: "/infra/gcp-cloud-monitoring", title: "Cloud Monitoring" },
+          { href: "/infra/gcp-cicd", title: "CI/CD" },
+          { href: "/infra/gcp-cloud-build", title: "Cloud Build" },
+          { href: "/infra/gcp-iac", title: "IaC" },
+        ],
+      },
+      { href: "/infra/cloudflare", title: "Cloudflare" },
+      {
+        href: "/infra/ops",
+        title: "サービス運営",
+        children: [
+          { href: "/infra/ops-performance", title: "パフォーマンス" },
+          { href: "/infra/ops-data", title: "データ管理" },
+          { href: "/infra/ops-analytics", title: "分析・改善" },
+          { href: "/infra/ops-content", title: "コンテンツ管理" },
+          { href: "/infra/ops-cost", title: "コスト管理" },
+          { href: "/infra/ops-maintenance", title: "保守" },
+          { href: "/infra/ops-compliance", title: "法令・コンプライアンス" },
+        ],
+      },
+    ],
   },
   { href: "/other", title: "その他", icon: Layers, tree: [] },
 ];

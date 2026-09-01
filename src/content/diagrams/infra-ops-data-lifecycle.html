@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 280"
+        role="img"
+        aria-label="扱うデータを、その性質ごとに置き場所と扱いを決めるための図。利用者の操作に応答するために読み書きするデータは、低遅延の置き場所へ置き、日々のバックアップと世代を用意する。画像や動画のように大きく変わらないものは、オブジェクトの置き場所へ置き、期間が過ぎたら安いクラスへ自動で移す。集計と分析のための記録は、専用の置き場所へ流し、期間を区切って読む。一時的な作業用のデータは、消えても作り直せるようにしておく。同じシステムの中でも、性質が違うデータを1か所にまとめようとすると、費用も性能も要件を満たせなくなる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="46" width="350" height="94" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="40" y="70" font-size="11">応答のために読み書きする</text>
+        <text x="40" y="92" font-size="9.5" class="muted">低遅延の置き場所へ / 日次のバックアップと世代</text>
+        <text x="40" y="112" font-size="9.5" class="muted">失うと業務が止まる ― 最も手厚く守る</text>
+        <text x="40" y="132" font-size="9" class="accent">戻せることを、定期的に確かめる</text>
+
+        <rect x="390" y="46" width="350" height="94" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="410" y="70" font-size="11">大きくて、あまり変わらない</text>
+        <text x="410" y="92" font-size="9.5" class="muted">画像・動画・添付ファイル</text>
+        <text x="410" y="112" font-size="9.5" class="muted">オブジェクトの置き場所へ</text>
+        <text x="410" y="132" font-size="9" class="accent">期間が過ぎたら安いクラスへ自動で移す</text>
+
+        <rect x="20" y="152" width="350" height="94" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="40" y="176" font-size="11">後からまとめて集計する</text>
+        <text x="40" y="198" font-size="9.5" class="muted">アクセスの記録・イベントの履歴</text>
+        <text x="40" y="218" font-size="9.5" class="muted">分析用の置き場所へ流す</text>
+        <text x="40" y="238" font-size="9" class="accent">読んだ量で課金される ― 期間で区切る</text>
+
+        <rect x="390" y="152" width="350" height="94" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="410" y="176" font-size="11">消えても作り直せる</text>
+        <text x="410" y="198" font-size="9.5" class="muted">キャッシュ・一時ファイル・中間生成物</text>
+        <text x="410" y="218" font-size="9.5" class="muted">守らない ― 守る対象から外す判断も設計</text>
+        <text x="410" y="238" font-size="9" class="accent">ここを守ろうとすると、費用だけが増える</text>
+
+        <text x="20" y="270" font-size="10.5" class="muted">性質の違うデータを1か所にまとめようとすると、費用も性能も要件を満たせなくなる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

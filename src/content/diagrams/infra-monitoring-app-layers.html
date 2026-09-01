@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 300"
+        role="img"
+        aria-label="監視を3つの層に分けて、それぞれが捕まえられる異常を示した図。いちばん下のインフラ層はCPUやメモリ、ディスクといった土台の数値で、機械が苦しんでいることを教える。中間のアプリケーション層はエラー率や応答時間、注文の確定数や決済の成功率といった業務の意味を持つ数値で、処理が通っているかを教える。いちばん上のビジネス層は登録数や解約数、売上といった事業の数値で、価値が届いているかを教える。下の層がすべて正常でも上の層だけが落ちることがあり、その種類の障害は上の層を見ていなければ何日も気づけない。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="40" y="40" width="620" height="60" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="60" y="64" font-size="11.5">ビジネス ― 価値が届いているか</text>
+        <text x="60" y="84" font-size="9.5" class="muted">登録完了数・購入数・解約数・売上</text>
+        <text x="640" y="76" font-size="10" text-anchor="end" class="accent">技術的には「正常」な障害を捕まえる</text>
+
+        <rect x="40" y="112" width="620" height="60" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="60" y="136" font-size="11.5">アプリケーション ― 処理が通っているか</text>
+        <text x="60" y="156" font-size="9.5" class="muted">エラー率・応答時間・決済の成功率・キューの滞留</text>
+        <text x="640" y="148" font-size="10" text-anchor="end" class="muted">業務の意味を持つ数値</text>
+
+        <rect x="40" y="184" width="620" height="60" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="60" y="208" font-size="11.5">インフラ ― 土台が動いているか</text>
+        <text x="60" y="228" font-size="9.5" class="muted">CPU・メモリ・ディスク・死活</text>
+        <text x="640" y="220" font-size="10" text-anchor="end" class="muted">機械が苦しんでいるか</text>
+
+        <text x="40" y="276" font-size="10.5" class="muted">下の層が全部正常でも、上の層だけが落ちることがある ― サーバーは200を返しているのに、誰も登録できていない。</text>
+        <text x="40" y="294" font-size="10.5" class="accent">その障害は、上の層を見ていなければ何日も気づけない。</text>
+      </svg>
+    </div>
+  </body>
+</html>

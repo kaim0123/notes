@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 260"
+        role="img"
+        aria-label="ソースの変更から本番への配置までを2つの道具で分担する構成を示した図。前半はビルドの仕組みが受け持ち、ソースを取得し、テストを走らせ、コンテナのイメージを作って保管庫へ登録する。後半は配置の仕組みが受け持ち、登録されたイメージを検証環境へ配置し、確認できたら承認を経て本番へ配置する。同じイメージがそのまま各環境へ渡っていくため、検証したものと本番で動くものが一致する。環境ごとにビルドし直す構成では、この一致が崩れる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="60" width="350" height="120" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="195" y="86" font-size="11.5" text-anchor="middle">ビルドの仕組み</text>
+        <rect x="40" y="100" width="145" height="30" rx="6" fill="none" stroke="var(--border)" />
+        <text x="112" y="120" font-size="9" text-anchor="middle" class="muted">取得してテスト</text>
+        <rect x="197" y="100" width="153" height="30" rx="6" fill="none" stroke="var(--border)" />
+        <text x="273" y="120" font-size="9" text-anchor="middle" class="muted">イメージを作る</text>
+        <rect x="40" y="138" width="310" height="28" rx="6" fill="none" stroke="var(--border)" />
+        <text x="195" y="157" font-size="9" text-anchor="middle" class="muted">保管庫へ登録する</text>
+
+        <line x1="376" y1="120" x2="406" y2="120" stroke="var(--primary)" marker-end="url(#arp)" />
+        <text x="391" y="106" font-size="9" text-anchor="middle" class="accent">同じイメージ</text>
+
+        <rect x="412" y="60" width="328" height="120" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="576" y="86" font-size="11.5" text-anchor="middle">配置の仕組み</text>
+        <rect x="432" y="100" width="140" height="30" rx="6" fill="none" stroke="var(--border)" />
+        <text x="502" y="120" font-size="9" text-anchor="middle" class="muted">検証環境へ</text>
+        <rect x="584" y="100" width="136" height="30" rx="6" fill="none" stroke="var(--border)" />
+        <text x="652" y="120" font-size="9" text-anchor="middle" class="muted">承認 → 本番へ</text>
+        <rect x="432" y="138" width="288" height="28" rx="6" fill="none" stroke="var(--border)" />
+        <text x="576" y="157" font-size="9" text-anchor="middle" class="muted">問題があれば前の版へ戻す</text>
+
+        <text x="20" y="216" font-size="10.5" class="accent">同じイメージがそのまま各環境へ渡る ― 検証したものと本番で動くものが一致する。</text>
+        <text x="20" y="238" font-size="10.5" class="muted">環境ごとにビルドし直す構成では、この一致が崩れて「検証では通ったのに」が起きる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

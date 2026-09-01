@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 300"
+        role="img"
+        aria-label="公開したサービスが守る決まりごとを4つの領域に分けた図。1つ目は個人情報の扱いで、何を集め、何に使い、どこへ渡すのかを示し、求められたときに消せるようにしておく。2つ目は同意の管理で、計測や広告のための仕組みを、同意を得る前に動かさないようにする。3つ目は表示の義務で、事業者の情報や取引の条件など、掲示が求められるものを整える。4つ目は使えることの保証で、目や耳、操作に制約のある人にも届く形にする。いずれも技術だけでは満たせず、何を扱っているかを把握することから始まる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="46" width="320" height="94" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="40" y="70" font-size="11">個人情報の扱い</text>
+        <text x="40" y="92" font-size="9.5" class="muted">何を集め、何に使い、どこへ渡すか</text>
+        <text x="40" y="112" font-size="9.5" class="muted">求められたときに消せるか</text>
+        <text x="40" y="130" font-size="9" class="accent">まず棚卸しから始まる</text>
+
+        <rect x="360" y="46" width="320" height="94" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="380" y="70" font-size="11">同意の管理</text>
+        <text x="380" y="92" font-size="9.5" class="muted">計測や広告の仕組みを</text>
+        <text x="380" y="112" font-size="9.5" class="muted">同意の前に動かさない</text>
+        <text x="380" y="130" font-size="9" class="accent">既定で有効になっていないか</text>
+
+        <rect x="20" y="154" width="320" height="94" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="40" y="178" font-size="11">表示の義務</text>
+        <text x="40" y="200" font-size="9.5" class="muted">事業者の情報、取引の条件</text>
+        <text x="40" y="220" font-size="9.5" class="muted">扱う商材によって変わる</text>
+        <text x="40" y="238" font-size="9" class="accent">公開前に一度洗い出す</text>
+
+        <rect x="360" y="154" width="320" height="94" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="380" y="178" font-size="11">使えることの保証</text>
+        <text x="380" y="200" font-size="9.5" class="muted">目や耳、操作に制約のある人にも</text>
+        <text x="380" y="220" font-size="9.5" class="muted">届く形になっているか</text>
+        <text x="380" y="238" font-size="9" class="accent">要件として扱う場面が増えている</text>
+
+        <text x="20" y="278" font-size="10.5" class="muted">技術だけでは満たせない ― 何を扱っているかを把握することが出発点になる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

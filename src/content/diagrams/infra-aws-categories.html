@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 340"
+        role="img"
+        aria-label="AWSの主要サービスを、担っている役割ごとに6つのまとまりへ整理した図。動かす役割にコンピューティングとコンテナ、置く役割にストレージとデータベース、つなぐ役割にネットワーキングとアプリケーション統合が入る。その下に、守る役割としてIAMや鍵と秘密の管理、見る役割としてCloudWatchなどの監視、作って配る役割としてCI/CDとIaCが並ぶ。これら全部が、リージョン・アベイラビリティゾーン・エッジロケーションという地理の土台の上に置かれている。個々のサービス名を覚える前に、この6つの役割のどれに当たるかで位置を決められる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="20" y="26" font-size="12" class="muted">サービス名の数は多いが、担う役割は少ない</text>
+
+        <rect x="20" y="40" width="230" height="96" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="36" y="62" font-size="12">動かす</text>
+        <text x="36" y="84" font-size="10.5" class="muted">コンピューティング(EC2・Lambda)</text>
+        <text x="36" y="104" font-size="10.5" class="muted">コンテナ(ECS・EKS・Fargate)</text>
+        <text x="36" y="124" font-size="10" class="muted">処理をどこで実行するか</text>
+
+        <rect x="266" y="40" width="230" height="96" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="282" y="62" font-size="12">置く</text>
+        <text x="282" y="84" font-size="10.5" class="muted">ストレージ(S3・EBS・EFS)</text>
+        <text x="282" y="104" font-size="10.5" class="muted">データベース(RDS・DynamoDB)</text>
+        <text x="282" y="124" font-size="10" class="muted">データをどの形で保つか</text>
+
+        <rect x="512" y="40" width="230" height="96" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="528" y="62" font-size="12">つなぐ</text>
+        <text x="528" y="84" font-size="10.5" class="muted">VPC・Route 53・CloudFront</text>
+        <text x="528" y="104" font-size="10.5" class="muted">SQS・SNS・EventBridge</text>
+        <text x="528" y="124" font-size="10" class="muted">経路と、サービス同士の連絡</text>
+
+        <rect x="20" y="150" width="230" height="86" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="36" y="172" font-size="12">守る</text>
+        <text x="36" y="194" font-size="10.5" class="muted">IAM ― 誰が何にどこまで</text>
+        <text x="36" y="214" font-size="10.5" class="muted">KMS・Secrets Manager</text>
+
+        <rect x="266" y="150" width="230" height="86" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="282" y="172" font-size="12">見る</text>
+        <text x="282" y="194" font-size="10.5" class="muted">CloudWatch ― 指標とログ</text>
+        <text x="282" y="214" font-size="10.5" class="muted">CloudTrail ― 誰が操作したか</text>
+
+        <rect x="512" y="150" width="230" height="86" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="528" y="172" font-size="12">作って配る</text>
+        <text x="528" y="194" font-size="10.5" class="muted">CodeBuild・CodePipeline</text>
+        <text x="528" y="214" font-size="10.5" class="muted">CloudFormation・CDK(IaC)</text>
+
+        <rect x="20" y="252" width="722" height="66" rx="8" fill="none" stroke="var(--primary)" stroke-dasharray="5 4" />
+        <text x="381" y="276" font-size="12" text-anchor="middle" class="accent">土台 ― リージョン / アベイラビリティゾーン / エッジロケーション</text>
+        <text x="381" y="300" font-size="10.5" text-anchor="middle" class="muted">どのサービスも「どこに置くか」を必ず持つ。この地理の階層が可用性と遅延を決める。</text>
+      </svg>
+    </div>
+  </body>
+</html>

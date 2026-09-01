@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 320"
+        role="img"
+        aria-label="共有の巨大なシードデータを使う場合と、ファクトリでその場で作る場合を比べた図。左は全テストが同じ100件を前提にする方式で、テストコードにはユーザー42という識別子だけが現れる。この42番が何者なのか、テストコードを読んでも分からない。1件直すと無関係な20個のテストが落ち、そのテストが何を前提にしているのかも暗黙のまま消える。右はファクトリで必要な項目だけを指定し残りは既定値で埋める方式で、テストコードには無料プランの利用者と5000円未満の注文という、そのテストが依存する条件だけが現れる。読めば前提が分かり、他のテストに影響せず、並列実行しても衝突しない。テストデータは共有する資産ではなく、そのテストの一部である、と図の下部に記されている。"
+      >
+        <text x="16" y="26" font-size="11" class="muted">同じテストを、2つのデータの用意の仕方で書いたとき</text>
+
+        <text x="16" y="52" font-size="10.5" class="muted">共有の巨大なシード</text>
+        <text x="328" y="52" font-size="10.5" class="accent">ファクトリでその場で作る</text>
+
+        <rect x="16" y="60" width="296" height="58" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="82" font-size="9" class="mono muted">const user = users[42];</text>
+        <text x="30" y="102" font-size="9" class="mono muted">const order = orders[7];</text>
+
+        <rect x="328" y="60" width="296" height="58" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="342" y="82" font-size="9" class="mono">createUser({ plan: "free" })</text>
+        <text x="342" y="102" font-size="9" class="mono">createOrder({ total: 4999 })</text>
+
+        <rect x="16" y="128" width="296" height="118" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="150" font-size="9.5" class="muted">42番が何者か、読んでも分からない</text>
+        <text x="30" y="176" font-size="9.5" class="muted">1件直すと、無関係な20個が落ちる</text>
+        <text x="30" y="202" font-size="9.5" class="muted">何を前提にしたテストかが消える</text>
+        <text x="30" y="228" font-size="9.5" class="muted">件数を前提にすると並列で壊れる</text>
+
+        <rect x="328" y="128" width="296" height="118" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="342" y="150" font-size="9.5" class="muted">無料プランであることが読める</text>
+        <text x="342" y="176" font-size="9.5" class="muted">5000円未満であることが読める</text>
+        <text x="342" y="202" font-size="9.5" class="muted">他のテストに影響しない</text>
+        <text x="342" y="228" font-size="9.5" class="muted">並列で走らせても衝突しない</text>
+
+        <line x1="16" y1="266" x2="624" y2="266" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="286" font-size="10.5" class="muted">指定しなかった項目は既定値で埋まる。だから、書いてある項目がそのまま「このテストの前提」になる。</text>
+        <text x="16" y="308" font-size="10.5" class="accent">テストデータは共有する資産ではなく、そのテストの一部。</text>
+      </svg>
+    </div>
+  </body>
+</html>

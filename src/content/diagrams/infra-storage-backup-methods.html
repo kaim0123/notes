@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 320"
+        role="img"
+        aria-label="フル・差分・増分という3つのバックアップ方式で、取得のたびに何を保存し、復元に何が必要になるかを比べた図。フルは毎回すべてを保存するので復元は1つ戻すだけで済むが、取得に時間と容量がかかる。差分は前回のフル以降に変わった分をまとめて保存するので、復元にはフルと最新の差分の2つがあればよく、日が経つほど1回の取得量は増える。増分は直前の取得以降に変わった分だけを保存するので取得は最も軽いが、復元にはフルとその後の全増分を順に適用する必要があり、途中の1つが壊れていると以降が戻せない。取得の軽さと復元の確実さは反対を向いている。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="20" y="26" font-size="12" class="muted">日曜にフル、月〜水に取得したとき、水曜の状態へ戻すには何が要るか</text>
+
+        <text x="20" y="72" font-size="11.5">フル</text>
+        <rect x="90" y="52" width="140" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="160" y="74" font-size="10" text-anchor="middle">日 全体</text>
+        <rect x="240" y="52" width="140" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="310" y="74" font-size="10" text-anchor="middle" class="muted">月 全体</text>
+        <rect x="390" y="52" width="140" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="460" y="74" font-size="10" text-anchor="middle" class="muted">火 全体</text>
+        <rect x="540" y="52" width="140" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="610" y="74" font-size="10" text-anchor="middle">水 全体</text>
+        <text x="694" y="74" font-size="10" class="accent">1つ</text>
+
+        <text x="20" y="152" font-size="11.5">差分</text>
+        <rect x="90" y="132" width="140" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="160" y="154" font-size="10" text-anchor="middle">日 全体</text>
+        <rect x="240" y="132" width="90" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="285" y="154" font-size="10" text-anchor="middle" class="muted">月 差分</text>
+        <rect x="390" y="132" width="110" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="445" y="154" font-size="10" text-anchor="middle" class="muted">火 差分</text>
+        <rect x="540" y="132" width="130" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="605" y="154" font-size="10" text-anchor="middle">水 差分</text>
+        <text x="694" y="154" font-size="10" class="accent">2つ</text>
+        <text x="90" y="186" font-size="9.5" class="muted">前回のフル以降をまとめて持つので、日が経つほど1回が重くなる</text>
+
+        <text x="20" y="232" font-size="11.5">増分</text>
+        <rect x="90" y="212" width="140" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="160" y="234" font-size="10" text-anchor="middle">日 全体</text>
+        <rect x="240" y="212" width="70" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="275" y="234" font-size="10" text-anchor="middle">月 増分</text>
+        <rect x="390" y="212" width="70" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="425" y="234" font-size="10" text-anchor="middle">火 増分</text>
+        <rect x="540" y="212" width="70" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="575" y="234" font-size="10" text-anchor="middle">水 増分</text>
+        <text x="694" y="234" font-size="10" class="accent">4つ</text>
+        <text x="90" y="266" font-size="9.5" class="muted">取得はいちばん軽いが、途中の1つが壊れていると、それ以降は戻せない</text>
+
+        <text x="20" y="300" font-size="10.5" class="muted">緑 = 水曜の状態へ戻すのに必要なもの。取得の軽さと復元の確実さは、反対を向いている。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 280"
+        role="img"
+        aria-label="無駄な費用が生まれる典型的な形を4つ並べた図。1つ目は使っていないのに残っているもので、止め忘れた計算資源や消し忘れた保存領域が該当する。2つ目は過剰な性能で、余裕を見て大きくしたまま見直していない状態を指す。3つ目は取り込みすぎた記録で、すべてのログを最高の詳細度で保存し続けている状態にあたる。4つ目は経路の設計で、本来は内側で完結できる通信が外を経由していたり、キャッシュが効かず毎回オリジンまで届いていたりする場合を指す。いずれも1件あたりは小さく、請求書を見るまで気づかない点が共通している。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="46" width="350" height="90" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="40" y="70" font-size="11">1. 使っていないのに残っている</text>
+        <text x="40" y="92" font-size="9.5" class="muted">止め忘れた計算資源 / 消し忘れた保存領域</text>
+        <text x="40" y="112" font-size="9.5" class="muted">確保したままのアドレス / 古いスナップショット</text>
+        <text x="40" y="130" font-size="9" class="accent">見つけ方 ― 使用率がゼロのものを一覧する</text>
+
+        <rect x="390" y="46" width="350" height="90" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="410" y="70" font-size="11">2. 過剰な性能</text>
+        <text x="410" y="92" font-size="9.5" class="muted">余裕を見て大きくしたまま、見直していない</text>
+        <text x="410" y="112" font-size="9.5" class="muted">本番と同じ構成の検証環境を常時稼働</text>
+        <text x="410" y="130" font-size="9" class="accent">見つけ方 ― 使用率の上限を見る</text>
+
+        <rect x="20" y="150" width="350" height="90" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="40" y="174" font-size="11">3. 取り込みすぎた記録</text>
+        <text x="40" y="196" font-size="9.5" class="muted">すべてのログを最高の詳細度で保存し続ける</text>
+        <text x="40" y="216" font-size="9.5" class="muted">保存期間を決めていない</text>
+        <text x="40" y="234" font-size="9" class="accent">見つけ方 ― 取り込み量の推移を見る</text>
+
+        <rect x="390" y="150" width="350" height="90" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="410" y="174" font-size="11">4. 経路の設計</text>
+        <text x="410" y="196" font-size="9.5" class="muted">内側で済む通信が、外を経由している</text>
+        <text x="410" y="216" font-size="9.5" class="muted">キャッシュが効かず、毎回オリジンまで届く</text>
+        <text x="410" y="234" font-size="9" class="accent">見つけ方 ― 転送量の内訳を見る</text>
+
+        <text x="20" y="268" font-size="10.5" class="muted">共通点 ― 1件あたりは小さく、請求書を見るまで気づかない。だから定期的に見る仕組みを置く。</text>
+      </svg>
+    </div>
+  </body>
+</html>

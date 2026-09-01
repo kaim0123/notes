@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 310"
+        role="img"
+        aria-label="注文の状態遷移を図にしたもの。注文前から注文するという操作で注文済みへ、注文済みから発送するという操作で発送済みへ、発送済みから受け取るという操作で完了へ進む。注文済みからはキャンセルするという操作でキャンセル済みへ移れる。ここで狙うのは、発送済みからキャンセル済みへの遷移が通ってしまわないかという点で、この経路は破線とバツ印で許可されない遷移として示されている。状態遷移テストが探すのは、書かれている遷移が動くことよりも、書かれていない遷移が通ってしまわないことのほうである、と図の下部に記されている。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="28" font-size="11" class="muted">同じ操作でも、今どの状態かで結果が変わる仕様を狙う</text>
+
+        <rect x="35" y="68" width="110" height="44" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="90" y="95" font-size="10.5" text-anchor="middle">注文前</text>
+
+        <rect x="195" y="68" width="110" height="44" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="250" y="95" font-size="10.5" text-anchor="middle">注文済</text>
+
+        <rect x="355" y="68" width="110" height="44" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="410" y="95" font-size="10.5" text-anchor="middle">発送済</text>
+
+        <rect x="515" y="68" width="110" height="44" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="570" y="95" font-size="10.5" text-anchor="middle">完了</text>
+
+        <rect x="195" y="196" width="110" height="44" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="250" y="223" font-size="10.5" text-anchor="middle">キャンセル済</text>
+
+        <line x1="145" y1="90" x2="189" y2="90" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="167" y="82" font-size="9" text-anchor="middle" class="muted">注文する</text>
+
+        <line x1="305" y1="90" x2="349" y2="90" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="327" y="82" font-size="9" text-anchor="middle" class="muted">発送する</text>
+
+        <line x1="465" y1="90" x2="509" y2="90" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="487" y="82" font-size="9" text-anchor="middle" class="muted">受け取る</text>
+
+        <line x1="250" y1="112" x2="250" y2="190" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="260" y="156" font-size="9" class="muted">キャンセルする</text>
+
+        <line x1="380" y1="112" x2="312" y2="196" stroke="var(--primary)" stroke-width="1.3" stroke-dasharray="4 4" />
+        <line x1="337" y1="147" x2="355" y2="161" stroke="var(--primary)" stroke-width="1.8" />
+        <line x1="355" y1="147" x2="337" y2="161" stroke="var(--primary)" stroke-width="1.8" />
+        <text x="372" y="182" font-size="9.5" class="accent">通ってはいけない遷移</text>
+
+        <line x1="16" y1="264" x2="624" y2="264" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="284" font-size="10.5" class="muted">状態と操作の全組み合わせを表にすると、仕様に書かれていない升目が浮かび上がる。</text>
+        <text x="16" y="304" font-size="10.5" class="accent">狙うのは、書かれた遷移が動くことより、書かれていない遷移が通ってしまわないこと。</text>
+      </svg>
+    </div>
+  </body>
+</html>

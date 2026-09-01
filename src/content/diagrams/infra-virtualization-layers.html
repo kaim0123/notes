@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 330"
+        role="img"
+        aria-label="ハイパーバイザー型とコンテナ型の層構造を並べた比較図。左のハイパーバイザー型は、ハードウェアの上にハイパーバイザーを置き、その上の仮想マシンごとにゲストOSを丸ごと動かすため、アプリのほかにOSの分の重さが台数だけ積み上がる。右のコンテナ型は、ホストOSのカーネルを全コンテナで共有し、コンテナにはアプリとライブラリだけが入るため、ゲストOSにあたる層がまるごと不要になり、起動が数秒で済む。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="195" y="24" font-size="13" text-anchor="middle" class="muted">ハイパーバイザー型</text>
+        <text x="565" y="24" font-size="13" text-anchor="middle" class="muted">コンテナ型</text>
+        <line x1="380" y1="16" x2="380" y2="320" stroke="var(--border)" stroke-dasharray="4 3" />
+
+        <rect x="30" y="280" width="330" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="195" y="302" font-size="12" text-anchor="middle">ハードウェア</text>
+        <rect x="30" y="240" width="330" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="195" y="262" font-size="12" text-anchor="middle">ハイパーバイザー</text>
+
+        <rect x="36" y="60" width="104" height="170" rx="6" fill="none" stroke="var(--border)" />
+        <rect x="44" y="70" width="88" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="88" y="91" font-size="11" text-anchor="middle">アプリ</text>
+        <rect x="44" y="108" width="88" height="26" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="88" y="125" font-size="10" text-anchor="middle" class="muted">ライブラリ</text>
+        <rect x="44" y="138" width="88" height="84" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="88" y="185" font-size="11" text-anchor="middle">ゲストOS</text>
+
+        <rect x="148" y="60" width="104" height="170" rx="6" fill="none" stroke="var(--border)" />
+        <rect x="156" y="70" width="88" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="200" y="91" font-size="11" text-anchor="middle">アプリ</text>
+        <rect x="156" y="108" width="88" height="26" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="200" y="125" font-size="10" text-anchor="middle" class="muted">ライブラリ</text>
+        <rect x="156" y="138" width="88" height="84" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="200" y="185" font-size="11" text-anchor="middle">ゲストOS</text>
+
+        <rect x="260" y="60" width="104" height="170" rx="6" fill="none" stroke="var(--border)" />
+        <rect x="268" y="70" width="88" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="312" y="91" font-size="11" text-anchor="middle">アプリ</text>
+        <rect x="268" y="108" width="88" height="26" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="312" y="125" font-size="10" text-anchor="middle" class="muted">ライブラリ</text>
+        <rect x="268" y="138" width="88" height="84" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="312" y="185" font-size="11" text-anchor="middle">ゲストOS</text>
+
+        <rect x="400" y="280" width="330" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="565" y="302" font-size="12" text-anchor="middle">ハードウェア</text>
+        <rect x="400" y="240" width="330" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="565" y="262" font-size="12" text-anchor="middle">ホストOSのカーネル(全コンテナで共有)</text>
+        <rect x="400" y="200" width="330" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="565" y="222" font-size="12" text-anchor="middle">コンテナランタイム</text>
+
+        <rect x="406" y="110" width="104" height="84" rx="6" fill="none" stroke="var(--border)" />
+        <rect x="414" y="118" width="88" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="458" y="139" font-size="11" text-anchor="middle">アプリ</text>
+        <rect x="414" y="156" width="88" height="30" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="458" y="176" font-size="10" text-anchor="middle" class="muted">ライブラリ</text>
+
+        <rect x="518" y="110" width="104" height="84" rx="6" fill="none" stroke="var(--border)" />
+        <rect x="526" y="118" width="88" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="570" y="139" font-size="11" text-anchor="middle">アプリ</text>
+        <rect x="526" y="156" width="88" height="30" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="570" y="176" font-size="10" text-anchor="middle" class="muted">ライブラリ</text>
+
+        <rect x="630" y="110" width="104" height="84" rx="6" fill="none" stroke="var(--border)" />
+        <rect x="638" y="118" width="88" height="34" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="682" y="139" font-size="11" text-anchor="middle">アプリ</text>
+        <rect x="638" y="156" width="88" height="30" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="682" y="176" font-size="10" text-anchor="middle" class="muted">ライブラリ</text>
+
+        <rect x="406" y="46" width="328" height="52" rx="6" fill="none" stroke="var(--primary)" stroke-dasharray="5 4" />
+        <text x="570" y="70" font-size="11" text-anchor="middle" class="accent">ゲストOSにあたる層が、まるごと空く</text>
+        <text x="570" y="88" font-size="10" text-anchor="middle" class="muted">起動は数秒・メモリはMB単位</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 340"
+        role="img"
+        aria-label="セッションの仕組みを、ブラウザとサーバーの2本の縦線として示した図。まずブラウザがIDとパスワードを送ってログインを求める。サーバーは照合に成功すると、推測できない長さの乱数をセッションIDとして発行し、その利用者が誰であるかという中身を自分の側に保存する。次にSet-CookieヘッダでそのセッションIDだけをブラウザへ渡す。以降のリクエストでは、ブラウザが同じサイト宛の通信に自動でそのCookieを付け、サーバーは受け取ったIDから保存済みの中身を引いて誰かを思い出す。中身はサーバーにあり、ブラウザが持ち歩くのは引換券だけである。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="70" y="36" width="130" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="135" y="58" font-size="11" text-anchor="middle">ブラウザ</text>
+        <rect x="500" y="36" width="130" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="565" y="58" font-size="11" text-anchor="middle">サーバー</text>
+        <line x1="135" y1="70" x2="135" y2="268" stroke="var(--border)" stroke-width="1.1" />
+        <line x1="565" y1="70" x2="565" y2="268" stroke="var(--border)" stroke-width="1.1" />
+
+        <text x="350" y="96" font-size="9.5" text-anchor="middle" class="muted">① IDとパスワードを送る</text>
+        <line x1="137" y1="106" x2="561" y2="106" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="470" y="120" width="200" height="42" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.3" />
+        <text x="570" y="138" font-size="9.5" text-anchor="middle" class="accent">② 128bit以上の乱数を発行</text>
+        <text x="570" y="154" font-size="9" text-anchor="middle" class="muted">誰であるかは、こちら側に保存</text>
+
+        <text x="350" y="188" font-size="9.5" text-anchor="middle" class="muted">③ Set-Cookie でIDだけを渡す(HttpOnly / Secure / SameSite)</text>
+        <line x1="563" y1="198" x2="139" y2="198" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+
+        <text x="350" y="228" font-size="9.5" text-anchor="middle" class="muted">④ 以降のリクエストに、ブラウザが自動でCookieを付ける</text>
+        <line x1="137" y1="238" x2="561" y2="238" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="350" y="262" font-size="9.5" text-anchor="middle" class="muted">⑤ サーバーはIDから中身を引いて「誰か」を思い出す</text>
+
+        <rect x="20" y="120" width="200" height="42" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="120" y="138" font-size="9.5" text-anchor="middle" class="muted">ブラウザが持つのは</text>
+        <text x="120" y="154" font-size="9.5" text-anchor="middle">引換券の番号だけ</text>
+
+        <line x1="16" y1="286" x2="684" y2="286" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="308" font-size="10.5" class="muted">HTTPは前回を覚えていない。だから毎回「同じ人からの続き」だと示す番号を持ち歩く必要がある。</text>
+        <text x="16" y="330" font-size="10.5" class="accent">裏を返せば、この番号を握った人は誰でも本人として通る。だからURLには絶対に載せない。</text>
+      </svg>
+    </div>
+  </body>
+</html>

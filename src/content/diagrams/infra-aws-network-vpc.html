@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 320"
+        role="img"
+        aria-label="クラウド上に用意する自分専用のネットワークの構造を示した図。外側の枠が仮想ネットワーク全体で、その中を役割ごとの区画に分ける。上段の公開側の区画には、外から直接届いてよいもの、たとえばロードバランサだけを置く。下段の非公開側の区画には、アプリやデータベースのように外から直接届いてはいけないものを置く。非公開側から外部への通信が必要な場合は、変換のための出口を経由して外へ出るが、外から中への接続は開かない。区画は複数のゾーンにまたがって同じ構成を用意し、片方のゾーンが落ちても続けられるようにする。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="36" width="720" height="230" rx="10" fill="none" stroke="var(--primary)" />
+        <text x="36" y="58" font-size="11.5">自分専用の仮想ネットワーク</text>
+
+        <rect x="40" y="70" width="330" height="86" rx="8" fill="none" stroke="var(--border)" />
+        <text x="205" y="90" font-size="10" text-anchor="middle" class="muted">公開側の区画(ゾーンA)</text>
+        <rect x="56" y="100" width="140" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="126" y="124" font-size="9.5" text-anchor="middle">ロードバランサ</text>
+        <rect x="212" y="100" width="140" height="40" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="282" y="118" font-size="9.5" text-anchor="middle" class="muted">外向けの出口</text>
+        <text x="282" y="133" font-size="8.5" text-anchor="middle" class="muted">中→外だけ通す</text>
+
+        <rect x="390" y="70" width="330" height="86" rx="8" fill="none" stroke="var(--border)" />
+        <text x="555" y="90" font-size="10" text-anchor="middle" class="muted">公開側の区画(ゾーンC)</text>
+        <text x="555" y="122" font-size="9.5" text-anchor="middle" class="muted">同じ構成をもう1つのゾーンにも</text>
+
+        <rect x="40" y="166" width="330" height="86" rx="8" fill="none" stroke="var(--border)" />
+        <text x="205" y="186" font-size="10" text-anchor="middle" class="muted">非公開側の区画(ゾーンA)</text>
+        <rect x="56" y="196" width="140" height="40" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="126" y="220" font-size="9.5" text-anchor="middle">アプリ</text>
+        <rect x="212" y="196" width="140" height="40" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="282" y="220" font-size="9.5" text-anchor="middle">データベース</text>
+
+        <rect x="390" y="166" width="330" height="86" rx="8" fill="none" stroke="var(--border)" />
+        <text x="555" y="186" font-size="10" text-anchor="middle" class="muted">非公開側の区画(ゾーンC)</text>
+        <text x="555" y="218" font-size="9.5" text-anchor="middle" class="muted">こちらにも同じものを置く</text>
+
+        <line x1="126" y1="20" x2="126" y2="96" stroke="var(--primary)" marker-end="url(#arp)" />
+        <text x="140" y="30" font-size="9.5" class="accent">外から来る通信は、ここだけ</text>
+
+        <line x1="282" y1="196" x2="282" y2="146" stroke="var(--muted)" marker-end="url(#ar)" />
+        <text x="296" y="176" font-size="9" class="muted">中から外へ</text>
+
+        <text x="20" y="292" font-size="10.5" class="muted">区画を分ける目的は、外から直接届く範囲を最小にすること ― 届かないものは攻撃されない。</text>
+        <text x="20" y="312" font-size="10.5" class="muted">同じ構成を複数のゾーンに用意するのは、片方が落ちても続けるため。</text>
+      </svg>
+    </div>
+  </body>
+</html>

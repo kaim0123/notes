@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 330"
+        role="img"
+        aria-label="セキュリティの4つの検査手法を、対象と見つかるもの、そして見つからないものの3点で並べた図。静的解析はソースコードを対象にし、危険な関数の使用やコードに直接書かれた鍵を見つけるが、実行時の設定の不備は見つからない。依存解析は使っているパッケージを対象にし、既知の脆弱性を見つけるが、自作コードの欠陥は見つからない。動的解析は稼働中のアプリを対象にし、実際に成立する攻撃を見つけるが、認証の裏側など到達しにくい経路は調べない。ペネトレーションテストはシステム全体を対象にし、複数の弱点を組み合わせた侵入経路を見つけるが、網羅性は保証されない。4つとも、見つからないものの列が別々を向いている。どれか1つでは足りず、層を重ねて互いの穴を埋めるのが前提である、と図の下部に記されている。"
+      >
+        <text x="16" y="26" font-size="11" class="muted">4つとも「見つからないもの」が別々を向いている</text>
+
+        <text x="30" y="52" font-size="9" class="muted">手法</text>
+        <text x="180" y="52" font-size="9" class="muted">対象</text>
+        <text x="316" y="52" font-size="9" class="muted">見つかるもの</text>
+        <text x="512" y="52" font-size="9" class="accent">見つからないもの</text>
+        <line x1="16" y1="58" x2="684" y2="58" stroke="var(--border)" stroke-width="1" />
+
+        <rect x="16" y="64" width="152" height="52" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="86" font-size="9.5">静的解析(SAST)</text>
+        <text x="30" y="104" font-size="8.5" class="muted">動かさずに読む</text>
+        <text x="180" y="94" font-size="9" class="muted">ソースコード</text>
+        <text x="316" y="86" font-size="9" class="muted">危険な関数の使用</text>
+        <text x="316" y="104" font-size="9" class="muted">コードに書かれた鍵</text>
+        <text x="512" y="94" font-size="9" class="accent">実行時の設定不備</text>
+
+        <rect x="16" y="122" width="152" height="52" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="144" font-size="9.5">依存解析(SCA)</text>
+        <text x="30" y="162" font-size="8.5" class="muted">一覧を照合する</text>
+        <text x="180" y="152" font-size="9" class="muted">依存パッケージ</text>
+        <text x="316" y="152" font-size="9" class="muted">既知の脆弱性</text>
+        <text x="512" y="152" font-size="9" class="accent">自作コードの欠陥</text>
+
+        <rect x="16" y="180" width="152" height="52" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="202" font-size="9.5">動的解析(DAST)</text>
+        <text x="30" y="220" font-size="8.5" class="muted">動かして試す</text>
+        <text x="180" y="210" font-size="9" class="muted">稼働中のアプリ</text>
+        <text x="316" y="210" font-size="9" class="muted">実際に成立する攻撃</text>
+        <text x="512" y="202" font-size="9" class="accent">到達しにくい経路</text>
+        <text x="512" y="220" font-size="9" class="accent">認証の裏側</text>
+
+        <rect x="16" y="238" width="152" height="52" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="260" font-size="9.5">ペネトレーション</text>
+        <text x="30" y="278" font-size="8.5" class="muted">人が侵入を試みる</text>
+        <text x="180" y="268" font-size="9" class="muted">システム全体</text>
+        <text x="316" y="260" font-size="9" class="muted">複数の弱点を</text>
+        <text x="316" y="278" font-size="9" class="muted">組み合わせた侵入経路</text>
+        <text x="512" y="268" font-size="9" class="accent">網羅性は保証されない</text>
+
+        <line x1="16" y1="304" x2="684" y2="304" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="324" font-size="10.5" class="accent">どれか1つでは足りない。層を重ねて、互いの穴を埋めるのが前提。</text>
+      </svg>
+    </div>
+  </body>
+</html>

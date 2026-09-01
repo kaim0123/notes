@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 300"
+        role="img"
+        aria-label="1つのリージョンの中で複数のアベイラビリティゾーンに分散して配置した構成を示した図。利用者のリクエストはロードバランサが受け、2つのゾーンに置かれた同じ役割のサーバーへ振り分ける。データベースは片方のゾーンを主系、もう片方を待機系として複製しておく。左のゾーンが丸ごと落ちても、ロードバランサは応答しない側への振り分けをやめ、データベースは待機系へ切り替わるため、サービスは続く。逆に単一ゾーンにすべてを置いていると、そのゾーンの障害がそのままサービス停止になる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="40" width="660" height="200" rx="10" fill="none" stroke="var(--primary)" />
+        <text x="36" y="62" font-size="11.5">リージョン(例: 東京)</text>
+
+        <rect x="250" y="72" width="200" height="40" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="350" y="90" font-size="10.5" text-anchor="middle">ロードバランサ</text>
+        <text x="350" y="105" font-size="9" text-anchor="middle" class="muted">応答しない側へは振らない</text>
+
+        <rect x="44" y="130" width="280" height="96" rx="8" fill="none" stroke="var(--border)" />
+        <text x="184" y="150" font-size="10.5" text-anchor="middle" class="muted">アベイラビリティゾーン A</text>
+        <rect x="60" y="160" width="120" height="30" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="120" y="180" font-size="9.5" text-anchor="middle">アプリ</text>
+        <rect x="192" y="160" width="116" height="30" rx="6" fill="var(--card)" stroke="var(--border)" />
+        <text x="250" y="180" font-size="9.5" text-anchor="middle">DB 主系</text>
+        <text x="184" y="212" font-size="9" text-anchor="middle" class="accent">ここが丸ごと落ちても</text>
+
+        <rect x="376" y="130" width="280" height="96" rx="8" fill="none" stroke="var(--border)" />
+        <text x="516" y="150" font-size="10.5" text-anchor="middle" class="muted">アベイラビリティゾーン C</text>
+        <rect x="392" y="160" width="120" height="30" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="452" y="180" font-size="9.5" text-anchor="middle">アプリ</text>
+        <rect x="524" y="160" width="116" height="30" rx="6" fill="var(--card)" stroke="var(--primary)" />
+        <text x="582" y="180" font-size="9.5" text-anchor="middle">DB 待機系</text>
+        <text x="516" y="212" font-size="9" text-anchor="middle" class="accent">こちらで続けられる</text>
+
+        <line x1="320" y1="116" x2="180" y2="156" stroke="var(--muted)" marker-end="url(#ar)" />
+        <line x1="380" y1="116" x2="452" y2="156" stroke="var(--primary)" marker-end="url(#arp)" />
+        <line x1="308" y1="175" x2="520" y2="175" stroke="var(--muted)" stroke-dasharray="4 3" />
+        <text x="414" y="170" font-size="9" text-anchor="middle" class="muted">複製</text>
+
+        <text x="20" y="268" font-size="10.5" class="muted">EC2もサブネットもディスクも、属するのは1つのゾーン ― だから同じものを2つのゾーンに置く。</text>
+        <text x="20" y="288" font-size="10.5" class="muted">「冗長化した」と言えるのは、落ちた側を外して動き続けることを確かめたときだけ。</text>
+      </svg>
+    </div>
+  </body>
+</html>

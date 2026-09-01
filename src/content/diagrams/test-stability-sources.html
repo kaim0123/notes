@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 340"
+        role="img"
+        aria-label="テストが不安定になる3つの源と、それぞれに効かせる手立て、そして取りこぼしを拾う仕組みの対応を示した図。左の列に不安定さの源が3つ並ぶ。外部への依存はネットワークや時刻や他サービスが原因になる。共有された状態はデータベースやグローバル変数やファイルが原因になる。実行の時間と順序は待ち方や並列実行や非同期処理が原因になる。中央の列にはそれぞれに対応する手立てが並び、外部への依存にはテストダブルで境界だけを代役に置き換え、共有された状態にはテストデータ管理でテストごとに独立させその場で作り、実行の時間と順序にはテストパターンで待ち方と期待値の作り方を定石に寄せる。右にはフレーキーテストの枠があり、3つの手立てから漏れた不安定さをここで拾う。再実行したら通ったを放置せず、見つける仕組みを作って赤に意味を戻す役割を持つ。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="50" font-size="11" class="muted">不安定さの源</text>
+        <text x="262" y="50" font-size="11" class="muted">効かせる手立て</text>
+        <text x="508" y="50" font-size="11" class="accent">取りこぼしを拾う</text>
+
+        <rect x="16" y="62" width="190" height="56" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="84" font-size="10.5">外部への依存</text>
+        <text x="30" y="104" font-size="9" class="muted">ネットワーク・時刻・他サービス</text>
+
+        <rect x="16" y="132" width="190" height="56" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="154" font-size="10.5">共有された状態</text>
+        <text x="30" y="174" font-size="9" class="muted">DB・グローバル変数・ファイル</text>
+
+        <rect x="16" y="202" width="190" height="56" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="224" font-size="10.5">実行の時間と順序</text>
+        <text x="30" y="244" font-size="9" class="muted">待ち方・並列実行・非同期</text>
+
+        <rect x="262" y="62" width="190" height="56" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="276" y="84" font-size="10.5">テストダブル</text>
+        <text x="276" y="104" font-size="9" class="muted">境界だけを代役に置き換える</text>
+
+        <rect x="262" y="132" width="190" height="56" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="276" y="154" font-size="10.5">テストデータ管理</text>
+        <text x="276" y="174" font-size="9" class="muted">独立させ、その場で作る</text>
+
+        <rect x="262" y="202" width="190" height="56" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="276" y="224" font-size="10.5">テストパターン</text>
+        <text x="276" y="244" font-size="9" class="muted">待ち方と期待値を定石に寄せる</text>
+
+        <rect x="508" y="62" width="176" height="196" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="522" y="92" font-size="11.5" class="accent">フレーキーテスト</text>
+        <text x="522" y="120" font-size="9.5" class="muted">3つの手立てから漏れた</text>
+        <text x="522" y="138" font-size="9.5" class="muted">不安定さは、必ず残る。</text>
+        <text x="522" y="170" font-size="9.5" class="muted">「再実行したら通った」を</text>
+        <text x="522" y="188" font-size="9.5" class="muted">放置しない。見つける仕組み</text>
+        <text x="522" y="206" font-size="9.5" class="muted">を作り、赤に意味を戻す。</text>
+
+        <line x1="206" y1="90" x2="256" y2="90" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="206" y1="160" x2="256" y2="160" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="206" y1="230" x2="256" y2="230" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <line x1="452" y1="90" x2="502" y2="132" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <line x1="452" y1="160" x2="502" y2="160" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <line x1="452" y1="230" x2="502" y2="188" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+
+        <line x1="16" y1="292" x2="684" y2="292" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="312" font-size="10.5" class="muted">3つの源は独立していない。共有状態を断てば順序依存も消える ― 上から順に潰すほど、下の問題は減る。</text>
+        <text x="16" y="332" font-size="10.5" class="accent">目的は1つ ― テストが赤いなら本当に壊れている、と言い切れる状態を保つこと。</text>
+      </svg>
+    </div>
+  </body>
+</html>

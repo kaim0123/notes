@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 280"
+        role="img"
+        aria-label="ソースの変更からデプロイまでを段階として並べ、順に進めていく仕組みを示した図。最初の段階でソースの変更を検知し、次の段階でビルドとテストを実行し、続けて検証環境へ配置する。その次に人の承認を挟む段階を置き、承認されて初めて本番への配置に進む。どこかの段階で失敗すると、そこで停止して以降には進まない。段階の中には複数の作業を並べることができ、並行して走らせることも順番に走らせることもできる。この形にしておくと、いま何がどこまで進んでいるのかが一目で分かり、途中で止まった理由も段階として記録される。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="70" width="120" height="60" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="80" y="94" font-size="10" text-anchor="middle">ソース</text>
+        <text x="80" y="114" font-size="9" text-anchor="middle" class="muted">変更を検知する</text>
+        <line x1="146" y1="100" x2="170" y2="100" stroke="var(--muted)" marker-end="url(#ar)" />
+
+        <rect x="176" y="70" width="130" height="60" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="241" y="94" font-size="10" text-anchor="middle">ビルドとテスト</text>
+        <text x="241" y="114" font-size="9" text-anchor="middle" class="muted">失敗すればここで止まる</text>
+        <line x1="312" y1="100" x2="336" y2="100" stroke="var(--muted)" marker-end="url(#ar)" />
+
+        <rect x="342" y="70" width="120" height="60" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="402" y="94" font-size="10" text-anchor="middle">検証環境へ</text>
+        <text x="402" y="114" font-size="9" text-anchor="middle" class="muted">自動で配置する</text>
+        <line x1="468" y1="100" x2="492" y2="100" stroke="var(--muted)" marker-end="url(#ar)" />
+
+        <rect x="498" y="70" width="120" height="60" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="558" y="94" font-size="10" text-anchor="middle" class="accent">人が承認する</text>
+        <text x="558" y="114" font-size="9" text-anchor="middle" class="muted">ここで待つ</text>
+        <line x1="624" y1="100" x2="648" y2="100" stroke="var(--primary)" marker-end="url(#arp)" />
+
+        <rect x="654" y="70" width="86" height="60" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="697" y="94" font-size="10" text-anchor="middle">本番へ</text>
+        <text x="697" y="114" font-size="9" text-anchor="middle" class="muted">配置</text>
+
+        <rect x="20" y="168" width="720" height="88" rx="8" fill="none" stroke="var(--border)" />
+        <text x="36" y="192" font-size="10.5" class="muted">1つの段階の中には複数の作業を置ける ― 並行させることも、順番に走らせることもできる。</text>
+        <text x="36" y="214" font-size="10.5" class="muted">失敗した段階で停止し、以降には進まない。どこで止まったかが、そのまま記録として残る。</text>
+        <text x="36" y="236" font-size="10.5" class="accent">承認の段階は「止める場所」を明示する仕組み ― 誰がいつ通したかも記録に残る。</text>
+      </svg>
+    </div>
+  </body>
+</html>

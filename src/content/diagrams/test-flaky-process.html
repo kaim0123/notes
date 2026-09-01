@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 330"
+        role="img"
+        aria-label="フレーキーテストを見つけて直すまでの流れを6つの工程で示した図。上段の左から、通常のCIは1回だけ実行するため、たまにしか起きない不安定さは原理的に見えない。次に揺さぶる専用のジョブを用意し、同じテストを繰り返し実行し、順序をランダムにし、並列度を変え、負荷をかけた環境で回す。次に結果を記録し、再実行で通った分も含めてテスト単位の失敗率を集計する。下段へ移り、原因調査に時間がかかるものは本流のCIから外して隔離するが、これは一時避難なので必ず期限を切る。次に原因を8つの分類のどれかに特定する。最後に、直したあと100回連続で通ることを確認して初めて解決とみなす。スキップを付けて放置されたテストは、存在しないのに存在するふりをする最悪の状態であり、直せないなら削除するほうが誠実である、と図の下部に記されている。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="26" font-size="11" class="muted">「たまに」は、意識して探さないと見つからない</text>
+
+        <rect x="16" y="42" width="180" height="64" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="62" font-size="10" class="muted">通常のCI</text>
+        <text x="30" y="80" font-size="9" class="muted">1回だけ実行する</text>
+        <text x="30" y="96" font-size="9" class="muted">だから原理的に見えない</text>
+
+        <line x1="200" y1="74" x2="224" y2="74" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="228" y="42" width="180" height="64" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="242" y="62" font-size="10" class="accent">揺さぶる専用ジョブ</text>
+        <text x="242" y="80" font-size="9" class="muted">繰り返し / 順序をランダム</text>
+        <text x="242" y="96" font-size="9" class="muted">並列度を変える / 負荷をかける</text>
+
+        <line x1="412" y1="74" x2="436" y2="74" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="440" y="42" width="184" height="64" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="454" y="62" font-size="10" class="muted">記録する</text>
+        <text x="454" y="80" font-size="9" class="muted">再実行で通った分も含め</text>
+        <text x="454" y="96" font-size="9" class="muted">テスト単位の失敗率を出す</text>
+
+        <line x1="532" y1="106" x2="532" y2="128" stroke="var(--muted)" stroke-width="1.2" />
+        <line x1="532" y1="128" x2="106" y2="128" stroke="var(--muted)" stroke-width="1.2" />
+        <line x1="106" y1="128" x2="106" y2="152" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="16" y="156" width="180" height="64" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="176" font-size="10" class="muted">隔離する</text>
+        <text x="30" y="194" font-size="9" class="muted">本流のCIから外す</text>
+        <text x="30" y="210" font-size="9" class="muted">一時避難なので期限を切る</text>
+
+        <line x1="200" y1="188" x2="224" y2="188" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <rect x="228" y="156" width="180" height="64" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="242" y="176" font-size="10" class="muted">原因を分類する</text>
+        <text x="242" y="194" font-size="9" class="muted">8つのどれかを特定する</text>
+        <text x="242" y="210" font-size="9" class="muted">「たぶん」で止めない</text>
+
+        <line x1="412" y1="188" x2="436" y2="188" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+
+        <rect x="440" y="156" width="184" height="64" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="454" y="176" font-size="10" class="accent">直したら、検証する</text>
+        <text x="454" y="194" font-size="9" class="muted">100回連続で通ることを</text>
+        <text x="454" y="210" font-size="9" class="muted">確認して初めて解決</text>
+
+        <line x1="16" y1="248" x2="624" y2="248" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="268" font-size="10.5" class="muted">記録が要るのは、直したかどうかを主観で判断しないため。1回通っただけでは何も分からない。</text>
+        <text x="16" y="290" font-size="10.5" class="muted">スキップを付けて放置されたテストは、存在しないのに存在するふりをする最悪の状態になる。</text>
+        <text x="16" y="312" font-size="10.5" class="accent">直せないなら削除するほうが誠実 ― 少なくとも「テストがない」という事実は正しく伝わる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

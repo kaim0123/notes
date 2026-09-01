@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 300"
+        role="img"
+        aria-label="外部サービスをテストでどう扱うかの3つの方式を比べた図。1つ目は本物を毎回呼ぶ方式で、確かめられることは最も多いが、相手の障害やレート制限に左右され、料金が発生することもあり、実行が遅い。2つ目は本物の応答を一度記録しておいて再生する方式で、速く安定し、記録した時点の本物の形をそのまま使えるが、相手の仕様が変わっても記録は古いまま緑を返し続ける危険がある。3つ目はモックサーバーを立てて相手の振る舞いを模倣する方式で、エラーや遅延を自由に作れるため異常系を試せるが、模倣が本物とずれていないかを別途確かめる必要がある。3つとも、確かめているのは相手のサービスの正しさではなく、自分のコードが相手の仕様どおりに組み立て解釈できるかである、と図の下部に記されている。"
+      >
+        <text x="16" y="28" font-size="11" class="muted">外部サービスを、テストでどう扱うか</text>
+
+        <rect x="16" y="42" width="216" height="188" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="64" font-size="10.5">本物を毎回呼ぶ</text>
+        <text x="30" y="92" font-size="9" class="muted">確かめられることは最も多い</text>
+        <text x="30" y="118" font-size="9" class="muted">相手の障害・レート制限に</text>
+        <text x="30" y="134" font-size="9" class="muted">そのまま左右される</text>
+        <text x="30" y="160" font-size="9" class="muted">料金が発生することがある</text>
+        <text x="30" y="186" font-size="9" class="muted">遅い</text>
+        <text x="30" y="214" font-size="9" class="muted">定期実行の枠に置く</text>
+
+        <rect x="242" y="42" width="216" height="188" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="256" y="64" font-size="10.5" class="accent">記録して、再生する</text>
+        <text x="256" y="92" font-size="9" class="muted">本物の応答を一度記録し</text>
+        <text x="256" y="108" font-size="9" class="muted">以後はそれを返す</text>
+        <text x="256" y="134" font-size="9" class="muted">速く、安定する</text>
+        <text x="256" y="160" font-size="9" class="muted">記録した時点の本物の形</text>
+        <text x="256" y="176" font-size="9" class="muted">をそのまま使える</text>
+        <text x="256" y="204" font-size="9" class="muted">相手の仕様が変わっても</text>
+        <text x="256" y="220" font-size="9" class="muted">記録は古いまま緑を返す</text>
+
+        <rect x="468" y="42" width="216" height="188" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="482" y="64" font-size="10.5">模倣サーバーを立てる</text>
+        <text x="482" y="92" font-size="9" class="muted">相手の振る舞いを自分で書く</text>
+        <text x="482" y="118" font-size="9" class="muted">エラー・遅延・タイムアウトを</text>
+        <text x="482" y="134" font-size="9" class="muted">自由に作れる</text>
+        <text x="482" y="160" font-size="9" class="muted">異常系を試せる唯一の方式</text>
+        <text x="482" y="186" font-size="9" class="muted">模倣が本物とずれていないか</text>
+        <text x="482" y="202" font-size="9" class="muted">を別途確かめる必要がある</text>
+
+        <line x1="16" y1="252" x2="684" y2="252" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="272" font-size="10.5" class="muted">3つとも、確かめているのは相手のサービスの正しさではない。</text>
+        <text x="16" y="292" font-size="10.5" class="accent">自分のコードが、相手の仕様どおりに組み立て、解釈できているか ― それだけが対象。</text>
+      </svg>
+    </div>
+  </body>
+</html>

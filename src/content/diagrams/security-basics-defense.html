@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 820 312"
+        role="img"
+        aria-label="多層防御を、3種類の攻撃がそれぞれ別の層で止まる様子として示した図。左から右へ、ネットワーク・通信・セッション・アプリケーションの4つの層が縦の帯として並び、いちばん右に情報資産が置かれている。左から入る1本目の攻撃、不正な通信やポートスキャンは、最初のネットワーク層でファイアウォールと分離によって止まる。2本目の経路上の盗聴・改ざんは、ネットワーク層は素通りするが、次の通信層のTLSで止まる。3本目のSQLインジェクションは、手前の3層をすべて素通りしたうえで、最後のアプリケーション層の入力検証と認可で止まる。どの攻撃も、担当する層がひとつ食い止めれば情報資産には届かない。"
+      >
+        <text x="250" y="46" font-size="11" text-anchor="middle">ネットワーク</text>
+        <text x="380" y="46" font-size="11" text-anchor="middle">通信</text>
+        <text x="510" y="46" font-size="11" text-anchor="middle">セッション</text>
+        <text x="640" y="46" font-size="11" text-anchor="middle">アプリケーション</text>
+
+        <rect x="200" y="60" width="100" height="175" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="330" y="60" width="100" height="175" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="460" y="60" width="100" height="175" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="590" y="60" width="100" height="175" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+
+        <text x="250" y="253" font-size="9.5" text-anchor="middle" class="muted">FW・分離</text>
+        <text x="380" y="253" font-size="9.5" text-anchor="middle" class="muted">TLS</text>
+        <text x="510" y="253" font-size="9.5" text-anchor="middle" class="muted">Cookie属性</text>
+        <text x="640" y="253" font-size="9.5" text-anchor="middle" class="muted">入力検証・認可</text>
+
+        <text x="182" y="104" font-size="10.5" text-anchor="end">不正な通信・スキャン</text>
+        <line x1="190" y1="100" x2="243" y2="100" stroke="var(--muted)" stroke-width="1.3" />
+        <line x1="243" y1="93" x2="257" y2="107" stroke="var(--primary)" stroke-width="2.2" />
+        <line x1="243" y1="107" x2="257" y2="93" stroke="var(--primary)" stroke-width="2.2" />
+
+        <text x="182" y="154" font-size="10.5" text-anchor="end">経路上の盗聴・改ざん</text>
+        <line x1="190" y1="150" x2="373" y2="150" stroke="var(--muted)" stroke-width="1.3" />
+        <line x1="373" y1="143" x2="387" y2="157" stroke="var(--primary)" stroke-width="2.2" />
+        <line x1="373" y1="157" x2="387" y2="143" stroke="var(--primary)" stroke-width="2.2" />
+
+        <text x="182" y="204" font-size="10.5" text-anchor="end">SQLインジェクション</text>
+        <line x1="190" y1="200" x2="633" y2="200" stroke="var(--muted)" stroke-width="1.3" />
+        <line x1="633" y1="193" x2="647" y2="207" stroke="var(--primary)" stroke-width="2.2" />
+        <line x1="633" y1="207" x2="647" y2="193" stroke="var(--primary)" stroke-width="2.2" />
+
+        <rect x="712" y="112" width="88" height="76" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="756" y="146" font-size="12" text-anchor="middle">情報資産</text>
+        <text x="756" y="166" font-size="9" text-anchor="middle" class="muted">顧客データ・信用</text>
+
+        <line x1="16" y1="272" x2="804" y2="272" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="294" font-size="10.5" class="accent">壁は「多いほう」ではなく「性質が違うほう」が効く。同じ検査を二重にしても、素通りする攻撃は同じだけ素通りする。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 314"
+        role="img"
+        aria-label="同じ鍵ペアでも、秘密にしたいときと本人だと示したいときで使う鍵が逆になることを示した図。上段は秘匿の場合で、差出人が受取人の公開鍵でメッセージを閉じ、暗号文になり、受取人が自分の秘密鍵でそれを開く。公開鍵は誰でも持てるので誰でも送れるが、読めるのは秘密鍵を持つ1人だけになる。下段は署名の場合で、向きが逆になる。差出人が自分の秘密鍵で署名し、受け取った側は差出人の公開鍵で検証する。署名できるのは秘密鍵を持つ1人だけだが、確かめることは公開鍵を持つ誰にでもできる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="44" font-size="10.5">① 秘密にしたい ― 公開鍵で閉じ、秘密鍵で開く</text>
+        <rect x="30" y="64" width="100" height="38" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="80" y="88" font-size="11" text-anchor="middle">差出人</text>
+        <rect x="250" y="64" width="140" height="38" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="320" y="88" font-size="11" text-anchor="middle">暗号文</text>
+        <rect x="510" y="64" width="100" height="38" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="560" y="88" font-size="11" text-anchor="middle">受取人</text>
+        <line x1="132" y1="83" x2="246" y2="83" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <line x1="392" y1="83" x2="506" y2="83" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <text x="189" y="74" font-size="9" text-anchor="middle" class="muted">受取人の公開鍵で閉じる</text>
+        <text x="449" y="74" font-size="9" text-anchor="middle" class="muted">受取人の秘密鍵で開く</text>
+        <text x="610" y="120" font-size="9.5" text-anchor="end" class="muted">誰でも送れる／読めるのは1人だけ</text>
+
+        <text x="16" y="164" font-size="10.5" class="accent">② 本人だと示したい ― 秘密鍵で閉じ、公開鍵で開く</text>
+        <rect x="30" y="184" width="100" height="38" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="80" y="208" font-size="11" text-anchor="middle">差出人</text>
+        <rect x="250" y="184" width="140" height="38" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="320" y="208" font-size="11" text-anchor="middle">署名つきの文書</text>
+        <rect x="510" y="184" width="100" height="38" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="560" y="208" font-size="11" text-anchor="middle">受取人</text>
+        <line x1="132" y1="203" x2="246" y2="203" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <line x1="392" y1="203" x2="506" y2="203" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <text x="189" y="194" font-size="9" text-anchor="middle" class="muted">差出人の秘密鍵で署名する</text>
+        <text x="449" y="194" font-size="9" text-anchor="middle" class="muted">差出人の公開鍵で検証する</text>
+        <text x="610" y="240" font-size="9.5" text-anchor="end" class="accent">送れるのは1人だけ／確かめるのは誰でも</text>
+
+        <line x1="16" y1="262" x2="624" y2="262" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="284" font-size="10.5" class="muted">鍵ペアは同じでも、どちらで閉じるかで意味が反転する。公開鍵で閉じれば秘匿、秘密鍵で閉じれば本人の証明。</text>
+        <text x="16" y="306" font-size="10.5" class="accent">「秘密鍵で閉じられるのは本人だけ」― この一点だけで、署名も、証明書も、パスキーも成り立っている。</text>
+      </svg>
+    </div>
+  </body>
+</html>

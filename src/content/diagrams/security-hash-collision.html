@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="ハッシュの衝突が電子署名を壊す仕組みを示した図。左上に本来の文書、たとえばA社へ100万円と書かれた指示書があり、そのハッシュ値が中央に出る。左下には攻撃者が作った別の文書、A社へ1億円と書かれた指示書があり、見えない位置に調整用のデータを詰めることで、ハッシュ値を上の文書とまったく同じ値に一致させてある。署名は文書そのものではなく、この短いハッシュ値に対して秘密鍵で作られる。したがって値が同じなら、上の文書のために作られた署名を、下の別内容の文書にそのまま貼り替えられる。署名の検証は通り、受け取った側は改ざんに気づけない。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="58" width="200" height="56" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="120" y="82" font-size="10.5" text-anchor="middle">本来の指示書</text>
+        <text x="120" y="101" font-size="9.5" text-anchor="middle" class="muted">「A社へ100万円」</text>
+
+        <rect x="20" y="166" width="200" height="66" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="120" y="188" font-size="10.5" text-anchor="middle" class="accent">攻撃者が作った別の文書</text>
+        <text x="120" y="207" font-size="9.5" text-anchor="middle" class="muted">「A社へ1億円」</text>
+        <text x="120" y="224" font-size="8.5" text-anchor="middle" class="muted">+ 見えない位置に調整用のデータ</text>
+
+        <line x1="224" y1="88" x2="296" y2="130" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="224" y1="196" x2="296" y2="160" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <text x="252" y="110" font-size="8.5" class="muted">ハッシュ</text>
+        <text x="252" y="188" font-size="8.5" class="muted">ハッシュ</text>
+
+        <rect x="300" y="122" width="180" height="46" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="390" y="140" font-size="9.5" text-anchor="middle" class="muted">どちらも同じ値</text>
+        <text x="390" y="159" font-size="11" text-anchor="middle" class="mono accent">3f9a…</text>
+
+        <line x1="484" y1="145" x2="546" y2="145" stroke="var(--muted)" stroke-width="1.3" marker-end="url(#ar)" />
+        <text x="515" y="137" font-size="8.5" text-anchor="middle" class="muted">秘密鍵で署名</text>
+
+        <rect x="550" y="118" width="190" height="54" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="645" y="140" font-size="10.5" text-anchor="middle">電子署名</text>
+        <text x="645" y="159" font-size="9" text-anchor="middle" class="muted">値に対して作られる</text>
+
+        <text x="380" y="200" font-size="9.5" text-anchor="middle" class="muted">署名は文書ではなく、この短い値に対して作られている</text>
+        <text x="380" y="224" font-size="10.5" text-anchor="middle" class="accent">→ 値が同じなら、署名は別内容の文書にそのまま貼り替えられる</text>
+
+        <line x1="16" y1="248" x2="744" y2="248" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="270" font-size="10.5" class="muted">衝突耐性が失われると、署名も、改ざん検知も、証明書も、同時に信用できなくなる。</text>
+        <text x="16" y="292" font-size="10.5" class="accent">だから「まだ破られていない」ではなく「破られる前に次へ移る」が運用の姿勢になる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="IDORと呼ばれる認可不備を、確認する内容の違いで比べた図。左は、ログイン済みかどうかだけを確認する実装で、自分の注文である123番の取得も、他人の注文である124番の取得も、どちらも200で中身が返ってしまう。URLの数字を1つ変えるだけで他人のデータが見えるという事故がこれにあたる。右は、ログイン済みかどうかに加えて、その行の持ち主が本当にこの利用者かどうかまで確認する実装で、123番は200で返るが、124番は403で拒否される。ログイン済みであることは、そのデータを見てよい理由にはならない。"
+      >
+        <line x1="380" y1="30" x2="380" y2="230" stroke="var(--border)" stroke-width="1" />
+
+        <text x="196" y="46" font-size="10.5" text-anchor="middle" class="muted">ログイン済みかだけを見る</text>
+        <text x="576" y="46" font-size="10.5" text-anchor="middle" class="accent">その行の持ち主かも見る</text>
+
+        <text x="30" y="86" font-size="9.5" class="muted">ユーザーAでログイン中</text>
+        <text x="410" y="86" font-size="9.5" class="muted">ユーザーAでログイン中</text>
+
+        <rect x="30" y="102" width="190" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="125" y="124" font-size="10" text-anchor="middle" class="mono">GET /orders/123</text>
+        <rect x="240" y="102" width="112" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="296" y="124" font-size="10" text-anchor="middle">200 自分の注文</text>
+
+        <rect x="30" y="152" width="190" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="125" y="174" font-size="10" text-anchor="middle" class="mono accent">GET /orders/124</text>
+        <rect x="240" y="152" width="112" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="296" y="174" font-size="10" text-anchor="middle" class="accent">200 他人の注文</text>
+
+        <rect x="410" y="102" width="190" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="505" y="124" font-size="10" text-anchor="middle" class="mono">GET /orders/123</text>
+        <rect x="620" y="102" width="112" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="676" y="124" font-size="10" text-anchor="middle">200 自分の注文</text>
+
+        <rect x="410" y="152" width="190" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="505" y="174" font-size="10" text-anchor="middle" class="mono">GET /orders/124</text>
+        <rect x="620" y="152" width="112" height="34" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="676" y="174" font-size="10" text-anchor="middle" class="accent">403 拒否</text>
+
+        <text x="196" y="212" font-size="9.5" text-anchor="middle" class="accent">URLの数字を1つ変えるだけで、他人のデータが見える</text>
+        <text x="576" y="212" font-size="9.5" text-anchor="middle" class="muted">所有者の一致を毎回確かめている</text>
+
+        <line x1="16" y1="244" x2="744" y2="244" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="266" font-size="10.5" class="muted">この事故は正常系のテストでは見つからない。自分のIDでしか操作しない限り、画面は最後まで正しく動く。</text>
+        <text x="16" y="288" font-size="10.5" class="accent">ログイン済みであることは、そのデータを見てよい理由にならない。IDは書き換えられる前提で扱う。</text>
+      </svg>
+    </div>
+  </body>
+</html>

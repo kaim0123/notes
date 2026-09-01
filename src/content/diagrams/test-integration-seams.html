@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 320"
+        role="img"
+        aria-label="Integrationテストが担当する3つのつなぎ目と、そこでしか見つからない不具合を並べた図。1つ目はデータベースとのつなぎ目で、SQLの書き間違い、スキーマとコードのずれ、一意制約に触れたときの挙動、トランザクションの境界がここで表面化する。2つ目は外部サービスとのつなぎ目で、リクエストの組み立て方の誤り、レスポンス形式の解釈違い、エラーや timeout の扱いがここで表面化する。3つ目は自分たちのモジュール同士のつなぎ目で、投げる例外の型の食い違い、引数の意味の取り違え、nullを返すのか例外を投げるのかという約束のずれが表面化する。3つに共通するのは、どれも片側だけを見ていては絶対に分からないという点であり、両側を単体で完璧にテストしても、噛み合うかどうかは別問題として残る。"
+      >
+        <text x="16" y="28" font-size="11" class="muted">Unitで両側を完璧にしても、噛み合うかどうかは別問題として残る</text>
+
+        <rect x="16" y="44" width="608" height="72" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="66" font-size="10.5">自分のコード ←→ データベース</text>
+        <text x="30" y="86" font-size="9" class="muted">SQLの書き間違い / スキーマとコードのずれ / 一意制約に触れたときの挙動</text>
+        <text x="30" y="104" font-size="9" class="muted">トランザクションの境界 ― どこまでが一括りか</text>
+
+        <rect x="16" y="126" width="608" height="72" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="148" font-size="10.5">自分のコード ←→ 外部サービス</text>
+        <text x="30" y="168" font-size="9" class="muted">リクエストの組み立て方の誤り / レスポンス形式の解釈違い</text>
+        <text x="30" y="186" font-size="9" class="muted">エラー・タイムアウト・レート制限に当たったときの振る舞い</text>
+
+        <rect x="16" y="208" width="608" height="72" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="30" y="230" font-size="10.5" class="accent">自分のコード ←→ 自分のコード(モジュール同士)</text>
+        <text x="30" y="250" font-size="9" class="muted">投げる例外の型の食い違い / 引数の意味の取り違え</text>
+        <text x="30" y="268" font-size="9" class="muted">見つからないとき null を返すのか、例外を投げるのか ― 約束のずれ</text>
+
+        <text x="16" y="304" font-size="10.5" class="muted">3つ目は外部が絡まないため見落とされやすい。両側とも自分で書いたものでも、認識は食い違う。</text>
+      </svg>
+    </div>
+  </body>
+</html>

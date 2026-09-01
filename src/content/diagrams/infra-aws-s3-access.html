@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="保存したファイルを外部へ届ける2つの経路と、その安全性の違いを示した図。上の経路は保存先そのものを公開して利用者が直接読む形で、手軽だが公開範囲の設定を誤ると全部が読まれるうえ、誰がいつ読んだかの制御も効かない。下の経路は保存先を非公開のまま配信網だけに読み取りを許し、利用者は配信網を経由して受け取る形で、経路上でキャッシュも効き、限定した相手にだけ有効な期限付きのリンクを発行することもできる。原則として保存先は非公開のままにし、公開は配信の層で行う。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="20" y="28" font-size="12" class="muted">保存したファイルを、どう外へ届けるか</text>
+
+        <rect x="20" y="46" width="120" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="80" y="74" font-size="10.5" text-anchor="middle">利用者</text>
+        <line x1="146" y1="60" x2="380" y2="60" stroke="var(--muted)" marker-end="url(#ar)" />
+        <text x="263" y="50" font-size="9.5" text-anchor="middle" class="muted">直接読む</text>
+        <rect x="386" y="40" width="180" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="476" y="60" font-size="10.5" text-anchor="middle">保存先を公開する</text>
+        <text x="476" y="76" font-size="9" text-anchor="middle" class="muted">誰でも読める状態</text>
+        <text x="580" y="56" font-size="9.5" class="accent">設定を誤れば全部が読まれる</text>
+        <text x="580" y="74" font-size="9.5" class="muted">誰がいつ読んだかも絞れない</text>
+
+        <line x1="20" y1="112" x2="740" y2="112" stroke="var(--border)" stroke-dasharray="4 3" />
+
+        <rect x="20" y="140" width="120" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="80" y="168" font-size="10.5" text-anchor="middle">利用者</text>
+        <line x1="146" y1="154" x2="220" y2="154" stroke="var(--primary)" marker-end="url(#arp)" />
+        <rect x="226" y="134" width="160" height="46" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="306" y="154" font-size="10.5" text-anchor="middle">配信の層(CDN)</text>
+        <text x="306" y="170" font-size="9" text-anchor="middle" class="muted">キャッシュも効く</text>
+        <line x1="392" y1="154" x2="466" y2="154" stroke="var(--primary)" marker-end="url(#arp)" />
+        <text x="429" y="144" font-size="9" text-anchor="middle" class="muted">許可された読み取り</text>
+        <rect x="472" y="134" width="180" height="46" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="562" y="154" font-size="10.5" text-anchor="middle">保存先は非公開のまま</text>
+        <text x="562" y="170" font-size="9" text-anchor="middle" class="muted">配信の層だけが読める</text>
+
+        <rect x="20" y="204" width="720" height="76" rx="8" fill="none" stroke="var(--border)" />
+        <text x="36" y="228" font-size="10.5" class="accent">原則 ― 保存先は非公開のままにし、公開は配信の層で行う。</text>
+        <text x="36" y="250" font-size="10.5" class="muted">限定した相手にだけ渡したいときは、期限付きの署名済みリンクを発行する(その場だけ有効)。</text>
+        <text x="36" y="272" font-size="10.5" class="muted">公開範囲の設定ミスは、クラウドの情報漏えいの最大の原因 ― 既定で塞いでおく仕組みも使う。</text>
+      </svg>
+    </div>
+  </body>
+</html>

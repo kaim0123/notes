@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 320"
+        role="img"
+        aria-label="コードレビューの7つの観点を、コードの中身を深く理解していなくても確認できるかどうかで並べた図。上の4つは知識がなくても確認できる。名前を読んで意味が伝わるかという読みやすさ、スクロールせずに全体が見えるかという長さ、そっくりなかたまりが複数箇所にないかという重複、そしてコードをそのまま日本語にしただけでなく理由が書かれているかというコメント。この4つは、プログラミング言語の文法を知らなくても、日本語の文章を読むのと同じ感覚で確認できる。下の3つは一部だけ確認できる。異常系を考慮しているかというエラー処理、テストコードが付いているかというテスト、同じ値が何箇所にも直書きされていないかという保守性。これらは中身を完全に理解する必要はなく、それらしきコードが存在するかどうかを見るだけで一定の価値がある。書いた本人には見えなくなっている初見の分かりにくさを見つけるのに、専門知識は必須ではない。"
+      >
+        <text x="16" y="26" font-size="11" class="muted">「詳しくないから何も言えない」は、たいてい正しくない</text>
+
+        <text x="16" y="52" font-size="10.5" class="accent">知識がなくても確認できる ― 日本語の文章を読むのと同じ感覚で</text>
+
+        <rect x="16" y="60" width="668" height="38" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="30" y="84" font-size="10" class="accent">読みやすさ</text>
+        <text x="180" y="84" font-size="9" class="muted">名前を読んで意味が伝わるか。「a」「data2」「tmp」に引っかかれる</text>
+
+        <rect x="16" y="102" width="668" height="38" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="30" y="126" font-size="10" class="accent">長さ</text>
+        <text x="180" y="126" font-size="9" class="muted">スクロールせずに1つの関数が収まるか。長さだけは誰でも測れる</text>
+
+        <rect x="16" y="144" width="668" height="38" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="30" y="168" font-size="10" class="accent">重複</text>
+        <text x="180" y="168" font-size="9" class="muted">そっくりなかたまりが複数箇所にないか。片方だけ直す事故の温床</text>
+
+        <rect x="16" y="186" width="668" height="38" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="30" y="210" font-size="10" class="accent">コメント</text>
+        <text x="180" y="210" font-size="9" class="muted">「何を」ではなく「なぜ」が書かれているか。読んで納得できるか</text>
+
+        <text x="16" y="248" font-size="10.5" class="muted">存在するかどうかを見るだけで、一定の価値がある</text>
+
+        <rect x="16" y="256" width="216" height="38" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="30" y="272" font-size="10" class="muted">エラー処理</text>
+        <text x="30" y="288" font-size="8.5" class="muted">「ないこと」には気づける</text>
+
+        <rect x="242" y="256" width="216" height="38" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="256" y="272" font-size="10" class="muted">テスト</text>
+        <text x="256" y="288" font-size="8.5" class="muted">付いているかは確認できる</text>
+
+        <rect x="468" y="256" width="216" height="38" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="482" y="272" font-size="10" class="muted">保守性</text>
+        <text x="482" y="288" font-size="8.5" class="muted">同じ値の直書きに気づける</text>
+
+        <text x="16" y="314" font-size="10.5" class="muted">書いた本人には見えなくなっている「初見の分かりにくさ」を見つけるのに、専門知識は要らない。</text>
+      </svg>
+    </div>
+  </body>
+</html>

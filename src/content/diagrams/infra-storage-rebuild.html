@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 300"
+        role="img"
+        aria-label="RAID 5で1台が故障してから復旧するまでの危うさを示した図。1台が壊れた直後は、残ったディスクとパリティから計算して読み書きを続けられる縮退状態になる。交換したディスクへ内容を書き戻す再構築では、残る全ディスクを端から端まで読み切る必要があり、その間は負荷が高く、時間も容量に比例して長くなる。ちょうどこの時間帯に2台目が落ちると、RAID 5では全損する。容量が大きいほど再構築が長引き、その分だけ2台目が落ちる確率も上がるため、大容量ではパリティを2重にするRAID 6や、複製を組み合わせるRAID 10が選ばれる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="50" width="190" height="90" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="115" y="76" font-size="11.5" text-anchor="middle">正常</text>
+        <text x="115" y="98" font-size="9.5" text-anchor="middle" class="muted">3台でデータとパリティを</text>
+        <text x="115" y="114" font-size="9.5" text-anchor="middle" class="muted">分散して持っている</text>
+
+        <rect x="255" y="50" width="190" height="90" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="350" y="76" font-size="11.5" text-anchor="middle">1台が故障(縮退)</text>
+        <text x="350" y="98" font-size="9.5" text-anchor="middle" class="muted">残りとパリティから計算して</text>
+        <text x="350" y="114" font-size="9.5" text-anchor="middle" class="muted">読み書きは続けられる</text>
+
+        <rect x="490" y="50" width="190" height="90" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="585" y="76" font-size="11.5" text-anchor="middle">再構築</text>
+        <text x="585" y="98" font-size="9.5" text-anchor="middle" class="muted">交換したディスクへ書き戻す</text>
+        <text x="585" y="114" font-size="9.5" text-anchor="middle" class="accent">残る全ディスクを読み切る</text>
+
+        <line x1="214" y1="95" x2="250" y2="95" stroke="var(--muted)" marker-end="url(#ar)" />
+        <line x1="449" y1="95" x2="485" y2="95" stroke="var(--muted)" marker-end="url(#ar)" />
+
+        <rect x="490" y="164" width="190" height="66" rx="8" fill="none" stroke="var(--primary)" stroke-dasharray="5 4" />
+        <text x="585" y="188" font-size="10.5" text-anchor="middle" class="accent">この最中に2台目が落ちると</text>
+        <text x="585" y="208" font-size="10.5" text-anchor="middle" class="accent">RAID 5では全損する</text>
+        <line x1="585" y1="144" x2="585" y2="160" stroke="var(--primary)" marker-end="url(#arp)" />
+
+        <text x="20" y="186" font-size="10.5" class="muted">再構築にかかる時間は容量に比例して延びる。</text>
+        <text x="20" y="206" font-size="10.5" class="muted">その間ずっと高負荷で全ディスクを読むので、</text>
+        <text x="20" y="226" font-size="10.5" class="muted">2台目が落ちる確率も同時に上がる。</text>
+
+        <text x="20" y="266" font-size="10.5" class="muted">だから大容量では、パリティを2重にするRAID 6や、複製とストライピングを組み合わせた</text>
+        <text x="20" y="286" font-size="10.5" class="muted">RAID 10が選ばれる。冗長化の目的は「壊れても止めない」であって「戻せる」ではない。</text>
+      </svg>
+    </div>
+  </body>
+</html>

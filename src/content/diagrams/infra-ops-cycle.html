@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 300"
+        role="img"
+        aria-label="公開したサービスを育てるための繰り返しを示した図。まず利用状況を計測し、そこから何を直すかを決め、直したものを出し、出したあとの様子をまた計測する。この4つが時計回りに回り続ける。中央には、この輪とは別に常時走っている保守 ― 依存ライブラリの更新、証明書の更新、非推奨機能への追従 ― が置かれている。保守は成果が見えにくいため後回しにされやすいが、止めた瞬間から、ある日の全体障害として跳ね返ってくる性質を持つ。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="120" y="40" width="180" height="56" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="210" y="64" font-size="11.5" text-anchor="middle">計測する</text>
+        <text x="210" y="82" font-size="9.5" text-anchor="middle" class="muted">アクセス解析・利用状況・費用</text>
+
+        <rect x="400" y="40" width="180" height="56" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="490" y="64" font-size="11.5" text-anchor="middle">決める</text>
+        <text x="490" y="82" font-size="9.5" text-anchor="middle" class="muted">どこを直すと効くか</text>
+
+        <rect x="400" y="200" width="180" height="56" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="490" y="224" font-size="11.5" text-anchor="middle">直す</text>
+        <text x="490" y="242" font-size="9.5" text-anchor="middle" class="muted">速度・内容・費用・使い勝手</text>
+
+        <rect x="120" y="200" width="180" height="56" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="210" y="224" font-size="11.5" text-anchor="middle">出す</text>
+        <text x="210" y="242" font-size="9.5" text-anchor="middle" class="muted">デプロイして、また見る</text>
+
+        <line x1="304" y1="68" x2="396" y2="68" stroke="var(--muted)" marker-end="url(#ar)" />
+        <line x1="490" y1="100" x2="490" y2="196" stroke="var(--muted)" marker-end="url(#ar)" />
+        <line x1="396" y1="228" x2="304" y2="228" stroke="var(--muted)" marker-end="url(#ar)" />
+        <line x1="210" y1="196" x2="210" y2="100" stroke="var(--muted)" marker-end="url(#ar)" />
+
+        <rect x="250" y="122" width="200" height="52" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-dasharray="5 4" />
+        <text x="350" y="144" font-size="11" text-anchor="middle" class="accent">保守は常時走っている</text>
+        <text x="350" y="162" font-size="9.5" text-anchor="middle" class="muted">依存更新・証明書・非推奨対応</text>
+
+        <text x="20" y="286" font-size="10.5" class="muted">保守は成果が見えないので後回しにされやすい。止めた分は、ある日の全体障害としてまとめて返ってくる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

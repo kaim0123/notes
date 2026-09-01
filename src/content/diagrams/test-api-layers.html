@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 320"
+        role="img"
+        aria-label="層に分けて組み立てたバックエンドで、層ごとにテストの形が変わることを示した図。最も内側のドメインとユースケースの層は業務ルールを持ち、依存をすべて代役にしたUnitテストで確かめる。データベースもHTTPも起動しないので数ミリ秒で終わり、何百件書いても苦にならない。次のリポジトリの層はSQLとマッピングを持ち、本物のデータベースを使ったIntegrationテストでしか確かめられない。次のルーターとミドルウェアの層はステータスコード、入力検証、認証、エラー変換を持ち、サーバーを起動せずにHTTPリクエストを流し込むテストで確かめる。最も外側のAPI全体は、層がつながって動くことを本物のHTTPと本物のデータベースの両方を通して確かめるが、遅いので代表的な経路だけに絞る。内側ほど数を多く外側ほど絞る、という配分がここでも成り立つ。"
+      >
+        <text x="16" y="28" font-size="11" class="muted">層ごとに、確かめるものも、テストの形も変わる</text>
+
+        <rect x="16" y="42" width="668" height="56" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="30" y="64" font-size="10.5" class="accent">ドメイン・ユースケース ― 業務ルール</text>
+        <text x="30" y="84" font-size="9" class="muted">依存はすべて代役。DBもHTTPも起動しない。数ミリ秒で終わるので、何百件でも書ける</text>
+        <text x="560" y="64" font-size="10" class="accent">Unit</text>
+        <text x="560" y="84" font-size="9" class="muted">最も多い</text>
+
+        <rect x="16" y="108" width="668" height="56" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="130" font-size="10.5">リポジトリ ― SQLとマッピング</text>
+        <text x="30" y="150" font-size="9" class="muted">本物のDBでしか確かめられない。代役に置き換えた瞬間、この層のテストは無意味になる</text>
+        <text x="560" y="130" font-size="10" class="muted">Integration</text>
+        <text x="560" y="150" font-size="9" class="muted">本物のDB</text>
+
+        <rect x="16" y="174" width="668" height="56" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="196" font-size="10.5">ルーター・ミドルウェア ― 外に向けた振る舞い</text>
+        <text x="30" y="216" font-size="9" class="muted">ステータスコード / 入力検証 / 認証・認可 / エラー本文の形</text>
+        <text x="560" y="196" font-size="10" class="muted">HTTP</text>
+        <text x="560" y="216" font-size="9" class="muted">ポートは開かない</text>
+
+        <rect x="16" y="240" width="668" height="46" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="262" font-size="10.5">API全体 ― 層がつながって動くか</text>
+        <text x="30" y="279" font-size="9" class="muted">本物のHTTPと本物のDBを両方通す。遅いので、代表的な経路だけに絞る</text>
+        <text x="560" y="266" font-size="9" class="muted">最も少ない</text>
+
+        <text x="16" y="310" font-size="10.5" class="muted">内側ほど多く、外側ほど絞る ― ピラミッドの配分は、層の構造にもそのまま現れる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

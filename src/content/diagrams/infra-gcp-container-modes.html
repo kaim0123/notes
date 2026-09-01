@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 280"
+        role="img"
+        aria-label="マネージドなKubernetesの2つの運用方式を比べた図。1つ目は、コンテナが載るサーバー群を自分で用意して管理する方式で、台数や種類、詰め込み方まで細かく決められる代わりに、更新も空き容量の管理も自分の仕事になる。2つ目は、サーバー群の存在ごと事業者に任せる方式で、要求した資源の分だけを払い、更新や台数の調整は肩代わりされる。細かい制御と引き換えに運用の手が空くため、Kubernetesの語彙は使いたいがクラスタの面倒は見たくない場合に向く。どちらを選んでも、書くマニフェストはほぼ同じになる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="46" width="320" height="170" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="180" y="74" font-size="11.5" text-anchor="middle">サーバー群を自分で持つ</text>
+        <rect x="40" y="90" width="280" height="30" rx="6" fill="none" stroke="var(--border)" />
+        <text x="180" y="110" font-size="9.5" text-anchor="middle" class="muted">台数・種類・詰め込み方を決められる</text>
+        <rect x="40" y="126" width="280" height="30" rx="6" fill="none" stroke="var(--border)" />
+        <text x="180" y="146" font-size="9.5" text-anchor="middle" class="muted">更新も空き容量の管理も自分の仕事</text>
+        <text x="180" y="180" font-size="10" text-anchor="middle" class="accent">詰め込めるほど単価は下がる</text>
+        <text x="180" y="202" font-size="9.5" text-anchor="middle" class="muted">規模が大きいほど効いてくる</text>
+
+        <rect x="360" y="46" width="320" height="170" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="520" y="74" font-size="11.5" text-anchor="middle">サーバー群ごと任せる</text>
+        <rect x="380" y="90" width="280" height="30" rx="6" fill="none" stroke="var(--border)" />
+        <text x="520" y="110" font-size="9.5" text-anchor="middle" class="muted">要求した資源の分だけ払う</text>
+        <rect x="380" y="126" width="280" height="30" rx="6" fill="none" stroke="var(--border)" />
+        <text x="520" y="146" font-size="9.5" text-anchor="middle" class="muted">更新も台数の調整も肩代わりされる</text>
+        <text x="520" y="180" font-size="10" text-anchor="middle" class="accent">クラスタの面倒を見なくてよい</text>
+        <text x="520" y="202" font-size="9.5" text-anchor="middle" class="muted">細かい制御は効かない</text>
+
+        <text x="20" y="252" font-size="10.5" class="muted">どちらでも、書くマニフェストはほぼ同じ ― 変わるのは「クラスタを誰が面倒見るか」だけ。</text>
+        <text x="20" y="272" font-size="10.5" class="muted">語彙は使いたいがクラスタ運用は持ちたくない、という場合は右から始める。</text>
+      </svg>
+    </div>
+  </body>
+</html>

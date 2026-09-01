@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 340"
+        role="img"
+        aria-label="TLSが公開鍵暗号と共通鍵暗号を組み合わせて使う流れを、ブラウザとサーバーの2本の縦線として示した図。まずブラウザがサーバーへ接続を求める。次にサーバーが公開鍵の入った証明書を返す。ブラウザはその証明書を検証したうえで、共通鍵のもとを公開鍵で包んで送る。ここまでが公開鍵暗号の出番である。以降の本文のやり取りは、共有された共通鍵だけで双方向に暗号化される。公開鍵の計算は重いため、鍵を渡す最初の一瞬にだけ使い、量の多い本文は速い共通鍵に任せる、という役割分担になっている。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="80" y="36" width="120" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="140" y="58" font-size="11" text-anchor="middle">ブラウザ</text>
+        <rect x="440" y="36" width="120" height="34" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="500" y="58" font-size="11" text-anchor="middle">サーバー</text>
+        <line x1="140" y1="70" x2="140" y2="266" stroke="var(--border)" stroke-width="1.1" />
+        <line x1="500" y1="70" x2="500" y2="266" stroke="var(--border)" stroke-width="1.1" />
+
+        <text x="320" y="98" font-size="9.5" text-anchor="middle" class="muted">つなぎたい</text>
+        <line x1="142" y1="108" x2="496" y2="108" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <text x="320" y="138" font-size="9.5" text-anchor="middle" class="muted">公開鍵の入った証明書を返す</text>
+        <line x1="498" y1="148" x2="144" y2="148" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+
+        <text x="320" y="178" font-size="9.5" text-anchor="middle" class="accent">証明書を確かめ、共通鍵のもとを公開鍵で包んで送る</text>
+        <line x1="142" y1="188" x2="496" y2="188" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+
+        <line x1="140" y1="206" x2="500" y2="206" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4" />
+        <text x="320" y="226" font-size="9.5" text-anchor="middle" class="muted">ここから先は、共有できた共通鍵だけで足りる</text>
+        <line x1="144" y1="240" x2="496" y2="240" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <line x1="496" y1="252" x2="144" y2="252" stroke="var(--primary)" stroke-width="1.3" marker-end="url(#arp)" />
+        <text x="320" y="272" font-size="9.5" text-anchor="middle" class="accent">本文のやり取り(速い)</text>
+
+        <line x1="16" y1="288" x2="624" y2="288" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="310" font-size="10.5" class="muted">公開鍵の計算は重い。だから通信のすべてを公開鍵で暗号化するのではなく、最初の鍵渡しだけに使う。</text>
+        <text x="16" y="332" font-size="10.5" class="accent">TLSは「どちらが優れているか」ではなく「どちらをどこで使うか」の設計。両方が要る。</text>
+      </svg>
+    </div>
+  </body>
+</html>

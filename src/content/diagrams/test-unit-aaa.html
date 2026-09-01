@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 310"
+        role="img"
+        aria-label="1件のUnitテストの構造を示した図。最上部にテスト名の欄があり、対象と条件と期待結果の3要素を名前に含めることで、失敗したログだけで当たりがつくようになる。その下に3つの段が縦に並ぶ。1段目はArrangeで、テストデータと依存をそろえる準備の段。ここが10行を超えるようなら、テストの書き方ではなく対象の設計を疑う。2段目はActで、テスト対象を1回だけ呼ぶ実行の段。3段目はAssertで、1つの関心事について確かめる検証の段であり、関連する複数の値をまとめて確かめるのは構わないが、無関係な検証を同じテストに詰め込まない。3段に分けて空行で区切るだけで、そのテストが何を保証しているのかが読んで分かるようになる。"
+      >
+        <text x="16" y="26" font-size="11" class="muted">1件のテストは、名前と3つの段でできている</text>
+
+        <rect x="16" y="40" width="608" height="48" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="62" font-size="10.5">テスト名 ― 「税率10%のとき、税込み価格が返る」</text>
+        <text x="30" y="80" font-size="9" class="muted">対象 / 条件 / 期待結果 の3要素を含める。失敗ログだけで当たりがつく</text>
+
+        <rect x="16" y="100" width="608" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="122" font-size="10.5">Arrange ― 準備</text>
+        <text x="30" y="141" font-size="9" class="muted">テストデータと依存をそろえる。ここが10行を超えたら、テストではなく対象の設計を疑う</text>
+
+        <rect x="16" y="162" width="608" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="184" font-size="10.5">Act ― 実行</text>
+        <text x="30" y="203" font-size="9" class="muted">テスト対象を1回だけ呼ぶ。ここが複数行になるなら、確かめたいことが2つ混ざっている</text>
+
+        <rect x="16" y="224" width="608" height="52" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="30" y="246" font-size="10.5" class="accent">Assert ― 検証</text>
+        <text x="30" y="265" font-size="9" class="muted">1つの関心事について確かめる。関連する値をまとめるのは可、無関係な検証を混ぜるのは不可</text>
+
+        <text x="16" y="300" font-size="10.5" class="muted">3段に分けて空行で区切るだけで、そのテストが何を保証しているのかが読んで分かるようになる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="Google Cloudで処理を動かす4つの方法を、自分で面倒を見る範囲の広い順に階段として並べた図。いちばん下のCompute EngineはVMを丸ごと預かるためOSの更新まで自分の仕事になり、そのぶん何でも動かせる。GKEはKubernetesのクラスタを扱い、コンテナの配置や台数を宣言で管理する。Cloud Runはコンテナを置くだけで実行とスケールを任せられ、リクエストが無い間はゼロまで縮む。Cloud Functionsは関数1つから動かせるが、実行時間や起動の癖といった制約を受け入れることになる。上へ行くほど運用は軽くなり、下へ行くほど自由が利く。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="40" y="220" width="620" height="52" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="56" y="242" font-size="11.5">Compute Engine ― 仮想マシン</text>
+        <text x="56" y="260" font-size="10" class="muted">OSの更新もミドルウェアの導入も自分の仕事。何でも動かせる。</text>
+
+        <rect x="90" y="160" width="570" height="52" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="106" y="182" font-size="11.5">GKE ― Kubernetesクラスタ</text>
+        <text x="106" y="200" font-size="10" class="muted">望ましい状態を宣言し、配置と台数の維持を任せる。土台の面倒は残る。</text>
+
+        <rect x="140" y="100" width="520" height="52" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="156" y="122" font-size="11.5">Cloud Run ― コンテナを置くだけ</text>
+        <text x="156" y="140" font-size="10" class="muted">実行とスケールを任せ、リクエストが無い間はゼロまで縮む。</text>
+
+        <rect x="190" y="40" width="470" height="52" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="206" y="62" font-size="11.5">Cloud Functions ― 関数1つ</text>
+        <text x="206" y="80" font-size="10" class="muted">最も手軽な代わりに、実行時間や起動の癖という制約を受け入れる。</text>
+
+        <line x1="22" y1="264" x2="22" y2="48" stroke="var(--primary)" marker-end="url(#arp)" />
+        <text x="14" y="180" font-size="10.5" text-anchor="middle" class="accent" transform="rotate(-90 14 180)">自分で見る範囲が減る →</text>
+      </svg>
+    </div>
+  </body>
+</html>

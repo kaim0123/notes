@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 320"
+        role="img"
+        aria-label="開発の工程に沿って6種類のレビューを並べ、その下に欠陥を見つけたときの修正コストを棒グラフで重ねた図。上段には左から順に、要件レビュー、設計レビュー、コードレビュー、テストケースレビュー、ドキュメントレビュー、リリースレビューが並ぶ。その下の軸には対応する工程として、要件定義、設計、実装、テスト、受入準備、リリースが並ぶ。下段の棒グラフは左から右へ一貫して高くなり、同じ欠陥でも見つかる工程が遅いほど修正コストが跳ね上がることを示している。左端の要件レビューと設計レビューだけが強調されており、ここを厚くするほど右側のコストが減るという、シフトレフトの考え方が図の下部に記されている。"
+      >
+        <text x="19" y="26" font-size="11" class="muted">同じ欠陥でも、見つかる工程が遅いほど修正は高くつく</text>
+
+        <rect x="19" y="40" width="112" height="36" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="75" y="63" font-size="9.5" text-anchor="middle" class="accent">要件レビュー</text>
+
+        <rect x="141" y="40" width="112" height="36" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="197" y="63" font-size="9.5" text-anchor="middle" class="accent">設計レビュー</text>
+
+        <rect x="263" y="40" width="112" height="36" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="319" y="63" font-size="9.5" text-anchor="middle" class="muted">コードレビュー</text>
+
+        <rect x="385" y="40" width="112" height="36" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="441" y="63" font-size="9" text-anchor="middle" class="muted">テストケースレビュー</text>
+
+        <rect x="507" y="40" width="112" height="36" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="563" y="63" font-size="9" text-anchor="middle" class="muted">ドキュメントレビュー</text>
+
+        <rect x="629" y="40" width="112" height="36" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="685" y="63" font-size="9.5" text-anchor="middle" class="muted">リリースレビュー</text>
+
+        <line x1="19" y1="96" x2="741" y2="96" stroke="var(--border)" stroke-width="1" />
+        <text x="75" y="114" font-size="9.5" text-anchor="middle" class="muted">要件定義</text>
+        <text x="197" y="114" font-size="9.5" text-anchor="middle" class="muted">設計</text>
+        <text x="319" y="114" font-size="9.5" text-anchor="middle" class="muted">実装</text>
+        <text x="441" y="114" font-size="9.5" text-anchor="middle" class="muted">テスト</text>
+        <text x="563" y="114" font-size="9.5" text-anchor="middle" class="muted">受入準備</text>
+        <text x="685" y="114" font-size="9.5" text-anchor="middle" class="muted">リリース</text>
+
+        <rect x="55" y="222" width="40" height="10" rx="3" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="177" y="214" width="40" height="18" rx="3" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="299" y="202" width="40" height="30" rx="3" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="421" y="184" width="40" height="48" rx="3" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="543" y="160" width="40" height="72" rx="3" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <rect x="665" y="132" width="40" height="100" rx="3" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+
+        <line x1="19" y1="232" x2="741" y2="232" stroke="var(--border)" stroke-width="1" />
+        <text x="19" y="252" font-size="9.5" class="muted">見つけたときの修正コスト</text>
+
+        <line x1="19" y1="266" x2="741" y2="266" stroke="var(--border)" stroke-width="1" />
+        <text x="19" y="286" font-size="10.5" class="accent">左の2つを厚くするほど、右側の棒は低くなる。これがシフトレフトの実体。</text>
+        <text x="19" y="308" font-size="10.5" class="muted">レビューの種類(厳格さ)と対象(工程)は別の軸。重要な判断ほど厳格に、日常の実装は軽く使い分ける。</text>
+      </svg>
+    </div>
+  </body>
+</html>

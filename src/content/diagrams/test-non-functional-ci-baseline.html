@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 320"
+        role="img"
+        aria-label="見た目の差分を検出する仕組みが不安定になる3つの原因と、それぞれの対処を並べた図。1つ目は環境の違いで、手元のパソコンとCIではフォントの描画が異なるため、実際には壊れていないのに差分が出る。対処は、基準画像の生成と更新を必ずCIと同じ環境で行うこと。2つ目は毎回変わる要素で、日時や広告やランダムな画像が入っていると常に差分が出続ける。対処は、変わることが分かっている領域を比較の対象から外し、意味のある差分だけを残すこと。3つ目は対象の広げすぎで、すべての画面を比較すると更新の手間と差分を見る負荷が跳ね上がり、やがて中身を見ずに承認するようになる。対処は、崩れたときの影響が大きい画面に絞ること。3つとも放置すると同じ結末に至る ― 差分が出ても誰も見なくなり、本物の崩れがそのまま承認される。"
+      >
+        <text x="16" y="26" font-size="11" class="muted">見た目の比較は、放っておくと必ず「常に差分が出る」状態になる</text>
+
+        <rect x="16" y="42" width="290" height="72" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="64" font-size="10">環境の違い</text>
+        <text x="30" y="84" font-size="9" class="muted">手元とCIではフォントの描画が異なる</text>
+        <text x="30" y="102" font-size="9" class="muted">壊れていないのに差分が出る</text>
+
+        <rect x="334" y="42" width="290" height="72" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="348" y="64" font-size="10" class="accent">対処</text>
+        <text x="348" y="84" font-size="9" class="muted">基準画像の生成と更新を、必ず</text>
+        <text x="348" y="102" font-size="9" class="muted">CIと同じ環境で行う</text>
+
+        <rect x="16" y="126" width="290" height="72" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="148" font-size="10">毎回変わる要素</text>
+        <text x="30" y="168" font-size="9" class="muted">日時・広告・ランダムな画像</text>
+        <text x="30" y="186" font-size="9" class="muted">常に差分が出続ける</text>
+
+        <rect x="334" y="126" width="290" height="72" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="348" y="148" font-size="10" class="accent">対処</text>
+        <text x="348" y="168" font-size="9" class="muted">変わると分かっている領域を</text>
+        <text x="348" y="186" font-size="9" class="muted">比較対象から外す</text>
+
+        <rect x="16" y="210" width="290" height="72" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="30" y="232" font-size="10">対象の広げすぎ</text>
+        <text x="30" y="252" font-size="9" class="muted">全画面を比較すると更新の手間と</text>
+        <text x="30" y="270" font-size="9" class="muted">差分を見る負荷が跳ね上がる</text>
+
+        <rect x="334" y="210" width="290" height="72" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="348" y="232" font-size="10" class="accent">対処</text>
+        <text x="348" y="252" font-size="9" class="muted">崩れたときの影響が大きい画面</text>
+        <text x="348" y="270" font-size="9" class="muted">に絞る</text>
+
+        <text x="16" y="308" font-size="10.5" class="accent">3つとも放置すれば同じ結末 ― 誰も差分を見なくなり、本物の崩れがそのまま承認される。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="同じ名前への問い合わせに対して、どのアドレスを返すかを決める4つの方針を並べた図。単純な方針は常に同じ宛先を返す。重みづけの方針は割合を決めて振り分けるので、新しい版へ少しずつ流す使い方ができる。遅延で選ぶ方針は、問い合わせ元から見て最も近い拠点の宛先を返す。切り替えの方針は、主系の健全性を監視しておき、応答しなくなったときだけ待機系の宛先を返す。いずれも名前解決の段階で宛先が決まるため、切り替わりの速さは応答の保持時間に左右される。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="40" width="350" height="106" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="40" y="64" font-size="11">単純 ― いつも同じ宛先</text>
+        <text x="40" y="86" font-size="9.5" class="muted">1つのアドレスを返すだけ。ほとんどの用途はこれで足りる</text>
+        <text x="40" y="112" font-size="9.5" class="muted">複数書くと順不同で返る(振り分けの制御はできない)</text>
+
+        <rect x="390" y="40" width="350" height="106" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="410" y="64" font-size="11">重みづけ ― 割合で振り分ける</text>
+        <text x="410" y="86" font-size="9.5" class="muted">9対1のように比率を決めて返し分ける</text>
+        <text x="410" y="112" font-size="9.5" class="accent">新しい版へ少しずつ流す切り替えに使える</text>
+
+        <rect x="20" y="160" width="350" height="106" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="40" y="184" font-size="11">遅延で選ぶ ― 近いほうを返す</text>
+        <text x="40" y="206" font-size="9.5" class="muted">問い合わせ元から見て速く届く拠点の宛先を返す</text>
+        <text x="40" y="232" font-size="9.5" class="muted">複数リージョンに同じものを置いているときに効く</text>
+
+        <rect x="390" y="160" width="350" height="106" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="410" y="184" font-size="11">切り替え ― 落ちたら待機系へ</text>
+        <text x="410" y="206" font-size="9.5" class="muted">主系の健全性を監視し、応答しなくなったら宛先を変える</text>
+        <text x="410" y="232" font-size="9.5" class="accent">切り替わりの速さは、応答の保持時間しだい</text>
+
+        <text x="20" y="290" font-size="10.5" class="muted">共通の注意 ― 宛先は名前解決の段階で決まる。保持時間を長くしていると、切り替えても古い宛先を使い続けられる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

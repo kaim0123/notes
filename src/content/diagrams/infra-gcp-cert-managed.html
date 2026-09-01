@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 260"
+        role="img"
+        aria-label="証明書を負荷分散の入口に紐づけて使う構成を示した図。証明書そのものは独立した資源として管理され、どのドメインにどの証明書を使うかという対応表を介して入口に結び付けられる。この形にしておくと、ドメインを追加するときは対応表に1行足すだけで済み、入口の設定を作り直す必要がない。所有の確認と期限前の更新は自動で行われるため、人が触るのは対応表だけになる。証明書を直接入口に埋め込む方式に比べ、増減が多い環境ほど管理が軽くなる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="70" width="150" height="60" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="95" y="94" font-size="10.5" text-anchor="middle">証明書</text>
+        <text x="95" y="114" font-size="9" text-anchor="middle" class="muted">独立した資源として持つ</text>
+        <rect x="20" y="146" width="150" height="60" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="95" y="170" font-size="10.5" text-anchor="middle">証明書</text>
+        <text x="95" y="190" font-size="9" text-anchor="middle" class="muted">ドメインごとに用意</text>
+
+        <line x1="176" y1="100" x2="236" y2="124" stroke="var(--muted)" marker-end="url(#ar)" />
+        <line x1="176" y1="176" x2="236" y2="152" stroke="var(--muted)" marker-end="url(#ar)" />
+
+        <rect x="242" y="98" width="200" height="80" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="342" y="124" font-size="10.5" text-anchor="middle">対応表</text>
+        <text x="342" y="146" font-size="9" text-anchor="middle" class="muted">どのドメインに</text>
+        <text x="342" y="162" font-size="9" text-anchor="middle" class="muted">どの証明書を使うか</text>
+
+        <line x1="448" y1="138" x2="508" y2="138" stroke="var(--primary)" marker-end="url(#arp)" />
+
+        <rect x="514" y="108" width="166" height="60" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="597" y="132" font-size="10.5" text-anchor="middle">入口(負荷分散)</text>
+        <text x="597" y="152" font-size="9" text-anchor="middle" class="muted">ここに1つ紐づける</text>
+
+        <text x="20" y="228" font-size="10.5" class="accent">ドメインを追加するときは、対応表に1行足すだけ ― 入口の設定は作り直さない。</text>
+        <text x="20" y="248" font-size="10.5" class="muted">所有の確認と期限前の更新は自動。人が触るのは対応表だけになる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

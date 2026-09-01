@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 310"
+        role="img"
+        aria-label="情報セキュリティポリシーの文書3階層を、上ほど狭く下ほど広い3段の台形として示した図。最上段は基本方針で、なぜ守るのか、誰が責任を持つのかを書く。経営層が承認し、数年に一度しか変わらない。中段は対策基準で、何をどこまでやるかの基準を書く。セキュリティ責任者が定め、年に一度は見直す。最下段は実施手順で、手順書・チェックリスト・設定値といった具体を書く。現場が書き、現場が回し、随時更新される。上へ行くほど抽象的で変わりにくく、下へ行くほど具体的で変わりやすい。"
+      >
+        <polygon points="200,68 360,68 380,120 180,120" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <polygon points="180,124 380,124 400,178 160,178" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <polygon points="160,182 400,182 420,236 140,236" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+
+        <text x="280" y="92" font-size="12" text-anchor="middle">基本方針</text>
+        <text x="280" y="110" font-size="9" text-anchor="middle" class="muted">なぜ守るか・誰が責任を持つか</text>
+        <text x="280" y="148" font-size="12" text-anchor="middle">対策基準</text>
+        <text x="280" y="167" font-size="9" text-anchor="middle" class="muted">何をどこまでやるかの基準</text>
+        <text x="280" y="206" font-size="12" text-anchor="middle">実施手順</text>
+        <text x="280" y="225" font-size="9" text-anchor="middle" class="muted">手順書・チェックリスト・設定値</text>
+
+        <text x="120" y="98" font-size="10" text-anchor="end" class="muted">何を守るか</text>
+        <text x="120" y="156" font-size="10" text-anchor="end" class="muted">どう守るか</text>
+        <text x="120" y="214" font-size="10" text-anchor="end" class="muted">どう操作するか</text>
+
+        <text x="440" y="88" font-size="9.5" class="muted">経営層が承認する</text>
+        <text x="440" y="106" font-size="9.5" class="muted">数年に一度しか変わらない</text>
+        <text x="440" y="146" font-size="9.5" class="muted">責任者が定める</text>
+        <text x="440" y="164" font-size="9.5" class="muted">年に一度は見直す</text>
+        <text x="440" y="204" font-size="9.5" class="accent">現場が書き、現場が回す</text>
+        <text x="440" y="222" font-size="9.5" class="muted">随時更新される</text>
+
+        <line x1="16" y1="256" x2="624" y2="256" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="278" font-size="10.5" class="muted">階層を分ける理由は、変わる速さが違うから。パスワードの桁数を基本方針に書くと、桁数を変えるたびに経営層の承認が要る。</text>
+        <text x="16" y="300" font-size="10.5" class="accent">上は変わらないことに、下は変えやすいことに責任を持つ。守れない手順書は、書いた瞬間から嘘になる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

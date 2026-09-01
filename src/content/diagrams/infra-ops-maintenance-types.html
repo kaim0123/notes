@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 280"
+        role="img"
+        aria-label="リリース後に手を入れる作業を目的で4つに分けた図。1つ目は不具合を直す修正で、見つかった問題への対応にあたる。2つ目は環境の変化への追従で、依存の更新や動作環境の変化に合わせる作業を指す。3つ目は改善で、使い勝手や性能を良くする変更にあたる。4つ目は予防で、いま困っていないが将来の問題を減らすための整理や作り直しを指す。急ぎで目立つのは最初の2つだが、4つ目を止めると3つ目の速度が落ち、やがて最初の2つが増える。どれか1つに偏らせないことが、長く動かすための条件になる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="46" width="350" height="88" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="40" y="70" font-size="11">1. 直す ― 不具合への対応</text>
+        <text x="40" y="92" font-size="9.5" class="muted">見つかった問題を修正する</text>
+        <text x="40" y="114" font-size="9" class="accent">急ぎで、目立つ</text>
+
+        <rect x="390" y="46" width="350" height="88" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="410" y="70" font-size="11">2. 追従する ― 環境の変化へ</text>
+        <text x="410" y="92" font-size="9.5" class="muted">依存の更新、動作環境の変化に合わせる</text>
+        <text x="410" y="114" font-size="9" class="accent">やらないと、ある日まとめて来る</text>
+
+        <rect x="20" y="148" width="350" height="88" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="40" y="172" font-size="11">3. 良くする ― 改善</text>
+        <text x="40" y="194" font-size="9.5" class="muted">使い勝手・性能・運用のしやすさ</text>
+        <text x="40" y="216" font-size="9" class="muted">価値を増やす側の仕事</text>
+
+        <rect x="390" y="148" width="350" height="88" rx="10" fill="var(--card)" stroke="var(--border)" />
+        <text x="410" y="172" font-size="11">4. 備える ― 予防</text>
+        <text x="410" y="194" font-size="9.5" class="muted">整理・作り直し・テストの追加</text>
+        <text x="410" y="216" font-size="9" class="accent">止めると、3の速度が落ち、1が増える</text>
+
+        <text x="20" y="264" font-size="10.5" class="muted">目立つのは上の2つ。だが下の2つを削り続けると、上の2つが増え続ける。</text>
+      </svg>
+    </div>
+  </body>
+</html>

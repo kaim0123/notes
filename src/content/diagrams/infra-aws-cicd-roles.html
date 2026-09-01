@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 260"
+        role="img"
+        aria-label="自動化を2つの役割に分けて捉える図。片方は実行エンジンで、決められた手順どおりにビルドやテストを走らせる。使い捨ての環境が用意され、手順書に書いたコマンドが順に実行され、成果物が出て環境は捨てられる。もう片方は調整役で、どの順番で何を動かすか、どこで人の承認を挟むか、失敗したらどこで止めるかという流れ全体を管理する。実行エンジンは1つの箱の中の話、調整役は箱と箱のつなぎ方の話であり、役割を分けておくと、実行の中身を変えても流れは変わらず、流れを変えても実行の中身は変わらない。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="50" width="310" height="140" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="175" y="78" font-size="11.5" text-anchor="middle">実行エンジン</text>
+        <text x="175" y="100" font-size="9.5" text-anchor="middle" class="muted">1つの箱の中で、手順どおりに走らせる</text>
+        <rect x="40" y="112" width="270" height="28" rx="6" fill="none" stroke="var(--border)" />
+        <text x="175" y="131" font-size="9.5" text-anchor="middle" class="muted">環境を用意 → コマンドを実行 → 成果物を出す</text>
+        <rect x="40" y="146" width="270" height="28" rx="6" fill="none" stroke="var(--border)" />
+        <text x="175" y="165" font-size="9.5" text-anchor="middle" class="muted">終われば環境は捨てられる</text>
+
+        <rect x="370" y="50" width="310" height="140" rx="10" fill="var(--card)" stroke="var(--primary)" />
+        <text x="525" y="78" font-size="11.5" text-anchor="middle">調整役</text>
+        <text x="525" y="100" font-size="9.5" text-anchor="middle" class="muted">箱と箱のつなぎ方を管理する</text>
+        <rect x="390" y="112" width="270" height="28" rx="6" fill="none" stroke="var(--border)" />
+        <text x="525" y="131" font-size="9.5" text-anchor="middle" class="muted">どの順番で / どこで人が承認するか</text>
+        <rect x="390" y="146" width="270" height="28" rx="6" fill="none" stroke="var(--border)" />
+        <text x="525" y="165" font-size="9.5" text-anchor="middle" class="muted">失敗したらどこで止めるか</text>
+
+        <text x="20" y="222" font-size="10.5" class="accent">役割を分けておくと、実行の中身を変えても流れは変わらず、流れを変えても中身は変わらない。</text>
+        <text x="20" y="244" font-size="10.5" class="muted">どちらか一方に寄せると、片方を触るたびにもう片方まで壊れる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

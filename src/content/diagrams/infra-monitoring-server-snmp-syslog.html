@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 260"
+        role="img"
+        aria-label="ネットワーク機器から情報を集める2つの向きを示した図。SNMPは監視サーバーの側から機器へ定期的に問い合わせて、CPU使用率やポートごとの通信量といった数値を取得する。重大な異常があるときだけ機器の側から通知を送るトラップという例外もある。Syslogは逆向きで、機器の側から監視サーバーへ、いつ何が起きたかというテキストのイベントを送りつける。数値の推移を追うのがSNMP、出来事の記録を集めるのがSyslogという役割分担になり、両方を1か所へ集約して初めて多数の機器の状態を把握できる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <rect x="30" y="80" width="170" height="60" rx="8" fill="var(--card)" stroke="var(--primary)" />
+        <text x="115" y="106" font-size="11.5" text-anchor="middle">監視サーバー</text>
+        <text x="115" y="124" font-size="9.5" text-anchor="middle" class="muted">1か所に集約する</text>
+
+        <rect x="500" y="80" width="170" height="60" rx="8" fill="var(--card)" stroke="var(--border)" />
+        <text x="585" y="106" font-size="11.5" text-anchor="middle">ルーター・スイッチ</text>
+        <text x="585" y="124" font-size="9.5" text-anchor="middle" class="muted">アプリを入れられない機器</text>
+
+        <line x1="204" y1="96" x2="496" y2="96" stroke="var(--primary)" marker-end="url(#arp)" />
+        <text x="350" y="86" font-size="10.5" text-anchor="middle" class="accent">SNMP ― 取りに行く(定期的に問い合わせ)</text>
+        <text x="350" y="66" font-size="9.5" text-anchor="middle" class="muted">CPU使用率・ポートごとの通信量・回線の状態</text>
+
+        <line x1="496" y1="126" x2="204" y2="126" stroke="var(--muted)" marker-end="url(#ar)" />
+        <text x="350" y="146" font-size="10.5" text-anchor="middle" class="muted">Syslog ― 送られてくる(機器が能動的に)</text>
+        <text x="350" y="166" font-size="9.5" text-anchor="middle" class="muted">再起動した・回線が落ちた、という出来事の記録</text>
+
+        <rect x="30" y="184" width="640" height="56" rx="8" fill="none" stroke="var(--border)" />
+        <text x="46" y="206" font-size="10.5" class="muted">数値の推移を追うのがSNMP、出来事の記録を集めるのがSyslog ― メトリクスとログの関係が、機器の世界でも同じ形で現れる。</text>
+        <text x="46" y="228" font-size="10.5" class="muted">重大な異常だけは、機器の側から即座に通知する仕組み(トラップ)もある。</text>
+      </svg>
+    </div>
+  </body>
+</html>

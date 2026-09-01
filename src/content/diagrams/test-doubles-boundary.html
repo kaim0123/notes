@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 640 330"
+        role="img"
+        aria-label="テストで何を代役に置き換えてよいかの境界を、入れ子の3層で示した図。最も外側の層は置き換えるべきもので、外部API、決済、メール送信、現在時刻、乱数、識別子の生成が入る。いずれも自分たちで制御できず、遅かったり課金が発生したり実行のたびに変わったりするため、代役に置き換える。中間の層は自分たちのデータベースで、できれば本物を使う。代役にするとSQLが間違っていてもテストは緑になるため、代役に置き換えた瞬間その層のテストは意味を失う。最も内側の層は自分たちのドメインロジックと、値オブジェクトや純粋関数で、ここは置き換えない。それこそが検証対象であり、純粋なものはそのまま使うほうが速く正確だから。置き換えの原則は、制御できないものだけを置き換えるという一点に尽きる。"
+      >
+        <text x="16" y="28" font-size="11" class="muted">原則は1つ ― 制御できないものだけを置き換える</text>
+
+        <rect x="16" y="40" width="608" height="214" rx="8" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="30" y="62" font-size="11" class="accent">置き換える ― 自分たちで制御できないもの</text>
+        <text x="30" y="80" font-size="9" class="muted">外部API・決済・メール送信 / 現在時刻・乱数・IDの生成</text>
+
+        <rect x="44" y="88" width="552" height="150" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="58" y="110" font-size="11">できれば本物 ― 自分たちのデータベース</text>
+        <text x="58" y="128" font-size="9" class="muted">代役にすると、SQLが間違っていてもテストは緑になる</text>
+
+        <rect x="72" y="136" width="496" height="88" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="86" y="158" font-size="11">置き換えない ― 自分たちのドメインロジック</text>
+        <text x="86" y="178" font-size="9" class="muted">それこそが検証対象。ここを代役にしたら、何も確かめていない</text>
+        <text x="86" y="198" font-size="9" class="muted">値オブジェクト・純粋関数も、そのまま使うほうが速く、正確</text>
+        <text x="86" y="216" font-size="9" class="muted">内部のクラスを代役にすると、呼び出し順序にテストが結合する</text>
+
+        <line x1="16" y1="274" x2="624" y2="274" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="294" font-size="10.5" class="muted">外側へ寄せすぎると遅く不安定になり、内側へ寄せすぎると「代役の正しさ」しか確かめなくなる。</text>
+        <text x="16" y="316" font-size="10.5" class="accent">代役が5つ必要になったら、置き換え方ではなく依存の多さを疑う ― それは設計の合図。</text>
+      </svg>
+    </div>
+  </body>
+</html>

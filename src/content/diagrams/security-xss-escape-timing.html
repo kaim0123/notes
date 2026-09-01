@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 760 300"
+        role="img"
+        aria-label="エスケープを入力時に行う場合と出力時に行う場合の違いを比べた図。上は入力時にエスケープする方式で、受け取った時点でHTML用に変換してから保存するため、データベースにはHTML向けに加工済みの値が入る。その値をメールの本文やCSVの書き出し、JSONのAPI応答など別の行き先に出すと、加工が合わずに文字化けや二重変換が起きる。下は出力時にエスケープする方式で、データベースには受け取ったままの生の値を保存し、画面へ出す直前に行き先に合わせて変換する。どの行き先にも正しい形で出せるうえ、元の値が壊れないため、あとから表示先が増えても対応できる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="40" font-size="10.5" class="muted">① 入力時にエスケープする</text>
+        <rect x="20" y="52" width="110" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="75" y="76" font-size="10" text-anchor="middle">入力</text>
+        <rect x="200" y="52" width="130" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="265" y="70" font-size="10" text-anchor="middle">DBに保存</text>
+        <text x="265" y="86" font-size="8.5" text-anchor="middle" class="muted">HTML用に加工済み</text>
+        <line x1="134" y1="72" x2="196" y2="72" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <text x="165" y="64" font-size="8.5" text-anchor="middle" class="muted">変換</text>
+        <line x1="334" y1="72" x2="392" y2="72" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <rect x="396" y="46" width="110" height="24" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <rect x="396" y="76" width="110" height="24" rx="5" fill="var(--card)" stroke="var(--border)" stroke-width="1.1" />
+        <text x="451" y="62" font-size="9" text-anchor="middle" class="muted">画面(HTML)</text>
+        <text x="451" y="92" font-size="9" text-anchor="middle" class="muted">メール・CSV・API</text>
+        <text x="520" y="62" font-size="9" class="muted">たまたま合う</text>
+        <text x="520" y="92" font-size="9" class="accent">合わない ― 二重変換・文字化け</text>
+
+        <line x1="16" y1="118" x2="744" y2="118" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4" />
+
+        <text x="16" y="146" font-size="10.5" class="accent">② 出力時に、行き先に合わせてエスケープする</text>
+        <rect x="20" y="158" width="110" height="40" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1.2" />
+        <text x="75" y="182" font-size="10" text-anchor="middle">入力</text>
+        <rect x="200" y="158" width="130" height="40" rx="6" fill="var(--card)" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="265" y="176" font-size="10" text-anchor="middle">DBに保存</text>
+        <text x="265" y="192" font-size="8.5" text-anchor="middle" class="muted">受け取ったままの生の値</text>
+        <line x1="134" y1="178" x2="196" y2="178" stroke="var(--muted)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="334" y1="170" x2="392" y2="158" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <line x1="334" y1="186" x2="392" y2="200" stroke="var(--primary)" stroke-width="1.2" marker-end="url(#arp)" />
+        <rect x="396" y="146" width="110" height="24" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.2" />
+        <rect x="396" y="188" width="110" height="24" rx="5" fill="var(--card)" stroke="var(--primary)" stroke-width="1.2" />
+        <text x="451" y="162" font-size="9" text-anchor="middle">画面(HTML)</text>
+        <text x="451" y="204" font-size="9" text-anchor="middle">メール・CSV・API</text>
+        <text x="520" y="162" font-size="9" class="muted">HTMLエスケープをかけて出す</text>
+        <text x="520" y="204" font-size="9" class="muted">その形式に合わせて出す</text>
+
+        <line x1="16" y1="234" x2="744" y2="234" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="256" font-size="10.5" class="muted">入力時に変換すると、行き先が1つのうちは動く。表示先が増えた日に、まとめて壊れる。</text>
+        <text x="16" y="278" font-size="10.5" class="accent">保存するのは事実、変換するのは表示 ― 元の値を壊さないことが、あとから効いてくる。</text>
+      </svg>
+    </div>
+  </body>
+</html>
