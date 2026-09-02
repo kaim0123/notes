@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 300"
+        role="img"
+        aria-label="クリックと待機を始める順序によって、レスポンスを取り逃すかどうかが変わることを時間軸で示した図。上はクリックの完了を待ってから待機を張る書き方で、時間軸の左でクリックが実行され、その少しあとにレスポンスが到着し、さらにあとになって待機が張られる。到着はすでに過ぎているので誰も受け取っておらず、来ないものを待ち続けてタイムアウトで失敗する。下は待機とクリックを同時に開始する書き方で、時間軸の同じ位置で待機が張られクリックが実行されるため、その後どのタイミングでレスポンスが到着しても必ず捕まえられる。処理が速いときだけ落ちるという再現しにくい失敗は、この順序の違いから生まれる。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="22" font-size="11" class="muted">待機を張る時刻が、クリックより後になっていないか</text>
+
+        <text x="16" y="62" font-size="10">クリックの完了を</text>
+        <text x="16" y="80" font-size="10">待ってから張る</text>
+
+        <text x="210" y="80" font-size="8.5" text-anchor="middle" class="muted">クリック実行</text>
+        <text x="340" y="80" font-size="8.5" text-anchor="middle" class="accent">★ レスポンス到着</text>
+        <text x="474" y="80" font-size="8.5" text-anchor="middle" class="muted">ここで待機を張る</text>
+
+        <line x1="150" y1="96" x2="676" y2="96" stroke="var(--border)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="210" y1="88" x2="210" y2="104" stroke="var(--muted)" stroke-width="1.2" />
+        <line x1="340" y1="88" x2="340" y2="104" stroke="var(--primary)" stroke-width="1.5" />
+        <line x1="474" y1="88" x2="474" y2="104" stroke="var(--muted)" stroke-width="1.2" />
+
+        <line x1="474" y1="118" x2="660" y2="118" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 3" />
+        <text x="567" y="136" font-size="9" text-anchor="middle" class="muted">来ないものを待ち続ける → タイムアウトで失敗</text>
+
+        <text x="16" y="188" font-size="10">待機とクリックを</text>
+        <text x="16" y="206" font-size="10">同時に始める</text>
+
+        <text x="210" y="206" font-size="8.5" text-anchor="middle" class="muted">待機を張る＋クリック</text>
+        <text x="340" y="206" font-size="8.5" text-anchor="middle" class="accent">★ レスポンス到着</text>
+
+        <line x1="150" y1="222" x2="676" y2="222" stroke="var(--border)" stroke-width="1.2" marker-end="url(#ar)" />
+        <line x1="210" y1="214" x2="210" y2="230" stroke="var(--muted)" stroke-width="1.2" />
+        <line x1="340" y1="214" x2="340" y2="230" stroke="var(--primary)" stroke-width="1.5" />
+
+        <line x1="210" y1="244" x2="340" y2="244" stroke="var(--primary)" stroke-width="1.4" />
+        <line x1="210" y1="238" x2="210" y2="250" stroke="var(--primary)" stroke-width="1.4" />
+        <line x1="340" y1="238" x2="340" y2="250" stroke="var(--primary)" stroke-width="1.4" />
+        <text x="352" y="248" font-size="9" class="accent">この区間ずっと張られている → いつ返っても捕まえる</text>
+
+        <line x1="16" y1="266" x2="684" y2="266" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="286" font-size="10.5" class="muted">処理が速いときだけ落ちる、という再現しにくい失敗は、この順序の違いから生まれる。</text>
+      </svg>
+    </div>
+  </body>
+</html>

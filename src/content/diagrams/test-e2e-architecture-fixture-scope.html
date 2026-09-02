@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: oklch(0 0 0);
+        --fg: oklch(1 0 0);
+        --card: oklch(0.12 0 0);
+        --muted: oklch(0.7 0 0);
+        --border: oklch(1 0 0 / 14%);
+        --primary: oklch(0.85 0.29 142);
+        --primary-fg: oklch(0 0 0);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      }
+      svg text {
+        fill: var(--fg);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .muted {
+        fill: var(--muted);
+      }
+      .accent {
+        fill: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%">
+      <svg
+        viewBox="0 0 700 320"
+        role="img"
+        aria-label="テストの前提を用意するフィクスチャを、寿命の長さで3段に分けた図。最上段はワーカー単位で、並列実行の1プロセスにつきコンテナを1回だけ起動し、そのワーカーが担当する全テストで使い回す。起動に約20秒かかるため、テストごとに立て直すことはできない。中段はテスト単位で、テスト1・テスト2・テスト3がそれぞれ自分のデータを作り、終わったら破棄する。最下段は自動適用で、明示的に呼ばなくても全テストの前後に必ず挟まる処理を置く場所である。重い資源ほど長い寿命へ寄せることになるが、寿命を伸ばして共有した分だけ、テスト同士が干渉できる余地も増える。ワーカー単位に置いたコンテナの中身を書き換えるテストは、同じワーカーの他のテストを壊す。"
+      >
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)" />
+          </marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--primary)" />
+          </marker>
+        </defs>
+
+        <text x="16" y="22" font-size="11" class="muted">用意にかかる時間で、どこまで寿命を伸ばすかが決まる</text>
+
+        <text x="16" y="60" font-size="10">ワーカー単位</text>
+        <text x="16" y="78" font-size="8.5" class="muted">起動が重いもの</text>
+        <rect x="150" y="40" width="534" height="52" rx="7" fill="var(--card)" stroke="var(--primary)" stroke-width="1.5" />
+        <text x="164" y="62" font-size="10" class="accent">コンテナを1回だけ起動し、このワーカーの全テストで使い回す</text>
+        <text x="164" y="82" font-size="9" class="muted">起動に約20秒。テストごとに立て直すと、テスト時間の大半が起動待ちになる</text>
+
+        <text x="16" y="132" font-size="10">テスト単位</text>
+        <text x="16" y="150" font-size="8.5" class="muted">作るのが軽いもの</text>
+        <rect x="150" y="112" width="170" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="235" y="134" font-size="9.5" text-anchor="middle">テスト1</text>
+        <text x="235" y="153" font-size="8.5" text-anchor="middle" class="muted">データ作成 → 破棄</text>
+
+        <rect x="332" y="112" width="170" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="417" y="134" font-size="9.5" text-anchor="middle">テスト2</text>
+        <text x="417" y="153" font-size="8.5" text-anchor="middle" class="muted">データ作成 → 破棄</text>
+
+        <rect x="514" y="112" width="170" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" />
+        <text x="599" y="134" font-size="9.5" text-anchor="middle">テスト3</text>
+        <text x="599" y="153" font-size="8.5" text-anchor="middle" class="muted">データ作成 → 破棄</text>
+
+        <text x="16" y="204" font-size="10">自動適用</text>
+        <text x="16" y="222" font-size="8.5" class="muted">呼ばなくても走る</text>
+        <rect x="150" y="184" width="534" height="52" rx="7" fill="var(--card)" stroke="var(--border)" stroke-width="1.3" stroke-dasharray="4 3" />
+        <text x="164" y="206" font-size="10" class="muted">全テストの前後に必ず挟まる処理(失敗時のスクリーンショット取得など)</text>
+        <text x="164" y="226" font-size="9" class="muted">ここを1つ変えると、すべてのテストの前後処理が同時に変わる</text>
+
+        <line x1="16" y1="262" x2="684" y2="262" stroke="var(--border)" stroke-width="1" />
+        <text x="16" y="282" font-size="10.5" class="muted">寿命を伸ばして共有した分だけ、テスト同士が干渉できる余地も増える。</text>
+        <text x="16" y="304" font-size="10.5" class="muted">ワーカー単位のコンテナの中身を書き換えるテストは、同じワーカーの他のテストを壊す。</text>
+      </svg>
+    </div>
+  </body>
+</html>

@@ -651,6 +651,8 @@ export const sections: NavSection[] = [
           { href: "/test/e2e", title: "E2Eテストの全体像" },
           { href: "/test/e2e-viewpoints", title: "テスト観点の洗い出し" },
           { href: "/test/e2e-waiting", title: "描画待機とAI生成テストのレビュー" },
+          { href: "/test/e2e-architecture", title: "E2Eテストのレイヤー設計" },
+          { href: "/test/e2e-quality", title: "テストコードの品質を保つ" },
           { href: "/test/tools", title: "Vitest・Playwright" },
         ],
       },

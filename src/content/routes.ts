@@ -318,6 +318,8 @@ export const routes: Record<string, { load: () => Promise<ContentModule> }> = {
   "/test/e2e": { load: () => import("@/content/pages/test-e2e") },
   "/test/e2e-viewpoints": { load: () => import("@/content/pages/test-e2e-viewpoints") },
   "/test/e2e-waiting": { load: () => import("@/content/pages/test-e2e-waiting") },
+  "/test/e2e-architecture": { load: () => import("@/content/pages/test-e2e-architecture") },
+  "/test/e2e-quality": { load: () => import("@/content/pages/test-e2e-quality") },
   "/test/tools": { load: () => import("@/content/pages/test-tools") },
   "/test/tdd": { load: () => import("@/content/pages/test-tdd") },
   "/test/stability": { load: () => import("@/content/pages/test-stability") },
